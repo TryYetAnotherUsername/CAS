@@ -1,0 +1,292 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4mbbww6g43bn"]
+
+[ext_resource type="Script" uid="uid://3hkmgrv70mtn" path="res://Scripts/UI/CustomWindows/CustomWindow.cs" id="1_k3s7o"]
+[ext_resource type="Shader" uid="uid://b0debcqwg61eq" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="2_nhd07"]
+[ext_resource type="Theme" uid="uid://cjt28obh8r4fx" path="res://Assets/UI/Themes/general.tres" id="3_fsjx2"]
+[ext_resource type="Script" uid="uid://dd8gdhupnwm2s" path="res://Scripts/UI/CustomWindows/CustomWindowOutlineLayer.cs" id="4_h8kim"]
+[ext_resource type="Texture2D" uid="uid://bwc45y2v2xrvb" path="res://Assets/UI/Icons/Circle fill.svg" id="5_7nveh"]
+[ext_resource type="PackedScene" uid="uid://pm22qihk26yl" path="res://Scenes/UI/CustomWindow/Sketch2D/win_cont_sketch_2d.tscn" id="5_nhd07"]
+[ext_resource type="Texture2D" uid="uid://7s67ddmyknwa" path="res://Addons/voronoi_scatter/example_grass/Ground003_1K-JPG_Color.jpg" id="6_dt78q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_skx73"]
+shader = ExtResource("2_nhd07")
+shader_parameter/blur_amount = 2.0
+shader_parameter/mix_amount = 0.70000003325
+shader_parameter/saturation = 0.50000002375
+shader_parameter/grain_amount = 0.010000000475
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_co7ut"]
+draw_center = false
+
+[node name="CustomWindow" type="Control" node_paths=PackedStringArray("Drag_Corner", "Drag_Right", "Drag_Bottom", "Drag_Top", "Drag_Left", "Drag_Bar", "OutlineLayer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_k3s7o")
+Drag_Corner = NodePath("OutlineLayer/Dragzone_Corner")
+Drag_Right = NodePath("OutlineLayer/Dragzone_Right")
+Drag_Bottom = NodePath("OutlineLayer/Dragzone_Bottom")
+Drag_Top = NodePath("OutlineLayer/Dragzone_Top")
+Drag_Left = NodePath("OutlineLayer/Dragzone_Left")
+Drag_Bar = NodePath("OutlineLayer/DragBar")
+OutlineLayer = NodePath("OutlineLayer")
+
+[node name="OutlineLayer" type="Panel" parent="." node_paths=PackedStringArray("_CustomWindow")]
+material = SubResource("ShaderMaterial_skx73")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -133.0
+offset_right = 208.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_fsjx2")
+theme_type_variation = &"window_outer"
+script = ExtResource("4_h8kim")
+_CustomWindow = NodePath("..")
+
+[node name="ContentLayer" type="Panel" parent="OutlineLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 34.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("3_fsjx2")
+theme_type_variation = &"window_outer_content"
+
+[node name="WinCont_Sketch2D" parent="OutlineLayer/ContentLayer" instance=ExtResource("5_nhd07")]
+layout_mode = 1
+
+[node name="Dragzone_Corner" type="Control" parent="OutlineLayer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+
+[node name="Dragzone_Right" type="Control" parent="OutlineLayer"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = 25.0
+offset_right = 12.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+
+[node name="Dragzone_Bottom" type="Control" parent="OutlineLayer"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -12.0
+offset_right = -32.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+
+[node name="Dragzone_Top" type="Control" parent="OutlineLayer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = -19.0
+offset_right = -16.0
+grow_horizontal = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+
+[node name="Dragzone_Left" type="Control" parent="OutlineLayer"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = 25.0
+offset_right = 12.0
+offset_bottom = -16.0
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+
+[node name="DragBar" type="Panel" parent="OutlineLayer"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_co7ut")
+
+[node name="Label" type="Label" parent="OutlineLayer/DragBar"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 75.0
+offset_top = -17.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_fsjx2")
+theme_override_colors/font_color = Color(1, 1, 1, 0.33333334)
+text = "<CustomWindowTitle>"
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 6
+
+[node name="Button" type="Button" parent="OutlineLayer/DragBar"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -17.0
+offset_right = 27.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Close"
+focus_mode = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="OutlineLayer/DragBar/Button"]
+modulate = Color(1, 0.20392157, 0.2627451, 0.6666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7nveh")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="OutlineLayer/DragBar"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 27.0
+offset_top = -17.0
+offset_right = 47.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Close"
+focus_mode = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="OutlineLayer/DragBar/Button2"]
+modulate = Color(1, 0.6337013, 0.2598319, 0.6666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7nveh")
+expand_mode = 1
+
+[node name="Button3" type="Button" parent="OutlineLayer/DragBar"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = -17.0
+offset_right = 67.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Close"
+focus_mode = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="OutlineLayer/DragBar/Button3"]
+modulate = Color(0.4707622, 0.92301905, 7.70092e-07, 0.6666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7nveh")
+expand_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+visible = false
+offset_right = 1024.0
+offset_bottom = 1024.0
+texture = ExtResource("6_dt78q")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+position = Vector2(-60, 0)
+scale = Vector2(9999, 9999)
+copy_mode = 2

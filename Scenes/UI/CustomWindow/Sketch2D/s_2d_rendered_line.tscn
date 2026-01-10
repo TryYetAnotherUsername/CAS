@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5vm3sr32w408"]
+
+[ext_resource type="Script" uid="uid://hi6n38ym6a71" path="res://Scripts/UI/CustomWindows/Apps/Sketch2d/S2dRenderedLine.cs" id="1_as1dc"]
+
+[node name="S2dRenderedLine" type="Line2D"]
+points = PackedVector2Array(0, 0, 100, 100, 200, 0)
+width = 3.25
+default_color = Color(0.6955033, 0.69550306, 0.6955032, 1)
+antialiased = true
+script = ExtResource("1_as1dc")
+Thickness = 3.0

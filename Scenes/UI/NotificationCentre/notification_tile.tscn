@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://ysd5jnc34d84"]
+
+[ext_resource type="Theme" uid="uid://cjt28obh8r4fx" path="res://Assets/UI/Themes/general.tres" id="1_6jxo4"]
+[ext_resource type="Script" uid="uid://bo2we6p5ynmr2" path="res://Scripts/UI/NotificationCenter/NotificationTile.cs" id="2_pkh5e"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_hryqi"]
+color = Color(1, 1, 1, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+vertical = true
+
+[node name="NotificationTile" type="PanelContainer" node_paths=PackedStringArray("Title", "Body", "Dismiss", "Line")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_6jxo4")
+theme_type_variation = &"InnerSectionPanel"
+script = ExtResource("2_pkh5e")
+Title = NodePath("VBoxContainer/HBoxContainer/Title")
+Body = NodePath("VBoxContainer/HBoxContainer2/RichTextLabel")
+Dismiss = NodePath("Dismiss")
+Line = NodePath("VBoxContainer/HBoxContainer/Line")
+
+[node name="Dismiss" type="Button" parent="."]
+visible = false
+layout_mode = 2
+focus_mode = 3
+text = "X"
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="Line" type="Panel" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_hryqi")
+
+[node name="Title" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(6.895, 0)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0.581033, 0.58103293, 0.5810329, 1)
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+fit_content = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2

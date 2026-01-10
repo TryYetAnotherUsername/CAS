@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://5aiwyat3ptjq"]
+
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="1_frths"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lk7d"]
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+border_color = Color(0.8, 0.8, 0.8, 0.09019608)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+MenuButton/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.1764706)
+MenuButton/colors/font_hover_color = Color(0.8745098, 0.8745098, 0.8745098, 0.627451)
+MenuButton/colors/font_hover_pressed_color = Color(0.84313726, 0.84313726, 0.84313726, 1)
+MenuButton/colors/font_pressed_color = Color(0.84313726, 0.84313726, 0.84313726, 1)
+MenuButton/font_sizes/font_size = 14
+MenuButton/fonts/font = ExtResource("1_frths")
+MenuButton/styles/hover = SubResource("StyleBoxFlat_3lk7d")

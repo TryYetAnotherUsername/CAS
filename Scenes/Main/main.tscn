@@ -1,0 +1,336 @@
+[gd_scene load_steps=25 format=3 uid="uid://be3ed6b05d2ej"]
+
+[ext_resource type="Shader" uid="uid://b6rvre2q0fx4t" path="res://Assets/3D/Shaders/TerrainShader_5.gdshader" id="1_1r6ip"]
+[ext_resource type="Script" uid="uid://bgvsbi1wrqvws" path="res://Scripts/UI/MainMenuBar/MainMenuBar.cs" id="1_qw60k"]
+[ext_resource type="Theme" uid="uid://cjt28obh8r4fx" path="res://Assets/UI/Themes/general.tres" id="1_y3v7k"]
+[ext_resource type="Texture2D" uid="uid://d0vr37mvo8gcl" path="res://Assets/3D/Textures/Grass/color.png" id="2_lixft"]
+[ext_resource type="Script" uid="uid://esub0u3os5ik" path="res://Scripts/UI/NotificationCenter/NotificationMenu.cs" id="3_hfg1r"]
+[ext_resource type="Shader" uid="uid://b0debcqwg61eq" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="3_hryqi"]
+[ext_resource type="Script" uid="uid://byejui756vb35" path="res://Scripts/Services/FileOpService.cs" id="5_hryqi"]
+[ext_resource type="Script" uid="uid://ck4v5psht8oep" path="res://Scripts/Services/WindowService.cs" id="5_p6jpk"]
+[ext_resource type="Script" uid="uid://bv16j12mdqioj" path="res://Scripts/Services/Sketch2dService.cs" id="6_xlvfx"]
+[ext_resource type="PackedScene" uid="uid://d2gljpq6f4bh4" path="res://Scenes/3D/Generate/vertex.tscn" id="7_6t3k2"]
+[ext_resource type="PackedScene" uid="uid://5etfschxl47d" path="res://Scenes/3D/Player/player_body.tscn" id="7_vk4q2"]
+[ext_resource type="PackedScene" uid="uid://ysd5jnc34d84" path="res://Scenes/UI/NotificationCentre/notification_tile.tscn" id="10_hfg1r"]
+[ext_resource type="Script" uid="uid://l6l8rl2msh1s" path="res://Scripts/Services/NotificationService.cs" id="10_imbg2"]
+[ext_resource type="Script" uid="uid://de4in8ro154kk" path="res://Scripts/Services/Generate3dService.cs" id="12_4e4y2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlvfx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfg1r"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.7137255)
+border_color = Color(0, 0, 0, 0.50980395)
+border_blend = true
+corner_detail = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y3v7k"]
+shader = ExtResource("3_hryqi")
+shader_parameter/blur_amount = 4.00000019
+shader_parameter/mix_amount = 0.50000002375
+shader_parameter/saturation = 0.50000002375
+shader_parameter/grain_amount = 0.010000000475
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_amr5s"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yls4"]
+render_priority = 0
+shader = ExtResource("1_1r6ip")
+shader_parameter/texture_albedo = ExtResource("2_lixft")
+shader_parameter/blend_color = Color(0.4250782, 0.8522065, 0, 1)
+shader_parameter/blend_amount = 0.999999977648
+shader_parameter/normal_strength = 0.0
+shader_parameter/global_tiling_scale = 100.0
+shader_parameter/blend_mode = 1
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vk4q2"]
+data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lixft"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qw60k"]
+sky_material = SubResource("ProceduralSkyMaterial_lixft")
+
+[sub_resource type="Environment" id="Environment_5yls4"]
+background_mode = 2
+sky = SubResource("Sky_qw60k")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4e4y2"]
+
+[node name="Main" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+
+[node name="WindowsRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="Control" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_xlvfx")
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 29.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="Panel" type="Panel" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hfg1r")
+
+[node name="MenuBar" type="MenuBar" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+mouse_filter = 1
+theme = ExtResource("1_y3v7k")
+flat = true
+
+[node name="File" type="PopupMenu" parent="TopBar/MenuBar"]
+oversampling_override = 1.0
+size = Vector2i(160, 180)
+prefer_native_menu = true
+item_count = 4
+item_0/text = "Save"
+item_0/id = 0
+item_1/text = "Open file"
+item_1/id = 1
+item_2/text = "New file"
+item_2/id = 2
+item_3/text = "File options"
+item_3/id = 3
+script = ExtResource("1_qw60k")
+
+[node name="Tools" type="PopupMenu" parent="TopBar/MenuBar"]
+oversampling_override = 1.0
+size = Vector2i(132, 176)
+prefer_native_menu = true
+item_count = 2
+item_0/text = "New console window"
+item_0/id = 0
+item_1/text = "Sketch 2D"
+item_1/id = 1
+script = ExtResource("1_qw60k")
+
+[node name="Simulation" type="PopupMenu" parent="TopBar/MenuBar"]
+oversampling_override = 1.0
+size = Vector2i(132, 176)
+prefer_native_menu = true
+
+[node name="Help" type="PopupMenu" parent="TopBar/MenuBar"]
+oversampling_override = 1.0
+size = Vector2i(112, 176)
+prefer_native_menu = true
+item_count = 3
+item_0/text = "Welcome"
+item_0/id = 0
+item_1/text = "About"
+item_1/id = 1
+item_2/text = "Thank you"
+item_2/id = 2
+script = ExtResource("1_qw60k")
+
+[node name="NotificationMenu" type="Button" parent="TopBar" node_paths=PackedStringArray("menu", "clearAll")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -14.5
+offset_right = -8.0
+offset_bottom = 9.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+theme = ExtResource("1_y3v7k")
+text = "Notifications"
+flat = true
+alignment = 2
+script = ExtResource("3_hfg1r")
+menu = NodePath("Panel")
+clearAll = NodePath("Panel/Control/ClearAll")
+
+[node name="Panel" type="Panel" parent="TopBar/NotificationMenu"]
+material = SubResource("ShaderMaterial_y3v7k")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -248.0
+offset_top = 32.0
+offset_bottom = 320.0
+grow_horizontal = 0
+focus_mode = 1
+theme = ExtResource("1_y3v7k")
+theme_type_variation = &"window_outer"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="TopBar/NotificationMenu/Panel"]
+position = Vector2(92.00001, 80)
+scale = Vector2(0.9199999, 0.8)
+copy_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="TopBar/NotificationMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_y3v7k")
+
+[node name="Control" type="Control" parent="TopBar/NotificationMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="TopBar/NotificationMenu/Panel/Control"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 180.0
+offset_bottom = 32.0
+text = "Notifications"
+vertical_alignment = 1
+
+[node name="ClearAll" type="Button" parent="TopBar/NotificationMenu/Panel/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -76.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 32.0
+grow_horizontal = 0
+focus_mode = 0
+focus_behavior_recursive = 2
+text = "Clear"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TopBar/NotificationMenu/Panel/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopBar/NotificationMenu/Panel/Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="World" type="Node3D" parent="Node3D"]
+
+[node name="Terrain" type="Node3D" parent="Node3D/World"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/World/Terrain"]
+mesh = SubResource("PlaneMesh_amr5s")
+surface_material_override/0 = SubResource("ShaderMaterial_5yls4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/World/Terrain/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/World/Terrain/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_vk4q2")
+
+[node name="Characters" type="Node3D" parent="Node3D/World"]
+
+[node name="Players" type="Node3D" parent="Node3D/World/Characters"]
+
+[node name="PlayerBody" parent="Node3D/World/Characters/Players" instance=ExtResource("7_vk4q2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7327754, 0)
+
+[node name="NPCs" type="Node3D" parent="Node3D/World/Characters"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D/World"]
+environment = SubResource("Environment_5yls4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/World/WorldEnvironment"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Node3D" type="NavigationRegion3D" parent="Node3D/World"]
+navigation_mesh = SubResource("NavigationMesh_4e4y2")
+
+[node name="DrawnItemsRoot" type="Node3D" parent="Node3D/World/Node3D"]
+
+[node name="Vertex" parent="Node3D/World/Node3D/DrawnItemsRoot" instance=ExtResource("7_6t3k2")]
+visible = false
+
+[node name="Services" type="Node" parent="."]
+
+[node name="FileService" type="Node" parent="Services"]
+script = ExtResource("5_hryqi")
+
+[node name="WindowService" type="Node" parent="Services"]
+script = ExtResource("5_p6jpk")
+
+[node name="Sketch2dService" type="Node" parent="Services"]
+script = ExtResource("6_xlvfx")
+
+[node name="NotificationService" type="Node" parent="Services" node_paths=PackedStringArray("NotifRoot")]
+script = ExtResource("10_imbg2")
+NotifRoot = NodePath("../../TopBar/NotificationMenu/Panel/Control/ScrollContainer/VBoxContainer")
+targetNotifScene = ExtResource("10_hfg1r")
+
+[node name="Generate3dService" type="Node" parent="Services" node_paths=PackedStringArray("_drawnItemsRoot")]
+script = ExtResource("12_4e4y2")
+_drawnItemsRoot = NodePath("../../Node3D/World/Node3D/DrawnItemsRoot")
+_vertexScene = ExtResource("7_6t3k2")
+
+[node name="MainMenu" type="PopupMenu" parent="Services"]
+oversampling_override = 1.0
+item_count = 1
+item_0/text = "rdsgrdg"
+item_0/id = 0
+
+[node name="FileSubmenu" type="PopupMenu" parent="Services/MainMenu"]
+oversampling_override = 1.0
+
+[node name="Utilities" type="Node" parent="."]
+
+[node name="FileDialog" type="FileDialog" parent="Utilities"]

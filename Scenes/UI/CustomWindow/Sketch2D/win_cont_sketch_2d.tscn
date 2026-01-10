@@ -1,0 +1,361 @@
+[gd_scene load_steps=8 format=3 uid="uid://pm22qihk26yl"]
+
+[ext_resource type="Theme" uid="uid://cjt28obh8r4fx" path="res://Assets/UI/Themes/general.tres" id="1_6v51d"]
+[ext_resource type="Script" uid="uid://ugvrv4lo1q6q" path="res://Scripts/UI/CustomWindows/Apps/Sketch2d/WinContSketch2d.cs" id="1_lam8d"]
+[ext_resource type="PackedScene" uid="uid://b5vm3sr32w408" path="res://Scenes/UI/CustomWindow/Sketch2D/s_2d_rendered_line.tscn" id="2_avtm2"]
+[ext_resource type="FontFile" uid="uid://yhs8m87atk67" path="res://Assets/UI/Fonts/Limelight/Limelight-Regular.ttf" id="2_nqrco"]
+[ext_resource type="Texture2D" uid="uid://4u8fly63mllc" path="res://icon.svg" id="4_3gyro"]
+[ext_resource type="PackedScene" uid="uid://c3yaiwvqqtdd1" path="res://Scenes/UI/CustomWindow/Sketch2D/s_2d_rendered_vert.tscn" id="6_avtm2"]
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="6_hxft6"]
+
+[node name="WinCont_Sketch2D" type="Control" node_paths=PackedStringArray("_viewport", "_camera", "_drawedItemsRoot", "_posLabel", "_updButton", "_vertexButton", "_SnapTo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lam8d")
+CurrentCamZoom = 6.0
+_zoomStep = 10.0
+_camZoomMax = 100.0
+_camZoomMin = 5.0
+_viewport = NodePath("ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer")
+_camera = NodePath("ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer/SubViewport/Node2D/Camera2D")
+_drawedItemsRoot = NodePath("ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer/SubViewport/Node2D/DrawedItemsRoot")
+_posLabel = NodePath("ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/Label")
+_updButton = NodePath("ScrollContainer/HSplitContainer/Left/UpdateButton")
+_vertexButton = NodePath("ScrollContainer/HSplitContainer/Control/Content_Right/BottomButtons/HBoxContainer/VertButton")
+_SnapTo = NodePath("ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SpinBox")
+_line = ExtResource("2_avtm2")
+_vert = ExtResource("6_avtm2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_6v51d")
+split_offset = 193
+
+[node name="Left" type="Control" parent="ScrollContainer/HSplitContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Left"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_right = 8.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.18431373)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.24705882)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.12941177)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_nqrco")
+theme_override_font_sizes/font_size = 25
+text = "Sketch 2D"
+text_overrun_behavior = 1
+
+[node name="VSplitContainer" type="VSplitContainer" parent="ScrollContainer/HSplitContainer/Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6v51d")
+drag_area_highlight_in_editor = true
+
+[node name="Panel" type="Panel" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_6v51d")
+theme_type_variation = &"InnerSectionPanel"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -9.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Class"
+
+[node name="LineEdit" type="LineEdit" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_6v51d")
+theme_type_variation = &"PropFieldLineEdit"
+text = "Vertex"
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+caret_mid_grapheme = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Class"
+
+[node name="LineEdit" type="LineEdit" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_6v51d")
+theme_type_variation = &"PropFieldLineEdit"
+text = "Vertex"
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+caret_mid_grapheme = true
+
+[node name="Control2" type="Control" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel2" type="Panel" parent="ScrollContainer/HSplitContainer/Left/VSplitContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6v51d")
+theme_type_variation = &"InnerSectionPanel"
+
+[node name="UpdateButton" type="Button" parent="ScrollContainer/HSplitContainer/Left"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+tooltip_text = "Vertex Composer
+After new vertexes are placed, you can select multiple vertexes and bridge them to make walls."
+focus_mode = 3
+theme = ExtResource("1_6v51d")
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Left/UpdateButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -9.5
+offset_right = 59.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sync / Build"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="ScrollContainer/HSplitContainer"]
+custom_minimum_size = Vector2(158, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Content_Right" type="Control" parent="ScrollContainer/HSplitContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ViewPortArea" type="Panel" parent="ScrollContainer/HSplitContainer/Control/Content_Right"]
+clip_children = 1
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_6v51d")
+theme_type_variation = &"window_outer"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer"]
+handle_input_locally = false
+msaa_2d = 3
+screen_space_aa = 2
+vrs_update_mode = 2
+oversampling = false
+size = Vector2i(947, 624)
+render_target_update_mode = 4
+
+[node name="Node2D" type="Node2D" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer/SubViewport"]
+
+[node name="Camera2D" type="Camera2D" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer/SubViewport/Node2D"]
+ignore_rotation = false
+zoom = Vector2(0.655, 0.655)
+limit_enabled = false
+limit_smoothed = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer/SubViewport/Node2D"]
+visible = false
+texture = ExtResource("4_3gyro")
+
+[node name="DrawedItemsRoot" type="Node2D" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea/SubViewportContainer/SubViewport/Node2D"]
+unique_name_in_owner = true
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 28.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.25490198)
+theme_override_fonts/font = ExtResource("6_hxft6")
+theme_override_font_sizes/font_size = 12
+text = "<POSITION>"
+horizontal_alignment = 2
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/HSplitContainer/Control/Content_Right/ViewPortArea"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 179.0
+offset_bottom = 31.0
+focus_mode = 1
+step = 0.001
+value = 1.0
+prefix = "snap to "
+suffix = " units"
+custom_arrow_step = 1.0
+
+[node name="BottomButtons" type="Control" parent="ScrollContainer/HSplitContainer/Control/Content_Right"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_6v51d")
+theme_type_variation = &"Panel_inner"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/HSplitContainer/Control/Content_Right/BottomButtons"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CommitButton2" type="Button" parent="ScrollContainer/HSplitContainer/Control/Content_Right/BottomButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 3
+theme = ExtResource("1_6v51d")
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Control/Content_Right/BottomButtons/HBoxContainer/CommitButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -9.5
+offset_right = 28.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Line"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VertButton" type="Button" parent="ScrollContainer/HSplitContainer/Control/Content_Right/BottomButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Vertex Composer
+After new vertexes are placed, you can select multiple vertexes and bridge them to make walls."
+focus_mode = 3
+theme = ExtResource("1_6v51d")
+
+[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/Control/Content_Right/BottomButtons/HBoxContainer/VertButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -9.5
+offset_right = 59.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Vertex"
+horizontal_alignment = 1
+vertical_alignment = 1
