@@ -7,12 +7,16 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 
 [node name="PrimitiveCube" type="Node3D" unique_id=389291832]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=58518131]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=58518131]
 mesh = SubResource("BoxMesh_6yrpj")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=668856868]
-collision_layer = 3
-collision_mask = 3
+[node name="PhysicsCollisionLayer" type="StaticBody3D" parent="." unique_id=668856868]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1989918190]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsCollisionLayer" unique_id=1989918190]
+shape = SubResource("ConcavePolygonShape3D_6yrpj")
+
+[node name="InteractionCollisionLayer" type="StaticBody3D" parent="." unique_id=641633619]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionCollisionLayer" unique_id=1567050992]
 shape = SubResource("ConcavePolygonShape3D_6yrpj")

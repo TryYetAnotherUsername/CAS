@@ -3,125 +3,47 @@ using System;
 
 public partial class ControlsLogic : TabContainer
 {
-	public enum BuildingMode
-	{
-		simple,
-		advanced
-	}
-
-	public enum Tool
-	{
-		freeform,
-		move,
-		rotate,
-		scale,
-		none
-	}
-
-	[Export] public CheckButton _ModeToggle;
-	[Export] public Control _ConfHint;
-
-	public static event Action<Tool> OnToolChanged;
-	public bool listenToConf;
-
-
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_ModeToggle.Toggled += (mode) =>
+		TabChanged += (t) =>
 		{
-			if (mode == true)
+			switch (t)
 			{
-				SetBuildingMode(BuildingMode.advanced);
-			}
-			else
-			{
-				SetBuildingMode(BuildingMode.simple);
+				case 0:
+					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Selection);
+					break;
+				case 1:
+					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Freeform);
+					break;
 			}
 		};
 
-		TabClicked += (i) =>
+		BuildmodeService.OnNewToolSelected += (tool) =>
 		{
-			if (i == 0)
+			if (tool == BuildmodeService.Tool.Selection)
 			{
-				UseTool(Tool.none);
-			}
-			else if (i == 1)
-			{
-				UseTool(Tool.freeform);
-			}
-			else if (i == 2)
-			{
-				UseTool(Tool.move);
-			}
-			else if (i == 3)
-			{
-				UseTool(Tool.rotate);
-			}
-			else if (i == 4)
-			{
-				UseTool(Tool.scale);
-			}
+				SetTabTitle(0, "Selecting...");
+				SetTabDisabled(0, false);
+				SetTabDisabled(1, true);
+				SetTabTitle(1, "Object");
+				SetTabDisabled(2, true);
+				SetTabDisabled(3, true);
+				SetTabDisabled(4, true);
+				SetTabDisabled(5, true);
+			};
 		};
 
-		SetTabDisabled(2,true);
-		SetTabDisabled(3,true);
-		SetTabDisabled(4,true);
-
-		_ConfHint.Visible = false;
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-    public override void _Input(InputEvent @event)
-    {
-		if (listenToConf)
+		BuildmodeService.OnNewObjectSelected += (name) =>
 		{
-			if (Input.IsActionJustPressed("build_conf"))
-			{
-				UseTool(Tool.none);
-			}
-		}
-    }
-
-
-
-	private void UseTool(Tool tool)
-	{
-		if (tool != Tool.none)
-		{
-			_ConfHint.Visible = true;
-			OnToolChanged?.Invoke(tool);
-			listenToConf = true;
-			GD.Print(tool);
-		}
-		else if (tool == Tool.none)
-		{
-			_ConfHint.Visible = false;
-			OnToolChanged?.Invoke(Tool.none);
-			listenToConf = false;
-			CurrentTab = 0;
-			GD.Print("end tool use");
-		}
-	}
-
-
-	public void SetBuildingMode(BuildingMode bm)
-	{
-		if (bm == BuildingMode.simple)
-		{
-			SetTabDisabled(2,true);
-			SetTabDisabled(3,true);
-			SetTabDisabled(4,true);
-		}
-		else
-		{
-			SetTabDisabled(2,false);
-			SetTabDisabled(3,false);
-			SetTabDisabled(4,false);
-		}
+			SetTabTitle(0, "Select new");
+			SetTabTitle(1, name.ToString());
+			SetTabDisabled(1, false);
+			SetTabDisabled(2, false);
+        	SetTabDisabled(3, false);
+        	SetTabDisabled(4, false);
+			SetTabDisabled(5, false);
+			BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Object);
+			CurrentTab = 1;
+		};
 	}
 }

@@ -7,31 +7,56 @@ using System.Data.Common;
 public partial class SelectionTool : Node
 {
 	private const float RayLength = 1000.0f;
-	[Export] Node3D _Marker;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		ControlsLogic.OnToolChanged += (tool) =>
+		BuildmodeService.OnNewToolSelected += (tool) => 
 		{
-			if (tool == ControlsLogic.Tool.none)
+			if (tool == BuildmodeService.Tool.Selection)
 			{
-				StartUsing();
+				SetSelecting(true);
 			}
 			else
 			{
-				EndUsing();
+				SetSelecting(false);
 			}
 		};
-		EndUsing();
 	}
 
-    public override void _Input(InputEvent @event)
+/*
+    public override void _UnhandledInput(InputEvent @event)
     {
 		if (Input.IsActionJustPressed("build_select"))
 		{
-			
+			if (CurrentHovering != null)
+			{
+				var owner = CurrentHovering.GetOwner<Node3D>();
+				if (owner?.GetParent()?.Name == "BuildingRoot")
+				{
+					GD.Print($"New object selected: {owner.Name}");
+					BuildmodeService.CurrentSelected = (Node3D) CurrentHovering.GetOwner();
+					var Mesh = (MeshInstance3D)BuildmodeService.CurrentSelected.FindChild("Mesh");
+					var newShaderMat = new ShaderMaterial();
+					newShaderMat.Shader = OutlineShader;
+					Mesh.MaterialOverlay = newShaderMat;
+				}
+			}
 		}
+
+		if (Input.IsActionJustPressed("build_select") && CurrentHoveringNoneDetected)
+		{
+			if (BuildmodeService.CurrentSelected != null)
+			{
+				var mesh = BuildmodeService.CurrentSelected.FindChild("Mesh") as MeshInstance3D;
+				if (mesh != null)
+				{
+					mesh.MaterialOverlay = null;
+				}
+				BuildmodeService.CurrentSelected = null;
+				GD.Print("Selection cleared.");
+			}
+		}
+
     }
 
 	public override void _PhysicsProcess(double delta)
@@ -46,26 +71,68 @@ public partial class SelectionTool : Node
 		
 		if (result.Count > 0)
 		{
-			_Marker.Visible = true;
-			_Marker.Position = (Vector3)result["position"];
+			CurrentHoveringNoneDetected = false;
+			CurrentHovering = (Node3D)result["collider"];
+			DisplayServer.CursorSetShape(DisplayServer.CursorShape.PointingHand);
 		}
 		else
 		{
-			_Marker.Visible = false;
+			DisplayServer.CursorSetShape(DisplayServer.CursorShape.Arrow);
+			CurrentHovering = null;
+			CurrentHoveringNoneDetected = true;
+		}
+	}
+*/
+
+	public override void _UnhandledInput(InputEvent @event)
+	{	
+		if (Input.IsActionJustPressed("build_select"))
+		{
+			if (Raycast() is Node3D collider)
+			{
+				var root = collider.GetOwner<Node3D>();
+				BuildmodeService.I.Select(root);  // Pass the root
+			}
 		}
 	}
 
-	public void StartUsing()
+	public void SetSelecting(bool state)
 	{
-		SetProcessInput(true);
-		SetProcess(true);
-		SetPhysicsProcess(true);
+		SetProcessUnhandledInput(state);
+		SetProcess(state);
 	}
 
-	public void EndUsing()
+    public override void _Process(double delta)
+    {
+    	Node3D collider = Raycast();
+    	if (collider is not null)
+    	{
+			DisplayServer.CursorSetShape(DisplayServer.CursorShape.PointingHand);
+    	}
+		else
+		{
+			DisplayServer.CursorSetShape(DisplayServer.CursorShape.Arrow);
+		}
+    }
+
+	private Node3D Raycast()
 	{
-		SetProcessInput(false);
-		SetProcess(false);
-		SetPhysicsProcess(false);
+		var camera3D = GetViewport().GetCamera3D();
+		var from = camera3D.ProjectRayOrigin(GetViewport().GetMousePosition());
+		var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * RayLength;
+
+		var spaceState = GetViewport().World3D.DirectSpaceState;
+		var options = PhysicsRayQueryParameters3D.Create(from, to);
+		options.CollisionMask = 2;
+		var result = spaceState.IntersectRay(options);
+		
+		if (result.Count > 0)
+		{
+			return (Node3D)result["collider"];
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

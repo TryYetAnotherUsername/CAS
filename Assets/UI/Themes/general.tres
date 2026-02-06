@@ -4,9 +4,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ic82w"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vpqh"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-draw_center = false
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngcls"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3xvl"]
 bg_color = Color(0, 0, 0, 1)
@@ -60,7 +58,7 @@ shadow_offset = Vector2(0, 3.635)
 default_font = ExtResource("1_ic82w")
 default_font_size = 12
 Panel/styles/panel = SubResource("StyleBoxEmpty_ic82w")
-TabContainer/styles/panel = SubResource("StyleBoxFlat_7vpqh")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_ngcls")
 panel_black/base_type = &"Panel"
 panel_black/styles/panel = SubResource("StyleBoxFlat_e3xvl")
 panel_transparent/base_type = &"Panel"
