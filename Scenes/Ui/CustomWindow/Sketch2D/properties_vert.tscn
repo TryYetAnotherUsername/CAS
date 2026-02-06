@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://ue5dvsfaeqej"]
+
+[ext_resource type="Script" uid="uid://ccy71ij4m8a5o" path="res://Scripts/UI/CustomWindows/Apps/Sketch2d/VertexDataInspector.cs" id="1_a82nt"]
+[ext_resource type="Theme" uid="uid://cjt28obh8r4fx" path="res://Assets/UI/Themes/general.tres" id="2_ysatt"]
+
+[node name="Properties_vert" type="VBoxContainer" node_paths=PackedStringArray("id", "x", "y", "z")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_a82nt")
+id = NodePath("HBoxContainer/LineEdit")
+x = NodePath("HBoxContainer2/LineEdit")
+y = NodePath("HBoxContainer4/LineEdit")
+z = NodePath("HBoxContainer3/LineEdit")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_ysatt")
+
+[node name="Label" type="Label" parent="HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+text = "Type"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+theme_type_variation = &"PropFieldLineEdit"
+text = "Vertex"
+editable = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_ysatt")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+text = "ID"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+theme_type_variation = &"PropFieldLineEdit"
+editable = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+text = "x"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+theme_type_variation = &"PropFieldLineEdit"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+text = "z"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+theme_type_variation = &"PropFieldLineEdit"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+text = "y"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ysatt")
+theme_type_variation = &"PropFieldLineEdit"

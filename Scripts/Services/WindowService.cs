@@ -4,76 +4,60 @@ using System.Collections.Generic;
 
 public partial class WindowService : Node
 {
-	Control WindowsRoot;
-    private PackedScene targetScene;
-    public static event Action DefocusAll;
+	public static WindowService I;
 
-    private static readonly Dictionary<string, (string dispName, string path)> AppData = new()
-    {
-        { "launchpad", ("Launchpad", "res://Scenes/UI/CustomWindow/Launcher/win_cont_launcher.tscn")},
-        { "sketch2d", ("Sketch2D", "res://Scenes/UI/CustomWindow/Sketch2D/win_cont_sketch_2d.tscn")},
-        { "console", ("Console", "res://Scenes/UI/CustomWindow/Console/win_cont_console.tscn")},
-        { "fileoptions", ("File options", "res://Scenes/UI/CustomWindow/SessionManager/win_cont_session_manager.tscn")}
-    };
+	// Export
+	[Export] private Control _WindowsRoot;
+	[Export] private PackedScene _WindowBase;
+
+	// All window content packed scenes:
+	[Export] private PackedScene _Content_Console;
+
+	// Links WindowContent enums to content PackedScenes and also display names
+
+	private Dictionary<WindowContent, (string dispName, PackedScene scene)> windowContentIndex;
+
+	public enum WindowContent
+	{
+		None, Console, 
+	};
 
     public override void _Ready()
     {
-        Relay.WindowService = this;
-        WindowsRoot = GetNode("/root/Main/WindowsRoot") as Control;
-        targetScene = GD.Load<PackedScene>("res://Scenes/UI/CustomWindow/CustomWindow.tscn");
+		I = this;
+        windowContentIndex = new()
+		{
+			{WindowContent.Console, ("CAS User console", _Content_Console)},
+			{WindowContent.None, ("New Window", null)}
+		};
     }
 
-    public void CloseFocusedWindow()
+
+	public void NewWindow(WindowContent content= WindowContent.None)
     {
-        if (CustomWindow.ActiveWindow != null)
-        {
-            ConsoleService.Print("WindowService: Attempting to close active window.");
-            CustomWindow.ActiveWindow.CloseWindow();
-        }
-        else
-        {
-            ConsoleService.Print("WindowService: Cannot close active window because there is no currently focused window, returning.");
-        }
-    }
+        var newWindowInst = _WindowBase.Instantiate();
 
-	public void NewWindow(string appName)
-    {
+		if (_WindowBase == null || newWindowInst == null)
+		{
+			GD.Print("hi");
+		}
+		
+		var newWindowScript = newWindowInst as WindowBase;
+		
+		PackedScene contentScene = windowContentIndex[content].scene;
+		var contSceneNode = (Control) contentScene.Instantiate();
 
-        if (appName == "")
-        {
-            ConsoleService.PrintErr("WindowService: No app defined, returning.");
-            return;
-        }
-        
-        else
-        {
-            string path;
-            string dispName;
+		newWindowScript.Init(windowContentIndex[content].dispName, contSceneNode);
 
-            if (!AppData.TryGetValue(appName, out var value))
-            {
-                ConsoleService.PrintErr("WindowService: No app found with this name, returning.");
-                return;
-            }
-            else
-            {
-                path = value.path;
-                dispName = value.dispName;
-            }
-            
-            var newWindow = targetScene.Instantiate();
+		_WindowsRoot.AddChild(newWindowInst);
 
-            DefocusAll?.Invoke();
-            WindowsRoot.AddChild(newWindow);
-
-            CustomWindow newWindowScript = newWindow as CustomWindow;
-            Control newWindowControl = newWindow as Control;
-
-            PackedScene targetContentScene = GD.Load<PackedScene>(path);
-            var newContent = targetContentScene.Instantiate();
-            newWindowControl.GetNode("%ContentLayer").AddChild(newContent);
-            newWindowScript.Init(dispName);
-            ConsoleService.Print($"WindowService: Finished creating new app <{appName}>");
-        }
-    }
+		if (content == WindowContent.None)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
 }

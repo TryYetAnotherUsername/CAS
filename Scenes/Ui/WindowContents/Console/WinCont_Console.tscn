@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dghqb28apitc6"]
+
+[node name="WinContConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "public partial class WindowService : Node
+{
+	// Export
+	[Export] private Control _WindowsRoot;
+	[Export] private PackedScene _WindowBase;
+
+	// All window content packed scenes:
+	[Export] private PackedScene _Content_Console;
+
+	// Links WindowContent enums to content PackedScenes and also display names
+
+	private Dictionary<WindowContent, (string dispName, PackedScene scene)> windowContentIndex;
+
+	public enum WindowContent
+	{
+		None, Console, 
+	};
+
+    public override void _Ready()
+    {
+        windowContentIndex = new()
+		{
+			{WindowContent.Console, (\"CAS User console\", _Content_Console)},
+		};"

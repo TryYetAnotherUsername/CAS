@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://1nlw4pdtrla0"]
+
+[ext_resource type="Script" uid="uid://12dru2vsuqyu" path="res://Scripts/Player/CharacterBody3d.cs" id="1_jkbnp"]
+[ext_resource type="Script" uid="uid://dyb52i8l1gvbk" path="res://Scripts/Player/Camera.cs" id="2_pfg0q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hfg1r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pfg0q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4e4y2"]
+size = Vector3(1, 2, 0.5)
+
+[node name="PlayerChar" type="CharacterBody3D" unique_id=1700912549 node_paths=PackedStringArray("_PivotH")]
+script = ExtResource("1_jkbnp")
+_PivotH = NodePath("Camera/PivotH")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2136201947]
+shape = SubResource("CapsuleShape3D_hfg1r")
+
+[node name="Camera" type="Node3D" parent="." unique_id=55437346 node_paths=PackedStringArray("_PivotH", "_PivotV", "_SpringArm", "_PlayerCam")]
+script = ExtResource("2_pfg0q")
+_PivotH = NodePath("PivotH")
+_PivotV = NodePath("PivotH/PivotV")
+_SpringArm = NodePath("PivotH/PivotV/SpringArm3D")
+_PlayerCam = NodePath("PivotH/PivotV/SpringArm3D/Camera3D")
+
+[node name="PivotH" type="Node3D" parent="Camera" unique_id=749529585]
+
+[node name="PivotV" type="Node3D" parent="Camera/PivotH" unique_id=1698357469]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera/PivotH/PivotV" unique_id=2024070360]
+shape = SubResource("SphereShape3D_pfg0q")
+
+[node name="Camera3D" type="Camera3D" parent="Camera/PivotH/PivotV/SpringArm3D" unique_id=1029975295]
+transform = Transform3D(1, 0, 0, 0, 0.99097854, 0.13402078, 0, -0.13402078, 0.99097854, 0, 0.6661043, 3.0848036)
+
+[node name="Visual" type="Node3D" parent="." unique_id=440230393]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual" unique_id=923761237]
+mesh = SubResource("BoxMesh_4e4y2")
+skeleton = NodePath("../..")
