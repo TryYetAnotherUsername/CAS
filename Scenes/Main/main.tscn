@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://Scripts/Main/Main.cs" id="1_imbg2"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p6jpk"]
-[ext_resource type="Texture2D" uid="uid://bsva85o05dto2" path="res://_dev/logo/iconimage.svg" id="2_2a143"]
+[ext_resource type="Texture2D" uid="uid://bsva85o05dto2" path="res://_dev1/logo/iconimage.svg" id="2_2a143"]
 [ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/Player/player_char.tscn" id="2_4e4y2"]
 [ext_resource type="Script" uid="uid://dlye63vsw30oo" path="res://Scripts/CoreUi/CommandBar/MenuCommandBindings.cs" id="2_hryqi"]
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
@@ -18,6 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://dbecfchbc4t6t" path="res://Scenes/3D/Placeables/Primitives/primitive_cube.tscn" id="12_2ok46"]
 [ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://Scripts/UI/Buildmode/Visuals/BmVisuals.cs" id="13_1t20g"]
 [ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://Scripts/UI/Buildmode/Tools/SelectionTool.cs" id="13_koken"]
+[ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
+[ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://Scripts/UI/Buildmode/Tools/ScaleTool.cs" id="15_1t20g"]
+[ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://Scripts/UI/Buildmode/Tools/BuildmodeTool.cs" id="15_4o5wv"]
+[ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="17_4a3kt"]
+[ext_resource type="Script" uid="uid://bf6217bwowddp" path="res://Scripts/UI/Buildmode/Gizmos/BuildmodeGizmo.cs" id="18_ifk88"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://Scripts/Services/BuildmodeService.cs" id="19_c4b4r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
@@ -487,11 +492,21 @@ shadow_blur = 0.463
 
 [node name="Visuals" type="Node" parent="Node3D/BuildingRoot/Scripts" unique_id=1447633678]
 script = ExtResource("13_1t20g")
+_OutlineShader = ExtResource("14_tdwxr")
 
 [node name="Tools" type="Node" parent="Node3D/BuildingRoot/Scripts" unique_id=2086890731]
+script = ExtResource("15_4o5wv")
 
 [node name="Selection" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1752505374]
 script = ExtResource("13_koken")
+
+[node name="Scale" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1868650021]
+script = ExtResource("15_1t20g")
+
+[node name="BuildtoolGizmo" type="Node3D" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=848150369]
+script = ExtResource("18_ifk88")
+
+[node name="ScaleGizmo" parent="Node3D/BuildingRoot/Scripts/Tools/BuildtoolGizmo" unique_id=369724828 instance=ExtResource("17_4a3kt")]
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
 

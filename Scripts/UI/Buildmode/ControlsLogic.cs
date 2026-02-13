@@ -18,7 +18,7 @@ public partial class ControlsLogic : TabContainer
 			}
 		};
 
-		BuildmodeService.OnNewToolSelected += (tool) =>
+		BuildmodeService.OnToolSelected += (tool) =>
 		{
 			if (tool == BuildmodeService.Tool.Selection)
 			{
@@ -33,7 +33,7 @@ public partial class ControlsLogic : TabContainer
 			};
 		};
 
-		BuildmodeService.OnNewObjectSelected += (name) =>
+		BuildmodeService.OnObjectSelected += (name) =>
 		{
 			SetTabTitle(0, "Select new");
 			SetTabTitle(1, name.ToString());

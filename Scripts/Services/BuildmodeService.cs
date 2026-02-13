@@ -1,17 +1,15 @@
 using Godot;
 using System;
-using System.Dynamic;
-using System.Net.Sockets;
 
 public partial class BuildmodeService : Node
 {
 	public static BuildmodeService I;
 
     // events
-	public static event Action<Tool> OnNewToolSelected;
+	public static event Action<Tool> OnToolSelected;
 
-    public static event Action<Node3D> OnNewObjectSelected;
-    public static event Action OnObjectDeselected;
+    public static event Action<Node3D> OnObjectSelected;
+    public static event Action<Node3D> OnObjectDeselected;
 
     // enums
     public enum BuildingMode { Simple, Advanced }
@@ -22,19 +20,21 @@ public partial class BuildmodeService : Node
     public Tool CurrentTool { get; private set; } = Tool.Selection;
 	public Node3D CurrentSelected { get; private set; } = null;
 
+	public const int RayLength = 1000;
+
 	public void Select(Node3D obj)
 	{
 		if (obj is null) return;
 		if (obj == CurrentSelected) return;
 		CurrentSelected = obj;
-    	OnNewObjectSelected?.Invoke(obj);
+    	OnObjectSelected?.Invoke(obj);
 		GD.Print("hi");
 	}
 
 	public void Deselect()
 	{
-    	CurrentSelected = null;
-    	OnObjectDeselected?.Invoke();
+    	OnObjectDeselected?.Invoke(CurrentSelected);
+		CurrentSelected = null;
 	}
 
 	public void SwitchToolTo(Tool tool)
@@ -42,7 +42,7 @@ public partial class BuildmodeService : Node
 		if (!(CurrentTool == tool))
 		{
 			CurrentTool = tool;
-			OnNewToolSelected?.Invoke(tool);
+			OnToolSelected?.Invoke(tool);
 			if (tool == Tool.Selection)
 				Deselect();
 		}
@@ -52,7 +52,7 @@ public partial class BuildmodeService : Node
     public override void _Ready()
     {
         I = this;
-		OnNewToolSelected?.Invoke(Tool.Selection);
+		OnToolSelected?.Invoke(Tool.Selection);
     }
 
 }

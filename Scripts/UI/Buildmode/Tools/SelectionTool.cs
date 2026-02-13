@@ -4,13 +4,12 @@ using System.Data.Common;
 
 
 
-public partial class SelectionTool : Node
+public partial class SelectionTool : BuildmodeTool
 {
-	private const float RayLength = 1000.0f;
 
 	public override void _Ready()
 	{
-		BuildmodeService.OnNewToolSelected += (tool) => 
+		BuildmodeService.OnToolSelected += (tool) => 
 		{
 			if (tool == BuildmodeService.Tool.Selection)
 			{
@@ -119,7 +118,7 @@ public partial class SelectionTool : Node
 	{
 		var camera3D = GetViewport().GetCamera3D();
 		var from = camera3D.ProjectRayOrigin(GetViewport().GetMousePosition());
-		var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * RayLength;
+		var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * BuildmodeService.RayLength;
 
 		var spaceState = GetViewport().World3D.DirectSpaceState;
 		var options = PhysicsRayQueryParameters3D.Create(from, to);

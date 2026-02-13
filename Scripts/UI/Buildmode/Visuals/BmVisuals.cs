@@ -1,34 +1,46 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class BmVisuals : Node
 {
-	[Export] Shader OutlineShader;
+	[Export] Shader _OutlineShader;
+	private ShaderMaterial _shaderMat;
+
 
 	public override void _Ready()
 	{
-		//BuildmodeService.OnNewObjectSelected += (obj) =>
-			
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-/*
-	ApplyOutline(Node3D targObj)
-	{
-		var owner = targObj.GetOwner<Node3D>();
-		if (owner?.GetParent()?.Name == "BuildingRoot")
+		BuildmodeService.OnObjectSelected += (obj) =>
 		{
-			GD.Print($"New object selected: {owner.Name}");
-			BuildmodeService.CurrentSelected = (Node3D) CurrentHovering.GetOwner();
-			var Mesh = (MeshInstance3D)BuildmodeService.CurrentSelected.FindChild("Mesh");
-			var newShaderMat = new ShaderMaterial();
-			newShaderMat.Shader = OutlineShader;
-			Mesh.MaterialOverlay = newShaderMat;
-		}
+			ChangeOutline(obj, true);
+		};
+
+		BuildmodeService.OnObjectDeselected += (obj) =>
+		{
+			ChangeOutline(obj, false);
+		};
+
+		_shaderMat = new ShaderMaterial();
+		_shaderMat.Shader = _OutlineShader;
+		_shaderMat.SetShaderParameter("color", new Color("#ff8800"));
 	}
-*/
+
+	private void ChangeOutline(Node3D targObj, bool apply)
+	{
+		if (targObj is null) return;
+
+		var mainMesh = targObj.FindChild("MainMesh", recursive: true) as MeshInstance3D;
+		if (mainMesh is null) return;
+
+		if (apply == true)
+		{
+			mainMesh.MaterialOverlay = _shaderMat;
+			GD.Print(mainMesh.MaterialOverlay);
+		}
+		else
+		{
+			mainMesh.MaterialOverlay = null;
+		}
+		
+	}
 }
