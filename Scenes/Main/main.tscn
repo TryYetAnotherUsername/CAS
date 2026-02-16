@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
 [ext_resource type="PackedScene" uid="uid://dghqb28apitc6" path="res://Scenes/UI/WindowContents/Console/WinCont_Console.tscn" id="8_y3v7k"]
-[ext_resource type="PackedScene" uid="uid://dbecfchbc4t6t" path="res://Scenes/3D/Placeables/Primitives/primitive_cube.tscn" id="12_2ok46"]
 [ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://Scripts/Buildmode/Visuals/BmVisuals.cs" id="13_1t20g"]
 [ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://Scripts/Buildmode/Tools/SelectionTool.cs" id="13_koken"]
 [ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
@@ -24,7 +23,10 @@
 [ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://Scripts/Services/BuildmodeService.cs" id="19_c4b4r"]
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://Scripts/Buildmode/Tools/MoveTool.cs" id="19_ifk88"]
+[ext_resource type="PackedScene" uid="uid://bc5su4g84yv5n" path="res://Scenes/3D/Placeables_auto/single_wall.tscn" id="20_tyqxl"]
+[ext_resource type="PackedScene" uid="uid://wsupfii2i1d6" path="res://Scenes/3D/Placeables_auto/double_wall.tscn" id="21_4ohmo"]
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://Scripts/Buildmode/Tools/FreeformTool.cs" id="21_tyqxl"]
+[ext_resource type="PackedScene" uid="uid://bja13j873eogw" path="res://Scenes/3D/Placeables_auto/double_wall_window.tscn" id="22_4ohmo"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_hfg1r"]
 size = Vector2(999, 999)
@@ -56,11 +58,14 @@ sky_material = SubResource("ProceduralSkyMaterial_hfg1r")
 background_mode = 2
 sky = SubResource("Sky_4e4y2")
 tonemap_mode = 2
+ssr_enabled = true
+ssr_max_steps = 120
 ssao_enabled = true
+ssao_radius = 0.5
+ssao_intensity = 4.0
 ssil_enabled = true
 ssil_radius = 1.36
 sdfgi_use_occlusion = true
-sdfgi_cascades = 8
 glow_enabled = true
 
 [node name="Main" type="Node" unique_id=458039144]
@@ -173,7 +178,7 @@ mouse_filter = 2
 [node name="Players" type="Node3D" parent="Node3D" unique_id=1881802444]
 
 [node name="PlayerChar" parent="Node3D/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.3716, 2.0613446)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, 0.4099676, 1.2755573)
 
 [node name="Terrain" type="Node3D" parent="Node3D" unique_id=18981723]
 
@@ -192,15 +197,14 @@ shape = SubResource("ConcavePolygonShape3D_4e4y2")
 environment = SubResource("Environment_6t3k2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/WorldEnvironment" unique_id=414167535]
-transform = Transform3D(-0.8365163, -0.54766774, 0.01733768, -0.22414383, 0.37089095, 0.90122116, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.036733806, -0.6913264, 0.72160816, -0.228678, 0.70875055, 0.6673673, -0.9728088, -0.14050098, -0.18412629, 0, 0, 0)
 shadow_enabled = true
-shadow_opacity = 0.91
-shadow_blur = 0.463
+shadow_bias = 0.041
+shadow_normal_bias = 0.0
+shadow_opacity = 0.9
+shadow_blur = 1.235
 
 [node name="BuildingRoot" type="Node3D" parent="Node3D" unique_id=1503896068]
-
-[node name="PrimitiveCube" parent="Node3D/BuildingRoot" unique_id=389291832 instance=ExtResource("12_2ok46")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Scripts" type="Node" parent="Node3D/BuildingRoot" unique_id=1985962158]
 
@@ -225,6 +229,14 @@ _moveGizmo = ExtResource("17_4a3kt")
 [node name="Freeform" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1875244053]
 script = ExtResource("21_tyqxl")
 
+[node name="single_wall" parent="Node3D/BuildingRoot" unique_id=303518627 instance=ExtResource("20_tyqxl")]
+
+[node name="double_wall" parent="Node3D/BuildingRoot" unique_id=421419658 instance=ExtResource("21_4ohmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6547322, 0, -0.0011661053)
+
+[node name="double_wall_window" parent="Node3D/BuildingRoot" unique_id=1632369450 instance=ExtResource("22_4ohmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
 [node name="Services" type="Node" parent="." unique_id=1469627630]
 
 [node name="FileOpService" type="Node" parent="Services" unique_id=1586219315]
@@ -238,3 +250,9 @@ _Content_Console = ExtResource("8_y3v7k")
 
 [node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
 script = ExtResource("19_c4b4r")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=549059661]
+transform = Transform3D(-5.4275e-08, 0.9593091, -0.2823582, 2.9590462e-08, 0.2823582, 0.9593091, 1, 4.3711392e-08, -4.371139e-08, -1.3499393, 1.920013, -1)
+shadow_enabled = true
+shadow_transmittance_bias = 16.0
+spot_angle = 70.15406

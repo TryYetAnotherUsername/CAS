@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bja13j873eogw"]
+
+[ext_resource type="PackedScene" uid="uid://csagp5cy344m7" path="res://Assets/3D/Models/Placeables/Walls/double_wall_window.glb" id="1_djh08"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://Scripts/Buildmode/Placeables/Types/Wall.cs" id="2_o08or"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djh08"]
+albedo_color = Color(0.7162959, 0.7162964, 0.7162961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ul42c"]
+albedo_color = Color(0.826702, 0.8712341, 0.77656376, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o08or"]
+albedo_color = Color(0.38009745, 0.4941675, 0.38005385, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3p45"]
+albedo_color = Color(0.6789437, 0.6789437, 0.6789437, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_buxix"]
+transparency = 1
+albedo_color = Color(0.9098039, 0.9607843, 1, 0.7137255)
+metallic = 1.0
+roughness = 0.0
+
+[node name="double_wall_window" unique_id=1632369450 instance=ExtResource("1_djh08")]
+script = ExtResource("2_o08or")
+
+[node name="single_wall__physics" parent="." index="0" unique_id=1866157028]
+visible = false
+
+[node name="single_wall" parent="." index="1" unique_id=1008648936]
+surface_material_override/0 = SubResource("StandardMaterial3D_djh08")
+surface_material_override/1 = SubResource("StandardMaterial3D_ul42c")
+surface_material_override/2 = SubResource("StandardMaterial3D_o08or")
+surface_material_override/3 = SubResource("StandardMaterial3D_a3p45")
+surface_material_override/4 = SubResource("StandardMaterial3D_buxix")
+
+[node name="single_wall_ray" parent="." index="2" unique_id=1120537349]
+visible = false
+
+[node name="StaticBody3D" parent="single_wall_ray" index="0" unique_id=1580764333]
+collision_layer = 2
+collision_mask = 2

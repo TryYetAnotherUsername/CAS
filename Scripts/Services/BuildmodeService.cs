@@ -54,6 +54,7 @@ public partial class BuildmodeService : Node
     {
         I = this;
 		OnToolSelected?.Invoke(Tool.Selection);
+		BuildModeConfig.Init();
     }
 
 }
