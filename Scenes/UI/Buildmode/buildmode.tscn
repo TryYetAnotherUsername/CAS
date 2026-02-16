@@ -1,0 +1,284 @@
+[gd_scene format=3 uid="uid://dbictodiotvlw"]
+
+[ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_7bl78"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_rh6rf"]
+[ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://Scripts/Buildmode/UI/ControlsLogic.cs" id="3_bqi83"]
+[ext_resource type="PackedScene" uid="uid://bg62smtawfgjh" path="res://Scenes/UI/Buildmode/catalogue_object_card.tscn" id="4_rh6rf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
+shader = ExtResource("1_7bl78")
+shader_parameter/blur_amount = 4.00000019
+shader_parameter/mix_amount = 0.6450000306375
+shader_parameter/saturation = 0.69200003287
+shader_parameter/grain_amount = 0.02
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk4q2"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wliom"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.28251404, 0.7426321, 1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.20098406, 0.6896132, 0.8194331, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Buildmode" type="Control" unique_id=2138034224]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=585105209]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Empty" type="Control" parent="VSplitContainer" unique_id=1374382555]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Controls" type="Panel" parent="VSplitContainer" unique_id=417764309]
+material = SubResource("ShaderMaterial_wliom")
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_vk4q2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/Controls" unique_id=923649569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="Control" parent="VSplitContainer/Controls/VBoxContainer" unique_id=508144064]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="VSplitContainer/Controls/VBoxContainer/Top" unique_id=1456418280]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_right = -8.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme = ExtResource("2_rh6rf")
+current_tab = 0
+script = ExtResource("3_bqi83")
+
+[node name="Select" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=1274381745]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select" unique_id=697177587]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer" unique_id=986010512]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer/HBoxContainer" unique_id=869602359]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer/HBoxContainer/PanelContainer" unique_id=1550038679]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1330166523]
+layout_mode = 2
+text = "Click on an object to start editing"
+
+[node name="Object" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=938463188]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object" unique_id=1236867590]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer" unique_id=325383268]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer/HBoxContainer" unique_id=792334093]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer/HBoxContainer/PanelContainer" unique_id=548713000]
+layout_mode = 2
+
+[node name="ModeToggle" type="CheckButton" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1437472972]
+layout_mode = 2
+text = "Precision mode (Custom grid)"
+
+[node name="Freeform" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=248054958]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Move" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=147284636]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move" unique_id=1817709539]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer" unique_id=242696774]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer/HBoxContainer" unique_id=795576165]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer/HBoxContainer/PanelContainer" unique_id=606298492]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1426701786]
+layout_mode = 2
+prefix = "snap"
+
+[node name="Rotate" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=1557484246]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Scale" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=243395632]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="ConfHint" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top" unique_id=1111044793]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -22.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wliom")
+
+[node name="Label" type="Label" parent="VSplitContainer/Controls/VBoxContainer/Top/ConfHint" unique_id=734948235]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_rh6rf")
+text = "Press [E] to confirm placement and return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Catalogue" type="Control" parent="VSplitContainer/Controls/VBoxContainer" unique_id=368824362]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabContainer" type="TabContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue" unique_id=1209384761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_rh6rf")
+current_tab = 0
+
+[node name="Walls" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=1434308202]
+layout_mode = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls" unique_id=1725562822]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CatalogueObjectCard" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls/HBoxContainer" unique_id=1980901793 instance=ExtResource("4_rh6rf")]
+layout_mode = 2
+
+[node name="Floors" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=2035728367]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors" unique_id=667044870]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors/HBoxContainer" unique_id=1653531398]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Floors2" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=1196830657]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+metadata/_tab_index = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors2" unique_id=350669039]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors2/HBoxContainer" unique_id=66665835]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2

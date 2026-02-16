@@ -1,8 +1,9 @@
 using System;
 using System.Diagnostics.Tracing;
+using System.Security;
 using Godot;
 
-public partial class ScaleGizmo : BuildmodeGizmo
+public partial class MoveGizmo : BuildmodeGizmo
 {
 	// Editor dependencies
 	[Export] MeshInstance3D _x;
@@ -25,10 +26,10 @@ public partial class ScaleGizmo : BuildmodeGizmo
 	}
 
 	// Global variables
-	[Export] private float _sensitivity = 0.01f;
+	[Export] private float _sensitivity = 0.05f;
+	[Export] private bool _showDebug;
 	private bool _isDragging;
 	private Direction _currentDragDir;
-	private Node3D _currentTargetObj;
 	private Vector2 _lineStart;
 	private Vector2 _lineEnd;
 	private Vector2 _initalPosOnLine;
@@ -48,7 +49,8 @@ public partial class ScaleGizmo : BuildmodeGizmo
 			_isDragging = true;
 			SetDragging(true);
 			
-			_initialPos = Position;
+			_initialPos = BuildmodeService.I.CurrentSelected.Position;
+			_targPos = BuildmodeService.I.CurrentSelected.Position; 
 			_initalPosOnLine = GetClosestPointOnLine(_lineStart, _lineEnd);
 
 		}
@@ -60,6 +62,7 @@ public partial class ScaleGizmo : BuildmodeGizmo
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_debugLine = new Line2D();
 		_debugLine.Width = 2;
 		_debugLine.DefaultColor = Color.FromHtml("#ffd194");
@@ -78,6 +81,7 @@ public partial class ScaleGizmo : BuildmodeGizmo
 	private Direction? GetMouseOverDir() // Apparently this "?" makes a function nullabel, interesting!
 	{
 		var part = GetMouseOverPart();
+		GD.Print(part);
 		if (part is null) return null;
 
 		if (part == _x) return Direction.X;
@@ -86,10 +90,11 @@ public partial class ScaleGizmo : BuildmodeGizmo
 		else return null;
 	}
 
-	private void ScaleObject(Direction? dir, float amount)
+	private void MoveObject(Direction? dir, float amount)
 	{
-		var p = Position;
-		var a = amount * _sensitivity * GetDistFromCam();
+		var p = BuildmodeService.I.CurrentSelected.Position;
+		var a = amount * _sensitivity;
+
 		if (dir == Direction.X)
 		{
 			_targPos.X = _initialPos.X + a;
@@ -103,7 +108,8 @@ public partial class ScaleGizmo : BuildmodeGizmo
 			_targPos.Z = _initialPos.Z + a;
 		}
 		p = _targPos;
-		Position = p;
+		BuildmodeService.I.CurrentSelected.Position = p;
+		Position = BuildmodeService.I.CurrentSelected.Position;
 	}
 
 	private void SetDragging(bool state)
@@ -120,20 +126,21 @@ public partial class ScaleGizmo : BuildmodeGizmo
 			var farEnd = start + direction * 10000;
 			var farStart = start - direction * 10000;
 
-			_debugLine.AddPoint(farEnd);
-			_debugLine.AddPoint(farStart);
-			_debugLine.Visible = true;
+			if (_showDebug)
+			{
+				_debugLine.AddPoint(farEnd);
+				_debugLine.AddPoint(farStart);
+				_debugLine.Visible = true;
+			}
 
 			_lineEnd = farEnd;
 			_lineStart = farStart;
 
-			_debugPoint.Visible = true;
 		}
 		else
 		{
 			_debugLine.Visible = false;
 			_debugPoint.Visible = false;
-
 		}
 
         Vector2 GetOffsetEndpoint(Direction? dir, Camera3D cam)
@@ -157,11 +164,6 @@ public partial class ScaleGizmo : BuildmodeGizmo
             return endP;
         }
     }
-
-	private float GetDistFromCam()
-	{
-		return Position.DistanceTo(GetViewport().GetCamera3D().Position);
-	}
 
 	private Vector2 GetClosestPointOnLine(Vector2 start, Vector2 end)
 	{
@@ -187,6 +189,6 @@ public partial class ScaleGizmo : BuildmodeGizmo
 
 		GD.Print(dragDelta);
 		
-		ScaleObject(_currentDragDir, dragDelta); // note dragDelta can be negative so no need for dot product.
+		MoveObject(_currentDragDir, dragDelta); // note dragDelta can be negative so no need for dot product.
 	}
 }

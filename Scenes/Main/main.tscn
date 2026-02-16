@@ -10,49 +10,21 @@
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/WindowBase/window_base.tscn" id="3_xlvfx"]
 [ext_resource type="Texture2D" uid="uid://d0vr37mvo8gcl" path="res://Assets/3D/Textures/Grass/color.png" id="4_2ok46"]
 [ext_resource type="Script" uid="uid://bpkg4pt26xwso" path="res://Scripts/Services/WindowService.cs" id="4_5yls4"]
+[ext_resource type="PackedScene" uid="uid://dbictodiotvlw" path="res://Scenes/UI/Buildmode/buildmode.tscn" id="5_8sujb"]
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
-[ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="5_vk4q2"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
-[ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://Scripts/UI/Buildmode/ControlsLogic.cs" id="6_wliom"]
 [ext_resource type="PackedScene" uid="uid://dghqb28apitc6" path="res://Scenes/UI/WindowContents/Console/WinCont_Console.tscn" id="8_y3v7k"]
 [ext_resource type="PackedScene" uid="uid://dbecfchbc4t6t" path="res://Scenes/3D/Placeables/Primitives/primitive_cube.tscn" id="12_2ok46"]
-[ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://Scripts/UI/Buildmode/Visuals/BmVisuals.cs" id="13_1t20g"]
-[ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://Scripts/UI/Buildmode/Tools/SelectionTool.cs" id="13_koken"]
+[ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://Scripts/Buildmode/Visuals/BmVisuals.cs" id="13_1t20g"]
+[ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://Scripts/Buildmode/Tools/SelectionTool.cs" id="13_koken"]
 [ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
-[ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://Scripts/UI/Buildmode/Tools/ScaleTool.cs" id="15_1t20g"]
-[ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://Scripts/UI/Buildmode/Tools/BuildmodeTool.cs" id="15_4o5wv"]
-[ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="17_4a3kt"]
-[ext_resource type="Script" uid="uid://bf6217bwowddp" path="res://Scripts/UI/Buildmode/Gizmos/BuildmodeGizmo.cs" id="18_ifk88"]
+[ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://Scripts/Buildmode/Tools/ScaleTool.cs" id="15_1t20g"]
+[ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://Scripts/Buildmode/Tools/BuildmodeTool.cs" id="15_4o5wv"]
+[ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/MoveGizmo.tscn" id="17_4a3kt"]
+[ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://Scripts/Services/BuildmodeService.cs" id="19_c4b4r"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
-shader = ExtResource("5_vk4q2")
-shader_parameter/blur_amount = 4.00000019
-shader_parameter/mix_amount = 0.6450000306375
-shader_parameter/saturation = 0.69200003287
-shader_parameter/grain_amount = 0.02
-shader_parameter/color_over = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk4q2"]
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wliom"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.28251404, 0.7426321, 1, 0.6)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.20098406, 0.6896132, 0.8194331, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://Scripts/Buildmode/Tools/MoveTool.cs" id="19_ifk88"]
+[ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://Scripts/Buildmode/Tools/FreeformTool.cs" id="21_tyqxl"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_hfg1r"]
 size = Vector2(999, 999)
@@ -184,267 +156,8 @@ prefer_native_menu = true
 oversampling_override = 1.0
 prefer_native_menu = true
 
-[node name="Buildmode" type="Control" parent="UI" unique_id=1047530451]
+[node name="Buildmode" parent="UI" unique_id=2138034224 instance=ExtResource("5_8sujb")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VSplitContainer" type="VSplitContainer" parent="UI/Buildmode" unique_id=1559951480]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 64.0
-offset_right = -64.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Empty" type="Control" parent="UI/Buildmode/VSplitContainer" unique_id=1913246135]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Controls" type="Panel" parent="UI/Buildmode/VSplitContainer" unique_id=2096448250]
-material = SubResource("ShaderMaterial_wliom")
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_vk4q2")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls" unique_id=1408170401]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Top" type="Control" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer" unique_id=203595809]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-
-[node name="TabContainer" type="TabContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top" unique_id=1511164308]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 8.0
-offset_right = -8.0
-offset_bottom = 58.0
-grow_horizontal = 2
-theme = ExtResource("1_p6jpk")
-current_tab = 0
-script = ExtResource("6_wliom")
-
-[node name="Select" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=731061021]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select" unique_id=1558355298]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer" unique_id=796268327]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer/HBoxContainer" unique_id=1182140548]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer/HBoxContainer/PanelContainer" unique_id=1928309479]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Select/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=593080405]
-layout_mode = 2
-text = "Click on an object to start editing"
-
-[node name="Object" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=1583316816]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object" unique_id=1762442509]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer" unique_id=1618206169]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer/HBoxContainer" unique_id=1381507820]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer/HBoxContainer/PanelContainer" unique_id=2061507895]
-layout_mode = 2
-
-[node name="ModeToggle" type="CheckButton" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Object/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=708034777]
-layout_mode = 2
-text = "Precision mode (Custom grid)"
-
-[node name="Freeform" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=1586441305]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="Move" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=498930416]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move" unique_id=440711594]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer" unique_id=114617743]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer/HBoxContainer" unique_id=1955521456]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer/HBoxContainer/PanelContainer" unique_id=1361443170]
-layout_mode = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Move/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1294971403]
-layout_mode = 2
-prefix = "snap"
-
-[node name="Rotate" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=1207169535]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 4
-
-[node name="Scale" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=2077535255]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 5
-
-[node name="ConfHint" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top" unique_id=180520210]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -22.0
-offset_right = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_wliom")
-
-[node name="Label" type="Label" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Top/ConfHint" unique_id=1452640662]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p6jpk")
-text = "Press [E] to confirm placement and return"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Catalogue" type="Control" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer" unique_id=444396519]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TabContainer" type="TabContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue" unique_id=1245948755]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("1_p6jpk")
-current_tab = 0
-
-[node name="Walls" type="ScrollContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=871189820]
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls" unique_id=1305859566]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls/HBoxContainer" unique_id=2074757707]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Panel2" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls/HBoxContainer" unique_id=1718569978]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls/HBoxContainer" unique_id=196748802]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls/HBoxContainer" unique_id=175054500]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Floors" type="ScrollContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=16182865]
-visible = false
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors" unique_id=1211266793]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors/HBoxContainer" unique_id=567619191]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Floors2" type="ScrollContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=1363253824]
-visible = false
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors2" unique_id=1476107441]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="UI/Buildmode/VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors2/HBoxContainer" unique_id=2072947170]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
 
 [node name="WindowsRoot" type="Control" parent="UI" unique_id=544186683]
 layout_mode = 1
@@ -487,6 +200,7 @@ shadow_blur = 0.463
 [node name="BuildingRoot" type="Node3D" parent="Node3D" unique_id=1503896068]
 
 [node name="PrimitiveCube" parent="Node3D/BuildingRoot" unique_id=389291832 instance=ExtResource("12_2ok46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Scripts" type="Node" parent="Node3D/BuildingRoot" unique_id=1985962158]
 
@@ -502,11 +216,14 @@ script = ExtResource("13_koken")
 
 [node name="Scale" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1868650021]
 script = ExtResource("15_1t20g")
+_scaleGizmo = ExtResource("18_8sujb")
 
-[node name="BuildtoolGizmo" type="Node3D" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=848150369]
-script = ExtResource("18_ifk88")
+[node name="Move" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=2017238234]
+script = ExtResource("19_ifk88")
+_moveGizmo = ExtResource("17_4a3kt")
 
-[node name="ScaleGizmo" parent="Node3D/BuildingRoot/Scripts/Tools/BuildtoolGizmo" unique_id=369724828 instance=ExtResource("17_4a3kt")]
+[node name="Freeform" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1875244053]
+script = ExtResource("21_tyqxl")
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
 

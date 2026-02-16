@@ -6,6 +6,13 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngcls"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngcls"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3xvl"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -59,6 +66,8 @@ default_font = ExtResource("1_ic82w")
 default_font_size = 12
 Panel/styles/panel = SubResource("StyleBoxEmpty_ic82w")
 TabContainer/styles/panel = SubResource("StyleBoxEmpty_ngcls")
+outline_clip/base_type = &"Panel"
+outline_clip/styles/panel = SubResource("StyleBoxFlat_ngcls")
 panel_black/base_type = &"Panel"
 panel_black/styles/panel = SubResource("StyleBoxFlat_e3xvl")
 panel_transparent/base_type = &"Panel"

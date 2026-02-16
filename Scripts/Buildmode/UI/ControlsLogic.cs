@@ -5,7 +5,7 @@ public partial class ControlsLogic : TabContainer
 {
 	public override void _Ready()
 	{
-		TabChanged += (t) =>
+		TabClicked += (t) =>
 		{
 			switch (t)
 			{
@@ -13,7 +13,19 @@ public partial class ControlsLogic : TabContainer
 					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Selection);
 					break;
 				case 1:
+					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Object);
+					break;
+				case 2:
 					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Freeform);
+					break;
+				case 3:
+					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Move);
+					break;
+				case 4:
+					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Rotate);
+					break;
+				case 5:
+					BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Scale);
 					break;
 			}
 		};

@@ -4,8 +4,17 @@ using System.Runtime.CompilerServices;
 
 public partial class BuildmodeGizmo : Node3D
 {
-	private Node3D currentPart;
-	private Vector3 OriginalScale;
+    public override void _Ready()
+    {
+		BuildmodeService.OnToolSelected += InitialisePostition;
+
+    }
+
+	public void InitialisePostition(BuildmodeService.Tool _)
+	{
+		GD.Print("initialised.");
+		Position = BuildmodeService.I.CurrentSelected.Position;
+	}
 
 	// This method returns the gizmo handle, or else null.
 	public MeshInstance3D GetMouseOverPart()

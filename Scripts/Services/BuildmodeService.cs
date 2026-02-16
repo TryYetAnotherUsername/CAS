@@ -8,8 +8,8 @@ public partial class BuildmodeService : Node
     // events
 	public static event Action<Tool> OnToolSelected;
 
-    public static event Action<Node3D> OnObjectSelected;
-    public static event Action<Node3D> OnObjectDeselected;
+    public static event Action<Placeable> OnObjectSelected;
+    public static event Action<Placeable> OnObjectDeselected;
 
     // enums
     public enum BuildingMode { Simple, Advanced }
@@ -18,11 +18,11 @@ public partial class BuildmodeService : Node
     // states
     public BuildingMode CurrentMode { get; private set; } = BuildingMode.Simple;
     public Tool CurrentTool { get; private set; } = Tool.Selection;
-	public Node3D CurrentSelected { get; private set; } = null;
+	public Placeable CurrentSelected { get; private set; } = null;
 
 	public const int RayLength = 1000;
 
-	public void Select(Node3D obj)
+	public void Select(Placeable obj)
 	{
 		if (obj is null) return;
 		if (obj == CurrentSelected) return;
@@ -46,6 +46,7 @@ public partial class BuildmodeService : Node
 			if (tool == Tool.Selection)
 				Deselect();
 		}
+		GD.Print($"BuildmodeService: Switched tool to {tool}");
 		
 	}
 

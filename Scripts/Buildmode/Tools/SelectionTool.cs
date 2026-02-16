@@ -84,13 +84,14 @@ public partial class SelectionTool : BuildmodeTool
 */
 
 	public override void _UnhandledInput(InputEvent @event)
-	{	
+	{
 		if (Input.IsActionJustPressed("build_select"))
 		{
 			if (Raycast() is Node3D collider)
 			{
-				var root = collider.GetOwner<Node3D>();
-				BuildmodeService.I.Select(root);  // Pass the root
+				var root = collider.GetOwner<Placeable>();
+				if (root is null) return;  // hit something that isn't a placeable
+				BuildmodeService.I.Select(root);
 			}
 		}
 	}

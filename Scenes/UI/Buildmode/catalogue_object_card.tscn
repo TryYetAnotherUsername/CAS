@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bg62smtawfgjh"]
+
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_dlen5"]
+[ext_resource type="Script" uid="uid://cp7b8ispu7nfa" path="res://Scripts/Buildmode/UI/CatalogueObjectCard.cs" id="2_u0h07"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7bl78"]
+
+[node name="CatalogueObjectCard" type="Panel" unique_id=1980901793]
+clip_children = 1
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+theme = ExtResource("1_dlen5")
+theme_type_variation = &"outline_clip"
+script = ExtResource("2_u0h07")
+
+[node name="ObjectPicture" type="TextureRect" parent="." unique_id=662199130]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_7bl78")
+expand_mode = 5
+
+[node name="SelectButton" type="Button" parent="." unique_id=1126961876]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_dlen5")
+text = "I am some placeholder text."
+flat = true
+autowrap_mode = 3
