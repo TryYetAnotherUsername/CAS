@@ -29,25 +29,24 @@ public static class BuildModeConfig
 
     public static void Init()
     {
-        GD.Print("BuildModeConfig: starting init");
+        GD.Print("::== BuildModeConfig: Starting init...");
 
         foreach (var kvp in BuildModeItems)
         {
-            GD.Print(kvp); // remove
-
             // try find a scene for it
             var foundScene = FindSceneOrNull(kvp.Key);
             if (foundScene is not null)
             {
                 kvp.Value.Scene = foundScene;
+                GD.Print($"BuildModeConfig: Scene {foundScene} matched to name <{kvp.Key}>.");
             }
             else
             {
                 GD.PrintErr($"BuildModeConfig: Could not find matching scene for name <{kvp.Value.DispName}>, the result is null.");
             }
-
-            
         }
+
+        GD.Print("==>> BuildModeConfig: Init done!");
 
     }
 }

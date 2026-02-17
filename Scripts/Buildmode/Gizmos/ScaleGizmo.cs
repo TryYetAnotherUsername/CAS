@@ -81,7 +81,7 @@ public partial class ScaleGizmo : BuildmodeGizmo
 	private Direction? GetMouseOverDir() // Apparently this "?" makes a function nullabel, interesting!
 	{
 		var part = GetMouseOverPart();
-		GD.Print(part);
+
 		if (part is null) return null;
 
 		if (part == _x) return Direction.X;
@@ -148,17 +148,14 @@ public partial class ScaleGizmo : BuildmodeGizmo
 			Vector2 endP = Vector2.Inf;
             if (dir == Direction.X)
             {
-				GD.Print("x");
                 endP = cam.UnprojectPosition(GlobalPosition + GlobalBasis.X * 2);
             }
             else if (dir == Direction.Y)
             {
-				GD.Print("y");
                 endP = cam.UnprojectPosition(GlobalPosition + GlobalBasis.Y * 2);
             }
             else if (dir == Direction.Z)
             {
-				GD.Print("z");
                 endP = cam.UnprojectPosition(GlobalPosition + GlobalBasis.Z * 2);
             }
             return endP;
@@ -186,8 +183,6 @@ public partial class ScaleGizmo : BuildmodeGizmo
 		float initialDist = _initalPosOnLine.DistanceTo(_lineStart);
 		float currentDist = currentIntersect.DistanceTo(_lineStart);
 		float dragDelta = initialDist - currentDist;
-
-		GD.Print(dragDelta);
 		
 		ScaleObject(_currentDragDir, dragDelta); // note dragDelta can be negative so no need for dot product.
 	}

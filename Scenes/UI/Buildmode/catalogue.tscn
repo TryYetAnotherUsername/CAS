@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://c72wblnpn0hka"]
 
+[ext_resource type="Script" uid="uid://kqsfrpba5iwi" path="res://Scripts/Buildmode/UI/CatalogueAuto.cs" id="1_2n76u"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_gtnng"]
+[ext_resource type="PackedScene" uid="uid://bg62smtawfgjh" path="res://Scenes/UI/Buildmode/catalogue_object_card.tscn" id="2_0y8ik"]
+[ext_resource type="PackedScene" uid="uid://dan3hghgxvbxj" path="res://Scenes/UI/Buildmode/CatalogueCatContainer.tscn" id="3_2n76u"]
 
-[node name="Catalogue" type="Control" unique_id=368824362]
+[node name="Catalogue" type="Control" unique_id=368824362 node_paths=PackedStringArray("_tabContainerRoot")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +13,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+script = ExtResource("1_2n76u")
+_tabContainerRoot = NodePath("TabContainer")
+_catContainer = ExtResource("3_2n76u")
+_objectCard = ExtResource("2_0y8ik")
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=1209384761]
 layout_mode = 1
@@ -24,63 +31,3 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_gtnng")
-current_tab = 1
-
-[node name="Walls" type="ScrollContainer" parent="TabContainer" unique_id=1434308202]
-visible = false
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Walls" unique_id=1725562822]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="TabContainer/Walls/HBoxContainer" unique_id=1787436839]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Panel2" type="Panel" parent="TabContainer/Walls/HBoxContainer" unique_id=1940419050]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="TabContainer/Walls/HBoxContainer" unique_id=1557282226]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="TabContainer/Walls/HBoxContainer" unique_id=435751033]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Floors" type="ScrollContainer" parent="TabContainer" unique_id=2035728367]
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Floors" unique_id=667044870]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="TabContainer/Floors/HBoxContainer" unique_id=1653531398]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Floors2" type="ScrollContainer" parent="TabContainer" unique_id=1196830657]
-visible = false
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Floors2" unique_id=350669039]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="TabContainer/Floors2/HBoxContainer" unique_id=66665835]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2

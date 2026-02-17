@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dan3hghgxvbxj"]
+
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_qafxe"]
+
+[node name="Walls" type="ScrollContainer" unique_id=179690046]
+theme = ExtResource("1_qafxe")
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="CatCardCont" type="HBoxContainer" parent="." unique_id=1714313657]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

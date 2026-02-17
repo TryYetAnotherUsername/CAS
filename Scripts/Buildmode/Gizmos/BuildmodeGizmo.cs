@@ -12,7 +12,6 @@ public partial class BuildmodeGizmo : Node3D
 
 	public void InitialisePostition(BuildmodeService.Tool _)
 	{
-		GD.Print("initialised.");
 		Position = BuildmodeService.I.CurrentSelected.Position;
 	}
 

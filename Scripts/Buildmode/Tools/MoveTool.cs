@@ -12,7 +12,6 @@ public partial class MoveTool : BuildmodeTool
 
         BuildmodeService.OnToolSelected += (tool) =>
         {
-			GD.Print("move tool selected");
             SetMoving(tool == BuildmodeService.Tool.Move);
         };
     }

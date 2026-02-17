@@ -34,13 +34,13 @@ size = Vector2(999, 999)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vk4q2"]
 render_priority = 0
 shader = ExtResource("3_6t3k2")
-shader_parameter/albedo_colour = Color(0.44985747, 0.9324575, 0, 1)
+shader_parameter/albedo_colour = Color(0.5308636, 0.9069635, 0.31363863, 1)
 shader_parameter/texture_albedo = ExtResource("4_2ok46")
 shader_parameter/texture_roughness = ExtResource("6_es6iu")
 shader_parameter/texture_normal = ExtResource("5_koken")
-shader_parameter/normal_strength = 1.1570000549575
-shader_parameter/roughness_strength = 1.0
-shader_parameter/base_scale = 1000.0
+shader_parameter/normal_strength = 1.0
+shader_parameter/roughness_strength = 0.800000038
+shader_parameter/base_scale = 1200.00005699674
 shader_parameter/scale = 1.0
 shader_parameter/voronoi_random = 0.0
 

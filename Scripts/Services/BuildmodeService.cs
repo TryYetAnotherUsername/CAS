@@ -28,7 +28,7 @@ public partial class BuildmodeService : Node
 		if (obj == CurrentSelected) return;
 		CurrentSelected = obj;
     	OnObjectSelected?.Invoke(obj);
-		GD.Print("hi");
+		GD.Print($"BuildModeService: New object of name <{obj.Name}> selected.");
 	}
 
 	public void Deselect()
@@ -54,7 +54,6 @@ public partial class BuildmodeService : Node
     {
         I = this;
 		OnToolSelected?.Invoke(Tool.Selection);
-		BuildModeConfig.Init();
     }
 
 }

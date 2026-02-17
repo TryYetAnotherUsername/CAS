@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_7bl78"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_rh6rf"]
 [ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://Scripts/Buildmode/UI/ControlsLogic.cs" id="3_bqi83"]
-[ext_resource type="PackedScene" uid="uid://bg62smtawfgjh" path="res://Scenes/UI/Buildmode/catalogue_object_card.tscn" id="4_rh6rf"]
+[ext_resource type="PackedScene" uid="uid://c72wblnpn0hka" path="res://Scenes/UI/Buildmode/catalogue.tscn" id="4_rh6rf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
 shader = ExtResource("1_7bl78")
@@ -218,67 +218,5 @@ text = "Press [E] to confirm placement and return"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Catalogue" type="Control" parent="VSplitContainer/Controls/VBoxContainer" unique_id=368824362]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TabContainer" type="TabContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue" unique_id=1209384761]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2_rh6rf")
-current_tab = 0
-
-[node name="Walls" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=1434308202]
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls" unique_id=1725562822]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CatalogueObjectCard" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Walls/HBoxContainer" unique_id=1980901793 instance=ExtResource("4_rh6rf")]
-layout_mode = 2
-
-[node name="Floors" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=2035728367]
-visible = false
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors" unique_id=667044870]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors/HBoxContainer" unique_id=1653531398]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="Floors2" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer" unique_id=1196830657]
-visible = false
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
-metadata/_tab_index = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors2" unique_id=350669039]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Catalogue/TabContainer/Floors2/HBoxContainer" unique_id=66665835]
-custom_minimum_size = Vector2(150, 0)
+[node name="Catalogue" parent="VSplitContainer/Controls/VBoxContainer" unique_id=368824362 instance=ExtResource("4_rh6rf")]
 layout_mode = 2

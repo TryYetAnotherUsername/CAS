@@ -12,7 +12,6 @@ public partial class ScaleTool : BuildmodeTool
 
         BuildmodeService.OnToolSelected += (tool) =>
         {
-			GD.Print("scale tool selected");
             SetScaling(tool == BuildmodeService.Tool.Scale);
         };
     }
