@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_7bl78"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_rh6rf"]
-[ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://Scripts/Buildmode/UI/ControlsLogic.cs" id="3_bqi83"]
+[ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://_Scripts/UsrBuild/UI/UiBehaviour/ControlsLogic.cs" id="3_bqi83"]
 [ext_resource type="PackedScene" uid="uid://c72wblnpn0hka" path="res://Scenes/UI/Buildmode/catalogue.tscn" id="4_rh6rf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]

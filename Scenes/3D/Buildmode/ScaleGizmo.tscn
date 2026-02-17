@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dpuaf4ao8tyl0"]
 
-[ext_resource type="Script" uid="uid://d3khh3x1foren" path="res://Scripts/Buildmode/Gizmos/ScaleGizmo.cs" id="1_3ftq3"]
+[ext_resource type="Script" uid="uid://d3khh3x1foren" path="res://_Scripts/UsrBuild/BuildingTools/Gizmos/ScaleGizmo.cs" id="1_3ftq3"]
 [ext_resource type="Shader" uid="uid://qii2qlfasgs6" path="res://Assets/3D/Shaders/GizmoShader.gdshader" id="1_tovpf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5og35"]

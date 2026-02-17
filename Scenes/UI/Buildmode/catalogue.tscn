@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c72wblnpn0hka"]
 
-[ext_resource type="Script" uid="uid://kqsfrpba5iwi" path="res://Scripts/Buildmode/UI/CatalogueAuto.cs" id="1_2n76u"]
+[ext_resource type="Script" uid="uid://kqsfrpba5iwi" path="res://_Scripts/UsrBuild/UI/UiBehaviour/CatalogueAuto.cs" id="1_2n76u"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_gtnng"]
 [ext_resource type="PackedScene" uid="uid://bg62smtawfgjh" path="res://Scenes/UI/Buildmode/catalogue_object_card.tscn" id="2_0y8ik"]
 [ext_resource type="PackedScene" uid="uid://dan3hghgxvbxj" path="res://Scenes/UI/Buildmode/CatalogueCatContainer.tscn" id="3_2n76u"]

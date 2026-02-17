@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bc5su4g84yv5n"]
 
 [ext_resource type="PackedScene" uid="uid://dhxtbaahhrayq" path="res://Assets/3D/Models/Placeables/Walls/single_wall.glb" id="1_wixaw"]
-[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://Scripts/Buildmode/Placeables/Types/Wall.cs" id="2_k3xs4"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Props/Objects/Wall.cs" id="2_k3xs4"]
 
 [node name="single_wall" unique_id=303518627 instance=ExtResource("1_wixaw")]
 script = ExtResource("2_k3xs4")

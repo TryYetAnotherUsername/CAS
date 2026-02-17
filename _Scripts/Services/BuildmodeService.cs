@@ -8,8 +8,8 @@ public partial class BuildmodeService : Node
     // events
 	public static event Action<Tool> OnToolSelected;
 
-    public static event Action<Placeable> OnObjectSelected;
-    public static event Action<Placeable> OnObjectDeselected;
+    public static event Action<Prop> OnObjectSelected;
+    public static event Action<Prop> OnObjectDeselected;
 
     // enums
     public enum BuildingMode { Simple, Advanced }
@@ -18,11 +18,11 @@ public partial class BuildmodeService : Node
     // states
     public BuildingMode CurrentMode { get; private set; } = BuildingMode.Simple;
     public Tool CurrentTool { get; private set; } = Tool.Selection;
-	public Placeable CurrentSelected { get; private set; } = null;
+	public Prop CurrentSelected { get; private set; } = null;
 
 	public const int RayLength = 1000;
 
-	public void Select(Placeable obj)
+	public void Select(Prop obj)
 	{
 		if (obj is null) return;
 		if (obj == CurrentSelected) return;
@@ -55,5 +55,10 @@ public partial class BuildmodeService : Node
         I = this;
 		OnToolSelected?.Invoke(Tool.Selection);
     }
+
+	public void NewObject(PackedScene scene)
+	{
+		
+	}
 
 }

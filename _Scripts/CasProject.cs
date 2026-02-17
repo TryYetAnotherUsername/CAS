@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class CasProj
 {
 	public Metadata Meta;
-    public List<Placeable> PlacedObjects;
+    public List<Prop> PlacedObjects;
 }
 
 public class Metadata

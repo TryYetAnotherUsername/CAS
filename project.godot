@@ -33,7 +33,7 @@ enabled=PackedStringArray("res://addons/voronoi_scatter/plugin.cfg")
 folder_colors={
 "res://Assets/": "red",
 "res://Scenes/": "blue",
-"res://Scripts/": "gray"
+"res://_Scripts/": "gray"
 }
 
 [filesystem]

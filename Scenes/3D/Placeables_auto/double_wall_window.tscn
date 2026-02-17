@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bja13j873eogw"]
 
 [ext_resource type="PackedScene" uid="uid://csagp5cy344m7" path="res://Assets/3D/Models/Placeables/Walls/double_wall_window.glb" id="1_djh08"]
-[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://Scripts/Buildmode/Placeables/Types/Wall.cs" id="2_o08or"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Props/Objects/Wall.cs" id="2_o08or"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djh08"]
 albedo_color = Color(0.7162959, 0.7162964, 0.7162961, 1)

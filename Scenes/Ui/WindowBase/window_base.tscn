@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://wm3tf1bsv1t"]
 
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_gpfsk"]
-[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/General.tres" id="1_lwwsd"]
-[ext_resource type="Script" uid="uid://vvrxuhlgyqsp" path="res://Scripts/Windows/Base/WindowBase.cs" id="2_cs5oi"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_lwwsd"]
+[ext_resource type="Script" uid="uid://vvrxuhlgyqsp" path="res://_Scripts/UI/Windows/Base/WindowBase.cs" id="2_cs5oi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cs5oi"]
 shader = ExtResource("1_gpfsk")

@@ -10,7 +10,7 @@ public partial class CatalogueAuto : Control
 
 	public override void _Ready()
     {
-        BuildModeConfig.Init();
+        CatalogConfig.Init();
         GD.Print("::== CatalogueAuto: Starting generation...");
         GenAllCats();
         GD.Print("==>> CatalogueAuto: Generation done!}");
@@ -18,7 +18,7 @@ public partial class CatalogueAuto : Control
 
     private void GenAllCats()
     {
-        foreach (ItemConfig.ECat cat in Enum.GetValues<ItemConfig.ECat>())
+        foreach (CatalogEntity.ECat cat in Enum.GetValues<CatalogEntity.ECat>())
         {
             var catCont = _catContainer.Instantiate();
             catCont.Name = cat.ToString();
@@ -27,7 +27,7 @@ public partial class CatalogueAuto : Control
         }
     }
 
-	private void GenAllObjectsInCat(ItemConfig.ECat targCatEnum, ScrollContainer catCont)
+	private void GenAllObjectsInCat(CatalogEntity.ECat targCatEnum, ScrollContainer catCont)
     {
         if (catCont is null)
         {
@@ -36,9 +36,9 @@ public partial class CatalogueAuto : Control
         }
 
         // loop through all objects on the dict
-		foreach (var kvp in BuildModeConfig.BuildModeItems)
+		foreach (var kvp in CatalogConfig.BuildModeItems)
         {
-            ItemConfig.ECat foundCat = kvp.Value.Category;
+            CatalogEntity.ECat foundCat = kvp.Value.Cat;
             
 			if (foundCat == targCatEnum)
             {

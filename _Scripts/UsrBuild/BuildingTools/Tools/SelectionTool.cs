@@ -89,7 +89,7 @@ public partial class SelectionTool : BuildmodeTool
 		{
 			if (Raycast() is Node3D collider)
 			{
-				var root = collider.GetOwner<Placeable>();
+				var root = collider.GetOwner<Prop>();
 				if (root is null) return;  // hit something that isn't a placeable
 				BuildmodeService.I.Select(root);
 			}

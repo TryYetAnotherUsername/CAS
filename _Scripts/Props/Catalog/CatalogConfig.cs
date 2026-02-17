@@ -1,19 +1,19 @@
 using Godot;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using static ItemConfig;
+using static CatalogEntity;
 
-public static class BuildModeConfig
+public static class CatalogConfig
 {
-    public static readonly Dictionary<string, ItemConfig> BuildModeItems = new()
+    public static readonly Dictionary<string, CatalogEntity> BuildModeItems = new()
     {
         // THE SCRIPT WILL AUTOMATICALLY FILL IN THE REMAINING VALUES.
         // THE VALUES ARE: Scene, Thumbnail
 
         // ========== WALLS ==========
-        { "single_wall",         new ItemConfig { DispName = "Wall",              Category = ECat.Walls }},
-        { "double_wall",         new ItemConfig { DispName = "Wall (Double)",     Category = ECat.Walls }},
-        { "double_wall_window",  new ItemConfig { DispName = "Wall (Windowed)",   Category = ECat.Walls }},
+        { "single_wall",         new CatalogEntity { DispName = "Wall",              Cat = ECat.Walls }},
+        { "double_wall",         new CatalogEntity { DispName = "Wall (Double)",     Cat = ECat.Walls }},
+        { "double_wall_window",  new CatalogEntity { DispName = "Wall (Windowed)",   Cat = ECat.Walls }},
     };
 
     private static PackedScene FindSceneOrNull(string name)
