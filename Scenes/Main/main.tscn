@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://_Scripts/Services/Main.cs" id="1_imbg2"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p6jpk"]
-[ext_resource type="Texture2D" uid="uid://bsva85o05dto2" path="res://_dev/logo/iconimage.svg" id="2_2a143"]
 [ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/Player/player_char.tscn" id="2_4e4y2"]
-[ext_resource type="Script" uid="uid://dlye63vsw30oo" path="res://_Scripts/UI/CoreUi/CommandBar/MenuCommandBindings.cs" id="2_hryqi"]
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
+[ext_resource type="Script" uid="uid://d13f5bg7kx7x4" path="res://_Scripts/UI/CoreUi/MenuOpenCloseButton.cs" id="3_ifk88"]
 [ext_resource type="Script" uid="uid://ciwwvp6n38c6u" path="res://_Scripts/Services/FileOpService.cs" id="3_qw60k"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/WindowBase/window_base.tscn" id="3_xlvfx"]
 [ext_resource type="Texture2D" uid="uid://d0vr37mvo8gcl" path="res://Assets/3D/Textures/Grass/color.png" id="4_2ok46"]
@@ -25,6 +24,180 @@
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/UsrBuild/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/UsrBuild/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/Services/FactoryService.cs" id="25_8sujb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifk88"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8745098)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="Animation" id="Animation_8sujb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Core/TopArea/OpenMenuButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Core/TopArea/OpenMenuButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Core/TopArea/Menu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Core/TopArea/Menu:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tyqxl"]
+resource_name = "hide_menu"
+length = 3.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Core/TopArea/Menu:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Core/TopArea/Menu:visible")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25470138, 0.28730315),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Core/TopArea/OpenMenuButton:visible")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.51734656),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Core/TopArea/OpenMenuButton:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.51734656, 0.8333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ifk88"]
+resource_name = "show_menu"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Core/TopArea/OpenMenuButton:visible")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Core/TopArea/OpenMenuButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Core/TopArea/Menu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Core/TopArea/Menu:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sujb"]
+_data = {
+&"RESET": SubResource("Animation_8sujb"),
+&"close_menu": SubResource("Animation_tyqxl"),
+&"open_menu": SubResource("Animation_ifk88")
+}
 
 [sub_resource type="QuadMesh" id="QuadMesh_hfg1r"]
 size = Vector2(999, 999)
@@ -85,79 +258,122 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 24.0
 grow_horizontal = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="TopArea" type="Control" parent="UI/Core" unique_id=256700952]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 24.0
+offset_bottom = 32.0
 grow_horizontal = 2
-
-[node name="Panel" type="Panel" parent="UI/Core/TopArea" unique_id=1610373888]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("1_p6jpk")
-theme_type_variation = &"panel_black"
 
-[node name="Logo" type="TextureButton" parent="UI/Core/TopArea/Panel" unique_id=249158440]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 21.0
-offset_bottom = 21.0
-texture_normal = ExtResource("2_2a143")
-ignore_texture_size = true
-stretch_mode = 0
+[node name="OpenMenuButton" type="Panel" parent="UI/Core/TopArea" unique_id=1403806244]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 8.0
+offset_right = 63.9917
+offset_bottom = 32.0
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="MenuBar" type="MenuBar" parent="UI/Core/TopArea/Panel" unique_id=1329218642]
+[node name="Button" type="Button" parent="UI/Core/TopArea/OpenMenuButton" unique_id=1604497462 node_paths=PackedStringArray("_animationPlayer")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
-offset_right = 136.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_default_cursor_shape = 2
 theme = ExtResource("1_p6jpk")
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.654902)
+text = "Tools >"
 flat = true
+script = ExtResource("3_ifk88")
+_animationPlayer = NodePath("../../AnimationPlayer")
 
-[node name="File" type="PopupMenu" parent="UI/Core/TopArea/Panel/MenuBar" unique_id=1160398475]
-oversampling_override = 1.0
-prefer_native_menu = true
-item_count = 4
-item_0/text = "Save"
-item_0/id = 0
-item_1/text = "Open"
-item_1/id = 1
-item_2/text = "New project"
-item_2/id = 2
-item_3/text = "Get info"
-item_3/id = 3
-script = ExtResource("2_hryqi")
+[node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
+modulate = Color(1, 1, 1, 0)
+clip_children = 2
+clip_contents = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = 8.0
+offset_right = -320.00006
+offset_bottom = 223.99979
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifk88")
+metadata/_edit_use_anchors_ = true
 
-[node name="Tools" type="PopupMenu" parent="UI/Core/TopArea/Panel/MenuBar" unique_id=1576100664]
-oversampling_override = 1.0
-prefer_native_menu = true
-item_count = 1
-item_0/text = "Build"
-item_0/id = 4
-script = ExtResource("2_hryqi")
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Core/TopArea/Menu" unique_id=1427515038]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.1035156e-05
+offset_bottom = 0.00021362305
+grow_horizontal = 2
+grow_vertical = 2
+scroll_hint_mode = 1
 
-[node name="Sim" type="PopupMenu" parent="UI/Core/TopArea/Panel/MenuBar" unique_id=1965311526]
-oversampling_override = 1.0
-prefer_native_menu = true
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer" unique_id=413247063]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Help" type="PopupMenu" parent="UI/Core/TopArea/Panel/MenuBar" unique_id=1556063070]
-oversampling_override = 1.0
-prefer_native_menu = true
+[node name="Panel" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=423993835]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Panel2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=571257693]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Panel3" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1402439089]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Panel4" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=883301305]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Panel5" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1888888624]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Panel6" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1209254183]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Panel7" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=991944702]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/Core/TopArea/Menu" unique_id=339895518 node_paths=PackedStringArray("_animationPlayer")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme = ExtResource("1_p6jpk")
+text = "< back"
+flat = true
+script = ExtResource("3_ifk88")
+_actionMode = 1
+_animationPlayer = NodePath("../../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea" unique_id=1314526044]
+root_node = NodePath("../../../..")
+libraries/ = SubResource("AnimationLibrary_8sujb")
 
 [node name="Buildmode" parent="UI" unique_id=2138034224 instance=ExtResource("5_8sujb")]
 layout_mode = 1
