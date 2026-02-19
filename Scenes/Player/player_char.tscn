@@ -11,6 +11,8 @@
 size = Vector3(1, 2, 0.5)
 
 [node name="PlayerChar" type="CharacterBody3D" unique_id=1700912549 node_paths=PackedStringArray("_PivotH")]
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_jkbnp")
 _PivotH = NodePath("Camera/PivotH")
 

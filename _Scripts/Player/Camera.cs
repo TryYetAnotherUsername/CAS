@@ -12,19 +12,21 @@ public partial class Camera : Node3D
     
     private float TargSpringArmLength;
     private bool _isDragging = false;
+
+    private Vector2 _initialMousePos;
     
     public override void _UnhandledInput(InputEvent @event)
     {
         // Handle drag button press/release
         if (@event.IsActionPressed("player_camera_drag"))
         {
+            _initialMousePos = GetViewport().GetMousePosition();
             _isDragging = true;
             Input.MouseMode = Input.MouseModeEnum.Captured;
         }
         else if (@event.IsActionReleased("player_camera_drag"))
         {
-            _isDragging = false;
-            Input.MouseMode = Input.MouseModeEnum.Visible;
+            ResetMouse();
         }
         
         // Handle mouse motion while dragging
@@ -56,7 +58,22 @@ public partial class Camera : Node3D
     public override void _Process(double delta)
     {
         _SpringArm.SpringLength = Mathf.Lerp(_SpringArm.SpringLength, TargSpringArmLength, 0.3f);
+
+        if (Input.IsActionJustReleased("player_camera_drag"))
+        {
+            ResetMouse();
+            Input.WarpMouse(_initialMousePos);
+        }
     }
+
+    private void ResetMouse()
+    {
+        _isDragging = false;
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        GD.Print(_initialMousePos);
+        Input.WarpMouse(_initialMousePos);
+    }
+
 
     public override void _Ready()
     {

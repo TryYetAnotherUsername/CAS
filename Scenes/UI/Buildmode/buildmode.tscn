@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_7bl78"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_rh6rf"]
 [ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://_Scripts/UsrBuild/UI/UiBehaviour/ControlsLogic.cs" id="3_bqi83"]
+[ext_resource type="Script" uid="uid://gm2ncgvmyqwg" path="res://Scenes/UI/Buildmode/GridlockStep.cs" id="4_bqi83"]
 [ext_resource type="PackedScene" uid="uid://c72wblnpn0hka" path="res://Scenes/UI/Buildmode/catalogue.tscn" id="4_rh6rf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
@@ -86,10 +87,11 @@ offset_right = -8.0
 offset_bottom = 58.0
 grow_horizontal = 2
 theme = ExtResource("2_rh6rf")
-current_tab = 0
+current_tab = 2
 script = ExtResource("3_bqi83")
 
 [node name="Select" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=1274381745]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -145,9 +147,43 @@ layout_mode = 2
 text = "Precision mode (Custom grid)"
 
 [node name="Freeform" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=248054958]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform" unique_id=215735072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform/ScrollContainer" unique_id=1034135223]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform/ScrollContainer/HBoxContainer" unique_id=79489368]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform/ScrollContainer/HBoxContainer/PanelContainer" unique_id=162136540]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=642273573]
+layout_mode = 2
+text = "Grid locked to"
+
+[node name="GridlockStep" type="SpinBox" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=514651199]
+layout_mode = 2
+max_value = 1000.25
+step = 0.1
+value = 0.5
+update_on_text_changed = true
+script = ExtResource("4_bqi83")
+
+[node name="Label2" type="Label" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer/Freeform/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1920101599]
+layout_mode = 2
+text = "units"
 
 [node name="Move" type="Panel" parent="VSplitContainer/Controls/VBoxContainer/Top/TabContainer" unique_id=147284636]
 visible = false

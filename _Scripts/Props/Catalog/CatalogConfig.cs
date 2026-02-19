@@ -1,52 +1,48 @@
 using Godot;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Linq;
 using static CatalogEntity;
 
 public static class CatalogConfig
 {
-    public static readonly Dictionary<string, CatalogEntity> BuildModeItems = new()
-    {
-        // THE SCRIPT WILL AUTOMATICALLY FILL IN THE REMAINING VALUES.
-        // THE VALUES ARE: Scene, Thumbnail
-
+    public static readonly List<CatalogEntity> Catalog =
+    [
         // ========== WALLS ==========
-        { "single_wall",         new CatalogEntity { DispName = "Wall",              Cat = ECat.Walls }},
-        { "double_wall",         new CatalogEntity { DispName = "Wall (Double)",     Cat = ECat.Walls }},
-        { "double_wall_window",  new CatalogEntity { DispName = "Wall (Windowed)",   Cat = ECat.Walls }},
-    };
+        new CatalogEntity { DispName = "Wall",            UID = "uid://dtmwx7ig68eac", CatalogGroup = EGroup.Walls },
+        new CatalogEntity { DispName = "Wall (Double)",   UID = "uid://bkwafr84yuc0q",  CatalogGroup = EGroup.Walls },
+        new CatalogEntity { DispName = "Wall (Windowed)", UID = "uid://b37vt42e0fhud", CatalogGroup = EGroup.Walls },
+    ];
 
-    private static PackedScene FindSceneOrNull(string name)
+    public static CatalogEntity FindByUID(string uid)
     {
-        var dir = DirAccess.Open("res://Scenes/3D/Placeables_auto/");
-        foreach (var file in dir.GetFiles())
-        {
-            if (file.Replace(".tscn", "") == name)
-                return GD.Load<PackedScene>($"res://Scenes/3D/Placeables_auto/{file}");
-        }
-        return null;
+        return Catalog.FirstOrDefault(e => e.UID == uid);
     }
 
     public static void Init()
     {
-        GD.Print("::== BuildModeConfig: Starting init...");
+        GD.Print("::== CatalogConfig: Starting init...");
 
-        foreach (var kvp in BuildModeItems)
+        int errors = 0;
+        foreach (var entity in Catalog)
         {
-            // try find a scene for it
-            var foundScene = FindSceneOrNull(kvp.Key);
-            if (foundScene is not null)
+            long id = ResourceUid.TextToId(entity.UID);
+            if (!ResourceUid.HasId(id))
             {
-                kvp.Value.Scene = foundScene;
-                GD.Print($"BuildModeConfig: Scene {foundScene} matched to name <{kvp.Key}>.");
+                GD.PrintErr($"[FAIL] CatalogConfig: UID <{entity.UID}> for '{entity.DispName}' not found in project.");
+                errors++;
             }
             else
             {
-                GD.PrintErr($"BuildModeConfig: Could not find matching scene for name <{kvp.Value.DispName}>, the result is null.");
+                GD.Print($"[OK] CatalogConfig: '{entity.DispName}'");
             }
         }
 
-        GD.Print("==>> BuildModeConfig: Init done!");
+        int total = Catalog.Count;
+        if (errors == 0)
+            GD.Print($"CatalogConfig: All ({total}) objects validated with no errors.");
+        else
+            GD.PrintErr($"CatalogConfig: {errors}/{total} objects failed validation.");
 
+        GD.Print("==>> CatalogConfig: Init done!");
     }
 }

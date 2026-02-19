@@ -39,7 +39,7 @@ public partial class WindowService : Node
 
 		if (_WindowBase == null || newWindowInst == null)
 		{
-			GD.Print("hi");
+
 		}
 		
 		var newWindowScript = newWindowInst as WindowBase;

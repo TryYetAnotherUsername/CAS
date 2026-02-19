@@ -5,7 +5,8 @@ using System.ComponentModel;
 
 public partial class CatalogEntity
 {
-    public enum ECat
+    // === Enums ===
+    public enum EGroup
     {
         // Retail infrastructure:
         Amenities,  // bins, seating, atm
@@ -21,17 +22,17 @@ public partial class CatalogEntity
         Signage,
         Walls,
     }
-
     public enum EPlacementMode
 	{
     	Free,
     	GridLocked
 	}
 
-    public string Name;
+    // === Fields ===
+    
+    public string UID;
     public string DispName;
-    public PackedScene Scene;
     public Texture2D Thumbnail;
-    public ECat Cat;
-    public EPlacementMode PlacementMode;
+    public EGroup CatalogGroup;
+    public EPlacementMode AllowedPlacementMode;
 }

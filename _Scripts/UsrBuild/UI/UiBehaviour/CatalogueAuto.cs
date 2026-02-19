@@ -13,12 +13,12 @@ public partial class CatalogueAuto : Control
         CatalogConfig.Init();
         GD.Print("::== CatalogueAuto: Starting generation...");
         GenAllCats();
-        GD.Print("==>> CatalogueAuto: Generation done!}");
+        GD.Print("==>> CatalogueAuto: Generation done!");
     }
 
     private void GenAllCats()
     {
-        foreach (CatalogEntity.ECat cat in Enum.GetValues<CatalogEntity.ECat>())
+        foreach (CatalogEntity.EGroup cat in Enum.GetValues<CatalogEntity.EGroup>())
         {
             var catCont = _catContainer.Instantiate();
             catCont.Name = cat.ToString();
@@ -27,7 +27,7 @@ public partial class CatalogueAuto : Control
         }
     }
 
-	private void GenAllObjectsInCat(CatalogEntity.ECat targCatEnum, ScrollContainer catCont)
+	private void GenAllObjectsInCat(CatalogEntity.EGroup targCatEnum, ScrollContainer catCont)
     {
         if (catCont is null)
         {
@@ -36,23 +36,23 @@ public partial class CatalogueAuto : Control
         }
 
         // loop through all objects on the dict
-		foreach (var kvp in CatalogConfig.BuildModeItems)
+		foreach (CatalogEntity catalogEntity in CatalogConfig.Catalog)
         {
-            CatalogEntity.ECat foundCat = kvp.Value.Cat;
+            CatalogEntity.EGroup foundCategory = catalogEntity.CatalogGroup;
             
-			if (foundCat == targCatEnum)
+			if (foundCategory == targCatEnum)
             {
                 // Make and setup a new object card
 				var objCard = _objectCard.Instantiate();
 				var cardScript = objCard as CatalogueObjectCard;
-				cardScript.Item = kvp.Value;
+				cardScript.Item = catalogEntity;
 
                 // Now find the HBox where this card will go into. (See CatalogueCatContainer scene)
 				var scrollCont = catCont.FindChild("CatCardCont");
 
                 // Add the card to scene and print sucess message!
                 scrollCont.AddChild(objCard);
-                GD.Print($"New object card created- {kvp.Key}");
+                GD.Print($"New object card created- {catalogEntity.DispName} - UID <{catalogEntity.UID}>");
             }
         }
     }

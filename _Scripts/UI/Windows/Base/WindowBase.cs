@@ -76,7 +76,6 @@ public partial class WindowBase : Panel
 			if (_DragT.GetGlobalRect().HasPoint(currentMousePos))
 			{
 				currentDir = Dir.T;
-				GD.Print("hi");
 			}
 			else if (_DragB.GetGlobalRect().HasPoint(currentMousePos))
 			{

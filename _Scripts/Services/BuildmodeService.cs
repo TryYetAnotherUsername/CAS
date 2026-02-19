@@ -8,8 +8,8 @@ public partial class BuildmodeService : Node
     // events
 	public static event Action<Tool> OnToolSelected;
 
-    public static event Action<Prop> OnObjectSelected;
-    public static event Action<Prop> OnObjectDeselected;
+    public static event Action<Node3D> OnObjectSelected;
+    public static event Action<Node3D> OnObjectDeselected;
 
     // enums
     public enum BuildingMode { Simple, Advanced }
@@ -18,17 +18,21 @@ public partial class BuildmodeService : Node
     // states
     public BuildingMode CurrentMode { get; private set; } = BuildingMode.Simple;
     public Tool CurrentTool { get; private set; } = Tool.Selection;
-	public Prop CurrentSelected { get; private set; } = null;
+	public Node3D CurrentSelected { get; private set; } = null;
+
+	// vars
+	public float GridLockStepVal { get; set; } = 0.5f;
 
 	public const int RayLength = 1000;
 
-	public void Select(Prop obj)
+	public void Select(Node3D obj)
 	{
 		if (obj is null) return;
 		if (obj == CurrentSelected) return;
 		CurrentSelected = obj;
+		Prop currentProp = CurrentSelected as Prop;
     	OnObjectSelected?.Invoke(obj);
-		GD.Print($"BuildModeService: New object of name <{obj.Name}> selected.");
+		GD.Print($"BuildModeService: New Prop selected, UID <{currentProp.Identity.UID}>, DispName <{currentProp.Identity.DispName}>");
 	}
 
 	public void Deselect()
@@ -41,10 +45,11 @@ public partial class BuildmodeService : Node
 	{
 		if (!(CurrentTool == tool))
 		{
-			CurrentTool = tool;
-			OnToolSelected?.Invoke(tool);
 			if (tool == Tool.Selection)
 				Deselect();
+
+			CurrentTool = tool;
+			OnToolSelected?.Invoke(tool);
 		}
 		GD.Print($"BuildmodeService: Switched tool to {tool}");
 		
@@ -56,9 +61,9 @@ public partial class BuildmodeService : Node
 		OnToolSelected?.Invoke(Tool.Selection);
     }
 
-	public void NewObject(PackedScene scene)
+	public void SpawnNewObject(string uid)
 	{
-		
+		Select(FactoryService.I?.TrySpawningUidAndGetNode(uid));
 	}
 
 }
