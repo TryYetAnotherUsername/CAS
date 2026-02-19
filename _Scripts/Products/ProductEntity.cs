@@ -1,6 +1,6 @@
 using Godot;
 
-public class Product
+public class ProductEntity
 {
 	public enum ProductCategoryEnum
 	{
@@ -10,9 +10,8 @@ public class Product
 		Electronics
 	}
 
-    public string ProductCode;
-    public string ProductName;
+	public string UID;
+    public string DispName;
     public ProductCategoryEnum Category;
-    public float Price;
-    public PackedScene Scene;
+    public float UnitPrice;
 }

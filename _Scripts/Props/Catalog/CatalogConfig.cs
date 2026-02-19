@@ -8,9 +8,11 @@ public static class CatalogConfig
     public static readonly List<CatalogEntity> Catalog =
     [
         // ========== WALLS ==========
-        new CatalogEntity { DispName = "Wall",            UID = "uid://dtmwx7ig68eac", CatalogGroup = EGroup.Walls },
-        new CatalogEntity { DispName = "Wall (Double)",   UID = "uid://bkwafr84yuc0q",  CatalogGroup = EGroup.Walls },
-        new CatalogEntity { DispName = "Wall (Windowed)", UID = "uid://b37vt42e0fhud", CatalogGroup = EGroup.Walls },
+        new CatalogEntity { DispName = "Wall",              UID = "uid://dtmwx7ig68eac", CatalogGroup = EGroup.Walls },
+        new CatalogEntity { DispName = "Wall (Double)",     UID = "uid://bkwafr84yuc0q", CatalogGroup = EGroup.Walls },
+        new CatalogEntity { DispName = "Wall (Windowed)",   UID = "uid://b37vt42e0fhud", CatalogGroup = EGroup.Walls },
+        // ========== SHELVES ==========
+        new CatalogEntity { DispName = "Basic shelf",       UID = "uid://c3rwyrjlanyer", CatalogGroup = EGroup.Shelves },
     ];
 
     public static CatalogEntity FindByUID(string uid)

@@ -202,29 +202,29 @@ shadow_normal_bias = 0.0
 shadow_opacity = 0.9
 shadow_blur = 1.235
 
-[node name="BuildingRoot" type="Node3D" parent="Node3D" unique_id=1503896068]
+[node name="PropsRoot" type="Node3D" parent="Node3D" unique_id=1503896068]
 
-[node name="Scripts" type="Node" parent="Node3D/BuildingRoot" unique_id=1985962158]
+[node name="Scripts" type="Node" parent="Node3D/PropsRoot" unique_id=1985962158]
 
-[node name="Visuals" type="Node" parent="Node3D/BuildingRoot/Scripts" unique_id=1447633678]
+[node name="Visuals" type="Node" parent="Node3D/PropsRoot/Scripts" unique_id=1447633678]
 script = ExtResource("13_1t20g")
 _OutlineShader = ExtResource("14_tdwxr")
 
-[node name="Tools" type="Node" parent="Node3D/BuildingRoot/Scripts" unique_id=2086890731]
+[node name="Tools" type="Node" parent="Node3D/PropsRoot/Scripts" unique_id=2086890731]
 script = ExtResource("15_4o5wv")
 
-[node name="Selection" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1752505374]
+[node name="Selection" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=1752505374]
 script = ExtResource("13_koken")
 
-[node name="Scale" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1868650021]
+[node name="Scale" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=1868650021]
 script = ExtResource("15_1t20g")
 _scaleGizmo = ExtResource("18_8sujb")
 
-[node name="Move" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=2017238234]
+[node name="Move" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=2017238234]
 script = ExtResource("19_ifk88")
 _moveGizmo = ExtResource("17_4a3kt")
 
-[node name="Freeform" type="Node" parent="Node3D/BuildingRoot/Scripts/Tools" unique_id=1875244053]
+[node name="Freeform" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=1875244053]
 script = ExtResource("21_tyqxl")
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
@@ -234,13 +234,13 @@ script = ExtResource("3_qw60k")
 
 [node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_WindowsRoot")]
 script = ExtResource("4_5yls4")
+_WindowsRoot = NodePath("../../UI/WindowsRoot")
 _WindowBase = ExtResource("3_xlvfx")
 _Content_Console = ExtResource("8_y3v7k")
-_WindowsRoot = NodePath("../../UI/WindowsRoot")
 
 [node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
 script = ExtResource("19_c4b4r")
 
 [node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_buildingRoot")]
 script = ExtResource("25_8sujb")
-_buildingRoot = NodePath("../../Node3D/BuildingRoot")
+_buildingRoot = NodePath("../../Node3D/PropsRoot")

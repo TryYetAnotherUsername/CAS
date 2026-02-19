@@ -28,6 +28,7 @@ _PivotV = NodePath("PivotH/PivotV")
 _SpringArm = NodePath("PivotH/PivotV/SpringArm3D")
 _PlayerCam = NodePath("PivotH/PivotV/SpringArm3D/Camera3D")
 zoomSpeed = 0.1
+mouseSens = null
 
 [node name="PivotH" type="Node3D" parent="Camera" unique_id=749529585]
 

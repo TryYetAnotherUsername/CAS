@@ -80,15 +80,27 @@ public partial class FreeformTool : BuildmodeTool
 
         var hit = result["collider"].As<Node>();
 
-        var body1 = selected.GetNodeOrNull<StaticBody3D>("single_wall_physics/StaticBody3D");
-        var body2 = selected.GetNodeOrNull<StaticBody3D>("single_wall_ray/StaticBody3D");
+
+        var body1 = FindBodyByKeyword(selected, "mesh");
+        var body2 = FindBodyByKeyword(selected, "physics");
 
         return hit == body1 || hit == body2;
+    }
+
+    private StaticBody3D FindBodyByKeyword(Node3D parent, string keyword)
+    {
+        foreach (Node meshInst in parent.GetChildren())
+        {
+            if (meshInst.Name.ToString().Contains(keyword))
+                return meshInst.GetChild(0) as StaticBody3D;
+        }
+        return null;
     }
 
     private void TryPlaceAtMouse()
     {
         var result = Raycast(true);
+
         if (result.Count == 0)
             return;
 
@@ -98,6 +110,7 @@ public partial class FreeformTool : BuildmodeTool
         Node3D selected = BuildmodeService.I.CurrentSelected;
         if (selected == null)
             return;
+
 
         var tween = CreateTween();
         tween.TweenProperty(selected, "global_position", ((Vector3)result["position"]).Snapped(BuildmodeService.I.GridLockStepVal), 0.1);
@@ -121,8 +134,8 @@ public partial class FreeformTool : BuildmodeTool
             {
                 var exclusions = new Godot.Collections.Array<Rid>();
 
-                var body1 = selected.GetNodeOrNull<StaticBody3D>("single_wall_physics/StaticBody3D");
-                var body2 = selected.GetNodeOrNull<StaticBody3D>("single_wall_ray/StaticBody3D");
+                var body1 = FindBodyByKeyword(selected, "mesh");
+                var body2 = FindBodyByKeyword(selected, "physics");
 
                 if (body1 != null) exclusions.Add(body1.GetRid());
                 if (body2 != null) exclusions.Add(body2.GetRid());
