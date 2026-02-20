@@ -9,10 +9,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
 shader = ExtResource("1_7bl78")
-shader_parameter/blur_amount = 4.00000019
-shader_parameter/mix_amount = 0.6450000306375
-shader_parameter/saturation = 0.69200003287
-shader_parameter/grain_amount = 0.02
+shader_parameter/blur_amount = 3.0000001425
+shader_parameter/mix_amount = 0.50000002375
+shader_parameter/saturation = 1.2
+shader_parameter/grain_amount = 0.00800000038
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk4q2"]

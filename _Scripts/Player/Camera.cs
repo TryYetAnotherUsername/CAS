@@ -15,7 +15,7 @@ public partial class Camera : Node3D
 
     private Vector2 _initialMousePos;
     
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         // Handle drag button press/release
         if (@event.IsActionPressed("player_camera_drag"))
@@ -70,7 +70,6 @@ public partial class Camera : Node3D
     {
         _isDragging = false;
         Input.MouseMode = Input.MouseModeEnum.Visible;
-        GD.Print(_initialMousePos);
         Input.WarpMouse(_initialMousePos);
     }
 

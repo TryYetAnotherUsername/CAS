@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/WindowBase/window_base.tscn" id="3_xlvfx"]
 [ext_resource type="Texture2D" uid="uid://d0vr37mvo8gcl" path="res://Assets/3D/Textures/Grass/color.png" id="4_2ok46"]
 [ext_resource type="Script" uid="uid://bpkg4pt26xwso" path="res://_Scripts/Services/WindowService.cs" id="4_5yls4"]
+[ext_resource type="Script" uid="uid://cw7mi3idogovc" path="res://_Scripts/UI/CoreUi/MenuItemButtons.cs" id="4_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://dbictodiotvlw" path="res://Scenes/UI/Buildmode/buildmode.tscn" id="5_8sujb"]
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
@@ -24,6 +25,7 @@
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/UsrBuild/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/UsrBuild/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/Services/FactoryService.cs" id="25_8sujb"]
+[ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/Services/ToolService.cs" id="25_tyqxl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifk88"]
 content_margin_left = 0.0
@@ -38,7 +40,7 @@ corner_radius_bottom_left = 10
 corner_detail = 10
 
 [sub_resource type="Animation" id="Animation_8sujb"]
-length = 0.001
+length = 2.2666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -87,10 +89,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Core/TopArea/Menu:mouse_filter")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="Animation" id="Animation_tyqxl"]
 resource_name = "hide_menu"
-length = 3.0333333
+length = 1.0666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -138,6 +152,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Core/TopArea/Menu:mouse_filter")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0009999999, 0.16666667, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 2]
 }
 
 [sub_resource type="Animation" id="Animation_ifk88"]
@@ -191,6 +217,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Core/TopArea/Menu:mouse_filter")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.23),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8sujb"]
 _data = {
@@ -236,8 +274,6 @@ ssao_radius = 0.5
 ssao_intensity = 4.0
 ssil_enabled = true
 ssil_radius = 1.36
-sdfgi_use_occlusion = true
-glow_enabled = true
 
 [node name="Main" type="Node" unique_id=458039144]
 script = ExtResource("1_imbg2")
@@ -299,18 +335,15 @@ modulate = Color(1, 1, 1, 0)
 clip_children = 2
 clip_contents = true
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 320.0
-offset_top = 8.0
-offset_right = -320.00006
-offset_bottom = 223.99979
+offset_left = 192.0
+offset_top = 40.0
+offset_right = -192.0
+offset_bottom = 256.0
 grow_horizontal = 2
-grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ifk88")
-metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Core/TopArea/Menu" unique_id=1427515038]
 layout_mode = 1
@@ -331,6 +364,20 @@ size_flags_vertical = 3
 [node name="Panel" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=423993835]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Panel" unique_id=460792739]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p6jpk")
+text = "Build tool"
+flat = true
+alignment = 0
+script = ExtResource("4_tyqxl")
 
 [node name="Panel2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=571257693]
 custom_minimum_size = Vector2(0, 40)
@@ -374,6 +421,7 @@ _animationPlayer = NodePath("../../AnimationPlayer")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea" unique_id=1314526044]
 root_node = NodePath("../../../..")
 libraries/ = SubResource("AnimationLibrary_8sujb")
+autoplay = &"close_menu"
 
 [node name="Buildmode" parent="UI" unique_id=2138034224 instance=ExtResource("5_8sujb")]
 layout_mode = 1
@@ -460,3 +508,6 @@ script = ExtResource("19_c4b4r")
 [node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_buildingRoot")]
 script = ExtResource("25_8sujb")
 _buildingRoot = NodePath("../../Node3D/PropsRoot")
+
+[node name="ToolService" type="Node" parent="Services" unique_id=452083335]
+script = ExtResource("25_tyqxl")

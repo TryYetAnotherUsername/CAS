@@ -19,14 +19,8 @@ _PivotH = NodePath("Camera/PivotH")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_pfg0q")
 
-[node name="Camera" type="Node3D" parent="." unique_id=55437346 node_paths=PackedStringArray("_PivotH", "_PivotV", "_SpringArm", "_PlayerCam")]
+[node name="Camera" type="Node3D" parent="." unique_id=55437346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28902304, 0)
-script = ExtResource("2_pfg0q")
-_PivotH = NodePath("PivotH")
-_PivotV = NodePath("PivotH/PivotV")
-_SpringArm = NodePath("PivotH/PivotV/SpringArm3D")
-_PlayerCam = NodePath("PivotH/PivotV/SpringArm3D/Camera3D")
-zoomSpeed = 0.1
 
 [node name="PivotH" type="Node3D" parent="Camera" unique_id=749529585]
 
@@ -45,3 +39,10 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 5.9604645e-08, 0)
 mesh = SubResource("BoxMesh_4e4y2")
 skeleton = NodePath("../..")
+
+[node name="CamControl" type="Node3D" parent="." unique_id=1778199951 node_paths=PackedStringArray("_PivotH", "_PivotV", "_SpringArm", "_PlayerCam")]
+script = ExtResource("2_pfg0q")
+_PivotH = NodePath("../Camera/PivotH")
+_PivotV = NodePath("../Camera/PivotH/PivotV")
+_SpringArm = NodePath("../Camera/PivotH/PivotV/SpringArm3D")
+_PlayerCam = NodePath("../Camera/PivotH/PivotV/SpringArm3D/Camera3D")
