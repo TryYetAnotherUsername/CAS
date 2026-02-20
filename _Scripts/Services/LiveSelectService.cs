@@ -13,14 +13,11 @@ public partial class LiveSelectService : Node
 		{
             var rayResult = Raycast();
             if (rayResult is null) return;
-            if (rayResult.GetOwner<Node3D>() is Prop prop)
+            if (rayResult.GetOwner<Node3D>() is Shelf shelf)
             {
-                if (prop is Shelf shelf)
+                foreach (var entry in shelf.stockedProducts)
                 {
-                    foreach (var entry in shelf.stockedProducts)
-                    {
-                        GD.Print($"{entry.Product.DispName}: {entry.Quantity}");
-                    }
+                    GD.Print($"{entry.Product.DispName}: {entry.Quantity}");
                 }
             }
 		}

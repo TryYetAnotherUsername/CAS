@@ -1,14 +1,12 @@
 //NOTE TO SELF
 //	BUGS
 //		When a window is spawned directly on top of another, when dragging, both windows move at the same time with each other
-//		This is not game breaking, can be worked around by user if they colse the top window, move it, and then try spawning again.
+//		This is not game breaking, can be worked around by user if they close the top window, move it, and then try spawning again.
 //		
 
 
 using Godot;
 using System;
-using System.ComponentModel;
-using System.Runtime.InteropServices.Marshalling;
 
 public partial class WindowBase : Panel
 {

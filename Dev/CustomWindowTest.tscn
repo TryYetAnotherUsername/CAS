@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4mbbww6g43bn"]
+[gd_scene format=3 uid="uid://c4mbbww6g43bn"]
 
-[ext_resource type="Script" uid="uid://3hkmgrv70mtn" path="res://Scripts/UI/CustomWindows/CustomWindow.cs" id="1_k3s7o"]
-[ext_resource type="Shader" uid="uid://b0debcqwg61eq" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="2_nhd07"]
-[ext_resource type="Theme" uid="uid://cjt28obh8r4fx" path="res://Assets/UI/Themes/general.tres" id="3_fsjx2"]
-[ext_resource type="Script" uid="uid://dd8gdhupnwm2s" path="res://Scripts/UI/CustomWindows/CustomWindowOutlineLayer.cs" id="4_h8kim"]
+[ext_resource type="Script" path="res://Scripts/UI/CustomWindows/CustomWindow.cs" id="1_k3s7o"]
+[ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="2_nhd07"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="3_fsjx2"]
+[ext_resource type="Script" path="res://Scripts/UI/CustomWindows/CustomWindowOutlineLayer.cs" id="4_h8kim"]
 [ext_resource type="Texture2D" uid="uid://bwc45y2v2xrvb" path="res://Assets/UI/Icons/Circle fill.svg" id="5_7nveh"]
-[ext_resource type="PackedScene" uid="uid://pm22qihk26yl" path="res://Scenes/UI/CustomWindow/Sketch2D/win_cont_sketch_2d.tscn" id="5_nhd07"]
-[ext_resource type="Texture2D" uid="uid://7s67ddmyknwa" path="res://Addons/voronoi_scatter/example_grass/Ground003_1K-JPG_Color.jpg" id="6_dt78q"]
+[ext_resource type="PackedScene" uid="uid://pm22qihk26yl" path="res://Scenes/UI/CustomWindowContents/Sketch2D/win_cont_sketch_2d.tscn" id="5_nhd07"]
+[ext_resource type="Texture2D" path="res://Addons/voronoi_scatter/example_grass/Ground003_1K-JPG_Color.jpg" id="6_dt78q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_skx73"]
 shader = ExtResource("2_nhd07")

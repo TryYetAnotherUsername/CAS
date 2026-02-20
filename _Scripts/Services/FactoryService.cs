@@ -3,7 +3,8 @@ using Godot;
 public partial class FactoryService : Node
 {
 	public static FactoryService I;
-    [Export] private Node3D _buildingRoot; 
+    [Export] private Node3D _floorsRoot;
+    [Export] private Node3D _generalPropsRoot;
 
     public override void _Ready()
     {
@@ -47,7 +48,14 @@ public Node3D TrySpawningUidAndGetNode(string uid)
     newNode.Position = new Vector3(0f,0f,0f);
 
     // Add as child of building root in main scene tree, and return the node:
-    _buildingRoot.AddChild(newInstance);
+    if (newProp.Identity.CatalogGroup == CatalogEntity.EGroup.Floors)
+    {
+        _floorsRoot.AddChild(newInstance);        
+    }
+    else
+    {
+        _generalPropsRoot.AddChild(newInstance);
+    }
     return newNode;
 }
 

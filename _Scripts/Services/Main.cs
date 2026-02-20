@@ -7,6 +7,7 @@ public partial class Main : Node
     {
         ProductConfig.Init();
 		RunShelfTests();
+        WindowService.I.NewWindow(WindowService.EWindowContent.Properties);
         GD.Print("\n==== Main: Scene tree ready. Hello, world!");
     }
 

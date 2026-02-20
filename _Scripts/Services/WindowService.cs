@@ -7,57 +7,82 @@ public partial class WindowService : Node
 	public static WindowService I;
 
 	// Export
-	[Export] private Control _WindowsRoot;
-	[Export] private PackedScene _WindowBase;
-
-	// All window content packed scenes:
-	[Export] private PackedScene _Content_Console;
+	[Export] private Control _windowsRoot;
+	[Export] private PackedScene _windowBase;
 
 	// Links WindowContent enums to content PackedScenes and also display names
+	private static readonly Dictionary<EWindowContent, (string dispName, string UID)> _windowContentIndex = new()
+    {
+        { EWindowContent.None, ("New window", "") },
+		{ EWindowContent.Properties, ("Inspect", "uid://dga1dp2fut3cf") }
+    };
 
-	private Dictionary<WindowContent, (string dispName, PackedScene scene)> windowContentIndex;
 
-	public enum WindowContent
+	public enum EWindowContent
 	{
-		None, Console, 
+		None, Properties, 
 	};
 
     public override void _Ready()
     {
 		I = this;
-        windowContentIndex = new()
-		{
-			{WindowContent.Console, ("CAS User console", _Content_Console)},
-			{WindowContent.None, ("New Window", null)}
-		};
+
     }
 
 
-	public void NewWindow(WindowContent content= WindowContent.None)
+	public void NewWindow(EWindowContent content= EWindowContent.None)
     {
-        var newWindowInst = _WindowBase.Instantiate();
+        GD.Print("WindowService: Trying to spawn a new window");
 
-		if (_WindowBase == null || newWindowInst == null)
+        var windowBase = _windowBase.Instantiate();
+        _windowsRoot.AddChild(windowBase);
+
+        var contLayer = windowBase.FindChild("ContentLayer", true);
+        Label title = windowBase.FindChild("Title", true) as Label;
+
+        var scene = TryGetScene(content);
+        if (scene is null) return;
+        var sceneInst = scene.Instantiate();
+
+        title.Text = GetDispName(content);
+
+        contLayer.AddChild(sceneInst);
+
+        GD.Print("WindowService: Finished spawning a new window");
+
+        static string GetDispName(EWindowContent targCont)
+        {
+            if (_windowContentIndex.TryGetValue(targCont, out (string, string) value))
+            {
+                return value.Item1;
+            }
+			else
+			{
+				return "New window";
+			}
+        }
+    }
+
+    private PackedScene TryGetScene(EWindowContent targCont)
+	{
+		string uid = "";
+
+		if (_windowContentIndex.TryGetValue(targCont, out (string, string) value))
 		{
-
+			uid = value.Item2;
 		}
-		
-		var newWindowScript = newWindowInst as WindowBase;
-		
-		PackedScene contentScene = windowContentIndex[content].scene;
-		var contSceneNode = (Control) contentScene.Instantiate();
 
-		newWindowScript.Init(windowContentIndex[content].dispName, contSceneNode);
-
-		_WindowsRoot.AddChild(newWindowInst);
-
-		if (content == WindowContent.None)
+		// Convert the string uid into non-human friendly uid, then into a path:
+		long numberUid = ResourceUid.TextToId(uid);
+		if (!ResourceUid.HasId(numberUid)) // validation
 		{
-			
+			GD.PrintErr($"WindowService: Could not find UID <{uid}>. Returning.");
+			return null;
 		}
-		else
-		{
-			
-		}
+		var path = ResourceUid.GetIdPath(numberUid);
+
+		// Return packedscene:
+		var scene = GD.Load<PackedScene>(path);
+		return scene;
 	}
 }

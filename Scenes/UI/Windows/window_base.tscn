@@ -1,0 +1,218 @@
+[gd_scene format=3 uid="uid://wm3tf1bsv1t"]
+
+[ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_gpfsk"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_lwwsd"]
+[ext_resource type="Script" uid="uid://vvrxuhlgyqsp" path="res://_Scripts/UI/Windows/Base/WindowBase.cs" id="2_cs5oi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cs5oi"]
+shader = ExtResource("1_gpfsk")
+shader_parameter/blur_amount = 2.50000011875
+shader_parameter/mix_amount = 0.5
+shader_parameter/saturation = 0.50000002375
+shader_parameter/grain_amount = 0.010000000475
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="WindowBase" type="Panel" unique_id=632438322 node_paths=PackedStringArray("_DragT", "_DragL", "_DragR", "_DragB", "_DragBR", "_DragBar", "_Outline", "_WindowTitle", "_CloseButton")]
+material = SubResource("ShaderMaterial_cs5oi")
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -108.0
+offset_right = 192.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+theme = ExtResource("1_lwwsd")
+theme_type_variation = &"window_base_outline"
+script = ExtResource("2_cs5oi")
+_DragT = NodePath("DragAreas/Top")
+_DragL = NodePath("DragAreas/Left")
+_DragR = NodePath("DragAreas/Right")
+_DragB = NodePath("DragAreas/Bottom")
+_DragBR = NodePath("DragAreas/BR")
+_DragBar = NodePath("Titlebar")
+_Outline = NodePath("FocusHighlight")
+_WindowTitle = NodePath("Titlebar/TitleArea/Title")
+_CloseButton = NodePath("Titlebar/CloseButton")
+
+[node name="Titlebar" type="Control" parent="." unique_id=1930440496]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="CloseButton" type="Button" parent="Titlebar" unique_id=1481981397]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_lwwsd")
+text = "X"
+flat = true
+
+[node name="TitleArea" type="Control" parent="Titlebar" unique_id=1916944992]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Titlebar/TitleArea" unique_id=481029864]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sample window"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContentLayer" type="Panel" parent="." unique_id=1225353101]
+unique_name_in_owner = true
+clip_children = 1
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_lwwsd")
+theme_type_variation = &"window_base_outline"
+
+[node name="FocusHighlight" type="PanelContainer" parent="." unique_id=17137804]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_lwwsd")
+theme_type_variation = &"window_base_highlight"
+
+[node name="DragAreas" type="Control" parent="." unique_id=1393039656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Top" type="Control" parent="DragAreas" unique_id=391153181]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = -16.0
+offset_right = -8.0
+grow_horizontal = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+
+[node name="Left" type="Control" parent="DragAreas" unique_id=2060937203]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = -8.0
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+
+[node name="Right" type="Control" parent="DragAreas" unique_id=1833041464]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+
+[node name="Bottom" type="Control" parent="DragAreas" unique_id=577293028]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+
+[node name="BR" type="Control" parent="DragAreas" unique_id=549377418]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+
+[node name="Shadow" type="Panel" parent="." unique_id=1739277991]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_lwwsd")
+theme_type_variation = &"window_base_shadow"
+
+[node name="ShadowSecondary" type="Panel" parent="Shadow" unique_id=1649934704]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_lwwsd")
+theme_type_variation = &"window_base_shadowSecondary"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1228677057]
+copy_mode = 2

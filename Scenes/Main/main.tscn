@@ -6,14 +6,12 @@
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
 [ext_resource type="Script" uid="uid://d13f5bg7kx7x4" path="res://_Scripts/UI/CoreUi/MenuOpenCloseButton.cs" id="3_ifk88"]
 [ext_resource type="Script" uid="uid://ciwwvp6n38c6u" path="res://_Scripts/Services/FileOpService.cs" id="3_qw60k"]
-[ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/WindowBase/window_base.tscn" id="3_xlvfx"]
 [ext_resource type="Texture2D" uid="uid://d0vr37mvo8gcl" path="res://Assets/3D/Textures/Grass/color.png" id="4_2ok46"]
 [ext_resource type="Script" uid="uid://bpkg4pt26xwso" path="res://_Scripts/Services/WindowService.cs" id="4_5yls4"]
 [ext_resource type="Script" uid="uid://cw7mi3idogovc" path="res://_Scripts/UI/CoreUi/MenuItemButtons.cs" id="4_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://dbictodiotvlw" path="res://Scenes/UI/Buildmode/buildmode.tscn" id="5_8sujb"]
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
-[ext_resource type="PackedScene" uid="uid://dghqb28apitc6" path="res://Scenes/UI/WindowContents/Console/WinCont_Console.tscn" id="8_y3v7k"]
 [ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://_Scripts/UsrBuild/UI/VFX/BmVisuals.cs" id="13_1t20g"]
 [ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://_Scripts/UsrBuild/BuildingTools/Tools/SelectionTool.cs" id="13_koken"]
 [ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
@@ -24,6 +22,7 @@
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/Services/BuildmodeService.cs" id="19_c4b4r"]
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/UsrBuild/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/UsrBuild/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
+[ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/Services/FactoryService.cs" id="25_8sujb"]
 [ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/Services/ToolService.cs" id="25_tyqxl"]
 [ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/Services/LiveSelectService.cs" id="27_4ohmo"]
@@ -238,6 +237,18 @@ _data = {
 &"open_menu": SubResource("Animation_ifk88")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_tyqxl"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyqxl"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tyqxl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ohmo"]
+albedo_color = Color(1, 0.33012483, 0.2645552, 1)
+
 [sub_resource type="QuadMesh" id="QuadMesh_hfg1r"]
 size = Vector2(999, 999)
 
@@ -275,6 +286,9 @@ ssao_radius = 0.5
 ssao_intensity = 4.0
 ssil_enabled = true
 ssil_radius = 1.36
+sdfgi_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4ohmo"]
 
 [node name="Main" type="Node" unique_id=458039144]
 script = ExtResource("1_imbg2")
@@ -436,30 +450,46 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Node3D" type="Node3D" parent="." unique_id=749366055]
+[node name="3D" type="Node3D" parent="." unique_id=749366055]
 
-[node name="Players" type="Node3D" parent="Node3D" unique_id=1881802444]
+[node name="Players" type="Node3D" parent="3D" unique_id=1881802444]
 
-[node name="PlayerChar" parent="Node3D/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
+[node name="PlayerChar" parent="3D/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, 0.4099676, 1.2755573)
 
-[node name="Terrain" type="Node3D" parent="Node3D" unique_id=18981723]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Players/PlayerChar" unique_id=246159912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053981304, 0.2942204, -0.083524585)
+mesh = SubResource("SphereMesh_tyqxl")
+surface_material_override/0 = SubResource("StandardMaterial3D_tyqxl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Terrain" unique_id=1732990741]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Players/PlayerChar/MeshInstance3D" unique_id=2059951538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12522614, 0, 0)
+mesh = SubResource("SphereMesh_tyqxl")
+surface_material_override/0 = SubResource("StandardMaterial3D_tyqxl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="3D/Players/PlayerChar/MeshInstance3D" unique_id=770610113]
+transform = Transform3D(0.09756535, 0.004386369, 0, -0.021931835, 0.019513067, 0, 0, 0, 0.19500001, 0.05966854, -0.11980051, 0.07331467)
+mesh = SubResource("BoxMesh_tyqxl")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ohmo")
+
+[node name="Terrain" type="Node3D" parent="3D" unique_id=18981723]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Terrain" unique_id=1732990741]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0.5149374, 0.0015220642, -1.0411961)
 mesh = SubResource("QuadMesh_hfg1r")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_vk4q2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/Terrain/MeshInstance3D" unique_id=1539425178]
+[node name="StaticBody3D" type="StaticBody3D" parent="3D/Terrain/MeshInstance3D" unique_id=1539425178]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Terrain/MeshInstance3D/StaticBody3D" unique_id=1273739676]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3D/Terrain/MeshInstance3D/StaticBody3D" unique_id=1273739676]
 shape = SubResource("ConcavePolygonShape3D_4e4y2")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=95604516]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="3D" unique_id=95604516]
 environment = SubResource("Environment_6t3k2")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/WorldEnvironment" unique_id=414167535]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3D/WorldEnvironment" unique_id=414167535]
 transform = Transform3D(-0.036733806, -0.6913264, 0.72160816, -0.228678, 0.70875055, 0.6673673, -0.9728088, -0.14050098, -0.18412629, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.041
@@ -467,48 +497,53 @@ shadow_normal_bias = 0.0
 shadow_opacity = 0.9
 shadow_blur = 1.235
 
-[node name="PropsRoot" type="Node3D" parent="Node3D" unique_id=1503896068]
+[node name="Props" type="Node3D" parent="3D" unique_id=1503896068]
 
-[node name="Scripts" type="Node" parent="Node3D/PropsRoot" unique_id=1985962158]
+[node name="Scripts" type="Node" parent="3D/Props" unique_id=1985962158]
 
-[node name="Visuals" type="Node" parent="Node3D/PropsRoot/Scripts" unique_id=1447633678]
+[node name="Visuals" type="Node" parent="3D/Props/Scripts" unique_id=1447633678]
 script = ExtResource("13_1t20g")
 _OutlineShader = ExtResource("14_tdwxr")
 
-[node name="Tools" type="Node" parent="Node3D/PropsRoot/Scripts" unique_id=2086890731]
+[node name="Tools" type="Node" parent="3D/Props/Scripts" unique_id=2086890731]
 script = ExtResource("15_4o5wv")
 
-[node name="Selection" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=1752505374]
+[node name="Selection" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1752505374]
 script = ExtResource("13_koken")
 
-[node name="Scale" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=1868650021]
+[node name="Scale" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1868650021]
 script = ExtResource("15_1t20g")
 _scaleGizmo = ExtResource("18_8sujb")
 
-[node name="Move" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=2017238234]
+[node name="Move" type="Node" parent="3D/Props/Scripts/Tools" unique_id=2017238234]
 script = ExtResource("19_ifk88")
 _moveGizmo = ExtResource("17_4a3kt")
 
-[node name="Freeform" type="Node" parent="Node3D/PropsRoot/Scripts/Tools" unique_id=1875244053]
+[node name="Freeform" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1875244053]
 script = ExtResource("21_tyqxl")
+
+[node name="FloorsRoot" type="NavigationRegion3D" parent="3D/Props" unique_id=322952058]
+navigation_mesh = SubResource("NavigationMesh_4ohmo")
+
+[node name="OtherPropsRoot" type="Node3D" parent="3D/Props" unique_id=1626172487]
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
 
 [node name="FileOpService" type="Node" parent="Services" unique_id=1586219315]
 script = ExtResource("3_qw60k")
 
-[node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_WindowsRoot")]
+[node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_windowsRoot")]
 script = ExtResource("4_5yls4")
-_WindowsRoot = NodePath("../../UI/WindowsRoot")
-_WindowBase = ExtResource("3_xlvfx")
-_Content_Console = ExtResource("8_y3v7k")
+_windowsRoot = NodePath("../../UI/WindowsRoot")
+_windowBase = ExtResource("22_tyqxl")
 
 [node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
 script = ExtResource("19_c4b4r")
 
-[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_buildingRoot")]
+[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot", "_generalPropsRoot")]
 script = ExtResource("25_8sujb")
-_buildingRoot = NodePath("../../Node3D/PropsRoot")
+_floorsRoot = NodePath("../../3D/Props/FloorsRoot")
+_generalPropsRoot = NodePath("../../3D/Props/OtherPropsRoot")
 
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
 script = ExtResource("25_tyqxl")

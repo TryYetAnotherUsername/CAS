@@ -7,6 +7,8 @@ public static class CatalogConfig
 {
     public static readonly List<CatalogEntity> Catalog =
     [
+        // ========== FLOORS ==========
+        new CatalogEntity { DispName = "Wooden floor",      UID = "uid://y7yesnlndrfg",  CatalogGroup = EGroup.Floors },
         // ========== WALLS ==========
         new CatalogEntity { DispName = "Wall",              UID = "uid://dtmwx7ig68eac", CatalogGroup = EGroup.Walls },
         new CatalogEntity { DispName = "Wall (Double)",     UID = "uid://bkwafr84yuc0q", CatalogGroup = EGroup.Walls },
