@@ -6,11 +6,42 @@ public partial class Shelf : Prop
 {
     public class StockEntry
     {
-        public ProductEntity product;
-        public int quantity;
+        public ProductEntity Product;
+        public int Quantity;
     }
 
-    private List<StockEntry> stockedProducts = new();
+    public List<StockEntry> stockedProducts = new();
+
+	public void ChangeProductStockStatus(ProductEntity targProduct, bool status)
+	{
+		var entry = GetEntryFromStocked(targProduct);
+		if (status == true) // want to stock
+		{
+			if (entry != null) // already stocked, do nothing.
+			{
+				GD.Print("A shelf: Tried to stock a product, but that product is already stocked on this shelf.");
+				return;
+			}
+			else // not stocked yet, stock.
+			{
+				stockedProducts.Add(new StockEntry{Product = targProduct, Quantity = 0});
+				GD.Print("A shelf: Stocked a new product");
+			}
+
+		}
+		else // want to unstock
+		{
+			if (entry != null) // stocked before, unstock now
+			{
+				stockedProducts.Remove(entry);
+				GD.Print("A shelf: Unstocked a product.");
+			}
+			else // no such stock, do nothing
+			{
+				GD.Print("A shelf: Could not unstock, that product is not stocked.");
+			}
+		}
+	}
 
 	public void AddProduct(ProductEntity targProduct, int amount)
 	{
@@ -22,7 +53,7 @@ public partial class Shelf : Prop
 		}
 		else
 		{
-			entry.quantity += 1;
+			entry.Quantity += amount;
 			GD.Print("A shelf: Added some products.");
 			return;
 		}
@@ -38,21 +69,21 @@ public partial class Shelf : Prop
 		}
 		else
 		{
-			if (entry.quantity == 0)
+			if (entry.Quantity == 0)
 			{
 				GD.Print("A shelf: Failed to take any products, shelf is empty.");
 				return 0;
 			}
-			else if (entry.quantity >= amount)
+			else if (entry.Quantity >= amount)
 			{
-				entry.quantity -= amount;
-				GD.Print($"A shelf: Took {amount} products. {entry.quantity} remaining.");
+				entry.Quantity -= amount;
+				GD.Print($"A shelf: Took {amount} products. {entry.Quantity} remaining.");
 				return amount;
 			}
 			else // quantity > 0 but < amount
 			{
-				int taken = entry.quantity;
-				entry.quantity = 0;
+				int taken = entry.Quantity;
+				entry.Quantity = 0;
 				GD.Print($"A shelf: Only had {taken}, took all that were left.");
 				return taken;
 			}
@@ -64,7 +95,7 @@ public partial class Shelf : Prop
 	{
 		foreach (StockEntry entry in stockedProducts)
 		{
-			if (entry.product == targProduct)
+			if (entry.Product == targProduct)
 			{
 				return entry;
 			}

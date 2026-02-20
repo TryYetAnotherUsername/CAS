@@ -91,7 +91,7 @@ public partial class FreeformTool : BuildmodeTool
     {
         foreach (Node meshInst in parent.GetChildren())
         {
-            if (meshInst.Name.ToString().Contains(keyword))
+            if (meshInst.Name.ToString().Contains(keyword) && meshInst.GetChildCount() > 0)
                 return meshInst.GetChild(0) as StaticBody3D;
         }
         return null;

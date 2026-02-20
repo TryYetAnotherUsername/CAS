@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/UsrBuild/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/Services/FactoryService.cs" id="25_8sujb"]
 [ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/Services/ToolService.cs" id="25_tyqxl"]
+[ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/Services/LiveSelectService.cs" id="27_4ohmo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifk88"]
 content_margin_left = 0.0
@@ -511,3 +512,6 @@ _buildingRoot = NodePath("../../Node3D/PropsRoot")
 
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
 script = ExtResource("25_tyqxl")
+
+[node name="LiveSelectService" type="Node" parent="Services" unique_id=1287970369]
+script = ExtResource("27_4ohmo")
