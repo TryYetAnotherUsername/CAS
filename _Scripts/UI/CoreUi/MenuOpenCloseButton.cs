@@ -23,14 +23,15 @@ public partial class MenuOpenCloseButton : Button
         ToolService.OnUpdate += (tool) => CloseMenu();
     }
 
+    // MIXED UP ANIMATION TRACKS PLS FIX!!!
 
     public void OpenMenu()
     {
-        _animationPlayer.Play("open_menu");
+        _animationPlayer.Play("close_menu");
     }
 
     public void CloseMenu()
     {
-        _animationPlayer.Play("close_menu");
+        _animationPlayer.PlayBackwards("close_menu");
     }
 }

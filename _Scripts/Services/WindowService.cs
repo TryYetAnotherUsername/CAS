@@ -30,7 +30,7 @@ public partial class WindowService : Node
     }
 
 
-	public void NewWindow(EWindowContent content= EWindowContent.None)
+	public Control NewWindow(EWindowContent content= EWindowContent.None) // returns control of content scene.
     {
         GD.Print("WindowService: Trying to spawn a new window");
 
@@ -41,15 +41,17 @@ public partial class WindowService : Node
         Label title = windowBase.FindChild("Title", true) as Label;
 
         var scene = TryGetScene(content);
-        if (scene is null) return;
+        if (scene is null) return null;
         var sceneInst = scene.Instantiate();
 
         title.Text = GetDispName(content);
 
         contLayer.AddChild(sceneInst);
 
-        GD.Print("WindowService: Finished spawning a new window");
+        GD.Print("WindowService: Finished spawning a new window. Returned the scene.");
+		return sceneInst as Control; // return the scene. Different uses can call custom inits.
 
+		// ===== local methods =====
         static string GetDispName(EWindowContent targCont)
         {
             if (_windowContentIndex.TryGetValue(targCont, out (string, string) value))

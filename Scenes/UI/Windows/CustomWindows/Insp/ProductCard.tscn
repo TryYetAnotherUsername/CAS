@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dlqm0ypqyba1l"]
+
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p2q0v"]
+[ext_resource type="Script" uid="uid://deapwab6a35d5" path="res://_Scripts/UI/Windows/LiveSelectWindow/ProductCard.cs" id="2_kwhan"]
+
+[node name="ProductCard" type="FoldableContainer" unique_id=1810743411 node_paths=PackedStringArray("_unstockButton", "_optionButton", "_quantityField")]
+theme = ExtResource("1_p2q0v")
+title = "Product"
+script = ExtResource("2_kwhan")
+_unstockButton = NodePath("HBoxContainer/Button")
+_optionButton = NodePath("HBoxContainer/OptionButton")
+_quantityField = NodePath("HBoxContainer/HBoxContainer/SpinBox")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1717647178]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=2091349246]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9438577, 0.01766875, 1.92523e-07, 1)
+text = "Unstock     "
+flat = true
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer" unique_id=1166145984]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 1
+popup/item_0/id = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1600156157]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1026571707]
+layout_mode = 2
+text = "     Quantity stocked:"
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer/HBoxContainer" unique_id=1931446773]
+layout_mode = 2

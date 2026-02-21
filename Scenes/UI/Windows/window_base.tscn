@@ -12,6 +12,13 @@ shader_parameter/saturation = 0.50000002375
 shader_parameter/grain_amount = 0.010000000475
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2ey3o"]
+color = Color(0, 0, 0, 0.22745098)
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4tdt1"]
+color = Color(1, 1, 1, 0.14901961)
+
 [node name="WindowBase" type="Panel" unique_id=632438322 node_paths=PackedStringArray("_DragT", "_DragL", "_DragR", "_DragB", "_DragBR", "_DragBar", "_Outline", "_WindowTitle", "_CloseButton")]
 material = SubResource("ShaderMaterial_cs5oi")
 custom_minimum_size = Vector2(100, 100)
@@ -57,7 +64,7 @@ focus_mode = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_lwwsd")
-text = "X"
+text = "x"
 flat = true
 
 [node name="TitleArea" type="Control" parent="Titlebar" unique_id=1916944992]
@@ -83,16 +90,37 @@ text = "Sample window"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="seperator" type="Panel" parent="." unique_id=47916094]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 22.0
+offset_right = -8.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_2ey3o")
+
+[node name="Panel" type="Panel" parent="seperator" unique_id=2088577946]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_4tdt1")
+
 [node name="ContentLayer" type="Panel" parent="." unique_id=1225353101]
 unique_name_in_owner = true
-clip_children = 1
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 24.0
+offset_top = 32.0
 offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
@@ -100,6 +128,10 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_lwwsd")
 theme_type_variation = &"window_base_outline"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ContentLayer" unique_id=1228677057]
+position = Vector2(-8, -24)
+copy_mode = 2
 
 [node name="FocusHighlight" type="PanelContainer" parent="." unique_id=17137804]
 layout_mode = 1
@@ -213,6 +245,3 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_lwwsd")
 theme_type_variation = &"window_base_shadowSecondary"
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1228677057]
-copy_mode = 2

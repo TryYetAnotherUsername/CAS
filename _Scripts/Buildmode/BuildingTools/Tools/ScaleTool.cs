@@ -12,7 +12,14 @@ public partial class ScaleTool : BuildmodeTool
 
         BuildmodeService.OnToolSelected += (tool) =>
         {
-            SetScaling(tool == BuildmodeService.Tool.Scale);
+            if (tool == BuildmodeService.Tool.Scale)
+			{
+				SetScaling(true);
+			}
+			else
+			{
+				SetScaling(false);
+			}
         };
     }
 

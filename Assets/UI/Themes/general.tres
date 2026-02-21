@@ -25,7 +25,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.31616732, 0.31616735, 0.3161673, 1)
+border_color = Color(0.52595025, 0.52595055, 0.5259505, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -33,7 +33,7 @@ corner_radius_bottom_left = 6
 anti_aliasing_size = 1.677
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic82w"]
-bg_color = Color(0, 0, 0, 0.2509804)
+bg_color = Color(0.6, 0.6, 0.6, 0)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8

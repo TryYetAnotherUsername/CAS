@@ -6,11 +6,9 @@ public partial class BuildmodeGizmo : Node3D
 {
     public override void _Ready()
     {
-		BuildmodeService.OnToolSelected += InitialisePostition;
-
     }
 
-	public void InitialisePostition(BuildmodeService.Tool _)
+	public void InitialisePostition()
 	{
 		Position = BuildmodeService.I.CurrentSelected.Position;
 	}

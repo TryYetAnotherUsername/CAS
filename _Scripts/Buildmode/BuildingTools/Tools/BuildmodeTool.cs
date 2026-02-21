@@ -8,7 +8,7 @@ public partial class BuildmodeTool : Node
         // Global logic: All tools listen for 'E' to quit
         if (@event.IsActionPressed("build_conf")) 
         {
-            BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Object);
+            BuildmodeService.I.SetToolTo(BuildmodeService.Tool.Object);
 			GD.Print("exiting to object tool");
         }
     }

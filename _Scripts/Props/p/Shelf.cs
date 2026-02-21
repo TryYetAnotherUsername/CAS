@@ -10,7 +10,7 @@ public partial class Shelf : Prop
         public int Quantity;
     }
 
-    public List<StockEntry> stockedProducts = new();
+    public List<StockEntry> StockedProductsList = new();
 
 	public void ChangeProductStockStatus(ProductEntity targProduct, bool status)
 	{
@@ -24,7 +24,7 @@ public partial class Shelf : Prop
 			}
 			else // not stocked yet, stock.
 			{
-				stockedProducts.Add(new StockEntry{Product = targProduct, Quantity = 0});
+				StockedProductsList.Add(new StockEntry{Product = targProduct, Quantity = 0});
 				GD.Print("A shelf: Stocked a new product");
 			}
 
@@ -33,7 +33,7 @@ public partial class Shelf : Prop
 		{
 			if (entry != null) // stocked before, unstock now
 			{
-				stockedProducts.Remove(entry);
+				StockedProductsList.Remove(entry);
 				GD.Print("A shelf: Unstocked a product.");
 			}
 			else // no such stock, do nothing
@@ -93,7 +93,7 @@ public partial class Shelf : Prop
 
 	private StockEntry GetEntryFromStocked(ProductEntity targProduct)
 	{
-		foreach (StockEntry entry in stockedProducts)
+		foreach (StockEntry entry in StockedProductsList)
 		{
 			if (entry.Product == targProduct)
 			{

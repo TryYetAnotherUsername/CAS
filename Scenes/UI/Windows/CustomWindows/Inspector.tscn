@@ -1,15 +1,100 @@
 [gd_scene format=3 uid="uid://dga1dp2fut3cf"]
 
-[node name="Inspector" type="Control" unique_id=16921979]
+[ext_resource type="Script" uid="uid://drcrly02s45c8" path="res://_Scripts/UI/Windows/LiveSelectWindow/Inspector.cs" id="1_5gduq"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_icng0"]
+[ext_resource type="PackedScene" uid="uid://dlqm0ypqyba1l" path="res://Scenes/UI/Windows/CustomWindows/Insp/ProductCard.tscn" id="3_kemcp"]
+
+[node name="Inspector" type="Control" unique_id=16921979 node_paths=PackedStringArray("_productCardRoot")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5gduq")
+_productCard = ExtResource("3_kemcp")
+_productCardRoot = NodePath("Shelf/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 
-[node name="Label" type="Label" parent="." unique_id=1100764187]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "hello there!"
+[node name="Shelf" type="Control" parent="." unique_id=1791949785]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shelf" unique_id=651253850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Shelf/VBoxContainer" unique_id=347097394]
+layout_mode = 2
+theme = ExtResource("2_icng0")
+theme_override_colors/font_color = Color(1, 1, 1, 0.4)
+text = "Sorry, this feature is still under development!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shelf/VBoxContainer" unique_id=1820703661]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer" unique_id=743618888]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Panel" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=166958871]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/Title" unique_id=11884727]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -7.5
+offset_right = 15.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_icng0")
+text = "Stocked products on this shelf"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=49552098]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer" unique_id=1272506754]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProductCard" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1810743411 instance=ExtResource("3_kemcp")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer" unique_id=868112021]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1134629780]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("2_icng0")
+text = "Reload"
+
+[node name="Button" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=278917167]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "+"
+
+[node name="Button2" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=507251880]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("2_icng0")
+text = "Apply"

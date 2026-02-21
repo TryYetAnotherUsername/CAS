@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://dbictodiotvlw"]
 
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_7bl78"]
+[ext_resource type="Script" uid="uid://ca0q5ftvjf7xf" path="res://_Scripts/Buildmode/UI/UiBehaviour/BuildmodeUIB.cs" id="1_xrfw4"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_rh6rf"]
-[ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://_Scripts/UsrBuild/UI/UiBehaviour/ControlsLogic.cs" id="3_bqi83"]
+[ext_resource type="Script" uid="uid://t1rmhq8qp6ch" path="res://_Scripts/Buildmode/UI/UiBehaviour/ControlsLogic.cs" id="3_bqi83"]
 [ext_resource type="Script" uid="uid://gm2ncgvmyqwg" path="res://Scenes/UI/Buildmode/GridlockStep.cs" id="4_bqi83"]
 [ext_resource type="PackedScene" uid="uid://c72wblnpn0hka" path="res://Scenes/UI/Buildmode/catalogue.tscn" id="4_rh6rf"]
-[ext_resource type="Script" uid="uid://bu1p3mhr8b2iv" path="res://Scenes/UI/Buildmode/ExitButton.cs" id="5_euntf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wliom"]
 shader = ExtResource("1_7bl78")
-shader_parameter/blur_amount = 3.0000001425
-shader_parameter/mix_amount = 0.50000002375
+shader_parameter/blur_amount = 0.0
+shader_parameter/mix_amount = 0.0
 shader_parameter/saturation = 1.2
 shader_parameter/grain_amount = 0.00800000038
 shader_parameter/color_over = Color(0, 0, 0, 1)
@@ -36,7 +36,117 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="Buildmode" type="Control" unique_id=2138034224]
+[sub_resource type="Animation" id="Animation_u8ugy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VSplitContainer/Controls:material:shader_parameter/mix_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VSplitContainer/Controls:material:shader_parameter/blur_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VSplitContainer/Controls/VBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.3882353)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xrfw4"]
+resource_name = "open_menu"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VSplitContainer/Controls:material:shader_parameter/mix_amount")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.9802322e-08, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.50000002375]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VSplitContainer/Controls:material:shader_parameter/blur_amount")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.9802322e-08, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.0000001425]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VSplitContainer/Controls/VBoxContainer:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8ugy"]
+_data = {
+&"RESET": SubResource("Animation_u8ugy"),
+&"open_menu": SubResource("Animation_xrfw4")
+}
+
+[node name="Buildmode" type="Control" unique_id=2138034224 node_paths=PackedStringArray("_exitButton", "_aniPlayer")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +155,9 @@ offset_top = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_xrfw4")
+_exitButton = NodePath("VSplitContainer/Controls/VBoxContainer/Top/ExitButton")
+_aniPlayer = NodePath("AnimationPlayer")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=585105209]
 layout_mode = 1
@@ -64,11 +177,13 @@ mouse_filter = 2
 
 [node name="Controls" type="Panel" parent="VSplitContainer" unique_id=417764309]
 material = SubResource("ShaderMaterial_wliom")
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_vk4q2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/Controls" unique_id=923649569]
+modulate = Color(1, 1, 1, 0.3882353)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,7 +371,7 @@ text = "Press [E] to confirm placement and return"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VSplitContainer/Controls/VBoxContainer/Top" unique_id=945624800]
+[node name="ExitButton" type="Button" parent="VSplitContainer/Controls/VBoxContainer/Top" unique_id=945624800]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -267,7 +382,12 @@ offset_right = -8.0
 offset_bottom = 50.0
 grow_horizontal = 0
 text = "X"
-script = ExtResource("5_euntf")
 
 [node name="Catalogue" parent="VSplitContainer/Controls/VBoxContainer" unique_id=368824362 instance=ExtResource("4_rh6rf")]
 layout_mode = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="VSplitContainer/Controls" unique_id=949316961]
+copy_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1506367964]
+libraries/ = SubResource("AnimationLibrary_u8ugy")

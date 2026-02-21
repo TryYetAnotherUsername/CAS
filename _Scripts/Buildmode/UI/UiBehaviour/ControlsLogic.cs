@@ -42,7 +42,7 @@ public partial class ControlsLogic : TabContainer
 	{
 		TabClicked += (t) =>
 		{
-			BuildmodeService.I.SwitchToolTo(GetToolFromTab((int)t));
+			BuildmodeService.I.SetToolTo(GetToolFromTab((int)t));
 			if (t == 0)
 			{
 				SetTabTitle(0, "Selecting...");
@@ -92,7 +92,7 @@ public partial class ControlsLogic : TabContainer
 				
 				//Set tab to freeform for convenience
 				CurrentTab = GetTabFromTool(BuildmodeService.Tool.Freeform);
-				BuildmodeService.I.SwitchToolTo(BuildmodeService.Tool.Freeform);
+				BuildmodeService.I.SetToolTo(BuildmodeService.Tool.Freeform);
 			}
 		};
 	}

@@ -1,46 +1,87 @@
 using Godot;
 using System;
+using System.Security.Principal;
 
 public partial class LiveSelectService : Node
 {
+    // Events:
+    public static event Action OnHoverStart;
+    public static event Action OnHoverEnd;
 
+    // States:
+    private Node3D _currentHovered = null;
 
-    // code copied from selection tool, needs proper implementation soon. :(
+    // Godot native methods:
+    public override void _Process(double delta)
+    {
+        var hit = Raycast();
 
-    public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event.IsActionPressed("build_select"))
+		if (hit == _currentHovered)
 		{
-            var rayResult = Raycast();
-            if (rayResult is null) return;
-            if (rayResult.GetOwner<Node3D>() is Shelf shelf)
-            {
-                foreach (var entry in shelf.stockedProducts)
-                {
-                    GD.Print($"{entry.Product.DispName}: {entry.Quantity}");
-                }
-            }
-		}
-	}
-    
-    private Node3D Raycast()
-	{
-		var camera3D = GetViewport().GetCamera3D();
-		var from = camera3D.ProjectRayOrigin(GetViewport().GetMousePosition());
-		var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * BuildmodeService.RayLength;
-
-		var spaceState = GetViewport().World3D.DirectSpaceState;
-		var options = PhysicsRayQueryParameters3D.Create(from, to);
-		options.CollisionMask = 2;
-		var result = spaceState.IntersectRay(options);
-		
-		if (result.Count > 0)
-		{
-			return (Node3D)result["collider"];
-		}
+			return;
+		} 
 		else
 		{
-			return null;
+			if (hit == null)
+			{
+				OnHoverEnd?.Invoke();
+				_currentHovered = hit;
+				return;
+			}
+
+			_currentHovered = hit;
+			
+			if (hit.GetOwner<Node3D>() is Shelf shelf)
+        	{
+				OnHoverStart?.Invoke();
+        	}
+			else
+			{
+				OnHoverEnd?.Invoke();
+			}
 		}
-	}
+    }
+
+	public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("inspect_pressed"))
+		{
+			HandleSelect();
+		}
+    }
+
+    // Private methods:
+    private void HandleSelect()
+    {
+        var hit = Raycast();
+        if (hit is null) return;
+        if (hit.GetOwner<Node3D>() is Shelf shelf)
+        {
+			Control window = WindowService.I.NewWindow(WindowService.EWindowContent.Properties);
+			
+
+			
+            foreach (var entry in shelf.StockedProductsList)
+			{
+				GD.Print($"{entry.Product.DispName}: {entry.Quantity}");
+			}
+        }
+
+    }
+
+    private Node3D Raycast()
+    {
+        var camera3D = GetViewport().GetCamera3D();
+        var from = camera3D.ProjectRayOrigin(GetViewport().GetMousePosition());
+		
+        var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * BuildmodeService.RayLength;
+        var spaceState = GetViewport().World3D.DirectSpaceState;
+
+        var options = PhysicsRayQueryParameters3D.Create(from, to);
+        options.CollisionMask = 2;
+
+        var result = spaceState.IntersectRay(options);
+        return result.Count > 0 ? (Node3D)result["collider"] : null;
+
+    }
 }

@@ -14,6 +14,7 @@ public partial class MoveTool : BuildmodeTool
         {
             SetMoving(tool == BuildmodeService.Tool.Move);
         };
+
     }
 
     public void SetMoving(bool state)
