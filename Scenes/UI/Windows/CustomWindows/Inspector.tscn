@@ -3,8 +3,79 @@
 [ext_resource type="Script" uid="uid://drcrly02s45c8" path="res://_Scripts/UI/Windows/LiveSelectWindow/Inspector.cs" id="1_5gduq"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_icng0"]
 [ext_resource type="PackedScene" uid="uid://dlqm0ypqyba1l" path="res://Scenes/UI/Windows/CustomWindows/Insp/ProductCard.tscn" id="3_kemcp"]
+[ext_resource type="Script" uid="uid://c70m01k25lu2m" path="res://_Scripts/UI/Windows/LiveSelectWindow/StockNewProductCard.cs" id="4_v84wr"]
 
-[node name="Inspector" type="Control" unique_id=16921979 node_paths=PackedStringArray("_productCardRoot")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kemcp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1.3957917e-06, 0.33073154, 0.4608187, 0.5372549)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.5243736, 0.6491937, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kemcp"]
+color = Color(1, 1, 1, 0.19215687)
+
+[sub_resource type="Animation" id="Animation_8wxfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScrollContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v84wr"]
+resource_name = "refresh_list"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScrollContainer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"updateShelfProductsA"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8wxfn"]
+_data = {
+&"RESET": SubResource("Animation_8wxfn"),
+&"refresh_list": SubResource("Animation_v84wr")
+}
+
+[node name="Inspector" type="Control" unique_id=16921979 node_paths=PackedStringArray("_productAddCard", "_productCardRoot", "_Reload", "_Add", "_aniPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +84,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5gduq")
 _productCard = ExtResource("3_kemcp")
+_productAddCard = NodePath("Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard")
 _productCardRoot = NodePath("Shelf/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+_Reload = NodePath("Shelf/VBoxContainer/HBoxContainer/VBoxContainer2/ReloadButton")
+_Add = NodePath("Shelf/VBoxContainer/HBoxContainer/VBoxContainer2/AddButton")
+_aniPlayer = NodePath("Shelf/VBoxContainer/HBoxContainer/VBoxContainer/AnimationPlayer")
 
 [node name="Shelf" type="Control" parent="." unique_id=1791949785]
 layout_mode = 1
@@ -30,12 +105,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Label" type="Label" parent="Shelf/VBoxContainer" unique_id=347097394]
 layout_mode = 2
 theme = ExtResource("2_icng0")
 theme_override_colors/font_color = Color(1, 1, 1, 0.4)
-text = "Sorry, this feature is still under development!"
+text = "This feature is still under development..."
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Shelf/VBoxContainer" unique_id=1820703661]
 layout_mode = 2
@@ -44,6 +120,55 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer" unique_id=743618888]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="StockNewProductCard" type="Panel" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=846114363 node_paths=PackedStringArray("_optionButton", "_button")]
+visible = false
+custom_minimum_size = Vector2(0, 97.13)
+layout_mode = 2
+theme = ExtResource("2_icng0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kemcp")
+script = ExtResource("4_v84wr")
+_optionButton = NodePath("VBoxContainer/HBoxContainer/OptionButton")
+_button = NodePath("VBoxContainer/Button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard" unique_id=493945498]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 5.0
+offset_right = -21.0
+offset_bottom = -4.1299973
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 9
+
+[node name="Label" type="Label" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard/VBoxContainer" unique_id=1771605416]
+layout_mode = 2
+theme = ExtResource("2_icng0")
+text = "Stock a new product"
+
+[node name="Panel" type="Panel" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard/VBoxContainer" unique_id=1946051596]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_kemcp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard/VBoxContainer" unique_id=1139417130]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard/VBoxContainer/HBoxContainer" unique_id=1685632498]
+layout_mode = 2
+theme = ExtResource("2_icng0")
+text = "Select product type:"
+
+[node name="OptionButton" type="OptionButton" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard/VBoxContainer/HBoxContainer" unique_id=156933080]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/StockNewProductCard/VBoxContainer" unique_id=295396439]
+layout_mode = 2
+theme = ExtResource("2_icng0")
+text = "Confirm"
 
 [node name="Title" type="Panel" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=166958871]
 custom_minimum_size = Vector2(0, 20)
@@ -76,8 +201,12 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ProductCard" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1810743411 instance=ExtResource("3_kemcp")]
+[node name="ProductCard" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1935421240 instance=ExtResource("3_kemcp")]
+visible = false
 layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=286329051]
+libraries/ = SubResource("AnimationLibrary_8wxfn")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer" unique_id=868112021]
 layout_mode = 2
@@ -92,9 +221,3 @@ text = "Reload"
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 text = "+"
-
-[node name="ApplyButton" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=507251880]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme = ExtResource("2_icng0")
-text = "Apply"

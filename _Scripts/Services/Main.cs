@@ -5,6 +5,7 @@ public partial class Main : Node
 {
     public override void _Ready()
     {
+        PathfindingService.Init();
         ProductConfig.Init();
 		RunShelfTests();
         GD.Print("\n==== Main: Scene tree ready. Hello, world!");
@@ -27,7 +28,7 @@ public partial class Main : Node
         var product = ProductConfig.FindByUID("uid://dutcuyuk8d0b6");
 		// Stock a product for fun
         GD.Print("Stock a product for fun");
-        shelf.ChangeProductStockStatus(product, true);
+        shelf.SetProductStockStatus(product, true);
         shelf.AddProduct(product, 10);
 
         GD.Print("==>> Shelf tests complete!");

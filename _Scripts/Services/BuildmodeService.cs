@@ -38,6 +38,7 @@ public partial class BuildmodeService : Node
                 SetBuildModeEnabled(true);
         };
         SetToolTo(Tool.None);
+        GD.Print("==== BuildmodeService: Init");
     }
 
     // API methods:
@@ -96,5 +97,9 @@ public partial class BuildmodeService : Node
     {
         OnObjectDeselected?.Invoke(CurrentSelected);
         CurrentSelected = null;
+        if (PathfindingService.I is not null)
+        {
+            PathfindingService.I?.StartBakingRegion();
+        }
     }
 }

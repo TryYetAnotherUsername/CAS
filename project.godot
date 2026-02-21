@@ -20,6 +20,10 @@ run/main_scene="uid://j8ww78jhfreh"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="uid://bsva85o05dto2"
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://Addons/debug_draw_3d"
+
 [dotnet]
 
 project/assembly_name="CAS 2"

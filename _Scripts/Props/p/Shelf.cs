@@ -12,7 +12,7 @@ public partial class Shelf : Prop
 
     public List<StockEntry> StockedProductsList = new();
 
-	public void ChangeProductStockStatus(ProductEntity targProduct, bool status)
+	public void SetProductStockStatus(ProductEntity targProduct, bool status)
 	{
 		var entry = GetEntryFromStocked(targProduct);
 		if (status == true) // want to stock
@@ -40,6 +40,19 @@ public partial class Shelf : Prop
 			{
 				GD.Print("A shelf: Could not unstock, that product is not stocked.");
 			}
+		}
+	}
+
+	public bool IsStocked(ProductEntity targProduct)
+	{
+		var entry = GetEntryFromStocked(targProduct);
+		if (entry is null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 

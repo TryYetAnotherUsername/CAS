@@ -7,11 +7,14 @@ public partial class Inspector : Control
 	private Prop _prop;
 	private Shelf _shelf;
 	[Export] private PackedScene _productCard;
+	[Export] private Control _productAddCard;
 	[Export] private Control _productCardRoot;
 
 	[Export] private Button _Reload;
 	[Export] private Button _Add;
 	[Export] private Button _Apply;
+
+	[Export] private AnimationPlayer _aniPlayer;
 
 	// lifecycle kinda methods
 	public void Init(Prop prop)
@@ -19,24 +22,40 @@ public partial class Inspector : Control
 		_prop = prop;
 		if (prop is Shelf shelf)
 		{
-			GD.Print(shelf.StockedProductsList);
 			_shelf = shelf;
-			updateShelfProducts(shelf.StockedProductsList);
-		}
-	}
+			updateWithAnimation(shelf.StockedProductsList);
 
-	public void QueueFree(Prop prop)
-	{
-		
+			var productAddCard = (StockNewProductCard)_productAddCard;
+			productAddCard.Start(_shelf, ()=> updateWithAnimation(shelf.StockedProductsList));
+
+			_Add.Pressed += () => 
+			{
+				productAddCard.Visible = true;
+				productAddCard.GenProductOptions();
+			};
+
+			_Reload.Pressed += () => 
+			{
+				updateWithAnimation(shelf.StockedProductsList);
+			};
+		}
 	}
 
 	// private methods
 
-	private void updateShelfProducts(List<Shelf.StockEntry> stockList)
+	private List<Shelf.StockEntry> _stockListA; // bad practice but if it works it works :/
+
+	private void updateWithAnimation(List<Shelf.StockEntry> stockList)
+	{
+		_stockListA = stockList;
+		_aniPlayer.Play("refresh_list");
+	}
+
+	public void updateShelfProductsA()
 	{
 		clearAllCards();
 
-		foreach (Shelf.StockEntry stockEntry in stockList)
+		foreach (Shelf.StockEntry stockEntry in _stockListA)
 		{
 			var productCard = _productCard.Instantiate();
 			_productCardRoot.AddChild(productCard);
