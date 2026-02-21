@@ -46,3 +46,5 @@ _PivotH = NodePath("../Camera/PivotH")
 _PivotV = NodePath("../Camera/PivotH/PivotV")
 _SpringArm = NodePath("../Camera/PivotH/PivotV/SpringArm3D")
 _PlayerCam = NodePath("../Camera/PivotH/PivotV/SpringArm3D/Camera3D")
+zoomSpeed = null
+mouseSens = null

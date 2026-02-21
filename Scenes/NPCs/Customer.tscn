@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cp8knfb1rmlmk"]
+
+[ext_resource type="Script" uid="uid://c5h5syrhafc45" path="res://_Scripts/NPCs/Customer/Customer.cs" id="1_pwaxx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ah3if"]
+size = Vector3(0.4, 0.7, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ah3if"]
+size = Vector3(0.39916992, 0.7023926, 0.20306396)
+
+[node name="Customer" type="CharacterBody3D" unique_id=215028712 node_paths=PackedStringArray("_navigationAgent")]
+script = ExtResource("1_pwaxx")
+MovementSpeed = null
+_navigationAgent = NodePath("NavigationAgent3D")
+_movementDelta = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=362684210]
+mesh = SubResource("BoxMesh_ah3if")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1352571645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0010986328, 0.00061035156, 0.00033569336)
+shape = SubResource("BoxShape3D_ah3if")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=995161607]
+debug_enabled = true

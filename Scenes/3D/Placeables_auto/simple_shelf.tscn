@@ -23,19 +23,19 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 [node name="simple_shelf" unique_id=1996084563 instance=ExtResource("1_0g6go")]
 script = ExtResource("2_jub67")
 
-[node name="simple_shelf_mesh" parent="." index="0" unique_id=1628762825]
+[node name="simple_shelf_mesh" parent="." index="0" unique_id=776869884]
 surface_material_override/0 = SubResource("StandardMaterial3D_jub67")
 surface_material_override/1 = SubResource("StandardMaterial3D_w4yej")
 surface_material_override/2 = SubResource("StandardMaterial3D_bds1l")
 
-[node name="simple_shelf_ray" parent="." index="1" unique_id=126876713]
+[node name="simple_shelf_ray" parent="." index="1" unique_id=1705521173]
 visible = false
 
-[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=1069603054]
+[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=1852970826]
 collision_layer = 2
 collision_mask = 2
 
-[node name="simple_shelf_physics" parent="." index="2" unique_id=1287771062]
+[node name="simple_shelf_physics" parent="." index="2" unique_id=1213111922]
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="3" unique_id=552055956]
@@ -84,3 +84,6 @@ text = "shelf data"
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "shelf data"
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." index="4" unique_id=1479893589]
+vertices = PackedVector3Array(0.39056477, 0, -0.4899517, 0.39056477, 0, 0.48813942, 0.08622345, 0, 0.4860405, 0.08832201, 0, -0.4857539)
