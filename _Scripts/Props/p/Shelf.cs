@@ -6,8 +6,8 @@ public partial class Shelf : Prop
 {
     public class StockEntry
     {
-        public ProductEntity Product;
-        public int Quantity;
+        public ProductEntity Product = ProductConfig.Catalog[0];
+        public int Quantity = 0;
     }
 
     public List<StockEntry> StockedProductsList = new();

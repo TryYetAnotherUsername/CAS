@@ -7,7 +7,6 @@ public partial class Main : Node
     {
         ProductConfig.Init();
 		RunShelfTests();
-        WindowService.I.NewWindow(WindowService.EWindowContent.Properties);
         GD.Print("\n==== Main: Scene tree ready. Hello, world!");
     }
 
@@ -25,7 +24,7 @@ public partial class Main : Node
             GD.Print("[OK] Added a new shelf");
         }
 
-        var product = ProductConfig.FindByUID("testUid");
+        var product = ProductConfig.FindByUID("uid://dutcuyuk8d0b6");
 		// Stock a product for fun
         GD.Print("Stock a product for fun");
         shelf.ChangeProductStockStatus(product, true);

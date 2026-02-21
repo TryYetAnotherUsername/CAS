@@ -82,18 +82,18 @@ layout_mode = 2
 [node name="VBoxContainer2" type="VBoxContainer" parent="Shelf/VBoxContainer/HBoxContainer" unique_id=868112021]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1134629780]
+[node name="ReloadButton" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1134629780]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme = ExtResource("2_icng0")
 text = "Reload"
 
-[node name="Button" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=278917167]
+[node name="AddButton" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=278917167]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 text = "+"
 
-[node name="Button2" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=507251880]
+[node name="ApplyButton" type="Button" parent="Shelf/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=507251880]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme = ExtResource("2_icng0")

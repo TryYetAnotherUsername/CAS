@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Net.Mime;
 using System.Security.Principal;
 
 public partial class LiveSelectService : Node
@@ -58,7 +59,8 @@ public partial class LiveSelectService : Node
         if (hit.GetOwner<Node3D>() is Shelf shelf)
         {
 			Control window = WindowService.I.NewWindow(WindowService.EWindowContent.Properties);
-			
+			var inspector = window as Inspector;
+            inspector?.Init(shelf);
 
 			
             foreach (var entry in shelf.StockedProductsList)

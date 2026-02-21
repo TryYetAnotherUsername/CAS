@@ -10,10 +10,10 @@ public static class ProductConfig
     public static readonly List<ProductEntity> Catalog =
     [
         // ========== WALLS ==========
-        new ProductEntity { DispName = "TestFoodProduct",           UID = "testUid",        Category = ProductEntity.ProductCategoryEnum.Food },
-        new ProductEntity { DispName = "TestElectronicProduct",     UID = "testUid2",       Category = ProductEntity.ProductCategoryEnum.Electronics },
-        new ProductEntity { DispName = "TestMeatProduct",           UID = "testUid3",       Category = ProductEntity.ProductCategoryEnum.Meat },
-        new ProductEntity { DispName = "TestDrinksProduct",         UID = "testUid3",       Category = ProductEntity.ProductCategoryEnum.Drinks },
+        new ProductEntity { DispName = "TestFoodProduct",           UID = "uid://dutcuyuk8d0b6",    Category = ProductEntity.ProductCategoryEnum.Food }, // dummy uid
+        new ProductEntity { DispName = "TestElectronicProduct",     UID = "testUid2",               Category = ProductEntity.ProductCategoryEnum.Electronics },
+        new ProductEntity { DispName = "TestMeatProduct",           UID = "testUid3",               Category = ProductEntity.ProductCategoryEnum.Meat },
+        new ProductEntity { DispName = "TestDrinksProduct",         UID = "testUid3",               Category = ProductEntity.ProductCategoryEnum.Drinks },
     ];
 
     public static ProductEntity FindByUID(string uid)

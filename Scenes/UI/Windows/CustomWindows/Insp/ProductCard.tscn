@@ -35,3 +35,5 @@ text = "     Quantity stocked:"
 
 [node name="SpinBox" type="SpinBox" parent="HBoxContainer/HBoxContainer" unique_id=1931446773]
 layout_mode = 2
+max_value = 50.0
+update_on_text_changed = true
