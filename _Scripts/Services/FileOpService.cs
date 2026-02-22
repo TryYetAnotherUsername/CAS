@@ -46,11 +46,11 @@ public partial class FileOpService : Node
 			
 			string contents = file.GetAsText();
 			var deserialised = JsonSerializer.Deserialize<CasProj>(contents);
-			ProjectService.Current = deserialised;
 			
 			if (deserialised != null)
 			{
-				GD.Print("Successfully loaded project!");
+				ProjectService.I.In(deserialised);
+				GD.Print("Successfully deserialised!");
 			}
 		}
     

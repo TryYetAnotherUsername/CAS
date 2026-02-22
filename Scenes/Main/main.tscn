@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://_Scripts/Services/Main.cs" id="1_imbg2"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p6jpk"]
 [ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/Player/player_char.tscn" id="2_4e4y2"]
+[ext_resource type="Script" uid="uid://nt878o4u3kxu" path="res://_Scripts/Services/ProjectService.cs" id="2_wbulw"]
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
 [ext_resource type="Script" uid="uid://d13f5bg7kx7x4" path="res://_Scripts/UI/CoreUi/MenuOpenCloseButton.cs" id="3_ifk88"]
 [ext_resource type="Script" uid="uid://ciwwvp6n38c6u" path="res://_Scripts/Services/FileOpService.cs" id="3_qw60k"]
@@ -318,8 +319,17 @@ ssil_radius = 1.36
 sdfgi_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_4ohmo"]
-vertices = PackedVector3Array(-4.9065194, 0.45499998, -4.2704782, -4.9065194, 0.45499998, -3.2704782, -3.9065194, 0.45499998, -3.2704782, -3.9065194, 0.45499998, -4.2704782, -1.9065194, 0.45499998, -4.2704782, -1.9065194, 0.45499998, -3.2704782, 0.09348059, 0.45499998, -3.2704782, 0.09348059, 0.45499998, -4.2704782)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5)]
+sample_partition_type = 1
+cell_size = 0.05
+cell_height = 0.01
+agent_radius = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_aq0wg"]
+size = Vector3(6.96, 0.02, 16.215)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbulw"]
+albedo_color = Color(0.23137255, 0.23137255, 0.23137255, 1)
+roughness = 0.5
 
 [node name="Main" type="Node" unique_id=458039144]
 script = ExtResource("1_imbg2")
@@ -328,7 +338,7 @@ script = ExtResource("1_imbg2")
 
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")
-_shelvesRoot = NodePath("../../3D/Props/OtherPropsRoot")
+_shelvesRoot = NodePath("../../3D/Props/FloorsRoot")
 
 [node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
 script = ExtResource("19_c4b4r")
@@ -344,7 +354,7 @@ _windowBase = ExtResource("22_tyqxl")
 [node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot", "_generalPropsRoot")]
 script = ExtResource("25_8sujb")
 _floorsRoot = NodePath("../../3D/Props/FloorsRoot")
-_generalPropsRoot = NodePath("../../3D/Props/OtherPropsRoot")
+_generalPropsRoot = NodePath("../../3D/Props/FloorsRoot")
 
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
 script = ExtResource("25_tyqxl")
@@ -360,6 +370,9 @@ _navRegion = NodePath("../../3D/Props/FloorsRoot")
 script = ExtResource("11_wbulw")
 _npcRoot = NodePath("../../3D/NPCs")
 _customerNpc = ExtResource("22_v4agm")
+
+[node name="ProjectService" type="Node" parent="Services" unique_id=1544795930]
+script = ExtResource("2_wbulw")
 
 [node name="UI" type="Control" parent="." unique_id=738311301]
 layout_mode = 3
@@ -662,11 +675,10 @@ script = ExtResource("21_tyqxl")
 [node name="FloorsRoot" type="NavigationRegion3D" parent="3D/Props" unique_id=322952058]
 navigation_mesh = SubResource("NavigationMesh_4ohmo")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Props/FloorsRoot" unique_id=438412997]
+mesh = SubResource("BoxMesh_aq0wg")
+surface_material_override/0 = SubResource("StandardMaterial3D_wbulw")
+
 [node name="OtherPropsRoot" type="Node3D" parent="3D/Props" unique_id=1626172487]
 
 [node name="NPCs" type="Node3D" parent="3D" unique_id=1296953903]
-
-[node name="Customer" parent="3D/NPCs" unique_id=215028712 instance=ExtResource("22_v4agm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7609152, 0)
-MovementSpeed = 4.0
-_movementDelta = 0.0

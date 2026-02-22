@@ -90,6 +90,20 @@ public partial class Customer : NPC
     // ========== State machine ========== (btw, why do they even call it that?)
     private void SwitchState(State newState)
     {
+        switch (newState)
+        {
+            case State.WalkingToShelf:
+                // Set target to shelf
+                Vector3 targetPos = WorldService.I.GetShelf(_currentWantItem.Product).GlobalPosition;
+                SetMovementTarget(targetPos);
+                GD.Print($"🟩 Target set to shelf to buy the product <{_currentWantItem.Product.DispName}>");
+                break;
+                
+            case State.WalkingToCheckout:
+                // Set target for checkout here...
+                break;
+        }
+
         _currentState = newState;
         GD.Print($"Customer {Name}: Switching to <{newState}> state.");
     }
@@ -156,8 +170,11 @@ public partial class Customer : NPC
 
     private void WalkingToShelf()
     {
-        GD.Print("🟩 Walking to a shelf...");
-        SwitchState(State.UsingShelf);
+        if (_navigationAgent.IsNavigationFinished())
+        {
+            GD.Print("Arrived at shelf!");
+            SwitchState(State.UsingShelf);
+        }
     }
 
     private void UsingShelf()

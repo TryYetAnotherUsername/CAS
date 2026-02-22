@@ -32,7 +32,6 @@ public partial class CatalogEntity
     
     public string UID;
     public string DispName;
-    public Texture2D Thumbnail;
     public EGroup CatalogGroup;
     public EPlacementMode AllowedPlacementMode;
 }
