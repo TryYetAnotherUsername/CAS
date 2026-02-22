@@ -1,6 +1,11 @@
+// NOTE TO SELF
+// The wandering state is not implemented yet, it just despawns.
+
+
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Customer : NPC
 {
@@ -8,34 +13,45 @@ public partial class Customer : NPC
     public enum State 
     {
         WalkingToEntrance,
-        Browsing,
+        CheckingShoppingList,
         WalkingToShelf,
-        BrowsingShelf,
+        UsingShelf,
         WalkingToCheckout,
+        UsingCheckout,
         WalkingToExit,
-        Leaving
+        Despawn
     }
 
     // Private Variables
-    private State _currentState;
-    private State _isWonderer;
+    [Export] private State _currentState;
+    [Export] private bool _isWander;
+    private int _currentShoppingListIndex;
+    private ShoppingItem _currentWantItem;
 
-    // Dictionaries
-    private Dictionary<ProductEntity, int> ShoppingList;
+    // shopping item
+    public class ShoppingItem
+    {
+        public ProductEntity Product;
+        public int Quantity;
+    }
+
+    // Shopping list
+    private List<ShoppingItem> _shoppingList = new List<ShoppingItem>();
 
     //========== Init ==========
 
     public void Init()
     {
-
+        // null check
         if (WorldService.I is null)
         {
             GD.PrintErr($"Customer {Name}: WorldService not found!");
             return;
         }
 
-        GD.Print($"==== Customer {Name}: Starting init.");
+        GD.Print($"\n::== Customer {Name}: Starting init.");
 
+        // check if there are any products in this store
         var productsInStore = WorldService.I.GetProducts();
         if (productsInStore is null || productsInStore.Count < 1)
         {
@@ -43,23 +59,32 @@ public partial class Customer : NPC
             return;
         }
 
-        // populate the shopping list
-
+        // Decide how many products to get overall
         var targetProductsCount =  (int) GD.RandRange(0, productsInStore.Count);
+       
+       // If I decide I don't want any, just wander around.
         if (targetProductsCount == 0)
         {
+            _isWander = true;
             GD.Print($"Customer {Name}: Not buying anything, just looking around.");
+            SwitchState(State.Despawn);
             return;
         }
 
-        for (int i = 1; i<=targetProductsCount; i+= 1) // repeat this targetProductsCount times
+        // Do this for the amount of items i want to get
+        for (int i = 0; i < targetProductsCount; i++) 
         {
-            var index = (int) GD.RandRange(0, productsInStore.Count - 1);
-            var quantity = (int) GD.RandRange(1, 5);
-            var targetProduct = productsInStore[index];
-            GD.Print($"Customer {Name}: I want to buy <{quantity}> of product <{targetProduct.DispName}>");
+            var index = (int)GD.RandRange(0, productsInStore.Count - 1);
+            var quantity = (int)GD.RandRange(1, 5);
+            
+            // Create the item and add it to the list
+            var newItem = new ShoppingItem{Product = productsInStore[index], Quantity = quantity};
+            GD.Print($"Customer {Name}: I wanna buy <{newItem.Quantity}> of <{newItem.Product.DispName}>");
+            _shoppingList.Add(newItem);
         }
-        
+
+        GD.Print($"==>> Customer {Name}: Init done.\n");
+        SwitchState(State.CheckingShoppingList);
     }
 
     // ========== State machine ========== (btw, why do they even call it that?)
@@ -69,6 +94,100 @@ public partial class Customer : NPC
         GD.Print($"Customer {Name}: Switching to <{newState}> state.");
     }
 
-    
+    // ========== Process ==========
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
+        switch (_currentState)
+        {
+            case State.CheckingShoppingList:
+                CheckingShoppingList();
+                break;
+
+            case State.WalkingToShelf:
+                WalkingToShelf();
+                break;
+
+            case State.UsingShelf:
+                UsingShelf();
+                break;
+
+            case State.WalkingToCheckout:
+                WalkingToCheckout();
+                break;
+
+            case State.UsingCheckout:
+                UsingCheckout();
+                break;
+            
+            case State.WalkingToExit:
+                WalkingToExit();
+                break;
+
+            case State.Despawn:
+                Despawn();
+                break;
+        }
+    }
+
+    // ========== state processes ==========
+    private void CheckingShoppingList()
+    {
+        GD.Print("🟩 Checking my shopping list...");
+
+        if (_currentShoppingListIndex > (_shoppingList.Count - 1)) // if the next item would be out of range
+        {
+            GD.Print($"Finished my shopping list!");
+            SwitchState(State.WalkingToCheckout);
+            return;
+        }
+
+        GD.Print($"I'm on index {_currentShoppingListIndex} of my shopping list...");
+
+        // Get the target item on list
+        _currentWantItem = _shoppingList[_currentShoppingListIndex];
+        GD.Print($"I'm going to buy {_currentWantItem.Quantity} of {_currentWantItem.Product.DispName}");
+
+        _currentShoppingListIndex += 1; // no one should use this index after this point
+
+        SwitchState(State.WalkingToShelf);
+    }
+
+    private void WalkingToShelf()
+    {
+        GD.Print("🟩 Walking to a shelf...");
+        SwitchState(State.UsingShelf);
+    }
+
+    private void UsingShelf()
+    {
+        GD.Print("🟩 Using shelf...");
+        SwitchState(State.CheckingShoppingList);
+    }
+
+    private void WalkingToCheckout()
+    {
+        GD.Print("🟩 Walking to checkout...");
+        SwitchState(State.UsingCheckout);
+    }
+
+    private void UsingCheckout()
+    {
+        GD.Print("🟩 Using the checkout...");
+        SwitchState(State.WalkingToExit);
+    }
+
+    private void WalkingToExit()
+    {
+        GD.Print("🟩 Walking to exit...");
+        SwitchState(State.Despawn);
+    }
+
+    private void Despawn()
+    {
+        GD.Print("🟩 Despawning...");
+        QueueFree();
+    }
     
 }

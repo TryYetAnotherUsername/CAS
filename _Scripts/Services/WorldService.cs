@@ -51,4 +51,31 @@ public partial class WorldService : Node
         return products; // return!
     }
 
+    // Get a shelf with specified product. Not nessasarily the closest one, though.
+    public Shelf GetShelf(ProductEntity targetProduct)
+    {
+        List<Shelf> shelvesWithThisProduct = new();
+
+        foreach (Node3D node in _shelvesRoot.GetChildren())
+        {
+            if (node is Shelf shelf) // found a new shelf
+            {
+                var stockList = shelf.StockedProductsList;
+                foreach (Shelf.StockEntry entry in stockList)
+                {
+                    if (entry.Product == targetProduct) // Has product
+                    {
+                        shelvesWithThisProduct.Add(shelf);
+                    }
+                }
+            }
+        }
+
+        if (shelvesWithThisProduct.Count == 0) return null;
+
+        var randomisedIndex = (int) GD.RandRange(0, shelvesWithThisProduct.Count - 1);
+        Shelf luckyShelf = shelvesWithThisProduct[randomisedIndex];
+        
+        return luckyShelf;
+    }
 }

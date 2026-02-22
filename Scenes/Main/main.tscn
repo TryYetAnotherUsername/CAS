@@ -412,7 +412,6 @@ theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.6549
 text = "Tools >"
 flat = true
 script = ExtResource("3_ifk88")
-_actionMode = null
 _animationPlayer = NodePath("../../MenuAnimationPlayer")
 
 [node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
@@ -466,7 +465,6 @@ text = "Build tool"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = null
 
 [node name="MenuItem2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=710371277]
 custom_minimum_size = Vector2(0, 40)
@@ -505,6 +503,25 @@ flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
 _tool = 2
+
+[node name="SpawnCustomer" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=718372211]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/SpawnCustomer" unique_id=942678748]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p6jpk")
+text = "Spawn a customer (You might feel powerful when you click this button)"
+flat = true
+alignment = 0
+script = ExtResource("4_tyqxl")
+_tool = 3
 
 [node name="Button" type="Button" parent="UI/Core/TopArea/Menu" unique_id=339895518 node_paths=PackedStringArray("_animationPlayer")]
 layout_mode = 1
@@ -651,3 +668,5 @@ navigation_mesh = SubResource("NavigationMesh_4ohmo")
 
 [node name="Customer" parent="3D/NPCs" unique_id=215028712 instance=ExtResource("22_v4agm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7609152, 0)
+MovementSpeed = 4.0
+_movementDelta = 0.0
