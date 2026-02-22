@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dbictodiotvlw" path="res://Scenes/UI/Buildmode/buildmode.tscn" id="5_8sujb"]
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
+[ext_resource type="Script" uid="uid://drtnqob4u6a2a" path="res://_Scripts/Services/NpcSpawnerService.cs" id="11_wbulw"]
 [ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://_Scripts/Buildmode/UI/VFX/BmVisuals.cs" id="13_1t20g"]
 [ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://_Scripts/Buildmode/BuildingTools/Tools/SelectionTool.cs" id="13_koken"]
 [ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
@@ -22,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/Services/BuildmodeService.cs" id="19_c4b4r"]
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/Buildmode/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
-[ext_resource type="PackedScene" uid="uid://y7yesnlndrfg" path="res://Scenes/3D/Placeables_auto/basic_floor.tscn" id="21_ah3if"]
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/Buildmode/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/NPCs/Customer.tscn" id="22_v4agm"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/Services/ToolService.cs" id="25_tyqxl"]
 [ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/Services/LiveSelectService.cs" id="27_4ohmo"]
 [ext_resource type="Script" uid="uid://pbm8xtsk7aox" path="res://_Scripts/Services/PathfindingService.cs" id="28_8oboy"]
+[ext_resource type="Script" uid="uid://ccodax680di2u" path="res://_Scripts/Services/WorldService.cs" id="31_aq0wg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifk88"]
 content_margin_left = 0.0
@@ -323,6 +324,43 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Arr
 [node name="Main" type="Node" unique_id=458039144]
 script = ExtResource("1_imbg2")
 
+[node name="Services" type="Node" parent="." unique_id=1469627630]
+
+[node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
+script = ExtResource("31_aq0wg")
+_shelvesRoot = NodePath("../../3D/Props/OtherPropsRoot")
+
+[node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
+script = ExtResource("19_c4b4r")
+
+[node name="FileOpService" type="Node" parent="Services" unique_id=1586219315]
+script = ExtResource("3_qw60k")
+
+[node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_windowsRoot")]
+script = ExtResource("4_5yls4")
+_windowsRoot = NodePath("../../UI/WindowsRoot")
+_windowBase = ExtResource("22_tyqxl")
+
+[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot", "_generalPropsRoot")]
+script = ExtResource("25_8sujb")
+_floorsRoot = NodePath("../../3D/Props/FloorsRoot")
+_generalPropsRoot = NodePath("../../3D/Props/OtherPropsRoot")
+
+[node name="ToolService" type="Node" parent="Services" unique_id=452083335]
+script = ExtResource("25_tyqxl")
+
+[node name="LiveSelectService" type="Node" parent="Services" unique_id=1287970369]
+script = ExtResource("27_4ohmo")
+
+[node name="PathfindingService" type="Node" parent="Services" unique_id=624495622 node_paths=PackedStringArray("_navRegion")]
+script = ExtResource("28_8oboy")
+_navRegion = NodePath("../../3D/Props/FloorsRoot")
+
+[node name="NPCSpawnerService" type="Node" parent="Services" unique_id=1708621918 node_paths=PackedStringArray("_npcRoot")]
+script = ExtResource("11_wbulw")
+_npcRoot = NodePath("../../3D/NPCs")
+_customerNpc = ExtResource("22_v4agm")
+
 [node name="UI" type="Control" parent="." unique_id=738311301]
 layout_mode = 3
 anchors_preset = 15
@@ -374,6 +412,7 @@ theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.6549
 text = "Tools >"
 flat = true
 script = ExtResource("3_ifk88")
+_actionMode = null
 _animationPlayer = NodePath("../../MenuAnimationPlayer")
 
 [node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
@@ -427,6 +466,7 @@ text = "Build tool"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
+_tool = null
 
 [node name="MenuItem2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=710371277]
 custom_minimum_size = Vector2(0, 40)
@@ -605,67 +645,9 @@ script = ExtResource("21_tyqxl")
 [node name="FloorsRoot" type="NavigationRegion3D" parent="3D/Props" unique_id=322952058]
 navigation_mesh = SubResource("NavigationMesh_4ohmo")
 
-[node name="basic_floor2" parent="3D/Props/FloorsRoot" unique_id=1538602412 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05548668, 0, -3.3112032)
-
-[node name="basic_floor3" parent="3D/Props/FloorsRoot" unique_id=849846245 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9158808, 0, -3.3112032)
-
-[node name="basic_floor4" parent="3D/Props/FloorsRoot" unique_id=721105047 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8671541, 0, -3.3112032)
-
-[node name="basic_floor5" parent="3D/Props/FloorsRoot" unique_id=1923967569 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06794453, 0, -4.2704782)
-
-[node name="basic_floor6" parent="3D/Props/FloorsRoot" unique_id=1479501018 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8990798, 0, -4.2704782)
-
-[node name="basic_floor7" parent="3D/Props/FloorsRoot" unique_id=1345822434 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8786436, 0, -4.2704782)
-
-[node name="basic_floor8" parent="3D/Props/FloorsRoot" unique_id=253732874 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.94767, 0, -4.2704782)
-
-[node name="basic_floor9" parent="3D/Props/FloorsRoot" unique_id=2081375142 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9065194, 0, -4.2704782)
-
-[node name="basic_floor10" parent="3D/Props/FloorsRoot" unique_id=671776076 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9065194, 0, -3.257521)
-
-[node name="basic_floor11" parent="3D/Props/FloorsRoot" unique_id=589289982 instance=ExtResource("21_ah3if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9728546, 0, -3.257521)
-
 [node name="OtherPropsRoot" type="Node3D" parent="3D/Props" unique_id=1626172487]
 
 [node name="NPCs" type="Node3D" parent="3D" unique_id=1296953903]
 
 [node name="Customer" parent="3D/NPCs" unique_id=215028712 instance=ExtResource("22_v4agm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7609152, 0)
-
-[node name="Services" type="Node" parent="." unique_id=1469627630]
-
-[node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
-script = ExtResource("19_c4b4r")
-
-[node name="FileOpService" type="Node" parent="Services" unique_id=1586219315]
-script = ExtResource("3_qw60k")
-
-[node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_windowsRoot")]
-script = ExtResource("4_5yls4")
-_windowsRoot = NodePath("../../UI/WindowsRoot")
-_windowBase = ExtResource("22_tyqxl")
-
-[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot", "_generalPropsRoot")]
-script = ExtResource("25_8sujb")
-_floorsRoot = NodePath("../../3D/Props/FloorsRoot")
-_generalPropsRoot = NodePath("../../3D/Props/OtherPropsRoot")
-
-[node name="ToolService" type="Node" parent="Services" unique_id=452083335]
-script = ExtResource("25_tyqxl")
-
-[node name="LiveSelectService" type="Node" parent="Services" unique_id=1287970369]
-script = ExtResource("27_4ohmo")
-
-[node name="PathfindingService" type="Node" parent="Services" unique_id=624495622 node_paths=PackedStringArray("_navRegion")]
-script = ExtResource("28_8oboy")
-_navRegion = NodePath("../../3D/Props/FloorsRoot")

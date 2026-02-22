@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Godot",
+            "type": "coreclr",
+            "request": "attach",
+            "processName": "Godot_v4.6-stable_mono_win64.exe"
+        }
+    ]
+}

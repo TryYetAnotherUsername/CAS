@@ -3,21 +3,17 @@
 [ext_resource type="Script" uid="uid://12dru2vsuqyu" path="res://_Scripts/Player/CharacterBody3d.cs" id="1_jkbnp"]
 [ext_resource type="Script" uid="uid://dyb52i8l1gvbk" path="res://_Scripts/Player/Camera.cs" id="2_pfg0q"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfg0q"]
-
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_pfg0q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4e4y2"]
 size = Vector3(1, 2, 0.5)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfg0q"]
+
 [node name="PlayerChar" type="CharacterBody3D" unique_id=1700912549 node_paths=PackedStringArray("_PivotH")]
 collision_layer = 0
 script = ExtResource("1_jkbnp")
 _PivotH = NodePath("Camera/PivotH")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2136201947]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_pfg0q")
 
 [node name="Camera" type="Node3D" parent="." unique_id=55437346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28902304, 0)
@@ -40,11 +36,13 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 5.9604645e-08, 0)
 mesh = SubResource("BoxMesh_4e4y2")
 skeleton = NodePath("../..")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2136201947]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_pfg0q")
+
 [node name="CamControl" type="Node3D" parent="." unique_id=1778199951 node_paths=PackedStringArray("_PivotH", "_PivotV", "_SpringArm", "_PlayerCam")]
 script = ExtResource("2_pfg0q")
 _PivotH = NodePath("../Camera/PivotH")
 _PivotV = NodePath("../Camera/PivotH/PivotV")
 _SpringArm = NodePath("../Camera/PivotH/PivotV/SpringArm3D")
 _PlayerCam = NodePath("../Camera/PivotH/PivotV/SpringArm3D/Camera3D")
-zoomSpeed = null
-mouseSens = null

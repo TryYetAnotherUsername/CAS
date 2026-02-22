@@ -8,17 +8,21 @@ public partial class PathfindingService : Node
 
     // export vars
     [Export] NavigationRegion3D _navRegion;
+    [Export] Node3D _shelvesRoot;
 
     // Vars
     private bool _subscribed = false;
 
-    // Godot native
+    // ========== Godot-lifecycle ==========
+
     public override void _Ready()
     {
         I = this;
     }
 
-    // public methods
+    // ========== public methods ==========
+
+    // Nav mesh baking
     public static void Init()
     {
         GD.Print("==== PathfindingService init");
@@ -47,7 +51,10 @@ public partial class PathfindingService : Node
         NavigationServer3D.SetDebugEnabled(true);
     }
 
-    // Private methods
+    // Helper funcs for NPCs
+    
+
+    // ========== Private methods ==========
     private void FinishBake()
     {
         _navRegion.BakeFinished -= FinishBake;
