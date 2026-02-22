@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class ProjectService
 {
 	public static ProjectService I;
-	public CasProj Current;
 	public Node3D _BuildingRoot;
 
 	public void In(CasProj projectData)
@@ -20,9 +19,25 @@ public class ProjectService
 
 	public void Out()
 	{
-		foreach (PropData prop in _)
+		CasProj project;
+		foreach (Node3D node in _BuildingRoot)
 		{
-			Node3D node = FactoryService.I.TrySpawningUidAndGetNode(prop.Uid);
+			if (node is Prop prop)
+			{
+				PropData propDataPack = new()
+				{
+					X = node.GlobalPosition.X,
+					Y = node.GlobalPosition.Y,
+					Z = node.GlobalPosition.Z,
+					RotX = node.GlobalRotation.X,
+					RotY = node.GlobalRotation.Y,
+					RotZ = node.GlobalRotation.Z
+				};
+				project.Props.Add()
+			} 
+		}
+		foreach (PropData prop in _BuildingRoot)
+		{
 			node.GlobalPosition = new Vector3(prop.X, prop.Y, prop.Z);
 			node.GlobalRotation = new Vector3(prop.RotX, prop.RotY, prop.RotZ);
 		}
