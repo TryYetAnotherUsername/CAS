@@ -25,6 +25,8 @@ public partial class Customer : NPC
     // Private Variables
     [Export] private State _currentState;
     [Export] private bool _isWander;
+    [Export] private Label _nameTag;
+
     private int _currentShoppingListIndex;
     private ShoppingItem _currentWantItem;
 
@@ -38,10 +40,27 @@ public partial class Customer : NPC
     // Shopping list
     private List<ShoppingItem> _shoppingList = new List<ShoppingItem>();
 
+    private static readonly List<string> _names =
+    [
+        "Timothy",
+        "Hendo🏀",
+        "BJJbuddy",
+        "MassiveMissile",
+        "Bails",
+        "i_love_python",
+        "BlueberryPi",
+        "CallMeAFridge",
+        "AmIReeeaaalll",
+        "untitled",
+        "rowey"
+    ];
+
     //========== Init ==========
 
     public void Init()
     {
+        GD.Randomize();
+        
         // null check
         if (WorldService.I is null)
         {
@@ -50,6 +69,9 @@ public partial class Customer : NPC
         }
 
         GD.Print($"\n::== Customer {Name}: Starting init.");
+
+        // set name
+        _nameTag.Text = _names[(int) GD.RandRange(0, _names.Count - 1)];
 
         // check if there are any products in this store
         var productsInStore = WorldService.I.GetProducts();

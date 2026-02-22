@@ -3,24 +3,25 @@ using System.Collections.Generic;
 
 public class CasProj
 {
-	public Metadata Meta;
-    public List<PropData> Props;
+	public Metadata Meta { get; set; }
+    public List<PropData> Props { get; set; } = new();
 }
 
 public class Metadata
 {
-	long LastModifiedUnix;
-	long FileCreatedUnix;
+	long LastModifiedUnix { get; set; }
+	long FileCreatedUnix { get; set; }
 }
 
+// needed because json has beef with Node3Ds :( 
 public class PropData
 {
-    public string Uid;
-    public float X;
-    public float Y;
-    public float Z;
-	public float RotX;
-    public float RotY;
-    public float RotZ;
+    public string Uid { get; set; }
+    public float X { get; set; }
+    public float Y { get; set; }
+    public float Z { get; set; }
+	public float RotX { get; set; }
+    public float RotY { get; set; }
+    public float RotZ { get; set; }
 }
 

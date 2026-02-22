@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cp8knfb1rmlmk"]
 
 [ext_resource type="Script" uid="uid://c5h5syrhafc45" path="res://_Scripts/NPCs/Customer/Customer.cs" id="1_pwaxx"]
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="2_ghghc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ah3if"]
 size = Vector3(0.4, 0.7, 0.2)
@@ -8,8 +9,12 @@ size = Vector3(0.4, 0.7, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ah3if"]
 size = Vector3(0.39916992, 0.7023926, 0.20306396)
 
-[node name="Customer" type="CharacterBody3D" unique_id=215028712 node_paths=PackedStringArray("_navigationAgent")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pwaxx"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Customer" type="CharacterBody3D" unique_id=215028712 node_paths=PackedStringArray("_nameTag", "_navigationAgent")]
 script = ExtResource("1_pwaxx")
+_nameTag = NodePath("Sprite3D/SubViewport/Control/CharNameLabel")
 _navigationAgent = NodePath("NavigationAgent3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=362684210]
@@ -22,8 +27,47 @@ shape = SubResource("BoxShape3D_ah3if")
 disabled = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=995161607]
-path_desired_distance = 20.62
-target_desired_distance = 19.35
+path_desired_distance = 0.1
+target_desired_distance = 0.1
 path_max_distance = 0.11
+path_postprocessing = 1
 simplify_path = true
 debug_enabled = true
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=881228422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80284774, 0)
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_pwaxx")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=1989353004]
+transparent_bg = true
+size = Vector2i(1031, 512)
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport" unique_id=1840589345]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharNameLabel" type="Label" parent="Sprite3D/SubViewport/Control" unique_id=1528084875]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("2_ghghc")
+theme_override_font_sizes/font_size = 50
+text = "Customer"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -16,6 +16,13 @@ public partial class NPC : CharacterBody3D
         _movementDelta = MovementSpeed * (float)delta;
         Vector3 nextPathPosition = _navigationAgent.GetNextPathPosition();
         Vector3 newVelocity = GlobalPosition.DirectionTo(nextPathPosition);
+
+        Vector3 flatNext = new Vector3(nextPathPosition.X, GlobalPosition.Y, nextPathPosition.Z);
+        if (GlobalPosition.DistanceTo(flatNext) > 0.1f)
+        {
+            LookAt(flatNext, Vector3.Up);
+        }
+
         Velocity = newVelocity;
         MoveAndSlide();
     }

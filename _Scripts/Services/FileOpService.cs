@@ -10,8 +10,25 @@ public partial class FileOpService : Node
     public override void _Ready()
     {
         I = this;
+		ToolService.OnUpdate += (tool) =>
+		{
+			if (tool == ToolService.ETools.SaveFile)
+			{
+				Save();
+			}
+			else if (tool == ToolService.ETools.OpenFile)
+			{
+				Open();
+			}
+			else
+			{
+				return;
+			}
+		};
     }
     
+
+
     public void Open()
     {
         if (_fDialog != null)
@@ -60,5 +77,46 @@ public partial class FileOpService : Node
 		}
     }
     
+	public void Save()
+    {
+        if (_fDialog != null)
+        {
+            _fDialog.QueueFree();
+            _fDialog = null;
+        }
+
+        _fDialog = new FileDialog();
+        _fDialog.FileMode = FileDialog.FileModeEnum.SaveFile;
+        _fDialog.Access = FileDialog.AccessEnum.Filesystem;
+        _fDialog.Filters = ["*.casproj"];
+		_fDialog.Title = "Save current CAS project file";
+		_fDialog.ForceNative = true;
+		_fDialog.UseNativeDialog = true;
+        AddChild(_fDialog);
+        
+        _fDialog.FileSelected += OnFileSelected;
+        _fDialog.Canceled += OnCanceled;
+        
+        _fDialog.Popup();
+
+		void OnFileSelected(string p)
+		{
+			using var file = FileAccess.Open(p, FileAccess.ModeFlags.Write);
+			if (file == null)
+			{
+				GD.PrintErr("Could not save file!");
+				return;
+			}
+			
+			var serialised = JsonSerializer.Serialize(ProjectService.I.Out());
+			file.StoreString(serialised);
+			GD.Print("Saved successfully!");
+		}
+    
+		void OnCanceled()
+		{
+			GD.Print("File selection canceled");
+		}
+    }
 
 }

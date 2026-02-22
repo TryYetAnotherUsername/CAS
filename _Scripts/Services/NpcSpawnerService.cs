@@ -5,9 +5,12 @@ public partial class NpcSpawnerService : Node
 {
     [Export] private Node3D _npcRoot;
     [Export] private PackedScene _customerNpc;
+    public static NpcSpawnerService I;
 
     public override void _Ready()
     {
+        I = this;
+        
         ToolService.OnUpdate += (tool) =>
         {
             if (tool == ToolService.ETools.SpawnACustomer)
@@ -27,4 +30,6 @@ public partial class NpcSpawnerService : Node
             customer.Init();
         }
     }
+
+    
 }
