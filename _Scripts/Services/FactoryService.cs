@@ -4,7 +4,6 @@ public partial class FactoryService : Node
 {
 	public static FactoryService I;
     [Export] private Node3D _floorsRoot;
-    [Export] private Node3D _generalPropsRoot;
 
     public override void _Ready()
     {
@@ -48,14 +47,7 @@ public partial class FactoryService : Node
         newNode.Position = new Vector3(0f,0f,0f);
 
         // Add as child of building root in main scene tree, and return the node:
-        if (newProp.Identity.CatalogGroup == CatalogEntity.EGroup.Floors)
-        {
-            _floorsRoot.AddChild(newInstance);        
-        }
-        else
-        {
-            _generalPropsRoot.AddChild(newInstance);
-        }
+        _floorsRoot.AddChild(newInstance);        
         return newNode;
     }
 

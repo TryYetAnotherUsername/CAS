@@ -7,7 +7,13 @@ public partial class Checkout : Prop
     [Export] private Label Display;
     [Export] public bool IsFree {get; private set;}
     [Export] public bool IsQueueTarg {get; private set;}
-    
+
+    public override void _Ready()
+    {
+        IsFree = true;
+    }
+
+
     public async void UseCheckout(Action callback)
     {
         IsFree = false;

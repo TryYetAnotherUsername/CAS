@@ -6,6 +6,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 public partial class Customer : NPC
 {
@@ -57,18 +58,27 @@ public partial class Customer : NPC
         "rowey"
     ];
 
-    //========== Init ==========
+    // ========== Godot native ==========
+    public override void _ExitTree()
+    {
+        NpcSpawnerService.OnClearAll -= QueueFree;
+    }
+
+
+    // ========== Init ==========
 
     public void Init()
     {
         GD.Randomize();
         
         // null check
-        if (WorldService.I is null)
+        if (WorldService.I is null || NpcSpawnerService.I is null)
         {
-            GD.PrintErr($"Customer {Name}: WorldService not found!");
+            GD.PrintErr($"Customer {Name}: WorldService or NpcSpawnerService not found!");
             return;
         }
+
+        NpcSpawnerService.OnClearAll += QueueFree;
 
         GD.Print($"\n::== Customer {Name}: Starting init.");
 
@@ -125,12 +135,12 @@ public partial class Customer : NPC
                 
             case State.WalkingToCheckout:
                 // Set target for checkout
-                if (WorldService.I.GetCheckoutQueue()is null) // wait for until there is a targ for checkout queue
+                Checkout checkoutQueue = WorldService.I.GetCheckoutQueue();
+                if (WorldService.I.GetCheckoutQueue()is null)
                 {
-                    SwitchState(State.WalkingToCheckout);
-                    GD.PushWarning("No checkout queue targets found. Place one in buildmode > misc > queue target.");
+                    return; // the logic here is: if the state gets here, retuns, it never changed the state yet, so it loops back here without stack overflow.
                 }
-                SetMovementTarget(WorldService.I.GetCheckoutQueue().GlobalPosition);
+                SetMovementTarget(checkoutQueue.GlobalPosition);
                 break;
 
             case State.QueueingForCheckout:

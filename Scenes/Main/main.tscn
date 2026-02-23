@@ -342,10 +342,9 @@ script = ExtResource("4_5yls4")
 _windowsRoot = NodePath("../../UI/WindowsRoot")
 _windowBase = ExtResource("22_tyqxl")
 
-[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot", "_generalPropsRoot")]
+[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot")]
 script = ExtResource("25_8sujb")
 _floorsRoot = NodePath("../../3D/Props/FloorsRoot")
-_generalPropsRoot = NodePath("../../3D/Props/FloorsRoot")
 
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
 script = ExtResource("25_tyqxl")

@@ -43,8 +43,12 @@ emission_energy_multiplier = 4.48
 [sub_resource type="ViewportTexture" id="ViewportTexture_lm80t"]
 viewport_path = NodePath("Screen/SubViewport")
 
-[node name="self_checkout" unique_id=2111515380 instance=ExtResource("1_gwfbx")]
+[node name="self_checkout" unique_id=2111515380 node_paths=PackedStringArray("NavTarg", "Display") instance=ExtResource("1_gwfbx")]
 script = ExtResource("2_6upq1")
+NavTarg = NodePath("NavTarg")
+Display = NodePath("Screen/SubViewport/Control/Label")
+IsFree = null
+IsQueueTarg = null
 
 [node name="self_checkout_mesh" parent="." index="0" unique_id=1893955406]
 surface_material_override/0 = SubResource("StandardMaterial3D_6upq1")

@@ -87,16 +87,15 @@ public partial class WorldService : Node
         {
             if (node is Checkout checkout) // found a new checkout
             {
-                if (checkout.IsQueueTarg) return null;
-
-                if (checkout.IsFree)
+                if (!checkout.IsQueueTarg)
                 {
-                    freeCheckouts.Add(checkout);
+                    if (checkout.IsFree)
+                    {
+                        freeCheckouts.Add(checkout);
+                    }   
                 }
             }
         }
-
-        
 
         if (freeCheckouts.Count == 0) return null;
         var randomisedIndex = (int) GD.RandRange(0, freeCheckouts.Count - 1);
@@ -119,8 +118,6 @@ public partial class WorldService : Node
                 }
             }
         }
-
-        
 
         if (queuePoints.Count == 0) return null;
         var randomisedIndex = (int) GD.RandRange(0, queuePoints.Count - 1);

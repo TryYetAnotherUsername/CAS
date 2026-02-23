@@ -17,6 +17,7 @@ public static class CatalogConfig
         new CatalogEntity { DispName = "Basic shelf",       UID = "uid://c3rwyrjlanyer", CatalogGroup = EGroup.Shelves },
         // ========== CHECKOUTS ==========
         new CatalogEntity { DispName = "Self checkout",     UID = "uid://kmvwjfwijr4y", CatalogGroup = EGroup.Misc },
+        new CatalogEntity { DispName = "Checkout queue point",     UID = "uid://btfdwcjiul0pn", CatalogGroup = EGroup.Misc },
     ];
 
     public static CatalogEntity FindByUID(string uid)
