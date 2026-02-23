@@ -8,19 +8,12 @@ public partial class CatalogEntity
     // === Enums ===
     public enum EGroup
     {
-        // Retail infrastructure:
-        Amenities,  // bins, seating, atm
-        Logistics,  // depot, storage
-        Services,   // checkouts
         Shelves,
-
-        // Design and architecture:
         Decorations,
         Floors,
-        Lighting,
-        Primitives,
-        Signage,
+        Misc,
         Walls,
+        Primitives,
     }
     public enum EPlacementMode
 	{

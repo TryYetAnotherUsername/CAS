@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0evkdqyjs8wy" path="res://Assets/3D/Models/Placeables/Services/self_checkout.glb" id="1_gwfbx"]
 [ext_resource type="FontFile" uid="uid://dn0ncfdjn8m2e" path="res://Assets/UI/Fonts/Fira code/FiraCode-Regular.ttf" id="2_2ixfa"]
+[ext_resource type="Script" uid="uid://buiuy3euf4387" path="res://_Scripts/Props/p/Checkout.cs" id="2_6upq1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6upq1"]
 albedo_color = Color(0.8477116, 0.85055155, 0.8081559, 1)
@@ -40,9 +41,10 @@ emission = Color(0, 0.9300265, 0.0046987166, 1)
 emission_energy_multiplier = 4.48
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lm80t"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+viewport_path = NodePath("Screen/SubViewport")
 
 [node name="self_checkout" unique_id=2111515380 instance=ExtResource("1_gwfbx")]
+script = ExtResource("2_6upq1")
 
 [node name="self_checkout_mesh" parent="." index="0" unique_id=1893955406]
 surface_material_override/0 = SubResource("StandardMaterial3D_6upq1")
@@ -55,26 +57,30 @@ surface_material_override/5 = SubResource("StandardMaterial3D_g1lot")
 [node name="self_checkout_ray" parent="." index="1" unique_id=770385602]
 visible = false
 
+[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=2128008127]
+collision_layer = 2
+collision_mask = 2
+
 [node name="self_checkout_physics" parent="." index="2" unique_id=2039680695]
 visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="3" unique_id=2121159137]
+[node name="IndicatiorLight" type="MeshInstance3D" parent="." index="3" unique_id=2121159137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018601008, 0.71700954, -0.084329024)
 mesh = SubResource("CylinderMesh_y6cyw")
 surface_material_override/0 = SubResource("StandardMaterial3D_xfm80")
 
-[node name="Sprite3D" type="Sprite3D" parent="." index="4" unique_id=930119440]
+[node name="Screen" type="Sprite3D" parent="." index="4" unique_id=930119440]
 transform = Transform3D(-1.3868912e-09, -0.007822481, -1.0221994, -3.8555759e-10, 0.02813829, -0.28417274, 0.03293162, 0, -4.6376226e-08, 0.07971819, 0.66309357, 0.0464674)
 flip_h = true
 modulate = Color(1, 1, 1, 0.35686275)
 pixel_size = 0.02
 texture = SubResource("ViewportTexture_lm80t")
 
-[node name="SubViewport" type="SubViewport" parent="Sprite3D" index="0" unique_id=1210891199]
+[node name="SubViewport" type="SubViewport" parent="Screen" index="0" unique_id=1210891199]
 transparent_bg = true
 size = Vector2i(212, 191)
 
-[node name="Control" type="Control" parent="Sprite3D/SubViewport" index="0" unique_id=921489577]
+[node name="Control" type="Control" parent="Screen/SubViewport" index="0" unique_id=921489577]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,7 +90,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Sprite3D/SubViewport/Control" index="0" unique_id=2007839601]
+[node name="Label" type="Label" parent="Screen/SubViewport/Control" index="0" unique_id=2007839601]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,3 +107,6 @@ theme_override_fonts/font = ExtResource("2_2ixfa")
 theme_override_font_sizes/font_size = 20
 text = "Please scan the next item."
 autowrap_mode = 1
+
+[node name="NavTarg" type="Node3D" parent="." index="5" unique_id=1061102893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4069031, 0, -0.0038947463)

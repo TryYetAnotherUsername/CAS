@@ -78,4 +78,54 @@ public partial class WorldService : Node
         
         return luckyShelf;
     }
+
+    public Checkout GetCheckout()
+    {
+        List<Checkout> freeCheckouts = new();
+
+        foreach (Node3D node in _shelvesRoot.GetChildren())
+        {
+            if (node is Checkout checkout) // found a new checkout
+            {
+                if (checkout.IsQueueTarg) return null;
+
+                if (checkout.IsFree)
+                {
+                    freeCheckouts.Add(checkout);
+                }
+            }
+        }
+
+        
+
+        if (freeCheckouts.Count == 0) return null;
+        var randomisedIndex = (int) GD.RandRange(0, freeCheckouts.Count - 1);
+        Checkout luckyCheckout = freeCheckouts[randomisedIndex];
+        
+        return luckyCheckout;
+    }
+
+    public Checkout GetCheckoutQueue()
+    {
+        List<Checkout> queuePoints = new();
+
+        foreach (Node3D node in _shelvesRoot.GetChildren())
+        {
+            if (node is Checkout target) // found a new checkout/ queuepoint (they share a class, not good practice but oh well)
+            {
+                if (target.IsQueueTarg)
+                {
+                    queuePoints.Add(target);
+                }
+            }
+        }
+
+        
+
+        if (queuePoints.Count == 0) return null;
+        var randomisedIndex = (int) GD.RandRange(0, queuePoints.Count - 1);
+        Checkout luckyQueuePoint = queuePoints[randomisedIndex];
+        
+        return luckyQueuePoint;
+    }
 }

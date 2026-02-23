@@ -17,6 +17,7 @@ public partial class Customer : NPC
         WalkingToShelf,
         UsingShelf,
         WalkingToCheckout,
+        QueueingForCheckout,
         UsingCheckout,
         WalkingToExit,
         Despawn
@@ -29,6 +30,7 @@ public partial class Customer : NPC
 
     private int _currentShoppingListIndex;
     private ShoppingItem _currentWantItem;
+    private Checkout _checkout;
 
     // shopping item
     public class ShoppingItem
@@ -122,7 +124,33 @@ public partial class Customer : NPC
                 break;
                 
             case State.WalkingToCheckout:
-                // Set target for checkout here...
+                // Set target for checkout
+                if (WorldService.I.GetCheckoutQueue()is null) // wait for until there is a targ for checkout queue
+                {
+                    SwitchState(State.WalkingToCheckout);
+                    GD.PushWarning("No checkout queue targets found. Place one in buildmode > misc > queue target.");
+                }
+                SetMovementTarget(WorldService.I.GetCheckoutQueue().GlobalPosition);
+                break;
+
+            case State.QueueingForCheckout:
+                if (WorldService.I.GetCheckout()is null)
+                {
+                    SwitchState(State.QueueingForCheckout);
+                }
+                SetMovementTarget(WorldService.I.GetCheckout().NavTarg.GlobalPosition);  // << NOTE TO SELF - FIX THIS, SHOULD USE 1 VAR CONTAINED IN THIS SCOPE
+                _checkout = WorldService.I.GetCheckout();
+                break;
+
+            case State.UsingCheckout:
+                // Set target for checkout
+                if (_checkout == null) // guard condition
+                {
+                    QueueFree();
+                    return;
+                }
+
+                
                 break;
         }
 
@@ -207,13 +235,26 @@ public partial class Customer : NPC
 
     private void WalkingToCheckout()
     {
-        GD.Print("🟩 Walking to checkout...");
-        SwitchState(State.UsingCheckout);
+        if (_navigationAgent.IsNavigationFinished())
+        {
+            GD.Print("Arrived at shelf!");
+            SwitchState(State.QueueingForCheckout);
+        }
+    }
+
+    private void QueueingForCheckout()
+    {
+        if (_navigationAgent.IsNavigationFinished()) // arrived at checkout
+        {
+            GD.Print("Arrived at checkout!");
+            SwitchState(State.UsingCheckout);
+        }
     }
 
     private void UsingCheckout()
     {
         GD.Print("🟩 Using the checkout...");
+        _checkout.UseCheckout( () => SwitchState(State.WalkingToExit) );
         SwitchState(State.WalkingToExit);
     }
 
