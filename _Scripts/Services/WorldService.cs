@@ -79,7 +79,7 @@ public partial class WorldService : Node
         return luckyShelf;
     }
 
-    public Checkout GetCheckout()
+    public Checkout GetFreeCheckout()
     {
         List<Checkout> freeCheckouts = new();
 
@@ -93,6 +93,28 @@ public partial class WorldService : Node
                     {
                         freeCheckouts.Add(checkout);
                     }   
+                }
+            }
+        }
+
+        if (freeCheckouts.Count == 0) return null;
+        var randomisedIndex = (int) GD.RandRange(0, freeCheckouts.Count - 1);
+        Checkout luckyCheckout = freeCheckouts[randomisedIndex];
+        
+        return luckyCheckout;
+    }
+
+    public Checkout GetCheckout()
+    {
+        List<Checkout> freeCheckouts = new();
+
+        foreach (Node3D node in _shelvesRoot.GetChildren())
+        {
+            if (node is Checkout checkout) // found a new checkout
+            {
+                if (!checkout.IsQueueTarg)
+                {
+                    freeCheckouts.Add(checkout);
                 }
             }
         }

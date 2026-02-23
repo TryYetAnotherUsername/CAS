@@ -14,8 +14,12 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Customer" type="CharacterBody3D" unique_id=215028712 node_paths=PackedStringArray("_nameTag", "_navigationAgent")]
 script = ExtResource("1_pwaxx")
+_currentState = null
+_isWander = null
 _nameTag = NodePath("Sprite3D/SubViewport/Control/CharNameLabel")
+MovementSpeed = null
 _navigationAgent = NodePath("NavigationAgent3D")
+_movementDelta = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=362684210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
@@ -30,7 +34,6 @@ disabled = true
 path_desired_distance = 0.1
 target_desired_distance = 0.1
 path_max_distance = 0.11
-path_postprocessing = 1
 simplify_path = true
 debug_enabled = true
 

@@ -126,6 +126,11 @@ inspect_pressed={
 3d_physics/layer_2="Interaction"
 3d_physics/layer_3="Gizmos"
 
+[navigation]
+
+3d/default_cell_size=0.001
+3d/default_cell_height=0.001
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

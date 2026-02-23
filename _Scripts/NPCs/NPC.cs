@@ -13,6 +13,12 @@ public partial class NPC : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (_navigationAgent.IsNavigationFinished())
+        {
+            Velocity = Vector3.Zero;
+            return; 
+        }
+        
         _movementDelta = MovementSpeed * (float)delta;
         Vector3 nextPathPosition = _navigationAgent.GetNextPathPosition();
         Vector3 newVelocity = GlobalPosition.DirectionTo(nextPathPosition);

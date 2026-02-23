@@ -12,8 +12,8 @@ orm_texture = ExtResource("3_ykt47")
 normal_enabled = true
 normal_scale = 1.5
 normal_texture = ExtResource("2_3xrh7")
-clearcoat = 0.17
-clearcoat_roughness = 0.69
+clearcoat = 0.29
+clearcoat_roughness = 0.68
 ao_enabled = true
 ao_light_affect = 1.0
 heightmap_scale = 16.0
@@ -28,18 +28,18 @@ grow_amount = -0.169
 [node name="basic_floor2" unique_id=1538602412 instance=ExtResource("1_37d5g")]
 script = ExtResource("2_lhtej")
 
-[node name="basic_floor" parent="." index="0" unique_id=1436109882]
+[node name="basic_floor" parent="." index="0" unique_id=1927384416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 surface_material_override/0 = SubResource("ORMMaterial3D_7sp5y")
 
-[node name="basic_floor_physics" parent="." index="1" unique_id=572467938]
+[node name="basic_floor_physics" parent="." index="1" unique_id=1550270093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 visible = false
 
-[node name="basic_floor_ray" parent="." index="2" unique_id=2085660817]
+[node name="basic_floor_ray" parent="." index="2" unique_id=1342764823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 visible = false
 
-[node name="StaticBody3D" parent="basic_floor_ray" index="0" unique_id=1945774054]
+[node name="StaticBody3D" parent="basic_floor_ray" index="0" unique_id=1524007479]
 collision_layer = 2
 collision_mask = 2

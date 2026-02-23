@@ -17,8 +17,9 @@ public partial class Customer : NPC
         CheckingShoppingList,
         WalkingToShelf,
         UsingShelf,
+        WalkingToQueue,
+        Queueing,
         WalkingToCheckout,
-        QueueingForCheckout,
         UsingCheckout,
         WalkingToExit,
         Despawn
@@ -31,7 +32,8 @@ public partial class Customer : NPC
 
     private int _currentShoppingListIndex;
     private ShoppingItem _currentWantItem;
-    private Checkout _checkout;
+    private Checkout _currentCheckout;
+    private Shelf _currentShelf;
 
     // shopping item
     public class ShoppingItem
@@ -42,20 +44,19 @@ public partial class Customer : NPC
 
     // Shopping list
     private List<ShoppingItem> _shoppingList = new List<ShoppingItem>();
+    private List<ShoppingItem> _broughtitems = new List<ShoppingItem>();
 
     private static readonly List<string> _names =
     [
-        "Timothy",
+        "pilotimothy",
+        "Rowey",
         "Hendo🏀",
-        "BJJbuddy",
-        "MassiveMissile",
+        "Haagrid",
+        "MassivMisileMustafa",
+        "William",
         "Bails",
-        "i_love_python",
-        "BlueberryPi",
-        "CallMeAFridge",
-        "AmIReeeaaalll",
-        "untitled",
-        "rowey"
+        "Ben",
+        "Cosmc",
     ];
 
     // ========== Godot native ==========
@@ -63,7 +64,6 @@ public partial class Customer : NPC
     {
         NpcSpawnerService.OnClearAll -= QueueFree;
     }
-
 
     // ========== Init ==========
 
@@ -128,39 +128,44 @@ public partial class Customer : NPC
         {
             case State.WalkingToShelf:
                 // Set target to shelf
-                Vector3 targetPos = WorldService.I.GetShelf(_currentWantItem.Product).GlobalPosition;
+                _currentShelf = WorldService.I.GetShelf(_currentWantItem.Product);
+                Vector3 targetPos = _currentShelf.GlobalPosition;
                 SetMovementTarget(targetPos);
                 GD.Print($"🟩 Target set to shelf to buy the product <{_currentWantItem.Product.DispName}>");
                 break;
+
+            case State.UsingShelf:
+                var result = _currentShelf.TakeProduct(_currentWantItem.Product, _currentWantItem.Quantity);
+                _broughtitems.Add(new ShoppingItem{Product = _currentWantItem.Product, Quantity = result});
+                GD.Print($"Customer {Name}: Took {result} of {_currentWantItem.Product.DispName} from shelf.");
+                break;
                 
-            case State.WalkingToCheckout:
-                // Set target for checkout
+            case State.WalkingToQueue:
                 Checkout checkoutQueue = WorldService.I.GetCheckoutQueue();
                 if (WorldService.I.GetCheckoutQueue()is null)
                 {
+                    QueueFree();
                     return; // the logic here is: if the state gets here, retuns, it never changed the state yet, so it loops back here without stack overflow.
                 }
                 SetMovementTarget(checkoutQueue.GlobalPosition);
                 break;
 
-            case State.QueueingForCheckout:
-                if (WorldService.I.GetCheckout()is null)
-                {
-                    SwitchState(State.QueueingForCheckout);
-                }
-                SetMovementTarget(WorldService.I.GetCheckout().NavTarg.GlobalPosition);  // << NOTE TO SELF - FIX THIS, SHOULD USE 1 VAR CONTAINED IN THIS SCOPE
-                _checkout = WorldService.I.GetCheckout();
+            case State.Queueing:
                 break;
 
+            case State.WalkingToCheckout:
+                SetMovementTarget(_currentCheckout.NavTarg.GlobalPosition);
+                break;
+ 
             case State.UsingCheckout:
-                // Set target for checkout
-                if (_checkout == null) // guard condition
+                if (_currentCheckout == null) // guard condition
                 {
                     QueueFree();
                     return;
                 }
-
-                
+                _currentCheckout.IsFree = false;
+                _currentCheckout.IsFinishedPaying = false;
+                _currentCheckout.UseCheckout(_broughtitems);
                 break;
         }
 
@@ -185,6 +190,14 @@ public partial class Customer : NPC
 
             case State.UsingShelf:
                 UsingShelf();
+                break;
+
+            case State.WalkingToQueue:
+                WalkingToQueue();
+                break;
+
+            case State.Queueing:
+                Queueing();
                 break;
 
             case State.WalkingToCheckout:
@@ -213,7 +226,7 @@ public partial class Customer : NPC
         if (_currentShoppingListIndex > (_shoppingList.Count - 1)) // if the next item would be out of range
         {
             GD.Print($"Finished my shopping list!");
-            SwitchState(State.WalkingToCheckout);
+            SwitchState(State.WalkingToQueue);
             return;
         }
 
@@ -243,18 +256,30 @@ public partial class Customer : NPC
         SwitchState(State.CheckingShoppingList);
     }
 
-    private void WalkingToCheckout()
+    private void WalkingToQueue()
     {
         if (_navigationAgent.IsNavigationFinished())
         {
-            GD.Print("Arrived at shelf!");
-            SwitchState(State.QueueingForCheckout);
+            GD.Print("Arrived at queue!");
+            SwitchState(State.Queueing);
         }
     }
 
-    private void QueueingForCheckout()
+    private void Queueing()
     {
-        if (_navigationAgent.IsNavigationFinished()) // arrived at checkout
+        _currentCheckout = WorldService.I.GetFreeCheckout();
+        if (_currentCheckout is null)
+        {
+            _currentState = State.Queueing;
+            return;
+        }
+        _currentCheckout.IsFree = false; // reserve a checkout so no one walks to it while i'm walking to it.
+        SwitchState(State.WalkingToCheckout);
+    }
+
+    private void WalkingToCheckout()
+    {
+        if (_navigationAgent.IsNavigationFinished())
         {
             GD.Print("Arrived at checkout!");
             SwitchState(State.UsingCheckout);
@@ -263,9 +288,11 @@ public partial class Customer : NPC
 
     private void UsingCheckout()
     {
-        GD.Print("🟩 Using the checkout...");
-        _checkout.UseCheckout( () => SwitchState(State.WalkingToExit) );
-        SwitchState(State.WalkingToExit);
+        if (_currentCheckout.IsFinishedPaying)
+        {
+            GD.Print("Finished paying.");
+            SwitchState(State.WalkingToExit);
+        }
     }
 
     private void WalkingToExit()

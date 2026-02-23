@@ -20,11 +20,24 @@ public partial class NpcSpawnerService : Node
             }
         };
 
-        StartSpawning();
+        //StartSpawning();
     }
 
     public void SpawnCustomer()
     {
+        if (WorldService.I.GetCheckout() is null)
+        {
+            GD.PrintErr("No one can shop at your shop because you dont have a Checkout.");
+            OnClearAll?.Invoke();
+            return;
+        }
+        if (WorldService.I.GetCheckoutQueue() is null)
+        {
+            GD.PrintErr("No one can shop at your shop because they have no where to queue.");
+            OnClearAll?.Invoke();
+            return;
+        }
+
         GD.Print("NpcSpawnerService: Starting to spawn a new customer.");
         var customerInst = _customerNpc.Instantiate();
         _npcRoot.AddChild(customerInst);
@@ -39,21 +52,6 @@ public partial class NpcSpawnerService : Node
     {
         while (true)
         {
-            if (WorldService.I.GetCheckout() is null)
-            {
-                GD.PrintErr("No one can shop at your shop because you dont have a Checkout.");
-                OnClearAll?.Invoke();
-                await ToSignal(GetTree().CreateTimer(5f), SceneTreeTimer.SignalName.Timeout);
-                continue;
-            }
-            if (WorldService.I.GetCheckoutQueue() is null)
-            {
-                GD.PrintErr("No one can shop at your shop because they have no where to queue.");
-                OnClearAll?.Invoke();
-                await ToSignal(GetTree().CreateTimer(5f), SceneTreeTimer.SignalName.Timeout);
-                continue;
-            }
-
             await ToSignal(GetTree().CreateTimer(GD.RandRange(1,5)), SceneTreeTimer.SignalName.Timeout);
             I.SpawnCustomer();
         }
