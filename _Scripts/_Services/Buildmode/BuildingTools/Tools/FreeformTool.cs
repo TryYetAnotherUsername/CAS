@@ -89,7 +89,7 @@ public partial class FreeformTool : BuildmodeTool
 
     private StaticBody3D FindBodyByKeyword(Node3D parent, string keyword)
     {
-        foreach (Node meshInst in parent.GetChildren())
+        foreach (Node meshInst in parent?.GetChildren())
         {
             if (meshInst.Name.ToString().Contains(keyword) && meshInst.GetChildCount() > 0)
                 return meshInst.GetChild(0) as StaticBody3D;

@@ -23,22 +23,23 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 [sub_resource type="BoxShape3D" id="BoxShape3D_d66kw"]
 size = Vector3(0.21374512, 0.20507813, 0.8535156)
 
-[node name="simple_shelf" unique_id=1996084563 instance=ExtResource("1_0g6go")]
+[node name="simple_shelf" unique_id=1996084563 node_paths=PackedStringArray("_productAreasRoot") instance=ExtResource("1_0g6go")]
 script = ExtResource("2_jub67")
+_productAreasRoot = NodePath("ProductAreasRoot")
 
-[node name="simple_shelf_mesh" parent="." index="0" unique_id=2132456000]
+[node name="simple_shelf_mesh" parent="." index="0" unique_id=564661375]
 surface_material_override/0 = SubResource("StandardMaterial3D_jub67")
 surface_material_override/1 = SubResource("StandardMaterial3D_w4yej")
 surface_material_override/2 = SubResource("StandardMaterial3D_bds1l")
 
-[node name="simple_shelf_ray" parent="." index="1" unique_id=1659237497]
+[node name="simple_shelf_ray" parent="." index="1" unique_id=1837854429]
 visible = false
 
-[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=1881985050]
+[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=561262361]
 collision_layer = 2
 collision_mask = 2
 
-[node name="simple_shelf_physics" parent="." index="2" unique_id=1613237225]
+[node name="simple_shelf_physics" parent="." index="2" unique_id=1713304825]
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="3" unique_id=552055956]
@@ -91,24 +92,24 @@ text = "shelf data"
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." index="4" unique_id=1479893589]
 vertices = PackedVector3Array(0.39056477, 0, -0.4899517, 0.39056477, 0, 0.48813942, 0.08622345, 0, 0.4860405, 0.08832201, 0, -0.4857539)
 
-[node name="ProductZones" type="Node3D" parent="." index="5" unique_id=1774215655]
+[node name="ProductAreasRoot" type="Node3D" parent="." index="5" unique_id=1774215655]
 
-[node name="Zone1" type="Area3D" parent="ProductZones" index="0" unique_id=1743555499]
+[node name="Zone1" type="Area3D" parent="ProductAreasRoot" index="0" unique_id=1743555499]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductZones/Zone1" index="0" unique_id=870371885]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductAreasRoot/Zone1" index="0" unique_id=870371885]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
 shape = SubResource("BoxShape3D_d66kw")
 
-[node name="Zone2" type="Area3D" parent="ProductZones" index="1" unique_id=618437763]
+[node name="Zone2" type="Area3D" parent="ProductAreasRoot" index="1" unique_id=618437763]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25520656, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductZones/Zone2" index="0" unique_id=422019963]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductAreasRoot/Zone2" index="0" unique_id=422019963]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
 shape = SubResource("BoxShape3D_d66kw")
 
-[node name="Zone3" type="Area3D" parent="ProductZones" index="2" unique_id=137412205]
+[node name="Zone3" type="Area3D" parent="ProductAreasRoot" index="2" unique_id=137412205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.514161, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductZones/Zone3" index="0" unique_id=1537746093]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductAreasRoot/Zone3" index="0" unique_id=1537746093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
 shape = SubResource("BoxShape3D_d66kw")

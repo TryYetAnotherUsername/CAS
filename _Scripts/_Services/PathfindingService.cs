@@ -53,7 +53,6 @@ public partial class PathfindingService : Node
 
     // Helper funcs for NPCs
     
-
     // ========== Private methods ==========
     private void FinishBake()
     {

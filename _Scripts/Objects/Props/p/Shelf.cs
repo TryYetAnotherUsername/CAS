@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using Godot;
 
 /// <summary>
@@ -11,13 +9,81 @@ using Godot;
 
 public partial class Shelf : Prop
 {
-	private class Visuals
+	private class ShelfVisuals
 	{
+		// vars
+		private Node3D _productAreasRoot;
+		private Shelf _shelf;
+		private List<Area3D> _productAreas = new();
+
+		// constructor
+		public ShelfVisuals(Shelf theClass)
+		{
+			_productAreasRoot = theClass._productAreasRoot;
+			_shelf = theClass;
+			ScanAreas();
+		}
+
+		// private methods
+		public void Refresh()
+		{
+			Clear();
+			if (_shelf.StockedProductsList is null || _shelf.StockedProductsList.Count == 0 || _shelf.StockedProductsList[0] is null || _shelf.StockedProductsList[0].Quantity == 0) return;
+
+			string targProductUid = _shelf.StockedProductsList[0].Product.UID;
+			int targProductQuantity = _shelf.StockedProductsList[0].Quantity;
+			Vector3 targetOffset = new Vector3(0,0,0);
+			PackedScene scene = GD.Load<PackedScene>(ResourceUid.GetIdPath(ResourceUid.TextToId(targProductUid)));
+
+			// for each product
+			for (int i = 1; i <= targProductQuantity; i++)
+			{
+				Node3D newNode = scene.Instantiate() as Node3D;
+				if (newNode is null) return;
+				MeshInstance3D mesh = newNode.GetChild(0) as MeshInstance3D;
+				if (mesh is null) return;
+
+				_productAreas[0].AddChild(newNode);
+				newNode.Position += targetOffset;
+				targetOffset += new Vector3(0,0,mesh.GetAabb().Size.Z + 0.005f);
+			}
+		}
+
+		private void ScanAreas()
+		{
+			foreach (Node node in _productAreasRoot.GetChildren())
+			{
+				if (node is Area3D area)
+				{
+					_productAreas.Add(area);
+				}
+			}
+		}
+
 		private void Clear()
 		{
-			
+			foreach (Area3D area in _productAreas)
+			{
+				foreach (Node node in area.GetChildren())
+				{
+					node.QueueFree();
+				}
+			}
 		}
+
 	}
+
+
+	[Export] private Node3D _productAreasRoot;
+	private ShelfVisuals _Visuals;
+
+    #region Godot methods
+    public override void _Ready()
+    {
+        _Visuals = new ShelfVisuals(this);
+		_Visuals.Refresh();
+    }
+	#endregion Godot methods
 
 	#region Stuff
 
@@ -35,7 +101,6 @@ public partial class Shelf : Prop
     public List<StockEntry> StockedProductsList = new();
 
 	[Export] public Node3D NavTarget;
-	[Export] private Node3D _productAreasRoot;
 
 	#endregion Stuff
 
@@ -55,6 +120,7 @@ public partial class Shelf : Prop
 			{
 				StockedProductsList.Add(new StockEntry{Product = targProduct, Quantity = 0});
 				GD.Print("A shelf: Stocked a new product");
+				_Visuals.Refresh();
 			}
 
 		}
@@ -64,6 +130,7 @@ public partial class Shelf : Prop
 			{
 				StockedProductsList.Remove(entry);
 				GD.Print("A shelf: Unstocked a product.");
+				_Visuals.Refresh();
 			}
 			else // no such stock, do nothing
 			{
@@ -97,6 +164,7 @@ public partial class Shelf : Prop
 		{
 			entry.Quantity += amount;
 			GD.Print("A shelf: Added some products.");
+			_Visuals.Refresh();
 			return;
 		}
 	}
@@ -120,6 +188,7 @@ public partial class Shelf : Prop
 			{
 				entry.Quantity -= amount;
 				GD.Print($"A shelf: Took {amount} products. {entry.Quantity} remaining.");
+				_Visuals.Refresh();
 				return amount;
 			}
 			else // quantity > 0 but < amount
@@ -127,6 +196,7 @@ public partial class Shelf : Prop
 				int taken = entry.Quantity;
 				entry.Quantity = 0;
 				GD.Print($"A shelf: Only had {taken}, took all that were left.");
+				_Visuals.Refresh();
 				return taken;
 			}
 			
