@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cp8knfb1rmlmk"]
 
-[ext_resource type="Script" uid="uid://c5h5syrhafc45" path="res://_Scripts/NPCs/Customer/Customer.cs" id="1_pwaxx"]
+[ext_resource type="Script" uid="uid://c5h5syrhafc45" path="res://_Scripts/Humanoids/NPCs/Customer/Customer.cs" id="1_pwaxx"]
 [ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="2_ghghc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ah3if"]

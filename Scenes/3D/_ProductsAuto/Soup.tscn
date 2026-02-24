@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dnp4qom8tlh68"]
+
+[ext_resource type="PackedScene" uid="uid://by6u3o22uylmx" path="res://Assets/3D/Models/Products/soup_2.glb" id="1_0no3v"]
+
+[node name="soup_2" unique_id=551216549 instance=ExtResource("1_0no3v")]
+
+[node name="soup_mesh" parent="." index="0" unique_id=1872111230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cxcijsn8eyi38"]
+
+[ext_resource type="PackedScene" uid="uid://bd6tafa0fwfnb" path="res://Assets/3D/Models/Products/bread.glb" id="1_5hqyf"]
+
+[node name="bread" unique_id=1025383751 instance=ExtResource("1_5hqyf")]
+
+[node name="BREAD" parent="." index="0" unique_id=494341038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

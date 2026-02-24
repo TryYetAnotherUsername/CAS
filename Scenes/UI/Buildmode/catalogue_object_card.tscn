@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bg62smtawfgjh"]
 
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_dlen5"]
-[ext_resource type="Script" uid="uid://cp7b8ispu7nfa" path="res://_Scripts/Buildmode/UI/UiBehaviour/CatalogueObjectCard.cs" id="2_u0h07"]
+[ext_resource type="Script" uid="uid://cp7b8ispu7nfa" path="res://_Scripts/_Services/Buildmode/UI/UiBehaviour/CatalogueObjectCard.cs" id="2_u0h07"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7bl78"]
 

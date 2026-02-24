@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c76oxjy730xxn"]
+
+[ext_resource type="PackedScene" uid="uid://cwda0iqxpis7v" path="res://Assets/3D/Models/Products/SchoolFood.glb" id="1_alpio"]
+
+[node name="SchoolFood" unique_id=723655524 instance=ExtResource("1_alpio")]
+
+[node name="Cube_001" parent="." index="0" unique_id=1710053600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

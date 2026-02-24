@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://c3rwyrjlanyer"]
+
+[ext_resource type="PackedScene" uid="uid://dhl7wcxuwxtdl" path="res://Assets/3D/Models/Placeables/Shelves/simple_shelf.glb" id="1_0g6go"]
+[ext_resource type="Script" uid="uid://dxli51xiuhl5k" path="res://_Scripts/Objects/Props/p/Shelf.cs" id="2_jub67"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jub67"]
+albedo_color = Color(0.2592937, 0.2592937, 0.2592937, 1)
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w4yej"]
+albedo_color = Color(0.7162962, 0.7162962, 0.7162962, 1)
+metallic = 1.0
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bds1l"]
+albedo_color = Color(0.9428228, 0.94282264, 0.94282264, 1)
+metallic = 1.0
+roughness = 0.8
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jub67"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d66kw"]
+size = Vector3(0.21374512, 0.20507813, 0.8535156)
+
+[node name="simple_shelf" unique_id=1996084563 instance=ExtResource("1_0g6go")]
+script = ExtResource("2_jub67")
+
+[node name="simple_shelf_mesh" parent="." index="0" unique_id=2132456000]
+surface_material_override/0 = SubResource("StandardMaterial3D_jub67")
+surface_material_override/1 = SubResource("StandardMaterial3D_w4yej")
+surface_material_override/2 = SubResource("StandardMaterial3D_bds1l")
+
+[node name="simple_shelf_ray" parent="." index="1" unique_id=1659237497]
+visible = false
+
+[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=1881985050]
+collision_layer = 2
+collision_mask = 2
+
+[node name="simple_shelf_physics" parent="." index="2" unique_id=1613237225]
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="3" unique_id=552055956]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.1014339, 0.94037867, 0)
+pixel_size = 0.0003
+texture = SubResource("ViewportTexture_jub67")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" index="0" unique_id=1219035449]
+transparent_bg = true
+size = Vector2i(1000, 500)
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport" index="0" unique_id=43399047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sprite3D/SubViewport/Control" index="0" unique_id=1699269634]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UID" type="Label" parent="Sprite3D/SubViewport/Control/VBoxContainer" index="0" unique_id=379777566]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "shelf data"
+
+[node name="UID2" type="Label" parent="Sprite3D/SubViewport/Control/VBoxContainer" index="1" unique_id=685882236]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "shelf data"
+
+[node name="UID3" type="Label" parent="Sprite3D/SubViewport/Control/VBoxContainer" index="2" unique_id=1258380966]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "shelf data"
+
+[node name="UID4" type="Label" parent="Sprite3D/SubViewport/Control/VBoxContainer" index="3" unique_id=1622182672]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "shelf data"
+
+[node name="UID5" type="Label" parent="Sprite3D/SubViewport/Control/VBoxContainer" index="4" unique_id=232900991]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "shelf data"
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." index="4" unique_id=1479893589]
+vertices = PackedVector3Array(0.39056477, 0, -0.4899517, 0.39056477, 0, 0.48813942, 0.08622345, 0, 0.4860405, 0.08832201, 0, -0.4857539)
+
+[node name="ProductZones" type="Node3D" parent="." index="5" unique_id=1774215655]
+
+[node name="Zone1" type="Area3D" parent="ProductZones" index="0" unique_id=1743555499]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductZones/Zone1" index="0" unique_id=870371885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
+shape = SubResource("BoxShape3D_d66kw")
+
+[node name="Zone2" type="Area3D" parent="ProductZones" index="1" unique_id=618437763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25520656, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductZones/Zone2" index="0" unique_id=422019963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
+shape = SubResource("BoxShape3D_d66kw")
+
+[node name="Zone3" type="Area3D" parent="ProductZones" index="2" unique_id=137412205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.514161, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductZones/Zone3" index="0" unique_id=1537746093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
+shape = SubResource("BoxShape3D_d66kw")

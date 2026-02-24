@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://37w2t4frtph5"]
+
+[ext_resource type="PackedScene" uid="uid://bup8x1j5pwreh" path="res://Assets/3D/Models/Products/carrot_pie.glb" id="1_034lw"]
+
+[node name="carrot_pie" unique_id=188877365 instance=ExtResource("1_034lw")]
+
+[node name="PIE" parent="." index="0" unique_id=1125900128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

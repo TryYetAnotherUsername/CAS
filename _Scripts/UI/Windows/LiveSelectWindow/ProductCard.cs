@@ -32,7 +32,7 @@ public partial class ProductCard : FoldableContainer
 	private void RemoveEntry()
 	{
 		GD.Print("try remove" + _entry.Product);
-		_shelf.SetProductStockStatus(_entry.Product, false);
+		_shelf.SetProductStock(_entry.Product, false);
 		QueueFree();
 	}
 

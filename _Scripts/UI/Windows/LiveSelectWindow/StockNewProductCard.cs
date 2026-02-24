@@ -38,7 +38,7 @@ public partial class StockNewProductCard : Panel
 			return;
 		}
 
-		_shelf.SetProductStockStatus(_targProductEntity, true);
+		_shelf.SetProductStock(_targProductEntity, true);
 		_onProductAdded?.Invoke();
 		Visible = false;
 	}

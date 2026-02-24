@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://btfdwcjiul0pn"]
+
+[ext_resource type="PackedScene" uid="uid://bnpu6kbv5sceo" path="res://Assets/3D/Models/Placeables/Misc/checkout_queue_point.glb" id="1_osvl3"]
+[ext_resource type="Script" uid="uid://buiuy3euf4387" path="res://_Scripts/Objects/Props/p/Checkout.cs" id="2_08rda"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08rda"]
+albedo_color = Color(0.8603631, 0.8580064, 0.84848136, 1)
+metallic = 0.05
+metallic_specular = 0.0
+roughness = 0.62
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbutn"]
+albedo_color = Color(0.13150415, 0.13150412, 0.13150412, 1)
+metallic = 0.63
+roughness = 0.64
+
+[node name="checkout_queue_point" unique_id=538471237 instance=ExtResource("1_osvl3")]
+script = ExtResource("2_08rda")
+IsQueueTarg = true
+
+[node name="queue_point" parent="." index="0" unique_id=1864982539]
+surface_material_override/0 = SubResource("StandardMaterial3D_08rda")
+surface_material_override/1 = SubResource("StandardMaterial3D_xbutn")
+
+[node name="queue_point_physics" parent="." index="1" unique_id=718148376]
+visible = false
+
+[node name="queue_point_ray" parent="." index="2" unique_id=48974423]
+visible = false
+
+[node name="StaticBody3D" parent="queue_point_ray" index="0" unique_id=1825571610]
+visible = false
+collision_layer = 2
+collision_mask = 2

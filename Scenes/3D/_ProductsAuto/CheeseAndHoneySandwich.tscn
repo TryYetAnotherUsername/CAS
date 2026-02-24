@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://db8sywujetaqj"]
+
+[ext_resource type="PackedScene" uid="uid://b00t18wo8mftt" path="res://Assets/3D/Models/Products/CheeseAndHoneySandwich.glb" id="1_2pgyo"]
+
+[node name="CheeseAndHoneySandwich" unique_id=854944287 instance=ExtResource("1_2pgyo")]
+
+[node name="Cube_002" parent="." index="0" unique_id=287371668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

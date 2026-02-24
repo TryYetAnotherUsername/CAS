@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://k6yq3isnp6aa"]
+
+[ext_resource type="PackedScene" uid="uid://dy2ly4q2xkib2" path="res://Assets/3D/Models/Products/milk.glb" id="1_82qp5"]
+
+[node name="milk" unique_id=1528716580 instance=ExtResource("1_82qp5")]
+
+[node name="MILK" parent="." index="0" unique_id=1725744300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

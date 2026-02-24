@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ssssxvop6cd4"]
+
+[ext_resource type="PackedScene" uid="uid://l6q6ohbpwxgr" path="res://Assets/3D/Models/Products/Crisps.glb" id="1_poeak"]
+
+[node name="Crisps" unique_id=326799305 instance=ExtResource("1_poeak")]
+
+[node name="Cube" parent="." index="0" unique_id=645736136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

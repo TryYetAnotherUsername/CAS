@@ -1,38 +1,38 @@
 [gd_scene format=3 uid="uid://j8ww78jhfreh"]
 
-[ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://_Scripts/Services/Main.cs" id="1_imbg2"]
+[ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://_Scripts/_Services/Main.cs" id="1_imbg2"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p6jpk"]
 [ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/Player/player_char.tscn" id="2_4e4y2"]
-[ext_resource type="Script" uid="uid://nt878o4u3kxu" path="res://_Scripts/Services/ProjectService.cs" id="2_wbulw"]
+[ext_resource type="Script" uid="uid://nt878o4u3kxu" path="res://_Scripts/_Services/ProjectService.cs" id="2_wbulw"]
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
 [ext_resource type="Script" uid="uid://d13f5bg7kx7x4" path="res://_Scripts/UI/CoreUi/MenuOpenCloseButton.cs" id="3_ifk88"]
-[ext_resource type="Script" uid="uid://ciwwvp6n38c6u" path="res://_Scripts/Services/FileOpService.cs" id="3_qw60k"]
+[ext_resource type="Script" uid="uid://ciwwvp6n38c6u" path="res://_Scripts/_Services/FileOpService.cs" id="3_qw60k"]
 [ext_resource type="Texture2D" uid="uid://d0vr37mvo8gcl" path="res://Assets/3D/Textures/Grass/color.png" id="4_2ok46"]
-[ext_resource type="Script" uid="uid://bpkg4pt26xwso" path="res://_Scripts/Services/WindowService.cs" id="4_5yls4"]
+[ext_resource type="Script" uid="uid://bpkg4pt26xwso" path="res://_Scripts/_Services/WindowService.cs" id="4_5yls4"]
 [ext_resource type="Script" uid="uid://cw7mi3idogovc" path="res://_Scripts/UI/CoreUi/MenuItemButtons.cs" id="4_tyqxl"]
 [ext_resource type="Script" uid="uid://6xux4smuu8ra" path="res://_Scripts/UI/CoreUi/InspectHint.cs" id="5_4ohmo"]
 [ext_resource type="PackedScene" uid="uid://dbictodiotvlw" path="res://Scenes/UI/Buildmode/buildmode.tscn" id="5_8sujb"]
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
-[ext_resource type="Script" uid="uid://drtnqob4u6a2a" path="res://_Scripts/Services/NpcSpawnerService.cs" id="11_wbulw"]
-[ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://_Scripts/Buildmode/UI/VFX/BmVisuals.cs" id="13_1t20g"]
-[ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://_Scripts/Buildmode/BuildingTools/Tools/SelectionTool.cs" id="13_koken"]
-[ext_resource type="Script" uid="uid://bhutg27lkojfk" path="res://_Scripts/Services/CustomerSpawnerService.cs" id="14_js8sm"]
+[ext_resource type="Script" uid="uid://drtnqob4u6a2a" path="res://_Scripts/_Services/NpcSpawnerService.cs" id="11_wbulw"]
+[ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://_Scripts/_Services/Buildmode/UI/VFX/BmVisuals.cs" id="13_1t20g"]
+[ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/SelectionTool.cs" id="13_koken"]
+[ext_resource type="Script" uid="uid://bhutg27lkojfk" path="res://_Scripts/_Services/CustomerSpawnerService.cs" id="14_js8sm"]
 [ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
-[ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://_Scripts/Buildmode/BuildingTools/Tools/ScaleTool.cs" id="15_1t20g"]
-[ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://_Scripts/Buildmode/BuildingTools/Tools/BuildmodeTool.cs" id="15_4o5wv"]
+[ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/ScaleTool.cs" id="15_1t20g"]
+[ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/BuildmodeTool.cs" id="15_4o5wv"]
 [ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/MoveGizmo.tscn" id="17_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
-[ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/Services/BuildmodeService.cs" id="19_c4b4r"]
-[ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/Buildmode/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
-[ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/Buildmode/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
+[ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/_Services/BuildmodeService.cs" id="19_c4b4r"]
+[ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
+[ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/NPCs/Customer.tscn" id="22_v4agm"]
-[ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/Services/FactoryService.cs" id="25_8sujb"]
-[ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/Services/ToolService.cs" id="25_tyqxl"]
-[ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/Services/LiveSelectService.cs" id="27_4ohmo"]
-[ext_resource type="Script" uid="uid://pbm8xtsk7aox" path="res://_Scripts/Services/PathfindingService.cs" id="28_8oboy"]
-[ext_resource type="Script" uid="uid://ccodax680di2u" path="res://_Scripts/Services/WorldService.cs" id="31_aq0wg"]
+[ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/_Services/FactoryService.cs" id="25_8sujb"]
+[ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/_Services/ToolService.cs" id="25_tyqxl"]
+[ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/_Services/LiveSelectService.cs" id="27_4ohmo"]
+[ext_resource type="Script" uid="uid://pbm8xtsk7aox" path="res://_Scripts/_Services/PathfindingService.cs" id="28_8oboy"]
+[ext_resource type="Script" uid="uid://ccodax680di2u" path="res://_Scripts/_Services/WorldService.cs" id="31_aq0wg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifk88"]
 content_margin_left = 0.0
@@ -143,7 +143,7 @@ tracks/1/path = NodePath("Menu:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.003911851, 0.23333333),
+"times": PackedFloat32Array(0.003911851, 0.13333334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -155,7 +155,7 @@ tracks/2/path = NodePath("Menu:scale")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.01961431, 0.13333334, 0.16666667),
+"times": PackedFloat32Array(0.01961431, 0.1, 0.16666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.7, 0.95), Vector2(1.05, 1.05), Vector2(1, 1)]
@@ -244,10 +244,10 @@ tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.011018785, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.011018785),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true, true]
+"values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -267,18 +267,6 @@ _data = {
 &"RESET": SubResource("Animation_v4agm"),
 &"enter": SubResource("Animation_ah3if")
 }
-
-[sub_resource type="SphereMesh" id="SphereMesh_tyqxl"]
-radius = 0.03
-height = 0.06
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyqxl"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tyqxl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ohmo"]
-albedo_color = Color(1, 0.33012483, 0.2645552, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_hfg1r"]
 size = Vector2(999, 999)
@@ -332,7 +320,7 @@ script = ExtResource("1_imbg2")
 
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")
-_shelvesRoot = NodePath("../../3D/Props/FloorsRoot")
+_shelvesRoot = NodePath("../../3D/Props/PropsRoot")
 
 [node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
 script = ExtResource("19_c4b4r")
@@ -344,7 +332,7 @@ _windowBase = ExtResource("22_tyqxl")
 
 [node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot")]
 script = ExtResource("25_8sujb")
-_floorsRoot = NodePath("../../3D/Props/FloorsRoot")
+_floorsRoot = NodePath("../../3D/Props/PropsRoot")
 
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
 script = ExtResource("25_tyqxl")
@@ -354,16 +342,16 @@ script = ExtResource("27_4ohmo")
 
 [node name="PathfindingService" type="Node" parent="Services" unique_id=624495622 node_paths=PackedStringArray("_navRegion")]
 script = ExtResource("28_8oboy")
-_navRegion = NodePath("../../3D/Props/FloorsRoot")
+_navRegion = NodePath("../../3D/Props/PropsRoot")
 
-[node name="NPCFactoryService" type="Node" parent="Services" unique_id=1708621918 node_paths=PackedStringArray("_npcRoot")]
+[node name="NpcFactoryService" type="Node" parent="Services" unique_id=1708621918 node_paths=PackedStringArray("_npcRoot")]
 script = ExtResource("11_wbulw")
-_npcRoot = NodePath("../../3D/NPCs")
+_npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
 _customerNpc = ExtResource("22_v4agm")
 
 [node name="ProjectService" type="Node" parent="Services" unique_id=1544795930 node_paths=PackedStringArray("_BuildingRoot")]
 script = ExtResource("2_wbulw")
-_BuildingRoot = NodePath("../../3D/Props/FloorsRoot")
+_BuildingRoot = NodePath("../../3D/Props/PropsRoot")
 
 [node name="CustomerSpawnerService" type="Node" parent="Services" unique_id=1236255876]
 script = ExtResource("14_js8sm")
@@ -422,7 +410,6 @@ theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.6549
 text = "Tools >"
 flat = true
 script = ExtResource("3_ifk88")
-_actionMode = null
 _animationPlayer = NodePath("../../MenuAnimationPlayer")
 
 [node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
@@ -476,7 +463,6 @@ text = "Build tool"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = null
 
 [node name="MenuItem2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=710371277]
 custom_minimum_size = Vector2(0, 40)
@@ -639,44 +625,23 @@ mouse_filter = 2
 
 [node name="3D" type="Node3D" parent="." unique_id=749366055]
 
-[node name="Players" type="Node3D" parent="3D" unique_id=1881802444]
-
-[node name="PlayerChar" parent="3D/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, 0.8630058, 1.2755573)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Players/PlayerChar" unique_id=246159912]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053981304, 0.2942204, -0.083524585)
-mesh = SubResource("SphereMesh_tyqxl")
-surface_material_override/0 = SubResource("StandardMaterial3D_tyqxl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Players/PlayerChar/MeshInstance3D" unique_id=2059951538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12522614, 0, 0)
-mesh = SubResource("SphereMesh_tyqxl")
-surface_material_override/0 = SubResource("StandardMaterial3D_tyqxl")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="3D/Players/PlayerChar/MeshInstance3D" unique_id=770610113]
-transform = Transform3D(0.09756535, 0.004386369, 0, -0.021931835, 0.019513067, 0, 0, 0, 0.19500001, 0.05966854, -0.11980051, 0.07331467)
-mesh = SubResource("BoxMesh_tyqxl")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_4ohmo")
-
 [node name="Terrain" type="Node3D" parent="3D" unique_id=18981723]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="3D/Terrain" unique_id=1732990741]
+[node name="Grass" type="MeshInstance3D" parent="3D/Terrain" unique_id=1732990741]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_hfg1r")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_vk4q2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="3D/Terrain/MeshInstance3D" unique_id=1539425178]
+[node name="StaticBody3D" type="StaticBody3D" parent="3D/Terrain/Grass" unique_id=1539425178]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="3D/Terrain/MeshInstance3D/StaticBody3D" unique_id=1273739676]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3D/Terrain/Grass/StaticBody3D" unique_id=1273739676]
 shape = SubResource("ConcavePolygonShape3D_4e4y2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="3D" unique_id=95604516]
 environment = SubResource("Environment_6t3k2")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3D/WorldEnvironment" unique_id=414167535]
+[node name="Sun" type="DirectionalLight3D" parent="3D/WorldEnvironment" unique_id=414167535]
 transform = Transform3D(-0.036733806, -0.6913264, 0.72160816, -0.228678, 0.70875055, 0.6673673, -0.9728088, -0.14050098, -0.18412629, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.041
@@ -709,9 +674,14 @@ _moveGizmo = ExtResource("17_4a3kt")
 [node name="Freeform" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1875244053]
 script = ExtResource("21_tyqxl")
 
-[node name="FloorsRoot" type="NavigationRegion3D" parent="3D/Props" unique_id=322952058]
+[node name="PropsRoot" type="NavigationRegion3D" parent="3D/Props" unique_id=322952058]
 navigation_mesh = SubResource("NavigationMesh_wbulw")
 
-[node name="OtherPropsRoot" type="Node3D" parent="3D/Props" unique_id=1626172487]
+[node name="Humanoids" type="Node3D" parent="3D" unique_id=1665425361]
 
-[node name="NPCs" type="Node3D" parent="3D" unique_id=1296953903]
+[node name="Players" type="Node3D" parent="3D/Humanoids" unique_id=1881802444]
+
+[node name="PlayerChar" parent="3D/Humanoids/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, 0.8630058, 1.2755573)
+
+[node name="NpcsRoot" type="Node3D" parent="3D/Humanoids" unique_id=1296953903]
