@@ -93,23 +93,10 @@ text = "shelf data"
 vertices = PackedVector3Array(0.39056477, 0, -0.4899517, 0.39056477, 0, 0.48813942, 0.08622345, 0, 0.4860405, 0.08832201, 0, -0.4857539)
 
 [node name="ProductAreasRoot" type="Node3D" parent="." index="5" unique_id=1774215655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1170485, 0.07094271, 0)
 
 [node name="Zone1" type="Area3D" parent="ProductAreasRoot" index="0" unique_id=1743555499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121514276, 0.101373784, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ProductAreasRoot/Zone1" index="0" unique_id=870371885]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
-shape = SubResource("BoxShape3D_d66kw")
-
-[node name="Zone2" type="Area3D" parent="ProductAreasRoot" index="1" unique_id=618437763]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25520656, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductAreasRoot/Zone2" index="0" unique_id=422019963]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
-shape = SubResource("BoxShape3D_d66kw")
-
-[node name="Zone3" type="Area3D" parent="ProductAreasRoot" index="2" unique_id=137412205]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.514161, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductAreasRoot/Zone3" index="0" unique_id=1537746093]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23675537, 0.17382813, 0)
 shape = SubResource("BoxShape3D_d66kw")

@@ -30,22 +30,27 @@ public partial class Shelf : Prop
 			Clear();
 			if (_shelf.StockedProductsList is null || _shelf.StockedProductsList.Count == 0 || _shelf.StockedProductsList[0] is null || _shelf.StockedProductsList[0].Quantity == 0) return;
 
+			Area3D targArea = _productAreas[0];
+			var targAreaCol = targArea.GetChild(0) as CollisionShape3D;
+			Vector3 baseOffset = targAreaCol.Shape.Get // <<<<<<<<<<<<<<<< start here tmr
+
 			string targProductUid = _shelf.StockedProductsList[0].Product.UID;
 			int targProductQuantity = _shelf.StockedProductsList[0].Quantity;
-			Vector3 targetOffset = new Vector3(0,0,0);
+			Vector3 accumOffset = new Vector3(0,0,0);
 			PackedScene scene = GD.Load<PackedScene>(ResourceUid.GetIdPath(ResourceUid.TextToId(targProductUid)));
 
 			// for each product
 			for (int i = 1; i <= targProductQuantity; i++)
 			{
-				Node3D newNode = scene.Instantiate() as Node3D;
+				var newNode = scene.Instantiate() as Node3D;
 				if (newNode is null) return;
-				MeshInstance3D mesh = newNode.GetChild(0) as MeshInstance3D;
+				var mesh = newNode.GetChild(0) as MeshInstance3D;
 				if (mesh is null) return;
 
 				_productAreas[0].AddChild(newNode);
-				newNode.Position += targetOffset;
-				targetOffset += new Vector3(0,0,mesh.GetAabb().Size.Z + 0.005f);
+
+				newNode.Position += accumOffset;
+				accumOffset += new Vector3(0,0,mesh.GetAabb().Size.Z + 0.005f) + ;
 			}
 		}
 
