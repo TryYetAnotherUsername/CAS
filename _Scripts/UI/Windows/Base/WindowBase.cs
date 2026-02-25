@@ -22,6 +22,8 @@ public partial class WindowBase : Panel
 	[Export] private PanelContainer _Outline; // window outline
 	[Export] private Label _WindowTitle; // window title shown on dragbar (titlebar)
 
+	[Export] private AnimationPlayer _aniPlayer;
+
 	// Window controls:
 	[Export] private Button _CloseButton;
 
@@ -47,19 +49,30 @@ public partial class WindowBase : Panel
 		GiveUpFocus();
         FocusEntered += BringToFocus;
 		FocusExited += GiveUpFocus;
-		_CloseButton.Pressed += QueueFree;
+		_CloseButton.Pressed += PlayCloseWindow;
+		PlayShowWindow();
     }
 
     public override void _ExitTree()
     {
         FocusEntered -= BringToFocus;
 		FocusExited -= GiveUpFocus;
-		_CloseButton.Pressed -= QueueFree;
+		_CloseButton.Pressed -= PlayCloseWindow;
     }
 
 
 	// NOTE TO SELF:	This bit is kinda slow and not snappy, could probably do it in Process instead.
 	//					just a minor visual anoyance though
+	private void PlayShowWindow()
+	{
+		_aniPlayer.Play("open_window");
+	}
+
+	private void PlayCloseWindow()
+	{
+		_aniPlayer.Play("close_window");
+	}
+
 	public override void _Input(InputEvent @event)
 	{
 		Vector2 currentMousePos = GetGlobalMousePosition();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -9,6 +10,9 @@ using Godot;
 
 public partial class Shelf : Prop
 {
+	/// <summary>
+	/// Contains all things related to rendering products out onto shelves.
+	/// </summary>
 	private class ShelfVisuals
 	{
 		// vars
@@ -28,37 +32,60 @@ public partial class Shelf : Prop
 		public void Refresh()
 		{
 			Clear();
-			if (_shelf.StockedProductsList is null || _shelf.StockedProductsList.Count == 0 || _shelf.StockedProductsList[0] is null || _shelf.StockedProductsList[0].Quantity == 0) return;
-			string targProductUid = _shelf.StockedProductsList[0].Product.UID;
-			int targProductQuantity = _shelf.StockedProductsList[0].Quantity;
-			PackedScene scene = GD.Load<PackedScene>(ResourceUid.GetIdPath(ResourceUid.TextToId(targProductUid)));
 
-			foreach (Area3D area in _productAreas) // for each row
+			// Get the data needed from the shelf class
+			if (_shelf.StockedProductsList is null || _shelf.StockedProductsList.Count == 0 || _shelf.StockedProductsList[0] is null || _shelf.StockedProductsList[0].Quantity == 0) return;
+			string productUid = _shelf.StockedProductsList[0].Product.UID;
+			int totalQuantity = _shelf.StockedProductsList[0].Quantity;
+			PackedScene scene = GD.Load<PackedScene>(ResourceUid.GetIdPath(ResourceUid.TextToId(productUid)));
+
+			// For the product
+			var newNode = scene.Instantiate() as Node3D;
+			if (newNode is null) return;
+			var mesh = newNode.GetChild(0) as MeshInstance3D;
+			if (mesh is null) return;
+				
+			var sizeOfProduct = mesh.GetAabb().Size;
+			var productOffset = sizeOfProduct / 2;
+			newNode.Free();
+
+			// For each area
+			foreach (Area3D area in _productAreas)
 			{
+				if (totalQuantity <= 0) return;
+
+				// Get the shelf area object
 				var targAreaCol = area.GetChild(0) as CollisionShape3D;
 				if (targAreaCol is null) return;
 				var box = targAreaCol.Shape as BoxShape3D;
 				if (box is null) return;
+				
+				// Calculate how many products will fit in this area
+				var fitHorizontal = (int) MathF.Floor(box.Size.Z / sizeOfProduct.Z);
+				var fitDepth = (int) MathF.Floor(box.Size.X / sizeOfProduct.X);
 
-				float rowWidth = box.Size.X;
-				float rowDepth = box.Size.Z;
-
-				Vector3 accumOffset = Vector3.Zero;
-
-				// for each product entity
-				for (int i = 1; i <= targProductQuantity; i++)
+				// go along the horizontal of the area
+				for (int column = 0; column < fitHorizontal; column++)
 				{
-					var newNode = scene.Instantiate() as Node3D;
-					if (newNode is null) return;
-					var mesh = newNode.GetChild(0) as MeshInstance3D;
-					if (mesh is null) return;
+					if (totalQuantity <= 0) return;
 
-					area.AddChild(newNode);
+					// place products along the depth of the area
+					for (int row = 0; row < fitDepth; row++)
+					{
+						if (totalQuantity <= 0) return;
 
-					Vector3 baseOffset = new Vector3(mesh.GetAabb().Size.X / 2, 0, -mesh.GetAabb().Size.Z / 2);
+						var node = scene.Instantiate() as Node3D;
+						if (node is null) continue;
+						area.AddChild(node);
 
-					newNode.Position = accumOffset + baseOffset;
-					accumOffset += new Vector3(0 , 0, -mesh.GetAabb().Size.Z - 0.005f);
+						var p = node.Position;
+						p.X += sizeOfProduct.X * row + productOffset.X;
+						p.Z -= sizeOfProduct.Z * column + productOffset.Z;
+						node.Position = p;
+
+						// decrease total quantity
+						totalQuantity --;
+					}
 				}
 			}
 		}
@@ -89,7 +116,6 @@ public partial class Shelf : Prop
 		}
 
 	}
-
 
 	[Export] private Node3D _productAreasRoot;
 	private ShelfVisuals _Visuals;

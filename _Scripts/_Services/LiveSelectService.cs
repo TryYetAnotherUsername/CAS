@@ -15,6 +15,15 @@ public partial class LiveSelectService : Node
     // Godot native methods:
     public override void _Process(double delta)
     {
+    }
+
+	public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("inspect_pressed"))
+		{
+			HandleSelect();
+		}
+
         var hit = Raycast();
 
 		if (hit == _currentHovered)
@@ -40,14 +49,6 @@ public partial class LiveSelectService : Node
 			{
 				OnHoverEnd?.Invoke();
 			}
-		}
-    }
-
-	public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("inspect_pressed"))
-		{
-			HandleSelect();
 		}
     }
 

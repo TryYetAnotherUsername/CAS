@@ -45,14 +45,14 @@ viewport_path = NodePath("Screen/SubViewport")
 
 [node name="self_checkout" unique_id=2111515380 node_paths=PackedStringArray("NavTarg", "_display", "_light") instance=ExtResource("1_gwfbx")]
 script = ExtResource("2_6upq1")
-NavTarg = NodePath("NavTarg")
-_display = NodePath("Screen/SubViewport/Control/Label")
-_light = NodePath("IndicatiorLight")
 IsFree = null
 IsFinishedPaying = null
 IsQueueTarg = null
+NavTarg = NodePath("NavTarg")
+_display = NodePath("Screen/SubViewport/Control/Label")
+_light = NodePath("IndicatiorLight")
 
-[node name="self_checkout_mesh" parent="." index="0" unique_id=1893955406]
+[node name="self_checkout_mesh" parent="." index="0" unique_id=1549290932]
 surface_material_override/0 = SubResource("StandardMaterial3D_6upq1")
 surface_material_override/1 = SubResource("StandardMaterial3D_6upq1")
 surface_material_override/2 = SubResource("StandardMaterial3D_lp85w")
@@ -60,14 +60,14 @@ surface_material_override/3 = SubResource("StandardMaterial3D_n1j1e")
 surface_material_override/4 = SubResource("StandardMaterial3D_snja7")
 surface_material_override/5 = SubResource("StandardMaterial3D_g1lot")
 
-[node name="self_checkout_ray" parent="." index="1" unique_id=770385602]
+[node name="self_checkout_ray" parent="." index="1" unique_id=431644701]
 visible = false
 
-[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=2128008127]
+[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=1662884452]
 collision_layer = 2
 collision_mask = 2
 
-[node name="self_checkout_physics" parent="." index="2" unique_id=2039680695]
+[node name="self_checkout_physics" parent="." index="2" unique_id=2018375510]
 visible = false
 
 [node name="IndicatiorLight" type="MeshInstance3D" parent="." index="3" unique_id=2121159137]
@@ -117,3 +117,6 @@ autowrap_mode = 2
 
 [node name="NavTarg" type="Node3D" parent="." index="5" unique_id=1061102893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4069031, 0, -0.0038947463)
+
+[node name="ProductTarg" type="Node3D" parent="." index="6" unique_id=2056219373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16360593, 0.53249544, 0.06139893)

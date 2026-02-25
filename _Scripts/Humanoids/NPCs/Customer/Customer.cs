@@ -129,7 +129,7 @@ public partial class Customer : NPC
             case State.WalkingToShelf:
                 // Set target to shelf
                 _currentShelf = WorldService.I.GetShelf(_currentWantItem.Product);
-                Vector3 targetPos = _currentShelf.GlobalPosition;
+                Vector3 targetPos = _currentShelf.NavTarget.GlobalPosition;
                 SetMovementTarget(targetPos);
                 GD.Print($"🟩 Target set to shelf to buy the product <{_currentWantItem.Product.DispName}>");
                 break;

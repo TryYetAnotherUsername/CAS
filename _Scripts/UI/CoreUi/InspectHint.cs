@@ -13,19 +13,17 @@ public partial class InspectHint : Panel
 
     public override void _Process(double delta)
     {
-        //var mousePos = GetViewport().GetMousePosition();
-		//Position = Position.Lerp(mousePos, 0.2f);
+        var mousePos = GetViewport().GetMousePosition();
+		Position = mousePos;
     }
 
 	private void Start()
 	{
-		SetProcess(true);
 		_aniPlayer.Play("enter");
 	}
 
 	private void End()
 	{
-		SetProcess(false);
 		_aniPlayer.PlayBackwards("enter");
 	}
 }

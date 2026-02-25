@@ -21,10 +21,12 @@
 [ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
 [ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/ScaleTool.cs" id="15_1t20g"]
 [ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/BuildmodeTool.cs" id="15_4o5wv"]
+[ext_resource type="Script" uid="uid://bj4gvgek4cup8" path="res://Scenes/Main/EconomyService.cs" id="15_u244o"]
 [ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/MoveGizmo.tscn" id="17_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/_Services/BuildmodeService.cs" id="19_c4b4r"]
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
+[ext_resource type="Script" uid="uid://bdbxtvkcmaj8u" path="res://Scenes/Main/MoneyCounter.cs" id="20_1j4pb"]
 [ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/NPCs/Customer.tscn" id="22_v4agm"]
@@ -123,7 +125,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_4ohmo"]
 resource_name = "close_menu"
-length = 0.23333333
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -131,7 +133,7 @@ tracks/0/path = NodePath("Menu:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.003911853, 0.23333333),
+"times": PackedFloat32Array(0, 0.003911853, 0.16666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, true]
@@ -167,7 +169,7 @@ tracks/3/path = NodePath("OpenMenuButton:visible")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.21820933, 0.23292007),
+"times": PackedFloat32Array(0, 0.13333334, 0.16666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -268,6 +270,91 @@ _data = {
 &"enter": SubResource("Animation_ah3if")
 }
 
+[sub_resource type="Animation" id="Animation_u244o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.52156866)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_js8sm"]
+resource_name = "tick"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.7058824), Color(1, 1, 1, 0.5058824)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u244o"]
+_data = {
+&"RESET": SubResource("Animation_u244o"),
+&"tick": SubResource("Animation_js8sm")
+}
+
 [sub_resource type="QuadMesh" id="QuadMesh_hfg1r"]
 size = Vector2(999, 999)
 
@@ -359,6 +446,9 @@ script = ExtResource("14_js8sm")
 [node name="FileOpService" type="Node" parent="Services" unique_id=1586219315]
 script = ExtResource("3_qw60k")
 
+[node name="EconomyService" type="Node" parent="Services" unique_id=180782190]
+script = ExtResource("15_u244o")
+
 [node name="UI" type="Control" parent="." unique_id=738311301]
 layout_mode = 3
 anchors_preset = 15
@@ -407,10 +497,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p6jpk")
 theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.654902)
+action_mode = 0
 text = "Tools >"
 flat = true
 script = ExtResource("3_ifk88")
-_animationPlayer = NodePath("../../MenuAnimationPlayer")
+_actionMode = null
+_animationPlayer = NodePath("../../Menu/MenuAnimationPlayer")
 
 [node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
 visible = false
@@ -463,6 +555,7 @@ text = "Build tool"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
+_tool = null
 
 [node name="MenuItem2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=710371277]
 custom_minimum_size = Vector2(0, 40)
@@ -568,13 +661,15 @@ offset_left = -58.0
 offset_bottom = 23.0
 grow_horizontal = 0
 theme = ExtResource("1_p6jpk")
+action_mode = 0
 text = "< back"
 flat = true
 script = ExtResource("3_ifk88")
 _actionMode = 1
-_animationPlayer = NodePath("../../MenuAnimationPlayer")
+_animationPlayer = NodePath("../MenuAnimationPlayer")
 
-[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea" unique_id=1771402108]
+[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea/Menu" unique_id=1771402108]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_4ohmo")
 
 [node name="InspectHint" type="Panel" parent="UI/Core/TopArea" unique_id=1756454243 node_paths=PackedStringArray("_aniPlayer")]
@@ -583,8 +678,8 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 192.0
-offset_bottom = 32.0
+offset_right = 123.35025
+offset_bottom = 24.060913
 scale = Vector2(0.985, 0.985)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("5_4ohmo")
@@ -598,9 +693,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -79.0
-offset_top = -11.5
+offset_top = -12.515228
 offset_right = 79.0
-offset_bottom = 11.5
+offset_bottom = 10.484772
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p6jpk")
@@ -610,6 +705,47 @@ vertical_alignment = 1
 
 [node name="HintAnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea/InspectHint" unique_id=681709736]
 libraries/ = SubResource("AnimationLibrary_v4agm")
+
+[node name="moneyCounter" type="Panel" parent="UI/Core/TopArea" unique_id=858953191 node_paths=PackedStringArray("_aniPlayer", "_label")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset_ratio = Vector2(1, 0.5)
+script = ExtResource("20_1j4pb")
+_aniPlayer = NodePath("AnimationPlayer")
+_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="UI/Core/TopArea/moneyCounter" unique_id=1291791439]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+theme = ExtResource("1_p6jpk")
+theme_override_colors/font_color = Color(1, 1, 1, 0.52156866)
+text = "£ 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea/moneyCounter" unique_id=829606511]
+libraries/ = SubResource("AnimationLibrary_u244o")
 
 [node name="Buildmode" parent="UI" unique_id=2138034224 instance=ExtResource("5_8sujb")]
 layout_mode = 1

@@ -1,13 +1,44 @@
 [gd_scene format=3 uid="uid://wm3tf1bsv1t"]
 
-[ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="1_gpfsk"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_lwwsd"]
 [ext_resource type="Script" uid="uid://vvrxuhlgyqsp" path="res://_Scripts/UI/Windows/Base/WindowBase.cs" id="2_cs5oi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cs5oi"]
-shader = ExtResource("1_gpfsk")
+[sub_resource type="Shader" id="Shader_j3b03"]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0.0, 10.0) = 2.0;
+uniform float mix_amount : hint_range(0.0, 1.0) = 0.5;
+uniform float saturation : hint_range(0.0, 2.0) = 1.2;
+uniform float grain_amount : hint_range(0.0, 0.1) = 0.02;
+uniform vec4 color_over : source_color;
+// The BackBufferCopy will feed this texture
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+float noise(vec2 uv) {
+    return fract(sin(dot(uv.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+void fragment() {
+    // Sampling with SCREEN_UV ensures we grab the exact pixels
+    // located behind this specific fragment on the screen.
+    vec4 blurred = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+
+    float luminance = dot(blurred.rgb, vec3(0.2126, 0.7152, 0.0722));
+    blurred.rgb = mix(vec3(luminance), blurred.rgb, saturation);
+
+    vec4 fin = mix(blurred, color_over, mix_amount);
+
+    // Grain stays static relative to the screen (macOS style)
+    float n = (noise(SCREEN_UV) - 0.5) * grain_amount;
+    fin.rgb += n;
+
+    COLOR = vec4(fin.rgb, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ey3o"]
+shader = SubResource("Shader_j3b03")
 shader_parameter/blur_amount = 2.50000011875
-shader_parameter/mix_amount = 0.5
+shader_parameter/mix_amount = 0.0
 shader_parameter/saturation = 0.50000002375
 shader_parameter/grain_amount = 0.010000000475
 shader_parameter/color_over = Color(0, 0, 0, 1)
@@ -19,8 +50,172 @@ thickness = 2
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_4tdt1"]
 color = Color(1, 1, 1, 0.14901961)
 
-[node name="WindowBase" type="Panel" unique_id=632438322 node_paths=PackedStringArray("_DragT", "_DragL", "_DragR", "_DragB", "_DragBR", "_DragBar", "_Outline", "_WindowTitle", "_CloseButton")]
-material = SubResource("ShaderMaterial_cs5oi")
+[sub_resource type="Animation" id="Animation_2ey3o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/mix_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/blur_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.50000011875]
+}
+
+[sub_resource type="Animation" id="Animation_tm3tc"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.16666667, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/mix_amount")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 0.16666667, 0.2328472),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.50000002375, 0.0, 0.50000002375]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/blur_amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1584297, 0.2328472),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [2.50000011875, 0.0, 2.50000011875]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4tdt1"]
+resource_name = "open_window"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/mix_amount")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.50000002375]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/blur_amount")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 3.0000001425]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tm3tc"]
+_data = {
+&"RESET": SubResource("Animation_2ey3o"),
+&"close_window": SubResource("Animation_tm3tc"),
+&"open_window": SubResource("Animation_4tdt1")
+}
+
+[node name="WindowBase" type="Panel" unique_id=632438322 node_paths=PackedStringArray("_DragT", "_DragL", "_DragR", "_DragB", "_DragBR", "_DragBar", "_Outline", "_WindowTitle", "_aniPlayer", "_CloseButton")]
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_2ey3o")
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,6 +228,8 @@ offset_right = 192.0
 offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 focus_mode = 1
 theme = ExtResource("1_lwwsd")
 theme_type_variation = &"window_base_outline"
@@ -45,6 +242,7 @@ _DragBR = NodePath("DragAreas/BR")
 _DragBar = NodePath("Titlebar")
 _Outline = NodePath("FocusHighlight")
 _WindowTitle = NodePath("Titlebar/TitleArea/Title")
+_aniPlayer = NodePath("AnimationPlayer")
 _CloseButton = NodePath("Titlebar/CloseButton")
 
 [node name="Titlebar" type="Control" parent="." unique_id=1930440496]
@@ -245,3 +443,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_lwwsd")
 theme_type_variation = &"window_base_shadowSecondary"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=3185527]
+libraries/ = SubResource("AnimationLibrary_tm3tc")

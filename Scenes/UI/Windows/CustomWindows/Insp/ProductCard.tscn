@@ -3,30 +3,265 @@
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p2q0v"]
 [ext_resource type="Script" uid="uid://deapwab6a35d5" path="res://_Scripts/UI/Windows/LiveSelectWindow/ProductCard.cs" id="2_kwhan"]
 
-[node name="ProductCard" type="FoldableContainer" unique_id=1810743411 node_paths=PackedStringArray("_unstockButton", "_quantityField")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2q0v"]
+bg_color = Color(1, 1, 1, 0.039215688)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.13333334)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 5.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_p2q0v"]
+color = Color(0, 0, 0, 0.3764706)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kwhan"]
+color = Color(1, 1, 1, 0.12941177)
+
+[node name="ProductCard" type="FoldableContainer" unique_id=1810743411 node_paths=PackedStringArray("_unstockButton", "_quantityField", "_add", "_take", "_add1", "_supplier", "_category", "_importPrice", "_sellPrice", "_popularity", "_localImports", "_ageRestriction")]
 theme = ExtResource("1_p2q0v")
+theme_override_colors/font_color = Color(0.38039216, 0.38039216, 0.38039216, 1)
 title = "Product"
 script = ExtResource("2_kwhan")
-_unstockButton = NodePath("HBoxContainer/Button")
-_quantityField = NodePath("HBoxContainer/HBoxContainer/SpinBox")
+_unstockButton = NodePath("VBoxContainer/Button")
+_quantityField = NodePath("VBoxContainer/HBoxContainer2/QuantityLabel")
+_add = NodePath("VBoxContainer/Import")
+_take = NodePath("VBoxContainer/Remove")
+_add1 = NodePath("VBoxContainer/ImportOne")
+_supplier = NodePath("VBoxContainer/InfoPanel/Cat2/HBoxContainer/Panel/Label3")
+_category = NodePath("VBoxContainer/InfoPanel/Cat/HBoxContainer/Panel/Label3")
+_importPrice = NodePath("VBoxContainer/InfoPanel/Import/Importprice/Panel/Label3")
+_sellPrice = NodePath("VBoxContainer/InfoPanel/Price/Importprice/Panel/Label3")
+_popularity = NodePath("VBoxContainer/InfoPanel/Popularity/HBoxContainer/Panel/Label3")
+_localImports = NodePath("VBoxContainer/InfoPanel/Label2")
+_ageRestriction = NodePath("VBoxContainer/InfoPanel/Label3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1717647178]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1773990841]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBoxContainer" unique_id=2091349246]
+[node name="InfoPanel" type="VBoxContainer" parent="VBoxContainer" unique_id=81880800]
+layout_mode = 2
+
+[node name="Cat2" type="HBoxContainer" parent="VBoxContainer/InfoPanel" unique_id=273559209]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InfoPanel/Cat2" unique_id=1543240015]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/InfoPanel/Cat2/HBoxContainer" unique_id=771696727]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Supplier"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/InfoPanel/Cat2/HBoxContainer" unique_id=656135547]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2q0v")
+
+[node name="Label3" type="Label" parent="VBoxContainer/InfoPanel/Cat2/HBoxContainer/Panel" unique_id=987907740]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.6784314)
+theme_override_font_sizes/font_size = 12
+text = "Supplier"
+
+[node name="Cat" type="HBoxContainer" parent="VBoxContainer/InfoPanel" unique_id=1364464]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InfoPanel/Cat" unique_id=1419144753]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/InfoPanel/Cat/HBoxContainer" unique_id=267197733]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Category"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/InfoPanel/Cat/HBoxContainer" unique_id=1552037409]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2q0v")
+
+[node name="Label3" type="Label" parent="VBoxContainer/InfoPanel/Cat/HBoxContainer/Panel" unique_id=1676638495]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.6784314)
+theme_override_font_sizes/font_size = 12
+text = "Category"
+
+[node name="Import" type="HBoxContainer" parent="VBoxContainer/InfoPanel" unique_id=326237365]
+layout_mode = 2
+
+[node name="Importprice" type="HBoxContainer" parent="VBoxContainer/InfoPanel/Import" unique_id=383042254]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/InfoPanel/Import/Importprice" unique_id=1994990105]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Unit import price"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/InfoPanel/Import/Importprice" unique_id=755705194]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2q0v")
+
+[node name="Label3" type="Label" parent="VBoxContainer/InfoPanel/Import/Importprice/Panel" unique_id=1223049755]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.6784314)
+theme_override_font_sizes/font_size = 12
+text = "Import Price "
+
+[node name="Price" type="HBoxContainer" parent="VBoxContainer/InfoPanel" unique_id=685937114]
+layout_mode = 2
+
+[node name="Importprice" type="HBoxContainer" parent="VBoxContainer/InfoPanel/Price" unique_id=326972212]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/InfoPanel/Price/Importprice" unique_id=1053215486]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Sell price"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/InfoPanel/Price/Importprice" unique_id=1067717227]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2q0v")
+
+[node name="Label3" type="Label" parent="VBoxContainer/InfoPanel/Price/Importprice/Panel" unique_id=907256487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.6784314)
+theme_override_font_sizes/font_size = 12
+text = "Sell price"
+
+[node name="Popularity" type="HBoxContainer" parent="VBoxContainer/InfoPanel" unique_id=1918190587]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InfoPanel/Popularity" unique_id=1306579102]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/InfoPanel/Popularity/HBoxContainer" unique_id=2031847927]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Popularity"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/InfoPanel/Popularity/HBoxContainer" unique_id=616242738]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2q0v")
+
+[node name="Label3" type="Label" parent="VBoxContainer/InfoPanel/Popularity/HBoxContainer/Panel" unique_id=1596826130]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.6784314)
+theme_override_font_sizes/font_size = 12
+text = "Popularity"
+
+[node name="Label2" type="Label" parent="VBoxContainer/InfoPanel" unique_id=357846566]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_font_sizes/font_size = 12
+text = "📦This product is locally imported"
+
+[node name="Label3" type="Label" parent="VBoxContainer/InfoPanel" unique_id=1715842198]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+theme_override_font_sizes/font_size = 12
+text = "🔞This product is age restricted"
+
+[node name="seperator" type="Panel" parent="VBoxContainer" unique_id=728437612]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_p2q0v")
+
+[node name="Panel" type="Panel" parent="VBoxContainer/seperator" unique_id=58369137]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_kwhan")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1600156157]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1026571707]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
+text = "Quantity stocked:"
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=956854887]
+layout_mode = 2
+text = "10"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2" unique_id=1482364552]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Import" type="Button" parent="VBoxContainer" unique_id=1400440904]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.25724414, 0.7034606, 1, 1)
+theme_override_colors/font_focus_color = Color(0.5380045, 0.8458379, 1, 1)
+text = "Import 10 units"
+
+[node name="ImportOne" type="Button" parent="VBoxContainer" unique_id=1897499851]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Import 1 unit"
+
+[node name="Remove" type="Button" parent="VBoxContainer" unique_id=604655648]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sell 10 (or less) units"
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=2091349246]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9438577, 0.01766875, 1.92523e-07, 1)
 text = "Unstock     "
 flat = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1600156157]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=1026571707]
-layout_mode = 2
-text = "     Quantity stocked:"
-
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer/HBoxContainer" unique_id=1931446773]
-layout_mode = 2
-max_value = 50.0
-update_on_text_changed = true
