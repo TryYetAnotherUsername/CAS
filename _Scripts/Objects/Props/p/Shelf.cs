@@ -29,28 +29,37 @@ public partial class Shelf : Prop
 		{
 			Clear();
 			if (_shelf.StockedProductsList is null || _shelf.StockedProductsList.Count == 0 || _shelf.StockedProductsList[0] is null || _shelf.StockedProductsList[0].Quantity == 0) return;
-
-			Area3D targArea = _productAreas[0];
-			var targAreaCol = targArea.GetChild(0) as CollisionShape3D;
-			Vector3 baseOffset = targAreaCol.Shape.Get // <<<<<<<<<<<<<<<< start here tmr
-
 			string targProductUid = _shelf.StockedProductsList[0].Product.UID;
 			int targProductQuantity = _shelf.StockedProductsList[0].Quantity;
-			Vector3 accumOffset = new Vector3(0,0,0);
 			PackedScene scene = GD.Load<PackedScene>(ResourceUid.GetIdPath(ResourceUid.TextToId(targProductUid)));
 
-			// for each product
-			for (int i = 1; i <= targProductQuantity; i++)
+			foreach (Area3D area in _productAreas) // for each row
 			{
-				var newNode = scene.Instantiate() as Node3D;
-				if (newNode is null) return;
-				var mesh = newNode.GetChild(0) as MeshInstance3D;
-				if (mesh is null) return;
+				var targAreaCol = area.GetChild(0) as CollisionShape3D;
+				if (targAreaCol is null) return;
+				var box = targAreaCol.Shape as BoxShape3D;
+				if (box is null) return;
 
-				_productAreas[0].AddChild(newNode);
+				float rowWidth = box.Size.X;
+				float rowDepth = box.Size.Z;
 
-				newNode.Position += accumOffset;
-				accumOffset += new Vector3(0,0,mesh.GetAabb().Size.Z + 0.005f) + ;
+				Vector3 accumOffset = Vector3.Zero;
+
+				// for each product entity
+				for (int i = 1; i <= targProductQuantity; i++)
+				{
+					var newNode = scene.Instantiate() as Node3D;
+					if (newNode is null) return;
+					var mesh = newNode.GetChild(0) as MeshInstance3D;
+					if (mesh is null) return;
+
+					area.AddChild(newNode);
+
+					Vector3 baseOffset = new Vector3(mesh.GetAabb().Size.X / 2, 0, -mesh.GetAabb().Size.Z / 2);
+
+					newNode.Position = accumOffset + baseOffset;
+					accumOffset += new Vector3(0 , 0, -mesh.GetAabb().Size.Z - 0.005f);
+				}
 			}
 		}
 
@@ -71,7 +80,10 @@ public partial class Shelf : Prop
 			{
 				foreach (Node node in area.GetChildren())
 				{
-					node.QueueFree();
+					if (node is not CollisionShape3D)
+					{
+						node.Free();
+					}
 				}
 			}
 		}
