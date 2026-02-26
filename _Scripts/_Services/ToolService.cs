@@ -13,7 +13,7 @@ public partial class ToolService : Node
 
     public enum ETools
     {
-        Buildmode, Settings, BakePathfinding, SpawnACustomer, SaveFile, OpenFile, None
+        Buildmode, Settings, BakePathfinding, SpawnACustomer, SaveFile, OpenFile, Messages, None
     }
 
     public static event Action <ETools> OnUpdate;

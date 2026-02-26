@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://t6dv70bnsld7"]
+
+[ext_resource type="Script" uid="uid://bu1q2fn8lehbh" path="res://_Scripts/UI/Windows/Messages/PersonCard.cs" id="1_2yua4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqsta"]
+bg_color = Color(1, 1, 1, 0.023529412)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+
+[node name="PersonCard" type="PanelContainer" unique_id=856814552 node_paths=PackedStringArray("_theButton")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kqsta")
+script = ExtResource("1_2yua4")
+_theButton = NodePath("Button")
+
+[node name="Button" type="Button" parent="." unique_id=930728291]
+layout_mode = 2
+text = "Person name"
+flat = true
+alignment = 0
+text_overrun_behavior = 5

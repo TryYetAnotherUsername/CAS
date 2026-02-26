@@ -14,13 +14,14 @@ public partial class WindowService : Node
 	private static readonly Dictionary<EWindowContent, (string dispName, string UID)> _windowContentIndex = new()
     {
         { EWindowContent.None, ("New window", "") },
-		{ EWindowContent.Properties, ("Inspect", "uid://dga1dp2fut3cf") }
+		{ EWindowContent.Properties, ("Inspect", "uid://dga1dp2fut3cf") },
+		{ EWindowContent.Messages, ("Messages", "uid://bh0t8bq1lj75o") }
     };
 
 
 	public enum EWindowContent
 	{
-		None, Properties, 
+		None, Properties, Messages
 	};
 
     public override void _Ready()
@@ -29,8 +30,13 @@ public partial class WindowService : Node
 
     }
 
-
-	public Control NewWindow(EWindowContent content= EWindowContent.None) // returns control of content scene.
+	/// <Summary>
+	/// Spawns a new window
+	/// </Summary>
+	/// <returns>
+	/// (Control) content scene root
+	/// </returns>
+	public Control NewWindow(EWindowContent content= EWindowContent.None)
     {
         GD.Print("WindowService: Trying to spawn a new window");
 
@@ -49,7 +55,7 @@ public partial class WindowService : Node
         contLayer.AddChild(sceneInst);
 
         GD.Print("WindowService: Finished spawning a new window. Returned the scene.");
-		return sceneInst as Control; // return the scene. Different uses can call custom inits.
+		return sceneInst as Control;
 
 		// ===== local methods =====
         static string GetDispName(EWindowContent targCont)

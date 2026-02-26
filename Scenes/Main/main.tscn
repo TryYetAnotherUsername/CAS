@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/ScaleTool.cs" id="15_1t20g"]
 [ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/BuildmodeTool.cs" id="15_4o5wv"]
 [ext_resource type="Script" uid="uid://bj4gvgek4cup8" path="res://Scenes/Main/EconomyService.cs" id="15_u244o"]
+[ext_resource type="Script" uid="uid://kxjem6ojd6ir" path="res://_Scripts/_Services/MessageService.cs" id="16_0uxpu"]
 [ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/MoveGizmo.tscn" id="17_4a3kt"]
 [ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/_Services/BuildmodeService.cs" id="19_c4b4r"]
@@ -319,8 +320,8 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.5),
 "update": 0,
 "values": [Vector2(1.1, 1), Vector2(1, 1)]
 }
@@ -343,8 +344,8 @@ tracks/2/path = NodePath("Label:scale")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 0.5, 0.5),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.2, 1), Vector2(1, 1)]
 }
@@ -449,6 +450,9 @@ script = ExtResource("3_qw60k")
 [node name="EconomyService" type="Node" parent="Services" unique_id=180782190]
 script = ExtResource("15_u244o")
 
+[node name="MessageService" type="Node" parent="Services" unique_id=872495204]
+script = ExtResource("16_0uxpu")
+
 [node name="UI" type="Control" parent="." unique_id=738311301]
 layout_mode = 3
 anchors_preset = 15
@@ -501,7 +505,6 @@ action_mode = 0
 text = "Tools >"
 flat = true
 script = ExtResource("3_ifk88")
-_actionMode = null
 _animationPlayer = NodePath("../../Menu/MenuAnimationPlayer")
 
 [node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
@@ -555,7 +558,6 @@ text = "Build tool"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = null
 
 [node name="MenuItem2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=710371277]
 custom_minimum_size = Vector2(0, 40)
@@ -575,6 +577,25 @@ flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
 _tool = 1
+
+[node name="Messages" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=679314490]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Messages" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages" unique_id=2074578238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p6jpk")
+text = "Open messages"
+flat = true
+alignment = 0
+script = ExtResource("4_tyqxl")
+_tool = 6
 
 [node name="BakePathfinding" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1750453374]
 custom_minimum_size = Vector2(0, 40)

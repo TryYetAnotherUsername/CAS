@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cigwxpoyuvy8b"]
+
+[ext_resource type="Script" uid="uid://c5nh8vsw50iea" path="res://_Scripts/UI/Windows/Messages/MessageBubble.cs" id="1_kwbac"]
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="2_uru5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxcpb"]
+content_margin_left = 9.0
+content_margin_top = 5.0
+content_margin_right = 9.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0648, 0.07866001, 0.09, 0.9843137)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 10
+shadow_color = Color(0.17, 0.17, 0.17, 0.35686275)
+shadow_size = 2
+
+[node name="IncomingMessage" type="HBoxContainer" unique_id=1002652987 node_paths=PackedStringArray("_label")]
+custom_minimum_size = Vector2(0, 40)
+script = ExtResource("1_kwbac")
+_label = NodePath("PanelContainer/text")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=738088445]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_vxcpb")
+
+[node name="text" type="RichTextLabel" parent="PanelContainer" unique_id=1760710062]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_uru5t")
+theme_override_font_sizes/normal_font_size = 13
+text = "Lorem ipsum dolor sit amet eos exerci rebum amet nonumy dolor stet dolor eirmod nonumy ipsum stet lorem ipsum vel voluptua duo. "
+fit_content = true
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1121822594]
+layout_mode = 2
+size_flags_horizontal = 3

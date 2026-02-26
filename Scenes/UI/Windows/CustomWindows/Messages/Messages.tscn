@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://bh0t8bq1lj75o"]
+
+[ext_resource type="Script" uid="uid://dd04m5270eaeg" path="res://_Scripts/UI/Windows/Messages/Contacts.cs" id="1_677fn"]
+[ext_resource type="PackedScene" uid="uid://t6dv70bnsld7" path="res://Scenes/UI/Windows/CustomWindows/Messages/person_card.tscn" id="2_677fn"]
+[ext_resource type="Script" uid="uid://cknl17lak3mxf" path="res://_Scripts/UI/Windows/Messages/Chat.cs" id="3_5e3h2"]
+[ext_resource type="PackedScene" uid="uid://q1q7gkcsnops" path="res://Scenes/UI/Windows/CustomWindows/Messages/outgoing_message.tscn" id="4_5e3h2"]
+[ext_resource type="PackedScene" uid="uid://cigwxpoyuvy8b" path="res://Scenes/UI/Windows/CustomWindows/Messages/incoming_message.tscn" id="5_kqsta"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7y3q"]
+bg_color = Color(0.12, 0.12, 0.12, 0.9647059)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0.17745534, 0.17745534, 0.17745534, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5e3h2"]
+bg_color = Color(0.063, 0.07830001, 0.09, 0.75686276)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.17745534, 0.17745534, 0.17745534, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 10
+
+[node name="Messages" type="ScrollContainer" unique_id=601615628]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="." unique_id=941973879]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Control" unique_id=459345504]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+drag_area_highlight_in_editor = true
+
+[node name="contacts" type="Control" parent="Control/HSplitContainer" unique_id=1965659238 node_paths=PackedStringArray("_root")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_677fn")
+_root = NodePath("ContactsCardsRoot")
+_personCard = ExtResource("2_677fn")
+
+[node name="ContactsCardsRoot" type="VBoxContainer" parent="Control/HSplitContainer/contacts" unique_id=923964883]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="PersonCard" parent="Control/HSplitContainer/contacts/ContactsCardsRoot" unique_id=856814552 instance=ExtResource("2_677fn")]
+layout_mode = 2
+
+[node name="chat" type="Control" parent="Control/HSplitContainer" unique_id=157799016 node_paths=PackedStringArray("_root", "_scrollCont")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_5e3h2")
+_root = NodePath("VBoxContainer/texts area/ScrollContainer/MessageBubblesRoot")
+_outboundBubble = ExtResource("4_5e3h2")
+_inboundBubble = ExtResource("5_kqsta")
+_scrollCont = NodePath("VBoxContainer/texts area/ScrollContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HSplitContainer/chat" unique_id=473028836]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="texts area" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=528547730]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7y3q")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/texts area" unique_id=1864333394]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/scrollbar_h_separation = 10
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="MessageBubblesRoot" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/texts area/ScrollContainer" unique_id=207765862]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ReplyBox" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=345745883]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5e3h2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox" unique_id=365473642]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox/ScrollContainer" unique_id=859223841]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox/ScrollContainer/VBoxContainer" unique_id=131351740]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox/ScrollContainer/VBoxContainer/PanelContainer" unique_id=1802417139]
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet eos exerci rebum amet nonumy dolor stet dolor eirmod nonumy ipsum stet lorem ipsum vel voluptua duo."
+autowrap_mode = 3
