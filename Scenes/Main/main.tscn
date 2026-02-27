@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://bj4gvgek4cup8" path="res://Scenes/Main/EconomyService.cs" id="15_u244o"]
 [ext_resource type="Script" uid="uid://kxjem6ojd6ir" path="res://_Scripts/_Services/MessageService.cs" id="16_0uxpu"]
 [ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/MoveGizmo.tscn" id="17_4a3kt"]
+[ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="17_fy12w"]
 [ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
 [ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/_Services/BuildmodeService.cs" id="19_c4b4r"]
 [ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
@@ -37,17 +38,71 @@
 [ext_resource type="Script" uid="uid://pbm8xtsk7aox" path="res://_Scripts/_Services/PathfindingService.cs" id="28_8oboy"]
 [ext_resource type="Script" uid="uid://ccodax680di2u" path="res://_Scripts/_Services/WorldService.cs" id="31_aq0wg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifk88"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8745098)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvw5u"]
+shader = ExtResource("17_fy12w")
+shader_parameter/blur_amount = 2.0
+shader_parameter/mix_amount = 0.5
+shader_parameter/saturation = 1.2
+shader_parameter/grain_amount = 0.02
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy12w"]
+bg_color = Color(0.2203832, 0.2270189, 0.23934245, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3407036, 0.35143778, 0.36753988, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Shader" id="Shader_fy12w"]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0.0, 10.0) = 2.0;
+uniform float mix_amount : hint_range(0.0, 1.0) = 0.5;
+uniform float saturation : hint_range(0.0, 2.0) = 1.2;
+uniform float grain_amount : hint_range(0.0, 0.1) = 0.02;
+uniform vec4 color_over : source_color;
+// The BackBufferCopy will feed this texture
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+float noise(vec2 uv) {
+    return fract(sin(dot(uv.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+void fragment() {
+    // Sampling with SCREEN_UV ensures we grab the exact pixels
+    // located behind this specific fragment on the screen.
+    vec4 blurred = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+
+    float luminance = dot(blurred.rgb, vec3(0.2126, 0.7152, 0.0722));
+    blurred.rgb = mix(vec3(luminance), blurred.rgb, saturation);
+
+    vec4 fin = mix(blurred, color_over, mix_amount);
+
+    // Grain stays static relative to the screen (macOS style)
+    float n = (noise(SCREEN_UV) - 0.5) * grain_amount;
+    fin.rgb += n;
+
+    COLOR = vec4(fin.rgb, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_go6uc"]
+shader = SubResource("Shader_fy12w")
+shader_parameter/blur_amount = 5.0000002375
+shader_parameter/mix_amount = 0.50000002375
+shader_parameter/saturation = 1.2
+shader_parameter/grain_amount = 0.02000000095
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvw5u"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-corner_detail = 10
 
 [sub_resource type="Animation" id="Animation_8oboy"]
 length = 0.001
@@ -210,6 +265,18 @@ _data = {
 &"open_menu": SubResource("Animation_tyqxl")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_go6uc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48645884, 0.4864589, 0.4864589, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
 [sub_resource type="Animation" id="Animation_v4agm"]
 length = 0.001
 tracks/0/type = "value"
@@ -270,6 +337,26 @@ _data = {
 &"RESET": SubResource("Animation_v4agm"),
 &"enter": SubResource("Animation_ah3if")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fy12w"]
+shader = ExtResource("17_fy12w")
+shader_parameter/blur_amount = 2.0
+shader_parameter/mix_amount = 0.5
+shader_parameter/saturation = 1.2
+shader_parameter/grain_amount = 0.02
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uxpu"]
+bg_color = Color(0.2203832, 0.2270189, 0.23934245, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3407036, 0.35143778, 0.36753988, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="Animation" id="Animation_u244o"]
 length = 0.001
@@ -480,16 +567,18 @@ grow_horizontal = 2
 mouse_filter = 1
 
 [node name="OpenMenuButton" type="Panel" parent="UI/Core/TopArea" unique_id=1403806244]
+material = SubResource("ShaderMaterial_hvw5u")
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -64.0
+offset_left = -96.0
 offset_top = 8.0
-offset_right = 63.9917
-offset_bottom = 32.0
+offset_right = 96.0
+offset_bottom = 48.0
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_fy12w")
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="UI/Core/TopArea/OpenMenuButton" unique_id=1604497462 node_paths=PackedStringArray("_animationPlayer")]
@@ -502,39 +591,48 @@ grow_vertical = 2
 theme = ExtResource("1_p6jpk")
 theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.654902)
 action_mode = 0
-text = "Tools >"
+text = "Select tool →"
 flat = true
 script = ExtResource("3_ifk88")
 _animationPlayer = NodePath("../../Menu/MenuAnimationPlayer")
 
+[node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/OpenMenuButton" unique_id=1216387105]
+copy_mode = 2
+
 [node name="Menu" type="Panel" parent="UI/Core/TopArea" unique_id=1936146633]
 visible = false
 modulate = Color(1, 1, 1, 0)
-clip_children = 2
+material = SubResource("ShaderMaterial_go6uc")
 clip_contents = true
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
-offset_left = 192.0
+anchor_bottom = 20.250002
+offset_left = 320.0
 offset_top = 40.0
-offset_right = -192.0
-offset_bottom = 256.0
+offset_right = -320.0
+offset_bottom = -392.00006
 grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(384, 86)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ifk88")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hvw5u")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/Menu" unique_id=102303710]
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Core/TopArea/Menu" unique_id=1427515038]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 6.1035156e-05
-offset_bottom = 0.00021362305
+offset_left = 16.0
+offset_top = 32.0
+offset_right = -16.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-scroll_hint_mode = 1
+theme_override_constants/scrollbar_h_separation = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer" unique_id=413247063]
 layout_mode = 2
@@ -675,15 +773,12 @@ _tool = 4
 
 [node name="Button" type="Button" parent="UI/Core/TopArea/Menu" unique_id=339895518 node_paths=PackedStringArray("_animationPlayer")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -58.0
-offset_bottom = 23.0
-grow_horizontal = 0
+offset_right = 60.0
+offset_bottom = 32.0
 theme = ExtResource("1_p6jpk")
+theme_override_colors/font_color = Color(0.21815291, 0.54189914, 1, 1)
 action_mode = 0
-text = "< back"
+text = "back"
 flat = true
 script = ExtResource("3_ifk88")
 _actionMode = 1
@@ -692,6 +787,16 @@ _animationPlayer = NodePath("../MenuAnimationPlayer")
 [node name="MenuAnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea/Menu" unique_id=1771402108]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_4ohmo")
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Core/TopArea/Menu" unique_id=1796641811]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_go6uc")
 
 [node name="InspectHint" type="Panel" parent="UI/Core/TopArea" unique_id=1756454243 node_paths=PackedStringArray("_aniPlayer")]
 visible = false
@@ -728,19 +833,21 @@ vertical_alignment = 1
 libraries/ = SubResource("AnimationLibrary_v4agm")
 
 [node name="moneyCounter" type="Panel" parent="UI/Core/TopArea" unique_id=858953191 node_paths=PackedStringArray("_aniPlayer", "_label")]
+material = SubResource("ShaderMaterial_fy12w")
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -80.0
+offset_left = -104.0
 offset_top = -8.0
 offset_right = -8.0
-offset_bottom = 16.0
+offset_bottom = 32.0
 grow_horizontal = 0
 grow_vertical = 2
 pivot_offset_ratio = Vector2(1, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_0uxpu")
 script = ExtResource("20_1j4pb")
 _aniPlayer = NodePath("AnimationPlayer")
 _label = NodePath("Label")
@@ -761,12 +868,16 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0, 0.5)
 theme = ExtResource("1_p6jpk")
 theme_override_colors/font_color = Color(1, 1, 1, 0.52156866)
+theme_override_font_sizes/font_size = 14
 text = "£ 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Core/TopArea/moneyCounter" unique_id=829606511]
 libraries/ = SubResource("AnimationLibrary_u244o")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/moneyCounter" unique_id=1865957402]
+copy_mode = 2
 
 [node name="Buildmode" parent="UI" unique_id=2138034224 instance=ExtResource("5_8sujb")]
 layout_mode = 1
