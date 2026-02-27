@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://i64mlc25571h"]
+
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="1_062xk"]
+[ext_resource type="Script" uid="uid://spurclviupn0" path="res://_Scripts/UI/Windows/Messages/ReplyCard.cs" id="1_rm0nx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqsta"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.15480001, 0.16992001, 0.18, 0.7607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.20872003, 0.22759947, 0.23074624, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="ReplyCard" type="PanelContainer" unique_id=1916850952 node_paths=PackedStringArray("_text", "_button")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_kqsta")
+script = ExtResource("1_rm0nx")
+_text = NodePath("HBoxContainer/Label")
+_button = NodePath("HBoxContainer/Button")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2948896]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=782555348]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.64705884)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet eos exerci rebum amet nonumy dolor stet dolor eirmod nonumy ipsum stet lorem ipsum vel voluptua duo. "
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=272693897]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.3882353)
+theme_override_colors/font_hover_color = Color(0.1845507, 0.57444036, 0.99999994, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.25490198)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("1_062xk")
+theme_override_font_sizes/font_size = 25
+action_mode = 0
+text = "⬆"
+flat = true

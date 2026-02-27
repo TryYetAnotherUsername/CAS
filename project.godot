@@ -24,6 +24,10 @@ config/icon="uid://bsva85o05dto2"
 
 settings/addon_root_folder="res://Addons/debug_draw_3d"
 
+[display]
+
+window/size/mode=3
+
 [dotnet]
 
 project/assembly_name="CAS 2"

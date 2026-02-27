@@ -9,4 +9,9 @@ public partial class MessageBubble : HBoxContainer
 	{
 		_label.Text = text;
 	}
+
+    public override void _Ready()
+    {
+    }
+
 }

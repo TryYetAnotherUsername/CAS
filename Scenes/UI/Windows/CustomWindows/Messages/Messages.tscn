@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://cknl17lak3mxf" path="res://_Scripts/UI/Windows/Messages/Chat.cs" id="3_5e3h2"]
 [ext_resource type="PackedScene" uid="uid://q1q7gkcsnops" path="res://Scenes/UI/Windows/CustomWindows/Messages/outgoing_message.tscn" id="4_5e3h2"]
 [ext_resource type="PackedScene" uid="uid://cigwxpoyuvy8b" path="res://Scenes/UI/Windows/CustomWindows/Messages/incoming_message.tscn" id="5_kqsta"]
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="6_kqsta"]
+[ext_resource type="PackedScene" uid="uid://i64mlc25571h" path="res://Scenes/UI/Windows/CustomWindows/Messages/reply_card.tscn" id="7_jfvh0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7y3q"]
 bg_color = Color(0.12, 0.12, 0.12, 0.9647059)
@@ -25,6 +27,120 @@ border_color = Color(0.17745534, 0.17745534, 0.17745534, 1)
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfvh0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.06949892, 0.08163463, 0.09361501, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18725526, 0.18725526, 0.1872552, 1)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfndq"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.74543387, 0.7454338, 0.7454338, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Animation" id="Animation_dfndq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/VBoxContainer:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/VBoxContainer2:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/VBoxContainer3:custom_minimum_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jfvh0"]
+resource_name = "tick"
+length = 2.3666666
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/VBoxContainer:custom_minimum_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 1.6333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, 0), Vector2(25, 0), Vector2(7, 0), Vector2(9.105, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/VBoxContainer2:custom_minimum_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.56666666, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, 0), Vector2(7, 0), Vector2(25, 0), Vector2(7, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/VBoxContainer3:custom_minimum_size")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 0.8333333, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, 0), Vector2(7, 0), Vector2(25, 0), Vector2(7, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dfndq"]
+_data = {
+&"RESET": SubResource("Animation_dfndq"),
+&"tick": SubResource("Animation_jfvh0")
+}
 
 [node name="Messages" type="ScrollContainer" unique_id=601615628]
 anchors_preset = 15
@@ -69,15 +185,21 @@ theme_override_constants/separation = 10
 [node name="PersonCard" parent="Control/HSplitContainer/contacts/ContactsCardsRoot" unique_id=856814552 instance=ExtResource("2_677fn")]
 layout_mode = 2
 
-[node name="chat" type="Control" parent="Control/HSplitContainer" unique_id=157799016 node_paths=PackedStringArray("_root", "_scrollCont")]
+[node name="chat" type="Control" parent="Control/HSplitContainer" unique_id=157799016 node_paths=PackedStringArray("_textsRoot", "_replyRoot", "_scrollCont", "_repliesArea", "_loadingAnimationThing", "_aniPlayer", "_loadingPhrase")]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_5e3h2")
-_root = NodePath("VBoxContainer/texts area/ScrollContainer/MessageBubblesRoot")
+_textsRoot = NodePath("VBoxContainer/TextsArea/ScrollContainer/MessageBubblesRoot")
+_replyRoot = NodePath("VBoxContainer/RepliesArea/ScrollContainer/ReplyCardsRoot")
 _outboundBubble = ExtResource("4_5e3h2")
 _inboundBubble = ExtResource("5_kqsta")
-_scrollCont = NodePath("VBoxContainer/texts area/ScrollContainer")
+_replyCard = ExtResource("7_jfvh0")
+_scrollCont = NodePath("VBoxContainer/TextsArea/ScrollContainer")
+_repliesArea = NodePath("VBoxContainer/RepliesArea")
+_loadingAnimationThing = NodePath("VBoxContainer/RepliesArea/loadingAnimation")
+_aniPlayer = NodePath("VBoxContainer/RepliesArea/loadingAnimation/AnimationPlayer")
+_loadingPhrase = NodePath("VBoxContainer/RepliesArea/loadingAnimation/TypingLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/HSplitContainer/chat" unique_id=473028836]
 layout_mode = 1
@@ -88,12 +210,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="texts area" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=528547730]
+[node name="TextsArea" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=528547730]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_g7y3q")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/texts area" unique_id=1864333394]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/TextsArea" unique_id=1864333394]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,34 +231,142 @@ theme_override_constants/scrollbar_h_separation = 10
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 4
 
-[node name="MessageBubblesRoot" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/texts area/ScrollContainer" unique_id=207765862]
+[node name="MessageBubblesRoot" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/TextsArea/ScrollContainer" unique_id=207765862]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="ReplyBox" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=345745883]
-custom_minimum_size = Vector2(0, 100)
+[node name="Label" type="Label" parent="Control/HSplitContainer/chat/VBoxContainer/TextsArea/ScrollContainer/MessageBubblesRoot" unique_id=1745207020]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.51, 0.51, 0.51, 0.35686275)
+theme_override_colors/font_outline_color = Color(0.09781171, 0.09781184, 0.097811766, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("6_kqsta")
+theme_override_font_sizes/font_size = 12
+text = "Select a chat"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RepliesArea" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=345745883]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5e3h2")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox" unique_id=365473642]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea" unique_id=365473642]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_hint_mode = 3
+
+[node name="ReplyCardsRoot" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/ScrollContainer" unique_id=859223841]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="loadingAnimation" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea" unique_id=1370698647]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfvh0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation" unique_id=1715353336]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox/ScrollContainer" unique_id=859223841]
+[node name="MarginContainer" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=408868460]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=1970742051]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer" unique_id=1522000909]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox/ScrollContainer/VBoxContainer" unique_id=131351740]
+[node name="Panel" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer" unique_id=771783913]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfndq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer" unique_id=2109289420]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=1186614706]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=1590146577]
+custom_minimum_size = Vector2(7, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/HSplitContainer/chat/VBoxContainer/ReplyBox/ScrollContainer/VBoxContainer/PanelContainer" unique_id=1802417139]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer2" unique_id=1577328494]
 layout_mode = 2
-text = "Lorem ipsum dolor sit amet eos exerci rebum amet nonumy dolor stet dolor eirmod nonumy ipsum stet lorem ipsum vel voluptua duo."
-autowrap_mode = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer2" unique_id=1054019042]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfndq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer2" unique_id=1754642258]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=1503233071]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=658930215]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer3" unique_id=955987493]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer3" unique_id=417528157]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfndq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer/VBoxContainer3" unique_id=1804115138]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation/HBoxContainer" unique_id=507792598]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation" unique_id=782537560]
+libraries/ = SubResource("AnimationLibrary_dfndq")
+
+[node name="TypingLabel" type="Label" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea/loadingAnimation" unique_id=1270804114]
+layout_mode = 0
+offset_left = 63.0
+offset_right = 138.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.21568628)
+theme_override_fonts/font = ExtResource("6_kqsta")
+theme_override_font_sizes/font_size = 12
+text = "Typing..."
+vertical_alignment = 1

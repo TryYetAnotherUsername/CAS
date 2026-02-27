@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 public partial class MessageService : Node
 {
@@ -13,8 +14,10 @@ public partial class MessageService : Node
     #endregion <fields>
 
     #region <events>
-    public static Action <(string ID, string dispName)> OnNewConvo;
     public static Action <(string conversationId, Conversation.InboundMessage)> OnNewMessage;
+    public static Action <Conversation.OutboundReply> OnNewReply;
+
+    public static Action <(string ID, string dispName)> OnNewConvo;
     public static Action <string> OnDisplayConversation;
 
     #endregion <events>
@@ -88,10 +91,25 @@ public partial class MessageService : Node
         OnDisplayConversation?.Invoke(conversationId);
     }
 
-    public void Reply(string conversationId, Conversation.OutboundReply reply)
+    public async void Reply(string conversationId, Conversation.OutboundReply reply)
     {
+        var convo = _convosList[conversationId];
+        
+        // add to history
+        convo.History.Add(new Conversation.HistoryEntry { Text = convo.Messages[convo.CurrentMessageId].Text, IsInboundMessage = true });
+        convo.History.Add(new Conversation.HistoryEntry { Text = reply.Text, IsInboundMessage = false });
+        
         reply.Consequence?.Invoke();
-        var nextMessage = _convosList[conversationId].Messages[reply.NextMessageID];
+        OnNewReply?.Invoke(reply);
+        
+        if (reply.NextMessageID == null) return;
+        var nextMessage = convo.Messages[reply.NextMessageID];
+        var waitTime = nextMessage.Text.Length * 0.08;
+        Mathf.Clamp(waitTime, 1,10);
+
+        await ToSignal(GetTree().CreateTimer(waitTime), SceneTreeTimer.SignalName.Timeout);
+        
+        convo.CurrentMessageId = reply.NextMessageID;
         OnNewMessage?.Invoke((conversationId, nextMessage));
     }
 
