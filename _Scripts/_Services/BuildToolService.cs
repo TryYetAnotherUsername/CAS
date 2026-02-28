@@ -68,9 +68,16 @@ public partial class BuildToolService : Node
             // this handles clicks during the auto place from catalogue freeform, so this creates a new instance
             if (_currentState == EState.PlacingFromCatalog)
             {
-                GD.Print("Placed- Continue placing");
+                if (EconomyService.I.TryTakeCash(_reqPropEnt.Cost) == false)
+                {
+                    _currentProp.QueueFree();
+                    NotificationService.I.Print($"⚠️ You are £{MathF.Round(_reqPropEnt.Cost - EconomyService.I.Cash, 2)} short to place {_reqPropEnt.DispName}.)");
+                    OpenForSelection();
+                    return;
+                }
                 _currentProp.SetCollision(true);
                 _currentProp.AnimatePlace();
+                GD.Print("Placed- Continue placing");
                 KeepPlacing();
             }
             
@@ -97,7 +104,7 @@ public partial class BuildToolService : Node
             {
                 // rotate
                 var tween = CreateTween();
-                tween.TweenProperty(_currentProp, "rotation_degrees:y", _currentProp.RotationDegrees.Y + 90, 0.15);
+                tween.TweenProperty(_currentProp, "rotation_degrees:y", _currentProp.RotationDegrees.Y + 90, 0.75);
             }
         }
     }

@@ -13,7 +13,7 @@ public partial class Main : Node
         ProductConfig.Init();
 		RunShelfTests();
         GD.Print("\n==== Main: Scene tree ready. Hello, world!");
-        EconomyService.I.AddCash(100000f);
+        EconomyService.I.AddCash(1000f);
     }
 
     private void RunShelfTests()

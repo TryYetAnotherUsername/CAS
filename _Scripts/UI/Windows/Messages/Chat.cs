@@ -142,6 +142,8 @@ public partial class Chat : Control
 			node.QueueFree();
 		}
 
+		if (message.AvalibleReplies == null) return; // end of conversation
+
 		foreach (Conversation.OutboundReply reply in message.AvalibleReplies)
 		{
 			var node = _replyCard.Instantiate();
@@ -185,9 +187,8 @@ public partial class Chat : Control
 	private void ScrollToBottom()
 	{
 		var tween = CreateTween();
-
 		tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
-		tween.TweenProperty(_scrollCont, "scroll_vertical", (int)_scrollCont.GetVScrollBar().MaxValue, 0.75);
+		tween.TweenProperty(_scrollCont, "scroll_vertical", 10000, 0.75);
 	}
 
 	#endregion <helper code>
