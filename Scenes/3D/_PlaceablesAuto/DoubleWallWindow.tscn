@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b37vt42e0fhud"]
 
 [ext_resource type="PackedScene" uid="uid://cv6t7o42bwcta" path="res://Assets/3D/Models/Placeables/Walls/double_wall_window_1.glb" id="1_oh2bx"]
-[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Objects/Props/p/Wall.cs" id="2_s0tpg"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Classes/Props/p/Wall.cs" id="2_s0tpg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh2bx"]
 albedo_color = Color(0.83033526, 0.83033514, 0.83033514, 1)
@@ -27,22 +27,24 @@ rim_enabled = true
 clearcoat_roughness = 0.43
 subsurf_scatter_strength = 1.0
 
-[node name="double_wall_window_1" unique_id=848946238 instance=ExtResource("1_oh2bx")]
+[node name="double_wall_window_1" unique_id=848946238 node_paths=PackedStringArray("PhyCol", "RayCol") instance=ExtResource("1_oh2bx")]
 script = ExtResource("2_s0tpg")
+PhyCol = NodePath("single_wall_physics/StaticBody3D/CollisionShape3D")
+RayCol = NodePath("single_wall_ray/StaticBody3D/CollisionShape3D")
 
-[node name="single_wall_physics" parent="." index="0" unique_id=1334974634]
+[node name="single_wall_physics" parent="." index="0" unique_id=1564160560]
 visible = false
 
-[node name="single_wall" parent="." index="1" unique_id=401331993]
+[node name="single_wall" parent="." index="1" unique_id=168957569]
 surface_material_override/0 = SubResource("StandardMaterial3D_oh2bx")
 surface_material_override/1 = SubResource("StandardMaterial3D_s0tpg")
 surface_material_override/2 = SubResource("StandardMaterial3D_dej7e")
 surface_material_override/3 = SubResource("StandardMaterial3D_uj5px")
 surface_material_override/4 = SubResource("StandardMaterial3D_oen5i")
 
-[node name="single_wall_ray" parent="." index="2" unique_id=473788535]
+[node name="single_wall_ray" parent="." index="2" unique_id=1234696482]
 visible = false
 
-[node name="StaticBody3D" parent="single_wall_ray" index="0" unique_id=1353119929]
+[node name="StaticBody3D" parent="single_wall_ray" index="0" unique_id=370241912]
 collision_layer = 2
 collision_mask = 2

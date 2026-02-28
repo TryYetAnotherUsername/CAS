@@ -67,13 +67,13 @@ public partial class FileOpService : Node
 			if (deserialised != null)
 			{
 				ProjectService.I.In(deserialised);
-				GD.Print("Successfully deserialised!");
+				NotificationService.I.Print("New file loaded.");
 			}
 		}
     
 		void OnCanceled()
 		{
-			GD.Print("File selection canceled");
+			NotificationService.I.Print("File selection was cancelled.");
 		}
     }
     
@@ -105,17 +105,18 @@ public partial class FileOpService : Node
 			if (file == null)
 			{
 				GD.PrintErr("Could not save file!");
+				NotificationService.I.Print("Could not save file.");
 				return;
 			}
 			
 			var serialised = JsonSerializer.Serialize(ProjectService.I.Out());
 			file.StoreString(serialised);
-			GD.Print("Saved successfully!");
+			NotificationService.I.Print("File saved.");
 		}
     
 		void OnCanceled()
 		{
-			GD.Print("File selection canceled");
+			NotificationService.I.Print("File selection was cancelled.");
 		}
     }
 

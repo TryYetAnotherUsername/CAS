@@ -30,7 +30,7 @@ project/assembly_name="CAS 2"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/voronoi_scatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/SmoothScroll/plugin.cfg", "res://addons/voronoi_scatter/plugin.cfg")
 
 [file_customization]
 

@@ -16,7 +16,10 @@ public partial class NpcSpawnerService : Node
         {
             if (tool == ToolService.ETools.SpawnACustomer)
             {
-                SpawnCustomer();
+                if (CheckSpawnStatus())
+                {
+                    StartSpawning();   
+                }
             }
         };
 
@@ -27,13 +30,13 @@ public partial class NpcSpawnerService : Node
     {
         if (WorldService.I.GetCheckout() is null)
         {
-            GD.PrintErr("No one can shop at your shop because you dont have a Checkout.");
+            GD.PushWarning("No one can shop at your shop because there is no checkout.");
             OnClearAll?.Invoke();
             return;
         }
         if (WorldService.I.GetCheckoutQueue() is null)
         {
-            GD.PrintErr("No one can shop at your shop because they have no where to queue.");
+            GD.PushWarning("No one can shop at your shop because they have no where to queue.");
             OnClearAll?.Invoke();
             return;
         }
@@ -48,6 +51,23 @@ public partial class NpcSpawnerService : Node
         }
     }
 
+    public bool CheckSpawnStatus()
+    {
+        if (WorldService.I.GetCheckout() is null)
+        {
+            NotificationService.I.Print("No one can shop at your shop because there is no checkout\n\nTo build a new checkout, open the build tool from the menu and go to Misc > Checkout.");
+            OnClearAll?.Invoke();
+            return false;
+        }
+        if (WorldService.I.GetCheckoutQueue() is null)
+        {
+            NotificationService.I.Print("No one can shop at your shop because they have no where to queue\n\nTo build a new queue point, open the build tool from the menu and go to Misc > Queue point.");
+            OnClearAll?.Invoke();
+            return false;
+        }
+        return true;
+    }
+
     public async void StartSpawning()
     {
         while (true)
@@ -57,5 +77,4 @@ public partial class NpcSpawnerService : Node
         }
     }
 
-    
 }

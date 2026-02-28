@@ -48,15 +48,15 @@ public partial class Customer : NPC
 
     private static readonly List<string> _names =
     [
-        "pilotimothy",
-        "Rowey",
-        "Hendo🏀",
-        "Haagrid",
-        "MassivMisileMustafa",
-        "William",
-        "Bails",
-        "Ben",
-        "Cosmc",
+        // "pilotimothy",
+        // "Rowey",
+        // "Hendo🏀",
+        // "Haaris",
+        // "Massive Missile Mustafa",
+        // "Will",
+        // "Bails",
+        // "Ben",
+        "Customer"
     ];
 
     // ========== Godot native ==========

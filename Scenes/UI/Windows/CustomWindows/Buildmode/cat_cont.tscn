@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dsils038mc357"]
+
+[ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="1_oa6kv"]
+[ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="2_6bkc0"]
+
+[sub_resource type="Resource" id="Resource_5g8ms"]
+script = ExtResource("2_6bkc0")
+
+[sub_resource type="Resource" id="Resource_re2da"]
+script = ExtResource("2_6bkc0")
+
+[node name="CatCont" type="ScrollContainer" unique_id=302557740]
+script = ExtResource("1_oa6kv")
+speed = 500.0
+wheel_scroll_damper = SubResource("Resource_5g8ms")
+dragging_scroll_damper = SubResource("Resource_re2da")
+drag_with_mouse = false
+drag_with_touch = false
+metadata/_custom_type_script = "uid://bgqglerkcylxx"
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1864258241]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+metadata/_smooth_scroll_default_mouse_filter_set = true

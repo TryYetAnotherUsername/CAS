@@ -14,7 +14,6 @@ public partial class Main : Node
 		RunShelfTests();
         GD.Print("\n==== Main: Scene tree ready. Hello, world!");
         EconomyService.I.AddCash(100000f);
-        BuildmodeService.I.SetBuildModeEnabled(false);
     }
 
     private void RunShelfTests()

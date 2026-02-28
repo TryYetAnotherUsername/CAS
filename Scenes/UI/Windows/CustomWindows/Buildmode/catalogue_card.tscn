@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://c5r85ncwfggtk"]
+
+[ext_resource type="Script" uid="uid://cpuoy0fojjkdr" path="res://_Scripts/UI/Windows/BuildmodeTool/CatalogueCard.cs" id="1_1wa27"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gydw8"]
+color = Color(1, 1, 1, 0.043137256)
+
+[node name="CatalogueProductCard" type="Button" unique_id=2117602811 node_paths=PackedStringArray("_dispNameLabel", "_costLabel")]
+custom_minimum_size = Vector2(0, 40)
+offset_right = 8.0
+offset_bottom = 40.0
+flat = true
+script = ExtResource("1_1wa27")
+_dispNameLabel = NodePath("HBoxContainer/Label")
+_costLabel = NodePath("HBoxContainer/Label2")
+
+[node name="Panel3" type="Panel" parent="." unique_id=1382088389]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 570.0
+theme_override_styles/panel = SubResource("StyleBoxLine_gydw8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=96758543]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1890247032]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DisplayName"
+clip_text = true
+text_overrun_behavior = 5
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=909218071]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6784314)
+theme_override_font_sizes/font_size = 12
+text = "Price/ unit"
+
+[node name="Panel2" type="Panel" parent="." unique_id=662512963]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 0
+offset_top = 40.0
+offset_right = 570.0
+offset_bottom = 41.0
+theme_override_styles/panel = SubResource("StyleBoxLine_gydw8")

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dutcuyuk8d0b6" path="res://Assets/3D/Models/Placeables/Floors/basic_floor.glb" id="1_37d5g"]
 [ext_resource type="Texture2D" uid="uid://d2l0biky6bi3b" path="res://Assets/3D/Textures/Wood/wood_floor_nor_gl_4k.jpg" id="2_3xrh7"]
 [ext_resource type="Texture2D" uid="uid://bgb0k78k3xri3" path="res://Assets/3D/Textures/Wood/wood_floor_diff_4k.jpg" id="2_7sp5y"]
-[ext_resource type="Script" uid="uid://dqm3dg2dbrxbu" path="res://_Scripts/Objects/Props/p/Floor.cs" id="2_lhtej"]
+[ext_resource type="Script" uid="uid://dqm3dg2dbrxbu" path="res://_Scripts/Classes/Props/p/Floor.cs" id="2_lhtej"]
 [ext_resource type="Texture2D" uid="uid://dnp300efy1vwo" path="res://Assets/3D/Textures/Wood/wood_floor_arm_4k.jpg" id="3_ykt47"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_7sp5y"]
@@ -25,21 +25,23 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 grow_amount = -0.169
 
-[node name="basic_floor2" unique_id=1538602412 instance=ExtResource("1_37d5g")]
+[node name="basic_floor2" unique_id=1538602412 node_paths=PackedStringArray("PhyCol", "RayCol") instance=ExtResource("1_37d5g")]
 script = ExtResource("2_lhtej")
+PhyCol = NodePath("basic_floor_physics/StaticBody3D/CollisionShape3D")
+RayCol = NodePath("basic_floor_ray/StaticBody3D/CollisionShape3D")
 
-[node name="basic_floor" parent="." index="0" unique_id=1927384416]
+[node name="basic_floor" parent="." index="0" unique_id=1698496386]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 surface_material_override/0 = SubResource("ORMMaterial3D_7sp5y")
 
-[node name="basic_floor_physics" parent="." index="1" unique_id=1550270093]
+[node name="basic_floor_physics" parent="." index="1" unique_id=725820469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 visible = false
 
-[node name="basic_floor_ray" parent="." index="2" unique_id=1342764823]
+[node name="basic_floor_ray" parent="." index="2" unique_id=2125123216]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
 visible = false
 
-[node name="StaticBody3D" parent="basic_floor_ray" index="0" unique_id=1524007479]
+[node name="StaticBody3D" parent="basic_floor_ray" index="0" unique_id=996282804]
 collision_layer = 2
 collision_mask = 2

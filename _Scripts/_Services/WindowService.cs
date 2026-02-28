@@ -14,14 +14,15 @@ public partial class WindowService : Node
 	private static readonly Dictionary<EWindowContent, (string dispName, string UID)> _windowContentIndex = new()
     {
         { EWindowContent.None, ("New window", "") },
-		{ EWindowContent.Properties, ("Inspect", "uid://dga1dp2fut3cf") },
-		{ EWindowContent.Messages, ("Messages", "uid://bh0t8bq1lj75o") }
+		{ EWindowContent.Properties, ("Manage stock", "uid://dga1dp2fut3cf") },
+		{ EWindowContent.Messages, ("Messages", "uid://bh0t8bq1lj75o") },
+		{ EWindowContent.BuildWindow, ("Build tool", "uid://dfoesuavqgm4r")}
     };
 
 
 	public enum EWindowContent
 	{
-		None, Properties, Messages
+		None, Properties, Messages, BuildWindow
 	};
 
     public override void _Ready()

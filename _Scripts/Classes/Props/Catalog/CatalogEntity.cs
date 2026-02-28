@@ -24,7 +24,9 @@ public partial class CatalogEntity
     // === Fields ===
     
     public string UID;
+    public float Cost;
     public string DispName;
     public EGroup CatalogGroup;
     public EPlacementMode AllowedPlacementMode;
+    public string Discription = "";
 }

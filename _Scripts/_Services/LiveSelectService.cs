@@ -77,7 +77,7 @@ public partial class LiveSelectService : Node
         var camera3D = GetViewport().GetCamera3D();
         var from = camera3D.ProjectRayOrigin(GetViewport().GetMousePosition());
 		
-        var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * BuildmodeService.RayLength;
+        var to = from + camera3D.ProjectRayNormal(GetViewport().GetMousePosition()) * BuildToolService.RayLength;
         var spaceState = GetViewport().World3D.DirectSpaceState;
 
         var options = PhysicsRayQueryParameters3D.Create(from, to);

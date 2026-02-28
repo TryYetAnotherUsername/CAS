@@ -195,7 +195,7 @@ _replyRoot = NodePath("VBoxContainer/RepliesArea/ScrollContainer/ReplyCardsRoot"
 _outboundBubble = ExtResource("4_5e3h2")
 _inboundBubble = ExtResource("5_kqsta")
 _replyCard = ExtResource("7_jfvh0")
-_scrollCont = NodePath("VBoxContainer/TextsArea/ScrollContainer")
+_scrollCont = NodePath("")
 _repliesArea = NodePath("VBoxContainer/RepliesArea")
 _loadingAnimationThing = NodePath("VBoxContainer/RepliesArea/loadingAnimation")
 _aniPlayer = NodePath("VBoxContainer/RepliesArea/loadingAnimation/AnimationPlayer")
@@ -216,7 +216,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_g7y3q")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/TextsArea" unique_id=1864333394]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/TextsArea" unique_id=1120293365]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,9 +236,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Label" type="Label" parent="Control/HSplitContainer/chat/VBoxContainer/TextsArea/ScrollContainer/MessageBubblesRoot" unique_id=1745207020]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/font_color = Color(0.51, 0.51, 0.51, 0.35686275)
 theme_override_colors/font_outline_color = Color(0.09781171, 0.09781184, 0.097811766, 1)
 theme_override_constants/outline_size = 1
@@ -247,13 +249,14 @@ theme_override_font_sizes/font_size = 12
 text = "Select a chat"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="RepliesArea" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer" unique_id=345745883]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5e3h2")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea" unique_id=365473642]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea" unique_id=1956322397]
 clip_contents = false
 layout_mode = 1
 anchors_preset = 15
@@ -271,6 +274,7 @@ scroll_hint_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="loadingAnimation" type="Panel" parent="Control/HSplitContainer/chat/VBoxContainer/RepliesArea" unique_id=1370698647]
 visible = false

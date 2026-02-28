@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://_Scripts/_Services/Main.cs" id="1_imbg2"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p6jpk"]
 [ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/Player/player_char.tscn" id="2_4e4y2"]
+[ext_resource type="Script" uid="uid://dq3hj7drvm3sd" path="res://_Scripts/_Services/BuildToolService.cs" id="2_hvw5u"]
 [ext_resource type="Script" uid="uid://nt878o4u3kxu" path="res://_Scripts/_Services/ProjectService.cs" id="2_wbulw"]
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
 [ext_resource type="Script" uid="uid://d13f5bg7kx7x4" path="res://_Scripts/UI/CoreUi/MenuOpenCloseButton.cs" id="3_ifk88"]
@@ -11,27 +12,20 @@
 [ext_resource type="Script" uid="uid://bpkg4pt26xwso" path="res://_Scripts/_Services/WindowService.cs" id="4_5yls4"]
 [ext_resource type="Script" uid="uid://cw7mi3idogovc" path="res://_Scripts/UI/CoreUi/MenuItemButtons.cs" id="4_tyqxl"]
 [ext_resource type="Script" uid="uid://6xux4smuu8ra" path="res://_Scripts/UI/CoreUi/InspectHint.cs" id="5_4ohmo"]
-[ext_resource type="PackedScene" uid="uid://dbictodiotvlw" path="res://Scenes/UI/Buildmode/buildmode.tscn" id="5_8sujb"]
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
 [ext_resource type="Script" uid="uid://drtnqob4u6a2a" path="res://_Scripts/_Services/NpcSpawnerService.cs" id="11_wbulw"]
-[ext_resource type="Script" uid="uid://bv8gug0a6yo1s" path="res://_Scripts/_Services/Buildmode/UI/VFX/BmVisuals.cs" id="13_1t20g"]
-[ext_resource type="Script" uid="uid://givyuumkqaaw" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/SelectionTool.cs" id="13_koken"]
 [ext_resource type="Script" uid="uid://bhutg27lkojfk" path="res://_Scripts/_Services/CustomerSpawnerService.cs" id="14_js8sm"]
-[ext_resource type="Shader" uid="uid://bh0dxw1pmcmxf" path="res://Assets/3D/Shaders/OutlineShader.gdshader" id="14_tdwxr"]
-[ext_resource type="Script" uid="uid://cclxkxsenvj3k" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/ScaleTool.cs" id="15_1t20g"]
-[ext_resource type="Script" uid="uid://boos15bwy55hv" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/BuildmodeTool.cs" id="15_4o5wv"]
 [ext_resource type="Script" uid="uid://bj4gvgek4cup8" path="res://Scenes/Main/EconomyService.cs" id="15_u244o"]
 [ext_resource type="Script" uid="uid://kxjem6ojd6ir" path="res://_Scripts/_Services/MessageService.cs" id="16_0uxpu"]
-[ext_resource type="PackedScene" uid="uid://d3h0nsr7xoftv" path="res://Scenes/3D/Buildmode/MoveGizmo.tscn" id="17_4a3kt"]
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="17_fy12w"]
-[ext_resource type="PackedScene" uid="uid://dpuaf4ao8tyl0" path="res://Scenes/3D/Buildmode/ScaleGizmo.tscn" id="18_8sujb"]
-[ext_resource type="Script" uid="uid://07nii4xi8qgo" path="res://_Scripts/_Services/BuildmodeService.cs" id="19_c4b4r"]
-[ext_resource type="Script" uid="uid://b8cnspqm71vo" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/MoveTool.cs" id="19_ifk88"]
+[ext_resource type="Script" uid="uid://bcwo50eg8ydb2" path="res://_Scripts/_Services/NotificationService.cs" id="18_m6uf5"]
+[ext_resource type="PackedScene" uid="uid://c1ulq183u1t8n" path="res://Scenes/UI/CoreUi/notif_card.tscn" id="19_m6uf5"]
 [ext_resource type="Script" uid="uid://bdbxtvkcmaj8u" path="res://Scenes/Main/MoneyCounter.cs" id="20_1j4pb"]
-[ext_resource type="Script" uid="uid://cpnqk328qclwf" path="res://_Scripts/_Services/Buildmode/BuildingTools/Tools/FreeformTool.cs" id="21_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/NPCs/Customer.tscn" id="22_v4agm"]
+[ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="23_gw8t2"]
+[ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="24_nsdex"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/_Services/FactoryService.cs" id="25_8sujb"]
 [ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/_Services/ToolService.cs" id="25_tyqxl"]
 [ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/_Services/LiveSelectService.cs" id="27_4ohmo"]
@@ -103,6 +97,12 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="Resource" id="Resource_gw8t2"]
+script = ExtResource("24_nsdex")
+
+[sub_resource type="Resource" id="Resource_nsdex"]
+script = ExtResource("24_nsdex")
 
 [sub_resource type="Animation" id="Animation_8oboy"]
 length = 0.001
@@ -473,32 +473,41 @@ sky_material = SubResource("ProceduralSkyMaterial_hfg1r")
 background_mode = 2
 sky = SubResource("Sky_4e4y2")
 tonemap_mode = 2
+tonemap_exposure = 1.69
+tonemap_white = 7.94
 ssr_enabled = true
-ssr_max_steps = 120
+ssr_max_steps = 300
 ssao_enabled = true
 ssao_radius = 0.5
 ssao_intensity = 4.0
 ssil_enabled = true
 ssil_radius = 1.36
 sdfgi_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.49610466, 0.6515301, 0.73339844, 1)
+fog_sun_scatter = 0.4
+fog_density = 0.6319
+fog_sky_affect = 0.0
+volumetric_fog_density = 0.0125
+volumetric_fog_sky_affect = 0.0
+adjustment_enabled = true
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_wbulw"]
-sample_partition_type = 1
-cell_size = 0.01
+[sub_resource type="NavigationMesh" id="NavigationMesh_fy12w"]
+geometry_parsed_geometry_type = 1
+cell_size = 0.02
 cell_height = 0.01
-agent_radius = 0.1
+agent_height = 1.0
+agent_radius = 0.2
 
 [node name="Main" type="Node" unique_id=458039144]
 script = ExtResource("1_imbg2")
+metadata/_edit_horizontal_guides_ = [-264.0]
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
 
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")
 _shelvesRoot = NodePath("../../3D/Props/PropsRoot")
-
-[node name="BuildmodeService" type="Node" parent="Services" unique_id=815273757]
-script = ExtResource("19_c4b4r")
 
 [node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_windowsRoot")]
 script = ExtResource("4_5yls4")
@@ -540,6 +549,14 @@ script = ExtResource("15_u244o")
 [node name="MessageService" type="Node" parent="Services" unique_id=872495204]
 script = ExtResource("16_0uxpu")
 
+[node name="BuildToolService" type="Node" parent="Services" unique_id=1940178770]
+script = ExtResource("2_hvw5u")
+
+[node name="NotificationService" type="Node" parent="Services" unique_id=4814348 node_paths=PackedStringArray("_root")]
+script = ExtResource("18_m6uf5")
+_notifCardScene = ExtResource("19_m6uf5")
+_root = NodePath("../../UI/Core/NotifRoot")
+
 [node name="UI" type="Control" parent="." unique_id=738311301]
 layout_mode = 3
 anchors_preset = 15
@@ -552,18 +569,20 @@ mouse_filter = 1
 
 [node name="Core" type="Control" parent="UI" unique_id=498702153]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 24.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 
 [node name="TopArea" type="Control" parent="UI/Core" unique_id=256700952]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 32.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 
 [node name="OpenMenuButton" type="Panel" parent="UI/Core/TopArea" unique_id=1403806244]
@@ -605,23 +624,25 @@ modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_go6uc")
 clip_contents = true
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 20.250002
-offset_left = 320.0
-offset_top = 40.0
-offset_right = -320.0
-offset_bottom = -392.00006
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -132.0
+offset_right = 224.0
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.9, 0.9)
-pivot_offset = Vector2(384, 86)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hvw5u")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/Menu" unique_id=102303710]
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Core/TopArea/Menu" unique_id=1427515038]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Core/TopArea/Menu" unique_id=789312875]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -633,53 +654,50 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/scrollbar_h_separation = 3
+script = ExtResource("23_gw8t2")
+speed = 500.0
+wheel_scroll_damper = SubResource("Resource_gw8t2")
+dragging_scroll_damper = SubResource("Resource_nsdex")
+drag_with_mouse = false
+drag_with_touch = false
+scrollbar_hide_time = 1.0
+metadata/_custom_type_script = "uid://bgqglerkcylxx"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer" unique_id=413247063]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="MenuItem" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=423993835]
+[node name="Build tool window" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=697393388]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/MenuItem" unique_id=460792739]
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build tool window" unique_id=1864862690]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Build tool"
+text = "Build tool window"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-
-[node name="MenuItem2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=710371277]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/MenuItem2" unique_id=678830184]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p6jpk")
-text = "Settings"
-flat = true
-alignment = 0
-script = ExtResource("4_tyqxl")
-_tool = 1
+_tool = 6
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Messages" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=679314490]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Messages" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages" unique_id=2074578238]
 layout_mode = 1
@@ -688,17 +706,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_p6jpk")
 text = "Open messages"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 6
+_tool = 5
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="BakePathfinding" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1750453374]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/BakePathfinding" unique_id=894265331]
 layout_mode = 1
@@ -707,17 +729,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_p6jpk")
 text = "Refresh pathfinding"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 2
+_tool = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="SpawnCustomer" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=718372211]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/SpawnCustomer" unique_id=942678748]
 layout_mode = 1
@@ -726,17 +752,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Spawn a customer (You might feel powerful when you click this button)"
+text = "Spawn customers"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 3
+_tool = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="OpenFile" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=99611495]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/OpenFile" unique_id=918659307]
 layout_mode = 1
@@ -745,17 +775,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_p6jpk")
 text = "Open an excisting file"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 5
+_tool = 4
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="SaveFile" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1360046575]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/SaveFile" unique_id=1668412186]
 layout_mode = 1
@@ -764,12 +798,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_p6jpk")
 text = "Save current session"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 4
+_tool = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Button" type="Button" parent="UI/Core/TopArea/Menu" unique_id=339895518 node_paths=PackedStringArray("_animationPlayer")]
 layout_mode = 1
@@ -825,7 +861,7 @@ offset_bottom = 10.484772
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p6jpk")
-text = "Inspect [Alt + LMB]"
+text = "Stock [Alt + LMB]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -835,17 +871,14 @@ libraries/ = SubResource("AnimationLibrary_v4agm")
 [node name="moneyCounter" type="Panel" parent="UI/Core/TopArea" unique_id=858953191 node_paths=PackedStringArray("_aniPlayer", "_label")]
 material = SubResource("ShaderMaterial_fy12w")
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = -8.0
+offset_left = -112.0
+offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 32.0
+offset_bottom = 48.0
 grow_horizontal = 0
-grow_vertical = 2
 pivot_offset_ratio = Vector2(1, 0.5)
 theme_override_styles/panel = SubResource("StyleBoxFlat_0uxpu")
 script = ExtResource("20_1j4pb")
@@ -879,8 +912,16 @@ libraries/ = SubResource("AnimationLibrary_u244o")
 [node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/moneyCounter" unique_id=1865957402]
 copy_mode = 2
 
-[node name="Buildmode" parent="UI" unique_id=2138034224 instance=ExtResource("5_8sujb")]
+[node name="NotifRoot" type="VBoxContainer" parent="UI/Core" unique_id=590001818]
 layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = 640.0
+grow_horizontal = 0
 
 [node name="WindowsRoot" type="Control" parent="UI" unique_id=544186683]
 layout_mode = 1
@@ -922,32 +963,24 @@ shadow_blur = 1.235
 [node name="Scripts" type="Node" parent="3D/Props" unique_id=1985962158]
 
 [node name="Visuals" type="Node" parent="3D/Props/Scripts" unique_id=1447633678]
-script = ExtResource("13_1t20g")
-_OutlineShader = ExtResource("14_tdwxr")
 
 [node name="Tools" type="Node" parent="3D/Props/Scripts" unique_id=2086890731]
-script = ExtResource("15_4o5wv")
 
 [node name="Selection" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1752505374]
-script = ExtResource("13_koken")
 
 [node name="Scale" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1868650021]
-script = ExtResource("15_1t20g")
-_scaleGizmo = ExtResource("18_8sujb")
 
 [node name="Move" type="Node" parent="3D/Props/Scripts/Tools" unique_id=2017238234]
-script = ExtResource("19_ifk88")
-_moveGizmo = ExtResource("17_4a3kt")
 
 [node name="Freeform" type="Node" parent="3D/Props/Scripts/Tools" unique_id=1875244053]
-script = ExtResource("21_tyqxl")
 
 [node name="PropsRoot" type="NavigationRegion3D" parent="3D/Props" unique_id=322952058]
-navigation_mesh = SubResource("NavigationMesh_wbulw")
+navigation_mesh = SubResource("NavigationMesh_fy12w")
 
 [node name="Humanoids" type="Node3D" parent="3D" unique_id=1665425361]
 
 [node name="Players" type="Node3D" parent="3D/Humanoids" unique_id=1881802444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2969537, 0)
 
 [node name="PlayerChar" parent="3D/Humanoids/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, 0.8630058, 1.2755573)

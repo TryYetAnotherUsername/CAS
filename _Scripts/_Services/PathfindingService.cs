@@ -17,7 +17,9 @@ public partial class PathfindingService : Node
 
     public override void _Ready()
     {
+        GD.Print("hi");
         I = this;
+        StartBakingRegion();
     }
 
     // ========== public methods ==========
@@ -47,8 +49,6 @@ public partial class PathfindingService : Node
             _navRegion.BakeFinished += FinishBake;
             _subscribed = true;
         }
-        
-        NavigationServer3D.SetDebugEnabled(true);
     }
 
     // Helper funcs for NPCs

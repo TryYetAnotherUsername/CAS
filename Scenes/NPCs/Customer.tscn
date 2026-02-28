@@ -35,6 +35,7 @@ path_desired_distance = 0.1
 target_desired_distance = 0.1
 path_max_distance = 0.11
 simplify_path = true
+avoidance_enabled = true
 debug_enabled = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=881228422]
@@ -74,3 +75,10 @@ theme_override_font_sizes/font_size = 50
 text = "Customer"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=1184925464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.029905349, 0)
+radius = 0.3
+vertices = PackedVector3Array(-0.21056205, 0, -0.10799956, -0.21056205, 0, 0.10546515, 0.20620233, 0, 0.10885347, 0.20846123, 0, -0.10799956)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

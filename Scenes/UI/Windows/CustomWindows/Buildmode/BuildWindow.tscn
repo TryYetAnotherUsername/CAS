@@ -1,0 +1,216 @@
+[gd_scene format=3 uid="uid://dfoesuavqgm4r"]
+
+[ext_resource type="Script" uid="uid://g6hy63tvxt7i" path="res://_Scripts/UI/Windows/BuildmodeTool/BuildWindow.cs" id="1_5ymx3"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_gydw8"]
+[ext_resource type="Script" uid="uid://08cnaskb08tq" path="res://_Scripts/UI/Windows/BuildmodeTool/CatalogAuto.cs" id="2_i31ph"]
+[ext_resource type="PackedScene" uid="uid://dsils038mc357" path="res://Scenes/UI/Windows/CustomWindows/Buildmode/cat_cont.tscn" id="3_i31ph"]
+[ext_resource type="PackedScene" uid="uid://c5r85ncwfggtk" path="res://Scenes/UI/Windows/CustomWindows/Buildmode/catalogue_card.tscn" id="4_hro37"]
+[ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="6_4mnh4"]
+[ext_resource type="Script" uid="uid://dt25prlv2dg4j" path="res://_Scripts/UI/Windows/BuildmodeTool/BuildSelectionButton.cs" id="6_efuaa"]
+[ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="7_61snl"]
+[ext_resource type="Script" uid="uid://bbcn0eld4n7ar" path="res://_Scripts/UI/Windows/BuildmodeTool/DeleteButton.cs" id="7_mi7ts"]
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="8_u5a06"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdeoc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3950097, 0.39500976, 0.3950097, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_3fj3t"]
+script = ExtResource("7_61snl")
+
+[sub_resource type="Resource" id="Resource_qsshu"]
+script = ExtResource("7_61snl")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efuaa"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.27174112, 0.29795206, 0.34288806, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.39607844, 0.39607844, 0.39607844, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mi7ts"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5a06"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+
+[node name="BuildWindow" type="Control" unique_id=887013017 node_paths=PackedStringArray("_infoPanel", "_infoTextBox")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_5ymx3")
+_infoPanel = NodePath("ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer/FoldableContainer")
+_infoTextBox = NodePath("ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer/FoldableContainer/PanelContainer/Title2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=609082148]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="ScrollContainer" unique_id=838813444]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlacingArea" type="Control" parent="ScrollContainer/HSplitContainer" unique_id=1888697395]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CatalogRoot" type="TabContainer" parent="ScrollContainer/HSplitContainer/PlacingArea" unique_id=1073830794 node_paths=PackedStringArray("_tabContainerRoot")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gydw8")
+script = ExtResource("2_i31ph")
+_tabContainerRoot = NodePath(".")
+_catContainer = ExtResource("3_i31ph")
+_objectCard = ExtResource("4_hro37")
+
+[node name="ModifyingArea" type="Control" parent="ScrollContainer/HSplitContainer" unique_id=701433244]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="ScrollContainer/HSplitContainer/ModifyingArea" unique_id=1652374063]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sdeoc")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel" unique_id=67252982]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+script = ExtResource("6_4mnh4")
+speed = 500.0
+wheel_scroll_damper = SubResource("Resource_3fj3t")
+dragging_scroll_damper = SubResource("Resource_qsshu")
+drag_with_mouse = false
+drag_with_touch = false
+metadata/_custom_type_script = "uid://bgqglerkcylxx"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer" unique_id=1199316979]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer" unique_id=742903140]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="StopPlacing" type="Button" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1847131366]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("1_gydw8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_efuaa")
+text = "Stop placing"
+script = ExtResource("6_efuaa")
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="DeleteObject" type="Button" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1863310085]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("1_gydw8")
+theme_override_colors/font_color = Color(0.8901973, 0.039788224, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_efuaa")
+text = "Delete"
+script = ExtResource("7_mi7ts")
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="FoldableContainer" type="FoldableContainer" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer" unique_id=533163492]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/hover_font_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
+theme_override_colors/collapsed_font_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("8_u5a06")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/title_panel = SubResource("StyleBoxFlat_mi7ts")
+theme_override_styles/title_hover_panel = SubResource("StyleBoxFlat_mi7ts")
+theme_override_styles/title_collapsed_panel = SubResource("StyleBoxFlat_mi7ts")
+theme_override_styles/title_collapsed_hover_panel = SubResource("StyleBoxFlat_mi7ts")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mi7ts")
+theme_override_styles/panel = SubResource("StyleBoxFlat_mi7ts")
+title = "Title"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer/FoldableContainer" unique_id=94597515]
+layout_mode = 2
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Title2" type="RichTextLabel" parent="ScrollContainer/HSplitContainer/ModifyingArea/Panel/ScrollContainer/VBoxContainer/FoldableContainer/PanelContainer" unique_id=658116398]
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_gydw8")
+theme_override_colors/default_color = Color(1, 1, 1, 0.5921569)
+theme_override_font_sizes/normal_font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u5a06")
+text = "Hello!"
+fit_content = true
+scroll_active = false
+selection_enabled = true
+metadata/_smooth_scroll_default_mouse_filter_set = true

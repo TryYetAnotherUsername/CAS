@@ -32,4 +32,6 @@ public partial class NPC : CharacterBody3D
         Velocity = newVelocity;
         MoveAndSlide();
     }
+
+    
 }

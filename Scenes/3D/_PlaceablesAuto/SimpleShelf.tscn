@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3rwyrjlanyer"]
 
 [ext_resource type="PackedScene" uid="uid://dhl7wcxuwxtdl" path="res://Assets/3D/Models/Placeables/Shelves/simple_shelf.glb" id="1_0g6go"]
-[ext_resource type="Script" uid="uid://dxli51xiuhl5k" path="res://_Scripts/Objects/Props/p/Shelf.cs" id="2_jub67"]
+[ext_resource type="Script" uid="uid://dxli51xiuhl5k" path="res://_Scripts/Classes/Props/p/Shelf.cs" id="2_jub67"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jub67"]
 albedo_color = Color(0.2592937, 0.2592937, 0.2592937, 1)
@@ -23,10 +23,12 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 [sub_resource type="BoxShape3D" id="BoxShape3D_d66kw"]
 size = Vector3(0.21911621, 0.18005371, 0.8532715)
 
-[node name="simple_shelf" unique_id=1996084563 node_paths=PackedStringArray("_productAreasRoot", "NavTarget") instance=ExtResource("1_0g6go")]
+[node name="simple_shelf" unique_id=1996084563 node_paths=PackedStringArray("_productAreasRoot", "NavTarget", "PhyCol", "RayCol") instance=ExtResource("1_0g6go")]
 script = ExtResource("2_jub67")
 _productAreasRoot = NodePath("ProductAreasRoot")
 NavTarget = NodePath("NavTarg")
+PhyCol = NodePath("simple_shelf_physics/StaticBody3D/CollisionShape3D")
+RayCol = NodePath("simple_shelf_ray/StaticBody3D/CollisionShape3D")
 
 [node name="simple_shelf_mesh" parent="." index="0" unique_id=564661375]
 surface_material_override/0 = SubResource("StandardMaterial3D_jub67")

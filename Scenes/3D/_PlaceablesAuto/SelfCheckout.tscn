@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://kmvwjfwijr4y"]
 
 [ext_resource type="PackedScene" uid="uid://c0evkdqyjs8wy" path="res://Assets/3D/Models/Placeables/Services/self_checkout.glb" id="1_gwfbx"]
-[ext_resource type="Script" uid="uid://buiuy3euf4387" path="res://_Scripts/Objects/Props/p/Checkout.cs" id="2_6upq1"]
+[ext_resource type="Script" uid="uid://buiuy3euf4387" path="res://_Scripts/Classes/Props/p/Checkout.cs" id="2_6upq1"]
 [ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="3_2ixfa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6upq1"]
@@ -43,16 +43,20 @@ emission_energy_multiplier = 10.0
 [sub_resource type="ViewportTexture" id="ViewportTexture_lm80t"]
 viewport_path = NodePath("Screen/SubViewport")
 
-[node name="self_checkout" unique_id=2111515380 node_paths=PackedStringArray("NavTarg", "_display", "_light") instance=ExtResource("1_gwfbx")]
+[node name="self_checkout" unique_id=2111515380 node_paths=PackedStringArray("NavTarg", "_productTarg", "_display", "_light", "PhyCol", "RayCol") instance=ExtResource("1_gwfbx")]
 script = ExtResource("2_6upq1")
+NavTarg = NodePath("NavTarg")
+_productTarg = NodePath("ProductTarg")
+_display = NodePath("Screen/SubViewport/Control/Label")
+_light = NodePath("IndicatiorLight")
+_grandTotal = null
 IsFree = null
 IsFinishedPaying = null
 IsQueueTarg = null
-NavTarg = NodePath("NavTarg")
-_display = NodePath("Screen/SubViewport/Control/Label")
-_light = NodePath("IndicatiorLight")
+PhyCol = NodePath("self_checkout_physics/StaticBody3D/CollisionShape3D")
+RayCol = NodePath("self_checkout_ray/StaticBody3D/CollisionShape3D")
 
-[node name="self_checkout_mesh" parent="." index="0" unique_id=1549290932]
+[node name="self_checkout_mesh" parent="." index="0" unique_id=1846018627]
 surface_material_override/0 = SubResource("StandardMaterial3D_6upq1")
 surface_material_override/1 = SubResource("StandardMaterial3D_6upq1")
 surface_material_override/2 = SubResource("StandardMaterial3D_lp85w")
@@ -60,14 +64,14 @@ surface_material_override/3 = SubResource("StandardMaterial3D_n1j1e")
 surface_material_override/4 = SubResource("StandardMaterial3D_snja7")
 surface_material_override/5 = SubResource("StandardMaterial3D_g1lot")
 
-[node name="self_checkout_ray" parent="." index="1" unique_id=431644701]
+[node name="self_checkout_ray" parent="." index="1" unique_id=1230794934]
 visible = false
 
-[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=1662884452]
+[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=2142795695]
 collision_layer = 2
 collision_mask = 2
 
-[node name="self_checkout_physics" parent="." index="2" unique_id=2018375510]
+[node name="self_checkout_physics" parent="." index="2" unique_id=232136143]
 visible = false
 
 [node name="IndicatiorLight" type="MeshInstance3D" parent="." index="3" unique_id=2121159137]
@@ -112,11 +116,11 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.4651618, 0.9999997, 0.9968923, 1)
 theme_override_fonts/font = ExtResource("3_2ixfa")
 theme_override_font_sizes/font_size = 25
-text = "Please scan the next item."
+text = "Scan an item on the scanner to start"
 autowrap_mode = 2
 
 [node name="NavTarg" type="Node3D" parent="." index="5" unique_id=1061102893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4069031, 0, -0.0038947463)
 
 [node name="ProductTarg" type="Node3D" parent="." index="6" unique_id=2056219373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16360593, 0.53249544, 0.06139893)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16360593, 0.53842425, 0.06139893)
