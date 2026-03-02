@@ -13,11 +13,12 @@ public static class CatalogConfig
         new CatalogEntity { DispName = "Wall",              UID = "uid://dtmwx7ig68eac", CatalogGroup = EGroup.Walls, Cost = 10, Discription = "Probably the most boring object in this game?"},
         new CatalogEntity { DispName = "Wall (Double)",     UID = "uid://bkwafr84yuc0q", CatalogGroup = EGroup.Walls, Cost = 20, Discription = "A bland, boring wall. A tad bit less boring than the other one."},
         new CatalogEntity { DispName = "Wall (Windowed)",   UID = "uid://b37vt42e0fhud", CatalogGroup = EGroup.Walls, Cost = 25, Discription = "A wall with a big window cut through it. Zombies hate these."},
+        new CatalogEntity { DispName = "Entrance",          UID = "uid://b56gypdqu6au0", CatalogGroup = EGroup.Walls, Cost = 100, Discription = "Customers enter your store from the entrance.\nAt least 1 of this item is required in the store."},
         // ========== SHELVES ==========
         new CatalogEntity { DispName = "Basic shelf",       UID = "uid://c3rwyrjlanyer", CatalogGroup = EGroup.Shelves, Cost = 500, Discription = "After a shelf is placed, you can try [Alt + LMB] to open a menu to stock it!\n...now the customers have something to buy!"},
         // ========== CHECKOUTS ==========
         new CatalogEntity { DispName = "Self checkout",     UID = "uid://kmvwjfwijr4y", CatalogGroup = EGroup.Misc, Cost = 1000, Discription = "Customers can take a while to use it, so place a few of these checkouts if your store gets crowded!\nAt least 1 of this item is required in the store."},
-        new CatalogEntity { DispName = "Checkout queue point",     UID = "uid://btfdwcjiul0pn", CatalogGroup = EGroup.Misc, Cost = 100, Discription = "Customers can queue up here. place a few of these near the checkouts.\nAt least 1 of this item is required in the store."},
+        new CatalogEntity { DispName = "Checkout queue point",  UID = "uid://btfdwcjiul0pn", CatalogGroup = EGroup.Misc, Cost = 100, Discription = "Customers can queue up here. place a few of these near the checkouts.\nAt least 1 of this item is required in the store."},
     ];
 
     public static CatalogEntity FindByUID(string uid)

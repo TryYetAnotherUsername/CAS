@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cpr2wqb80dwry"]
+
+[ext_resource type="PackedScene" uid="uid://b56gypdqu6au0" path="res://Assets/3D/Models/Placeables/Walls/entrance_door.glb" id="1_dycc7"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Classes/Props/p/Wall.cs" id="2_wds3v"]
+
+[node name="entrance_door" unique_id=1523275773 instance=ExtResource("1_dycc7")]
+script = ExtResource("2_wds3v")

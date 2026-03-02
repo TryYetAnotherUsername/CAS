@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading;
 
 public partial class NpcSpawnerService : Node
 {
@@ -7,6 +8,7 @@ public partial class NpcSpawnerService : Node
     [Export] private PackedScene _customerNpc;
     public static NpcSpawnerService I;
     public static event Action OnClearAll;
+    public int CustomerCount;
 
     public override void _Ready()
     {
@@ -68,13 +70,41 @@ public partial class NpcSpawnerService : Node
         return true;
     }
 
+    [Export] private float _facProductVariety;
+    [Export] private float _facCustomerCount;
+    [Export] private float _baseDelay;
+    [Export] private float _waitTime;
+
     public async void StartSpawning()
     {
         while (true)
         {
-            await ToSignal(GetTree().CreateTimer(GD.RandRange(1,5)), SceneTreeTimer.SignalName.Timeout);
+            var products = WorldService.I.GetProducts();
+            if (products is null || products.Count == 0)
+            {
+                return;
+            }
+
+            float varietyBonus = products.Count * _facProductVariety; // Each product avalible speeds spawnrate up by 0.2s
+            float crowdDelay = CustomerCount * _facCustomerCount; // Each customer slows spawnrate down by 0.5s
+
+            float _waitTime = _baseDelay + varietyBonus - crowdDelay;
+            _waitTime = MathF.Min(_waitTime, 5f);
+            _waitTime += GD.RandRange(1,10);
+
+            await ToSignal(GetTree().CreateTimer(_waitTime), SceneTreeTimer.SignalName.Timeout);
             I.SpawnCustomer();
         }
+    }
+
+    public void AddCount()
+    {
+        CustomerCount ++;
+    }
+
+    public void SubtractCount()
+    {
+        CustomerCount --;
     }
 
 }

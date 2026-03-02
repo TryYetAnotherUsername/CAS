@@ -21,6 +21,7 @@
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="17_fy12w"]
 [ext_resource type="Script" uid="uid://bcwo50eg8ydb2" path="res://_Scripts/_Services/NotificationService.cs" id="18_m6uf5"]
 [ext_resource type="PackedScene" uid="uid://c1ulq183u1t8n" path="res://Scenes/UI/CoreUi/notif_card.tscn" id="19_m6uf5"]
+[ext_resource type="Script" uid="uid://by4316qng1qrs" path="res://_Scripts/_Services/ShoppingListService.cs" id="19_wbulw"]
 [ext_resource type="Script" uid="uid://bdbxtvkcmaj8u" path="res://Scenes/Main/MoneyCounter.cs" id="20_1j4pb"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
 [ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/NPCs/Customer.tscn" id="22_v4agm"]
@@ -505,6 +506,24 @@ metadata/_edit_horizontal_guides_ = [-264.0]
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
 
+[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot")]
+script = ExtResource("25_8sujb")
+_floorsRoot = NodePath("../../3D/Props/PropsRoot")
+
+[node name="PathfindingService" type="Node" parent="Services" unique_id=624495622 node_paths=PackedStringArray("_navRegion")]
+script = ExtResource("28_8oboy")
+_navRegion = NodePath("../../3D/Props/PropsRoot")
+
+[node name="CustomerSpawnerService" type="Node" parent="Services" unique_id=1236255876]
+script = ExtResource("14_js8sm")
+
+[node name="NpcFactoryService" type="Node" parent="Services" unique_id=1708621918 node_paths=PackedStringArray("_npcRoot")]
+script = ExtResource("11_wbulw")
+_npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
+_customerNpc = ExtResource("22_v4agm")
+_facProductVariety = 1.0
+_facCustomerCount = 1.0
+
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")
 _shelvesRoot = NodePath("../../3D/Props/PropsRoot")
@@ -514,31 +533,15 @@ script = ExtResource("4_5yls4")
 _windowsRoot = NodePath("../../UI/WindowsRoot")
 _windowBase = ExtResource("22_tyqxl")
 
-[node name="FactoryService" type="Node" parent="Services" unique_id=765105891 node_paths=PackedStringArray("_floorsRoot")]
-script = ExtResource("25_8sujb")
-_floorsRoot = NodePath("../../3D/Props/PropsRoot")
-
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
 script = ExtResource("25_tyqxl")
 
 [node name="LiveSelectService" type="Node" parent="Services" unique_id=1287970369]
 script = ExtResource("27_4ohmo")
 
-[node name="PathfindingService" type="Node" parent="Services" unique_id=624495622 node_paths=PackedStringArray("_navRegion")]
-script = ExtResource("28_8oboy")
-_navRegion = NodePath("../../3D/Props/PropsRoot")
-
-[node name="NpcFactoryService" type="Node" parent="Services" unique_id=1708621918 node_paths=PackedStringArray("_npcRoot")]
-script = ExtResource("11_wbulw")
-_npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
-_customerNpc = ExtResource("22_v4agm")
-
 [node name="ProjectService" type="Node" parent="Services" unique_id=1544795930 node_paths=PackedStringArray("_BuildingRoot")]
 script = ExtResource("2_wbulw")
 _BuildingRoot = NodePath("../../3D/Props/PropsRoot")
-
-[node name="CustomerSpawnerService" type="Node" parent="Services" unique_id=1236255876]
-script = ExtResource("14_js8sm")
 
 [node name="FileOpService" type="Node" parent="Services" unique_id=1586219315]
 script = ExtResource("3_qw60k")
@@ -546,16 +549,19 @@ script = ExtResource("3_qw60k")
 [node name="EconomyService" type="Node" parent="Services" unique_id=180782190]
 script = ExtResource("15_u244o")
 
-[node name="MessageService" type="Node" parent="Services" unique_id=872495204]
-script = ExtResource("16_0uxpu")
-
-[node name="BuildToolService" type="Node" parent="Services" unique_id=1940178770]
-script = ExtResource("2_hvw5u")
-
 [node name="NotificationService" type="Node" parent="Services" unique_id=4814348 node_paths=PackedStringArray("_root")]
 script = ExtResource("18_m6uf5")
 _notifCardScene = ExtResource("19_m6uf5")
 _root = NodePath("../../UI/Core/NotifRoot")
+
+[node name="BuildToolService" type="Node" parent="Services" unique_id=1940178770]
+script = ExtResource("2_hvw5u")
+
+[node name="MessageService" type="Node" parent="Services" unique_id=872495204]
+script = ExtResource("16_0uxpu")
+
+[node name="ShoppingListService" type="Node" parent="Services" unique_id=7241652]
+script = ExtResource("19_wbulw")
 
 [node name="UI" type="Control" parent="." unique_id=738311301]
 layout_mode = 3

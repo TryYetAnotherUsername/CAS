@@ -48,6 +48,10 @@ public partial class WorldService : Node
             }
         }
 
+        if (products.Count == 0)
+        {
+            return null;
+        }
         return products; // return!
     }
 

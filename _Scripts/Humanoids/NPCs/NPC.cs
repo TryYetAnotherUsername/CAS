@@ -2,15 +2,16 @@ using Godot;
 
 public partial class NPC : CharacterBody3D
 {
-    [Export] public float MovementSpeed { get; set; } = 4.0f;
+    [Export] public float MovementSpeed = 0.5f;
     [Export] public NavigationAgent3D _navigationAgent;
     [Export] private float _movementDelta;
+
+    // adapted from gd docs
 
     public void SetMovementTarget(Vector3 movementTarget)
     {
         _navigationAgent.TargetPosition = movementTarget;
     }
-
     public override void _PhysicsProcess(double delta)
     {
         if (_navigationAgent.IsNavigationFinished())
@@ -18,10 +19,10 @@ public partial class NPC : CharacterBody3D
             Velocity = Vector3.Zero;
             return; 
         }
-        
-        _movementDelta = MovementSpeed * (float)delta;
+
         Vector3 nextPathPosition = _navigationAgent.GetNextPathPosition();
-        Vector3 newVelocity = GlobalPosition.DirectionTo(nextPathPosition);
+        Vector3 direction = GlobalPosition.DirectionTo(nextPathPosition);
+        Velocity = direction * MovementSpeed;
 
         Vector3 flatNext = new Vector3(nextPathPosition.X, GlobalPosition.Y, nextPathPosition.Z);
         if (GlobalPosition.DistanceTo(flatNext) > 0.1f)
@@ -29,7 +30,6 @@ public partial class NPC : CharacterBody3D
             LookAt(flatNext, Vector3.Up);
         }
 
-        Velocity = newVelocity;
         MoveAndSlide();
     }
 

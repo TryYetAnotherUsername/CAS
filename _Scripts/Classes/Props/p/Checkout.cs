@@ -20,7 +20,7 @@ public partial class Checkout : Prop
     }
 
 
-    public async void UseCheckout(List<Customer.ShoppingItem> shoppedItems)
+    public async void UseCheckout(List<ShoppingListService.ShoppingItem> shoppedItems)
     {
         _grandTotal = 0;
 

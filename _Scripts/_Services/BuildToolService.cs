@@ -80,14 +80,14 @@ public partial class BuildToolService : Node
                 GD.Print("Placed- Continue placing");
                 KeepPlacing();
             }
-            
+
             // this handles clicks while in freeform (place object)
             else if (_currentState == EState.Freeform)
             {
                 GD.Print("Freeform- placed");
                 OpenForSelection();
             }
-            
+
             // this handles clicks while nothing is active (so new editing target)
             else if (_currentState == EState.OpenForSelection)
             {
@@ -119,7 +119,7 @@ public partial class BuildToolService : Node
         _reqPropEnt = catEnt;
 
         GD.Print("BuildTool: Starting placement");
-        
+
         var node = FactoryService.I.TrySpawningUidAndGetNode(catEnt.UID);
 
         if (node is Prop prop)
@@ -253,11 +253,11 @@ public partial class BuildToolService : Node
         var options = PhysicsRayQueryParameters3D.Create(from, to);
         options.CollisionMask = 1;
         var result = spaceState.IntersectRay(options);
-        
-        
+
+
         if (result.Count > 0)
             return (Vector3)result["position"];
-        
+
         return Vector3.Zero;
     }
 
