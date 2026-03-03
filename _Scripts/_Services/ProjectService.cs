@@ -24,6 +24,15 @@ public partial class ProjectService : Node
 			{
 				p.GlobalPosition = new Vector3(prop.X, prop.Y, prop.Z);
 				p.GlobalRotation = new Vector3(0, prop.RotY, 0);
+
+				if (node is Shelf shelf && prop.StockListData != null)
+				{
+					foreach (var entry in prop.StockListData)
+					{
+						shelf.SetProductStock(entry.Product, true);
+						shelf.AddProduct(entry.Product, entry.Quantity);
+					}
+				}
 			}
 		}
 	}
@@ -31,11 +40,8 @@ public partial class ProjectService : Node
 	public CasProj Out()
 	{
 		CasProj project = new();
-
 		foreach (Node3D node in _BuildingRoot.GetChildren())
 		{
-			GD.Print($"  - {node.Name} is Prop: {node is Prop}");
-
 			if (node is Prop prop)
 			{
 				PropData propDataPack = new()
@@ -48,10 +54,15 @@ public partial class ProjectService : Node
 					RotY = node.GlobalRotation.Y,
 					RotZ = node.GlobalRotation.Z
 				};
-				project.Props.Add(propDataPack);
-			} 
-		}
 
+				// Save shelf stock asw if it is
+				if (node is Shelf shelf)
+				{
+					propDataPack.StockListData = shelf.StockedProductsList;
+				}
+				project.Props.Add(propDataPack);
+			}
+		}
 		return project;
 	}
 }

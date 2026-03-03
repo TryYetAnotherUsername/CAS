@@ -104,7 +104,7 @@ public partial class BuildToolService : Node
             {
                 // rotate
                 var tween = CreateTween();
-                tween.TweenProperty(_currentProp, "rotation_degrees:y", _currentProp.RotationDegrees.Y + 90, 0.75);
+                tween.TweenProperty(_currentProp, "rotation_degrees:y", _currentProp.RotationDegrees.Y + 90, 0.2);
             }
         }
     }

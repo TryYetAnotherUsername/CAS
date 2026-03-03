@@ -137,11 +137,11 @@ public partial class Shelf : Prop
 	
     public class StockEntry
     {
-        public ProductEntity Product = ProductConfig.Catalog[0];
-        public int Quantity = 0;
+    	public ProductEntity Product {get; set;} = ProductConfig.Catalog[0];
+        public int Quantity {get; set;} = 0;
     }
 
-    public List<StockEntry> StockedProductsList = new();
+    public List<StockEntry> StockedProductsList {get; set;}= new();
 
 	[Export] public Node3D NavTarget;
 

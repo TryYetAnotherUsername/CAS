@@ -1,0 +1,17 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://dlya2fn1vwlu2"]
+
+[ext_resource type="Texture2D" uid="uid://bh6nrp36yhnnx" path="res://Assets/3D/Textures/seaworn_bricks/seaworn_sandstone_brick_diff_4k.jpg" id="1_i7bql"]
+[ext_resource type="Texture2D" uid="uid://cyh6mtfcon04f" path="res://Assets/3D/Textures/seaworn_bricks/seaworn_sandstone_brick_nor_gl_4k.jpg" id="2_vbejd"]
+[ext_resource type="Texture2D" uid="uid://u7fqodtj3sj7" path="res://Assets/3D/Textures/seaworn_bricks/seaworn_sandstone_brick_arm_4k.jpg" id="3_v40cr"]
+
+[resource]
+albedo_texture = ExtResource("1_i7bql")
+orm_texture = ExtResource("3_v40cr")
+normal_enabled = true
+normal_texture = ExtResource("2_vbejd")
+anisotropy_enabled = true
+ao_enabled = true
+subsurf_scatter_strength = 0.17
+uv1_scale = Vector3(1, 1, 1.225)
+uv1_triplanar = true
+uv1_world_triplanar = true

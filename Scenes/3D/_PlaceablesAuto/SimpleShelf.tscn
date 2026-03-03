@@ -30,19 +30,19 @@ NavTarget = NodePath("NavTarg")
 PhyCol = NodePath("simple_shelf_physics/StaticBody3D/CollisionShape3D")
 RayCol = NodePath("simple_shelf_ray/StaticBody3D/CollisionShape3D")
 
-[node name="simple_shelf_mesh" parent="." index="0" unique_id=564661375]
+[node name="simple_shelf_mesh" parent="." index="0" unique_id=1551198788]
 surface_material_override/0 = SubResource("StandardMaterial3D_jub67")
 surface_material_override/1 = SubResource("StandardMaterial3D_w4yej")
 surface_material_override/2 = SubResource("StandardMaterial3D_bds1l")
 
-[node name="simple_shelf_ray" parent="." index="1" unique_id=1837854429]
+[node name="simple_shelf_ray" parent="." index="1" unique_id=1248162002]
 visible = false
 
-[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=561262361]
+[node name="StaticBody3D" parent="simple_shelf_ray" index="0" unique_id=1401587966]
 collision_layer = 2
 collision_mask = 2
 
-[node name="simple_shelf_physics" parent="." index="2" unique_id=1713304825]
+[node name="simple_shelf_physics" parent="." index="2" unique_id=1195033896]
 visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="3" unique_id=552055956]

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cooe23t4c7kcc"]
+
+[ext_resource type="PackedScene" uid="uid://b56gypdqu6au0" path="res://Assets/3D/Models/Placeables/Walls/entrance_door.glb" id="1_fggbo"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Classes/Props/p/Wall.cs" id="2_xvycj"]
+[ext_resource type="Material" uid="uid://dlya2fn1vwlu2" path="res://Assets/3D/Mat/seaworn_brick_orm.tres" id="3_l81rl"]
+[ext_resource type="Material" uid="uid://cwf2ouerpxfku" path="res://Assets/3D/Mat/glass.tres" id="4_yq2fo"]
+[ext_resource type="Material" uid="uid://bf1270kjvswxi" path="res://Assets/3D/Mat/metal.tres" id="5_rwbq0"]
+[ext_resource type="Material" uid="uid://mjgxifv4bgou" path="res://Assets/3D/Mat/interiour.tres" id="6_yq2fo"]
+
+[node name="entrance_door" unique_id=1523275773 node_paths=PackedStringArray("PhyCol", "RayCol") instance=ExtResource("1_fggbo")]
+script = ExtResource("2_xvycj")
+PhyCol = NodePath("entrance_physics/StaticBody3D/CollisionShape3D")
+RayCol = NodePath("entrance_ray/StaticBody3D/CollisionShape3D")
+
+[node name="entrance" parent="." index="0" unique_id=2048158301]
+surface_material_override/0 = ExtResource("3_l81rl")
+surface_material_override/1 = ExtResource("4_yq2fo")
+surface_material_override/2 = ExtResource("5_rwbq0")
+surface_material_override/3 = ExtResource("6_yq2fo")
+
+[node name="door_2" parent="." index="1" unique_id=1095816499]
+surface_material_override/0 = ExtResource("4_yq2fo")
+
+[node name="door_1" parent="." index="2" unique_id=25276520]
+surface_material_override/0 = ExtResource("4_yq2fo")
+
+[node name="entrance_physics" parent="." index="3" unique_id=1618858590]
+visible = false
+
+[node name="entrance_ray" parent="." index="4" unique_id=708281113]
+visible = false
+
+[node name="StaticBody3D" parent="entrance_ray" index="0" unique_id=711556315]
+collision_layer = 2
+collision_mask = 2

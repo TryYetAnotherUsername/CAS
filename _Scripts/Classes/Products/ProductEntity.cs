@@ -8,14 +8,14 @@ public class ProductEntity
 		Food,
 	}
 
-	public string UID;
-    public string DispName;
-    public EProductCategory Category = EProductCategory.General;
+	public string UID {get; set;}
+    public string DispName {get; set;}
+    public EProductCategory Category {get; set;} = EProductCategory.General;
 
-    public float PriceImport;
-	public float PriceSell;
-	public float Popularity = 1;
-	public bool AgeRestricted = false;
-	public bool LocalImport = false;
-	public string Supplier = "-";
+    public float PriceImport{get; set;}
+	public float PriceSell{get; set;}
+	public float Popularity {get; set;} = 1;
+	public bool AgeRestricted {get; set;}= false;
+	public bool LocalImport {get; set;} = false;
+	public string Supplier {get; set;} = "-";
 }

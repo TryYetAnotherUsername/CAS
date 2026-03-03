@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Dynamic;
 
 public class CasProj
 {
@@ -23,5 +24,13 @@ public class PropData
 	public float RotX { get; set; }
     public float RotY { get; set; }
     public float RotZ { get; set; }
+
+    public List<Shelf.StockEntry> StockListData { get; set; } = new();
+}
+
+public class StockData
+{
+    public string ProductUid;
+    public int Quantity;
 }
 

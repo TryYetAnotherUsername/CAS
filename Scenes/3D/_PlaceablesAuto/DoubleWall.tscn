@@ -2,32 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://ccqkjr0nwsu6q" path="res://Assets/3D/Models/Placeables/Walls/double_wall_1.glb" id="1_vh4mh"]
 [ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Classes/Props/p/Wall.cs" id="2_a3v7e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh4mh"]
-albedo_color = Color(0.83137256, 0.83137256, 0.83137256, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3v7e"]
-albedo_color = Color(0.81960785, 0.7921569, 0.69411767, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcx6l"]
-albedo_color = Color(0.6745098, 0.6117647, 0.47058824, 1)
+[ext_resource type="Material" uid="uid://mjgxifv4bgou" path="res://Assets/3D/Mat/interiour.tres" id="3_o0jxa"]
+[ext_resource type="Material" uid="uid://dlya2fn1vwlu2" path="res://Assets/3D/Mat/seaworn_brick_orm.tres" id="3_rcxe1"]
+[ext_resource type="Material" uid="uid://v5h0audxdhn5" path="res://Assets/3D/Mat/interiour_highlight.tres" id="4_mrl4q"]
 
 [node name="double_wall_1" unique_id=1762593974 node_paths=PackedStringArray("PhyCol", "RayCol") instance=ExtResource("1_vh4mh")]
 script = ExtResource("2_a3v7e")
 PhyCol = NodePath("single_wall_physics/StaticBody3D/CollisionShape3D")
 RayCol = NodePath("single_wall_ray/StaticBody3D/CollisionShape3D")
 
-[node name="single_wall_physics" parent="." index="0" unique_id=440636347]
+[node name="single_wall_physics" parent="." index="0" unique_id=74378296]
 visible = false
 
-[node name="single_wall" parent="." index="1" unique_id=1410307830]
-surface_material_override/0 = SubResource("StandardMaterial3D_vh4mh")
-surface_material_override/1 = SubResource("StandardMaterial3D_a3v7e")
-surface_material_override/2 = SubResource("StandardMaterial3D_vcx6l")
+[node name="single_wall" parent="." index="1" unique_id=511403636]
+surface_material_override/0 = ExtResource("3_rcxe1")
+surface_material_override/1 = ExtResource("3_o0jxa")
+surface_material_override/2 = ExtResource("4_mrl4q")
 
-[node name="single_wall_ray" parent="." index="2" unique_id=516446804]
+[node name="single_wall_ray" parent="." index="2" unique_id=751835453]
 visible = false
 
-[node name="StaticBody3D" parent="single_wall_ray" index="0" unique_id=1824338168]
+[node name="StaticBody3D" parent="single_wall_ray" index="0" unique_id=841394722]
 collision_layer = 2
 collision_mask = 2

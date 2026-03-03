@@ -1,0 +1,17 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://v5h0audxdhn5"]
+
+[ext_resource type="Texture2D" uid="uid://bsip7sjujje4v" path="res://Assets/3D/Textures/concrete_wall/painted_concrete_02_nor_gl_1k.jpg" id="1_qpokq"]
+[ext_resource type="Texture2D" uid="uid://ci71dqfvjqnu6" path="res://Assets/3D/Textures/concrete_wall/painted_concrete_02_arm_1k.jpg" id="2_mw3ge"]
+
+[resource]
+albedo_color = Color(0.8098845, 0.7167162, 0.56835043, 1)
+orm_texture = ExtResource("2_mw3ge")
+normal_enabled = true
+normal_texture = ExtResource("1_qpokq")
+clearcoat_enabled = true
+clearcoat = 0.3
+clearcoat_roughness = 1.0
+ao_enabled = true
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+uv1_world_triplanar = true
