@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://12dru2vsuqyu" path="res://_Scripts/Humanoids/Player/CharacterBody3d.cs" id="1_jkbnp"]
 [ext_resource type="Script" uid="uid://dyb52i8l1gvbk" path="res://_Scripts/Humanoids/Player/Camera.cs" id="2_pfg0q"]
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="3_2i1ue"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfg0q"]
 
@@ -14,6 +15,9 @@ dof_blur_far_transition = 20.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_4e4y2"]
 size = Vector3(1, 2, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2i1ue"]
+viewport_path = NodePath("NameTag/SubViewport")
 
 [node name="PlayerChar" type="CharacterBody3D" unique_id=1700912549 node_paths=PackedStringArray("_PivotH")]
 script = ExtResource("1_jkbnp")
@@ -50,3 +54,41 @@ mesh = SubResource("BoxMesh_4e4y2")
 
 [node name="Visual" type="Node3D" parent="MeshInstance3D" unique_id=440230393]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, -7.4505806e-08, 0)
+
+[node name="NameTag" type="Sprite3D" parent="." unique_id=1894485265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5793146, 0)
+visibility_range_end = 3.0
+pixel_size = 0.001
+billboard = 1
+texture = SubResource("ViewportTexture_2i1ue")
+
+[node name="SubViewport" type="SubViewport" parent="NameTag" unique_id=1847079709]
+transparent_bg = true
+size = Vector2i(1031, 512)
+
+[node name="Control" type="Control" parent="NameTag/SubViewport" unique_id=567229373]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharNameLabel" type="Label" parent="NameTag/SubViewport/Control" unique_id=562595921]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("3_2i1ue")
+theme_override_font_sizes/font_size = 50
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1

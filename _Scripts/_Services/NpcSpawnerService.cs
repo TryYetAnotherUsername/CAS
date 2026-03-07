@@ -114,7 +114,7 @@ public partial class NpcSpawnerService : Node
             float crowdDelay = CustomerCount * _facCustomerCount; // Each customer slows spawnrate down
 
             _finalWaitTime = crowdDelay - varietyBonus;
-            //_finalWaitTime = Mathf.Clamp(_finalWaitTime, _minDelay, _maxDelay);
+            _finalWaitTime = Mathf.Clamp(_finalWaitTime, 3, 60);
             //_finalWaitTime += (float)GD.RandRange(0, 2);
 
             await ToSignal(GetTree().CreateTimer(_finalWaitTime), SceneTreeTimer.SignalName.Timeout);

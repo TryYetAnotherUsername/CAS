@@ -41,14 +41,14 @@ public partial class Customer : NPC
 
     private static readonly List<string> _names =
     [
-        // "pilotimothy",
-        // "Rowey",
-        // "Hendo🏀",
-        // "Haaris",
-        // "Massive Missile Mustafa",
-        // "Will",
-        // "Bails",
-        // "Ben",
+        "pilotimothy",
+        "Rowey",
+        "Hendo🏀",
+        "Haaris",
+        "Massive Missile Mustafa",
+        "Will",
+        "Bails",
+        "Ben",
         "Customer"
     ];
 
@@ -246,6 +246,16 @@ public partial class Customer : NPC
         {
             GD.Print($"Finished my shopping list!");
             SwitchState(State.WalkingToQueue);
+
+            if (_broughtitems.Count == 0 || _broughtitems == null)
+            {
+                LeaveAndComplain("The shelves arn't even stocked!");
+            }
+            else
+            {
+                SwitchState(State.WalkingToQueue);
+            }
+            
             return;
         }
 
@@ -333,8 +343,7 @@ public partial class Customer : NPC
     
     private void LeaveAndComplain(string message)
     {
-        Print("Urgh. I can't be bothered anymore.");
-        NotificationService.I.Print("One of your customers just left without paying. Prehaps you should treat them better?\nTry building more checkouts.");
+        Print(message);
         EconomyService.I.ModCrowdCap(-7);
         SwitchState(State.WalkingToExit);
     }

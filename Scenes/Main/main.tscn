@@ -523,7 +523,10 @@ script = ExtResource("11_wbulw")
 _npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
 _customerNpc = ExtResource("22_v4agm")
 _facVariety = 2.0
+_facAttractiveness = null
 _facCustomerCount = 10.0
+_minDelay = null
+_maxDelay = null
 
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")

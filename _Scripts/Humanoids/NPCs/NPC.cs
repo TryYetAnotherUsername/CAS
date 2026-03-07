@@ -9,15 +9,22 @@ public partial class NPC : CharacterBody3D
     [Export] private Sprite3D _talkBubble;
     [Export] private Label _talkText;
 
+    private Vector3 _targPos;
+
+    public override void _Ready()
+    {
+        _targPos = _talkBubble.Position;
+    }
+
+
     public async void Print(string message)
     {
         _talkText.Text = message;
         _talkBubble.Visible = true;
 
-        var tPos = _talkBubble.Position;
-        var sPos = tPos;
-        sPos.Y -= 0.5f;
-        _talkBubble.Position = sPos;
+        var startPos = _targPos;
+        startPos.Y -= 0.5f;
+        _talkBubble.Position = startPos;
         _talkBubble.Modulate = Color.FromHtml("#ffffff00");
 
         Tween tween = CreateTween();
@@ -25,14 +32,13 @@ public partial class NPC : CharacterBody3D
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetParallel(true);
         tween.TweenProperty(_talkBubble, "modulate", Color.FromHtml("#ffffff"), 1f);
-        tween.TweenProperty(_talkBubble, "position", tPos, 1f);
+        tween.TweenProperty(_talkBubble, "position", _targPos, 1f);
 
         await ToSignal(GetTree().CreateTimer(5f), "timeout");
         if (!IsInstanceValid(this)) return;
 
-        // Despawn - float up and shrink
         _talkBubble.Visible = false;
-        _talkBubble.Position = tPos;
+        _talkBubble.Position = _targPos;
     }
 
     // adapted from gd docs
