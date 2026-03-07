@@ -5,8 +5,8 @@
 [ext_resource type="Material" uid="uid://dlya2fn1vwlu2" path="res://Assets/3D/Mat/seaworn_brick_orm.tres" id="3_b3xiu"]
 [ext_resource type="Material" uid="uid://mjgxifv4bgou" path="res://Assets/3D/Mat/interiour.tres" id="3_nrsdw"]
 [ext_resource type="Material" uid="uid://v5h0audxdhn5" path="res://Assets/3D/Mat/interiour_highlight.tres" id="4_2b621"]
-[ext_resource type="Material" uid="uid://cwf2ouerpxfku" path="res://Assets/3D/Mat/glass.tres" id="4_dsoqp"]
 [ext_resource type="Material" uid="uid://bf1270kjvswxi" path="res://Assets/3D/Mat/metal.tres" id="4_yj033"]
+[ext_resource type="Material" uid="uid://jlp07ufmm7xl" path="res://Assets/3D/Mat/glass_2.tres" id="7_b3xiu"]
 
 [node name="double_wall_window_1" unique_id=848946238 node_paths=PackedStringArray("PhyCol", "RayCol") instance=ExtResource("1_oh2bx")]
 script = ExtResource("2_s0tpg")
@@ -21,7 +21,7 @@ surface_material_override/0 = ExtResource("3_b3xiu")
 surface_material_override/1 = ExtResource("3_nrsdw")
 surface_material_override/2 = ExtResource("4_2b621")
 surface_material_override/3 = ExtResource("4_yj033")
-surface_material_override/4 = ExtResource("4_dsoqp")
+surface_material_override/4 = ExtResource("7_b3xiu")
 
 [node name="single_wall_ray" parent="." index="2" unique_id=1526409289]
 visible = false

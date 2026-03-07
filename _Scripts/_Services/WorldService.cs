@@ -19,6 +19,30 @@ public partial class WorldService : Node
     }
 
     // ========== public methods ==========
+    
+    // Get an entrance
+    public Node3D GetEntrance()
+    {
+        List<Wall> entrances = new();
+
+        foreach (Node3D node in _shelvesRoot.GetChildren())
+        {
+            if (node is Wall wall) // found a new shelf
+            {
+                if (wall.EntranceTarg is not null)
+                {
+                    entrances.Add(wall);
+                }
+            }
+        }
+
+        if (entrances.Count == 0) return null;
+
+        var randomisedIndex = (int) GD.RandRange(0, entrances.Count - 1);
+        Node3D target = entrances[randomisedIndex].EntranceTarg;
+        
+        return target;
+    }
 
     // Get all products in this store
     public List<ProductEntity> GetProducts()

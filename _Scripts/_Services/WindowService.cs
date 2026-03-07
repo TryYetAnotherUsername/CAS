@@ -16,13 +16,14 @@ public partial class WindowService : Node
         { EWindowContent.None, ("New window", "") },
 		{ EWindowContent.Properties, ("Manage stock", "uid://dga1dp2fut3cf") },
 		{ EWindowContent.Messages, ("Messages", "uid://bh0t8bq1lj75o") },
-		{ EWindowContent.BuildWindow, ("Build tool", "uid://dfoesuavqgm4r")}
+		{ EWindowContent.BuildWindow, ("Build tool", "uid://dfoesuavqgm4r")},
+		{ EWindowContent.Economy, ("Economy manager", "uid://cal7ydxuppgvp")}
     };
 
 
 	public enum EWindowContent
 	{
-		None, Properties, Messages, BuildWindow
+		None, Properties, Messages, BuildWindow, Economy
 	};
 
     public override void _Ready()

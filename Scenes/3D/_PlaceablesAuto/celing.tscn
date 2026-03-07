@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://8bnwbc5t1l0m"]
+
+[ext_resource type="PackedScene" uid="uid://bvvqfy4kg53q3" path="res://Assets/3D/Models/Placeables/Floors/celing.glb" id="1_c1ov4"]
+[ext_resource type="Texture2D" uid="uid://syucr6nw04hy" path="res://Assets/3D/Textures/metal_roof/corrugated_iron_02_nor_gl_1k.jpg" id="2_bospg"]
+[ext_resource type="Texture2D" uid="uid://cr5gfh1ylivqm" path="res://Assets/3D/Textures/metal_roof/corrugated_iron_02_arm_1k.jpg" id="2_grvdb"]
+[ext_resource type="Script" uid="uid://bwfblvbt5apli" path="res://_Scripts/Classes/Props/p/Wall.cs" id="2_jof1i"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_bospg"]
+albedo_color = Color(0.42636028, 0.42636037, 0.4263602, 1)
+orm_texture = ExtResource("2_grvdb")
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = ExtResource("2_bospg")
+ao_enabled = true
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bospg"]
+albedo_color = Color(0.6583868, 0.6583868, 0.6583868, 1)
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jof1i"]
+albedo_color = Color(0.55860746, 0.5586074, 0.5586074, 1)
+roughness = 0.65
+
+[node name="celing" unique_id=649037529 node_paths=PackedStringArray("PhyCol", "RayCol") instance=ExtResource("1_c1ov4")]
+script = ExtResource("2_jof1i")
+PhyCol = NodePath("physics/StaticBody3D/CollisionShape3D")
+RayCol = NodePath("ray/StaticBody3D/CollisionShape3D")
+
+[node name="s_wall_mesh" parent="." index="0" unique_id=847540121]
+surface_material_override/0 = SubResource("ORMMaterial3D_bospg")
+surface_material_override/1 = SubResource("StandardMaterial3D_bospg")
+surface_material_override/2 = SubResource("StandardMaterial3D_jof1i")
+
+[node name="physics" parent="." index="1" unique_id=180376294]
+visible = false
+
+[node name="ray" parent="." index="2" unique_id=1173938538]
+visible = false
+
+[node name="StaticBody3D" parent="ray" index="0" unique_id=1302628665]
+collision_layer = 2
+collision_mask = 2

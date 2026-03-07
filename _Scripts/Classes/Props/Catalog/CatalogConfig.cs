@@ -9,6 +9,7 @@ public static class CatalogConfig
     [
         // ========== FLOORS ==========
         new CatalogEntity { DispName = "Wooden floor",      UID = "uid://y7yesnlndrfg",  CatalogGroup = EGroup.Floors , Cost = 10, Discription = "A nice floor your customers may walk on."},
+        new CatalogEntity { DispName = "Ceiling", UID = "uid://8bnwbc5t1l0m", CatalogGroup = EGroup.Floors, Cost = 5, Discription = "A nice ceiling your customer's won't walk on."},
         // ========== WALLS ==========
         new CatalogEntity { DispName = "Wall",              UID = "uid://dtmwx7ig68eac", CatalogGroup = EGroup.Walls, Cost = 10, Discription = "Probably the most boring object in this game?"},
         new CatalogEntity { DispName = "Wall (Double)",     UID = "uid://bkwafr84yuc0q", CatalogGroup = EGroup.Walls, Cost = 20, Discription = "A bland, boring wall. A tad bit less boring than the other one."},
@@ -20,6 +21,8 @@ public static class CatalogConfig
         // ========== CHECKOUTS ==========
         new CatalogEntity { DispName = "Self checkout",     UID = "uid://kmvwjfwijr4y", CatalogGroup = EGroup.Misc, Cost = 1000, Discription = "Customers can take a while to use it, so place a few of these checkouts if your store gets crowded!\nAt least 1 of this item is required in the store."},
         new CatalogEntity { DispName = "Checkout queue point",  UID = "uid://btfdwcjiul0pn", CatalogGroup = EGroup.Misc, Cost = 100, Discription = "Customers can queue up here. place a few of these near the checkouts.\nAt least 1 of this item is required in the store."},
+        // ========== DECOR ==========
+        new CatalogEntity { DispName = "Ceiling light",     UID = "uid://wbgymum0154n", CatalogGroup = EGroup.Decorations, Cost = 1000, Discription = "Put these on the ceiling to light up your store."},
     ];
 
     public static CatalogEntity FindByUID(string uid)

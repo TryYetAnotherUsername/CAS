@@ -16,14 +16,16 @@ public partial class Shelf : Prop
 	private class ShelfVisuals
 	{
 		// vars
-		private Node3D _productAreasRoot;
+		public Node3D ProductAreasRoot;
 		private Shelf _shelf;
 		private List<Area3D> _productAreas = new();
+		public AnimationPlayer AniPlayer;
 
 		// constructor
 		public ShelfVisuals(Shelf theClass)
 		{
-			_productAreasRoot = theClass._productAreasRoot;
+			ProductAreasRoot = theClass._productAreasRoot;
+			AniPlayer = theClass._aniPlayer;
 			_shelf = theClass;
 			ScanAreas();
 		}
@@ -92,7 +94,7 @@ public partial class Shelf : Prop
 
 		private void ScanAreas()
 		{
-			foreach (Node node in _productAreasRoot.GetChildren())
+			foreach (Node node in ProductAreasRoot.GetChildren())
 			{
 				if (node is Area3D area)
 				{
@@ -118,6 +120,8 @@ public partial class Shelf : Prop
 	}
 
 	[Export] private Node3D _productAreasRoot;
+	[Export] private AnimationPlayer _aniPlayer;
+
 	private ShelfVisuals _Visuals;
 
     #region Godot methods
@@ -212,6 +216,58 @@ public partial class Shelf : Prop
 		}
 	}
 
+	/// <summary>
+	/// Take a product with animation and wait time.
+	/// </summary>
+	public void TryTakeProduct(ProductEntity targProduct, int amount, Action<int>callback)
+	{
+		if (_Visuals.AniPlayer is not null)
+		{
+			_Visuals.AniPlayer.Play("animate");	
+		}
+
+		GetTree().CreateTimer(10).Timeout += () =>
+		{
+			var entry = GetEntryFromStocked(targProduct);
+			if (entry is null)
+			{
+				GD.Print("A shelf: Tried to take a product, but that product is not stocked on this shelf.");
+				callback?.Invoke(-1);
+				//return 0;
+			}
+			else
+			{
+				if (entry.Quantity == 0)
+				{
+					GD.Print("A shelf: Failed to take any products, shelf is empty.");
+					callback?.Invoke(-1);
+					//return 0;
+				}
+				else if (entry.Quantity >= amount)
+				{
+					entry.Quantity -= amount;
+					GD.Print($"A shelf: Took {amount} products. {entry.Quantity} remaining.");
+					_Visuals.Refresh();
+					callback?.Invoke(amount);
+					//return amount;
+				}
+				else // quantity > 0 but < amount
+				{
+					int taken = entry.Quantity;
+					entry.Quantity = 0;
+					GD.Print($"A shelf: Only had {taken}, took all that were left.");
+					_Visuals.Refresh();
+					callback?.Invoke(taken);
+					//return taken;
+				}
+				
+			}	
+		};
+	}
+
+	/// <summary>
+	/// Take a product with no animation and no wait time.
+	/// </summary>
 	public int TakeProduct(ProductEntity targProduct, int amount)
 	{
 		var entry = GetEntryFromStocked(targProduct);
@@ -227,14 +283,14 @@ public partial class Shelf : Prop
 				GD.Print("A shelf: Failed to take any products, shelf is empty.");
 				return 0;
 			}
-			else if (entry.Quantity >= amount)
+		else if (entry.Quantity >= amount)
 			{
 				entry.Quantity -= amount;
 				GD.Print($"A shelf: Took {amount} products. {entry.Quantity} remaining.");
 				_Visuals.Refresh();
 				return amount;
 			}
-			else // quantity > 0 but < amount
+		else // quantity > 0 but < amount
 			{
 				int taken = entry.Quantity;
 				entry.Quantity = 0;
@@ -242,7 +298,7 @@ public partial class Shelf : Prop
 				_Visuals.Refresh();
 				return taken;
 			}
-			
+				
 		}
 	}
 	#endregion Public methods

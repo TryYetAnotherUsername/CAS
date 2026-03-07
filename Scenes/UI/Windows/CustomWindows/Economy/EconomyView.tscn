@@ -1,0 +1,306 @@
+[gd_scene format=3 uid="uid://cal7ydxuppgvp"]
+
+[ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="1_4oioy"]
+[ext_resource type="Script" uid="uid://do55r1h1cpukw" path="res://_Scripts/UI/Windows/Econ/EconomyView.cs" id="1_8pw52"]
+[ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="2_i5uhb"]
+[ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="3_8sb60"]
+[ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="4_i5uhb"]
+
+[sub_resource type="Resource" id="Resource_g4iyt"]
+script = ExtResource("4_i5uhb")
+
+[sub_resource type="Resource" id="Resource_jbofw"]
+script = ExtResource("4_i5uhb")
+
+[node name="EconomyView" type="Control" unique_id=772191965 node_paths=PackedStringArray("_attractiveness", "_variety", "_queueTime", "_crowdCap", "_money", "_ratingString", "_numberOfPeople")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8pw52")
+_attractiveness = NodePath("TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control/HBoxContainer/Label2")
+_variety = NodePath("TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2/HBoxContainer/Label2")
+_queueTime = NodePath("TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3/HBoxContainer/Label2")
+_crowdCap = NodePath("TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4/HBoxContainer/Label2")
+_money = NodePath("TabContainer/Ratings/Panel/VBoxContainer/Label")
+_ratingString = NodePath("TabContainer/Ratings/Panel/VBoxContainer/Label2")
+_numberOfPeople = NodePath("TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5/HBoxContainer/Label2")
+metadata/_edit_horizontal_guides_ = [-24.0]
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=508021656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_i5uhb")
+current_tab = 0
+
+[node name="Ratings" type="Control" parent="TabContainer" unique_id=694289877]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Panel" type="Panel" parent="TabContainer/Ratings" unique_id=96570652]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 49.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Ratings/Panel" unique_id=2085596764]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Ratings/Panel/VBoxContainer" unique_id=1222626912]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_4oioy")
+theme_override_font_sizes/font_size = 16
+text = "Money: £324"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="TabContainer/Ratings/Panel/VBoxContainer" unique_id=1758522019]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_4oioy")
+theme_override_font_sizes/font_size = 16
+text = "Rating: 50% - (Bonus +5% income)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SmoothScrollContainer" type="ScrollContainer" parent="TabContainer/Ratings" unique_id=1028839614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_8sb60")
+speed = 500.0
+wheel_scroll_damper = SubResource("Resource_g4iyt")
+dragging_scroll_damper = SubResource("Resource_jbofw")
+metadata/_custom_type_script = "uid://bgqglerkcylxx"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Ratings/SmoothScrollContainer" unique_id=547330935]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Control" type="PanelContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer" unique_id=2137675037]
+custom_minimum_size = Vector2(0, 66.755)
+layout_mode = 2
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control" unique_id=266270485]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control/HBoxContainer" unique_id=723127708]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control/HBoxContainer" unique_id=1558425956]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Attractiveness"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label2" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control/HBoxContainer" unique_id=284951497]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "50%"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label3" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control/HBoxContainer" unique_id=1675751588]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "The higher this rating, the more people want to shop at your store."
+autowrap_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control/HBoxContainer" unique_id=626350805]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Control2" type="PanelContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer" unique_id=1337806992]
+custom_minimum_size = Vector2(0, 66.755)
+layout_mode = 2
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2" unique_id=832101856]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2/HBoxContainer" unique_id=1746287290]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2/HBoxContainer" unique_id=733610908]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Variety"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label2" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2/HBoxContainer" unique_id=1081987172]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "50%"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label3" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2/HBoxContainer" unique_id=1987591337]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "The more types of products you have avalible, the better."
+autowrap_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control2/HBoxContainer" unique_id=1121414098]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Control3" type="PanelContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer" unique_id=1222266006]
+custom_minimum_size = Vector2(0, 66.755)
+layout_mode = 2
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3" unique_id=869255956]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3/HBoxContainer" unique_id=1388560895]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3/HBoxContainer" unique_id=1227407141]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Queue time"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label2" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3/HBoxContainer" unique_id=951585565]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "50%"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label3" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3/HBoxContainer" unique_id=1526815458]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Customers start to leave if your queue times are too long."
+autowrap_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control3/HBoxContainer" unique_id=162229703]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Control4" type="PanelContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer" unique_id=451561450]
+custom_minimum_size = Vector2(0, 66.755)
+layout_mode = 2
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4" unique_id=1995396181]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4/HBoxContainer" unique_id=1455678393]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4/HBoxContainer" unique_id=1739775613]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Crowd capacity"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label2" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4/HBoxContainer" unique_id=1745025670]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "50%"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label3" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4/HBoxContainer" unique_id=1889227186]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "If customers need to leave constantly, your store will gain a lower capacity rating."
+autowrap_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control4/HBoxContainer" unique_id=139448945]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Control5" type="PanelContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer" unique_id=870310547]
+custom_minimum_size = Vector2(0, 66.755)
+layout_mode = 2
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5" unique_id=678287088]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5/HBoxContainer" unique_id=805023239]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5/HBoxContainer" unique_id=1898758827]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Current customers count"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label2" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5/HBoxContainer" unique_id=836325708]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "5"
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Label3" type="Label" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5/HBoxContainer" unique_id=807376975]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+autowrap_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Ratings/SmoothScrollContainer/VBoxContainer/Control5/HBoxContainer" unique_id=297888733]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true

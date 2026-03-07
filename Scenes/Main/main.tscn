@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6phpy2k7l5d5" path="res://_Scripts/_Services/Main.cs" id="1_imbg2"]
 [ext_resource type="Theme" uid="uid://dwc7hjmajo8bv" path="res://Assets/UI/Themes/general.tres" id="1_p6jpk"]
-[ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/Player/player_char.tscn" id="2_4e4y2"]
+[ext_resource type="PackedScene" uid="uid://1nlw4pdtrla0" path="res://Scenes/3D/Player/player_char.tscn" id="2_4e4y2"]
 [ext_resource type="Script" uid="uid://dq3hj7drvm3sd" path="res://_Scripts/_Services/BuildToolService.cs" id="2_hvw5u"]
 [ext_resource type="Script" uid="uid://nt878o4u3kxu" path="res://_Scripts/_Services/ProjectService.cs" id="2_wbulw"]
 [ext_resource type="Shader" uid="uid://cs4qimaf74gk3" path="res://Assets/3D/Shaders/terrainShader.gdshader" id="3_6t3k2"]
@@ -24,7 +24,7 @@
 [ext_resource type="Script" uid="uid://by4316qng1qrs" path="res://_Scripts/_Services/ShoppingListService.cs" id="19_wbulw"]
 [ext_resource type="Script" uid="uid://bdbxtvkcmaj8u" path="res://Scenes/Main/MoneyCounter.cs" id="20_1j4pb"]
 [ext_resource type="PackedScene" uid="uid://wm3tf1bsv1t" path="res://Scenes/UI/Windows/window_base.tscn" id="22_tyqxl"]
-[ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/NPCs/Customer.tscn" id="22_v4agm"]
+[ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/3D/NPCs/Customer.tscn" id="22_v4agm"]
 [ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="23_gw8t2"]
 [ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="24_nsdex"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/_Services/FactoryService.cs" id="25_8sujb"]
@@ -484,6 +484,7 @@ ssao_intensity = 4.0
 ssil_enabled = true
 ssil_radius = 1.36
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
 fog_mode = 1
 fog_light_color = Color(0.49610466, 0.6515301, 0.73339844, 1)
 fog_sun_scatter = 0.4
@@ -521,8 +522,6 @@ script = ExtResource("14_js8sm")
 script = ExtResource("11_wbulw")
 _npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
 _customerNpc = ExtResource("22_v4agm")
-_facProductVariety = 1.0
-_facCustomerCount = 1.0
 
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")
@@ -695,7 +694,7 @@ text = "Build tool window"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 6
+_tool = 7
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Messages" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=679314490]
@@ -718,7 +717,30 @@ text = "Open messages"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 5
+_tool = 6
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Econ" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=35848020]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Econ" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ" unique_id=1073691293]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_p6jpk")
+text = "Economy stats"
+flat = true
+alignment = 0
+script = ExtResource("4_tyqxl")
+_tool = 2
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="BakePathfinding" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1750453374]
@@ -764,7 +786,7 @@ text = "Spawn customers"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 2
+_tool = 3
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="OpenFile" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=99611495]
@@ -787,7 +809,7 @@ text = "Open an excisting file"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 4
+_tool = 5
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="SaveFile" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1360046575]
@@ -810,7 +832,7 @@ text = "Save current session"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")
-_tool = 3
+_tool = 4
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Button" type="Button" parent="UI/Core/TopArea/Menu" unique_id=339895518 node_paths=PackedStringArray("_animationPlayer")]

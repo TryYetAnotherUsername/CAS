@@ -70,10 +70,10 @@ public partial class NpcSpawnerService : Node
         return true;
     }
 
-    [Export] private float _facProductVariety;
-    [Export] private float _facCustomerCount;
-    [Export] private float _baseDelay;
-    [Export] private float _waitTime;
+    [Export] private float _facProductVariety = 0;
+    [Export] private float _facCustomerCount = 0;
+    [Export] private float _baseDelay = 3;
+    [Export] private float _finalWaitTime;
 
     public async void StartSpawning()
     {
@@ -88,11 +88,11 @@ public partial class NpcSpawnerService : Node
             float varietyBonus = products.Count * _facProductVariety; // Each product avalible speeds spawnrate up by 0.2s
             float crowdDelay = CustomerCount * _facCustomerCount; // Each customer slows spawnrate down by 0.5s
 
-            float _waitTime = _baseDelay + varietyBonus - crowdDelay;
-            _waitTime = MathF.Min(_waitTime, 5f);
-            _waitTime += GD.RandRange(1,10);
+            float _finalWaitTime = _baseDelay + varietyBonus - crowdDelay;
+            _finalWaitTime = MathF.Min(_finalWaitTime, 3f);
+            _finalWaitTime += GD.RandRange(1,5);
 
-            await ToSignal(GetTree().CreateTimer(_waitTime), SceneTreeTimer.SignalName.Timeout);
+            await ToSignal(GetTree().CreateTimer(_finalWaitTime), SceneTreeTimer.SignalName.Timeout);
             I.SpawnCustomer();
         }
     }
