@@ -30,15 +30,22 @@ public partial class EconomyService : Node
         StartLoop();
     }
 
-	public async void Refresh()
+	public void Refresh()
 	{
+        float maxPopularity = 0;
+        // calc max popularity
+        foreach(var product in ProductConfig.Catalog)
+        {
+            maxPopularity += product.Popularity;
+        }
+
         // calc variety
         Variety = 0;
         if (WorldService.I.GetProducts() is not null)
         {
-            for (int i = 0; i < WorldService.I.GetProducts().Count; i++)
+            foreach (var product in WorldService.I.GetProducts())
             {
-                ModVariety(10);
+                ModVariety(product.Popularity);
             }
         }
         else
@@ -46,8 +53,10 @@ public partial class EconomyService : Node
             ModVariety(-100);
         }
 
+        Variety = Mathf.Clamp(Variety / maxPopularity * 100f, 0f, 100f);
+
         OverallRating = Math.Clamp((Variety + Attractiveness + (100f - QueueTime) + CrowdCap) / 4f, 0f, 100f);
-        OnStatsUpdate?.Invoke();   
+        OnStatsUpdate?.Invoke();
 	}
 
     public async void StartLoop()

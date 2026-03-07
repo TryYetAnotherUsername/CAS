@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Threading;
 
 public partial class NpcSpawnerService : Node
 {
@@ -10,10 +9,21 @@ public partial class NpcSpawnerService : Node
     public static event Action OnClearAll;
     public int CustomerCount;
 
+    private bool _spawning;
+
+
     public override void _Ready()
     {
         I = this;
-        
+
+        Performance.AddCustomMonitor("NpcSpawnerService/FinalWaitTime", Callable.From(() => (Variant)           _finalWaitTime));
+        Performance.AddCustomMonitor("NpcSpawnerService/CustomerCount", Callable.From(() => (Variant)           CustomerCount));
+        Performance.AddCustomMonitor("NpcSpawnerService/VarietyBonus", Callable.From(() => (Variant)            (EconomyService.I.Variety * _facVariety)));
+        Performance.AddCustomMonitor("NpcSpawnerService/AttractivenessBonus", Callable.From(() => (Variant)     EconomyService.I.Attractiveness));
+        // Performance.AddCustomMonitor("NpcSpawnerService/IsSpawning?", Callable.From(() => (Variant)              _spawning));
+        // Performance.AddCustomMonitor("NpcSpawnerService/AllowedToSpawn?", Callable.From(() => (Variant)          _allowedToSpawn));
+        // Performance.AddCustomMonitor("NpcSpawnerService/FactoredCusCount?", Callable.From(() => (Variant)          (CustomerCount * _facCustomerCount)));
+
         ToolService.OnUpdate += (tool) =>
         {
             if (tool == ToolService.ETools.SpawnACustomer)
@@ -30,19 +40,7 @@ public partial class NpcSpawnerService : Node
 
     public void SpawnCustomer()
     {
-        if (WorldService.I.GetCheckout() is null)
-        {
-            GD.PushWarning("No one can shop at your shop because there is no checkout.");
-            OnClearAll?.Invoke();
-            return;
-        }
-        if (WorldService.I.GetCheckoutQueue() is null)
-        {
-            GD.PushWarning("No one can shop at your shop because they have no where to queue.");
-            OnClearAll?.Invoke();
-            return;
-        }
-
+        if (!CheckSpawnStatus()) return;
         GD.Print("NpcSpawnerService: Starting to spawn a new customer.");
         var customerInst = _customerNpc.Instantiate();
         _npcRoot.AddChild(customerInst);
@@ -55,47 +53,81 @@ public partial class NpcSpawnerService : Node
 
     public bool CheckSpawnStatus()
     {
+        bool allowed = true;
         if (WorldService.I.GetCheckout() is null)
         {
             NotificationService.I.Print("No one can shop at your shop because there is no checkout\n\nTo build a new checkout, open the build tool from the menu and go to Misc > Checkout.");
             OnClearAll?.Invoke();
-            return false;
+            allowed = false;
         }
         if (WorldService.I.GetCheckoutQueue() is null)
         {
             NotificationService.I.Print("No one can shop at your shop because they have no where to queue\n\nTo build a new queue point, open the build tool from the menu and go to Misc > Queue point.");
             OnClearAll?.Invoke();
-            return false;
+            allowed = false;
         }
-        return true;
+        if (WorldService.I.GetEntrance() is null)
+        {
+            NotificationService.I.Print("No one can shop at your shop because there is no entrance\n\nTo build a new entrance, open the build tool from the menu and go to Walls > Entrance.");
+            OnClearAll?.Invoke();
+            allowed = false;
+        }
+        _allowedToSpawn = allowed;
+        return allowed;
     }
 
-    [Export] private float _facProductVariety = 0;
-    [Export] private float _facCustomerCount = 0;
-    [Export] private float _baseDelay = 3;
-    [Export] private float _finalWaitTime;
+    [Export] private float _facVariety = 0.05f;       // 100 variety = 5s bonus
+    [Export] private float _facAttractiveness = 0.03f; // 100 attract = 3s bonus
+    [Export] private float _facCustomerCount = 0.5f;   // each customer adds 0.5s
+    [Export] private float _minDelay = 2f;
+    [Export] private float _maxDelay = 30f;
+    private float _finalWaitTime;
+
+    private bool _currentlySpawning;      // loop is running
+    private bool _allowedToSpawn;
 
     public async void StartSpawning()
     {
-        while (true)
+
+        if (_currentlySpawning) return;
+        _allowedToSpawn = true;
+        _currentlySpawning = true;
+        
+        while (_allowedToSpawn)
         {
             var products = WorldService.I.GetProducts();
             if (products is null || products.Count == 0)
             {
-                return;
+                _allowedToSpawn = false;
+                continue;
             }
 
-            float varietyBonus = products.Count * _facProductVariety; // Each product avalible speeds spawnrate up by 0.2s
-            float crowdDelay = CustomerCount * _facCustomerCount; // Each customer slows spawnrate down by 0.5s
+            if (!CheckSpawnStatus())
+            {
+                _allowedToSpawn = false;
+                continue;
+            }
 
-            float _finalWaitTime = _baseDelay + varietyBonus - crowdDelay;
-            _finalWaitTime = MathF.Min(_finalWaitTime, 3f);
-            _finalWaitTime += GD.RandRange(1,5);
+            float varietyBonus = EconomyService.I.Variety * _facVariety;
+            float attractivenessBonus = EconomyService.I.Attractiveness * _facAttractiveness;
+
+            float crowdDelay = CustomerCount * _facCustomerCount; // Each customer slows spawnrate down
+
+            _finalWaitTime = crowdDelay - varietyBonus;
+            //_finalWaitTime = Mathf.Clamp(_finalWaitTime, _minDelay, _maxDelay);
+            //_finalWaitTime += (float)GD.RandRange(0, 2);
 
             await ToSignal(GetTree().CreateTimer(_finalWaitTime), SceneTreeTimer.SignalName.Timeout);
             I.SpawnCustomer();
         }
+        OnClearAll?.Invoke();
+        _currentlySpawning = false;
     }
+
+
+
+
+
 
     public void AddCount()
     {

@@ -522,6 +522,8 @@ script = ExtResource("14_js8sm")
 script = ExtResource("11_wbulw")
 _npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
 _customerNpc = ExtResource("22_v4agm")
+_facVariety = 2.0
+_facCustomerCount = 10.0
 
 [node name="WorldService" type="Node" parent="Services" unique_id=1975059932 node_paths=PackedStringArray("_shelvesRoot")]
 script = ExtResource("31_aq0wg")
@@ -618,6 +620,7 @@ action_mode = 0
 text = "Select tool →"
 flat = true
 script = ExtResource("3_ifk88")
+_actionMode = null
 _animationPlayer = NodePath("../../Menu/MenuAnimationPlayer")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/OpenMenuButton" unique_id=1216387105]
@@ -720,14 +723,14 @@ script = ExtResource("4_tyqxl")
 _tool = 6
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Econ" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=35848020]
+[node name="Econ(StoreManager)" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=35848020]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Econ" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ" unique_id=1073691293]
+[node name="Econ" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ(StoreManager)" unique_id=1073691293]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -736,7 +739,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Economy stats"
+text = "Store manager"
 flat = true
 alignment = 0
 script = ExtResource("4_tyqxl")

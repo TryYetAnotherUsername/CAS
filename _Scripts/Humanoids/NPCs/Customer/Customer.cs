@@ -88,6 +88,11 @@ public partial class Customer : NPC
             QueueFree();
         }
 
+        if (WorldService.I.GetEntrance() is null)
+        {
+            QueueFree();
+        }
+
         GlobalPosition = WorldService.I.GetEntrance().GlobalPosition;
         GD.Print(_navigationAgent);
     }
@@ -171,6 +176,10 @@ public partial class Customer : NPC
             case State.WalkingToExit:
                 aniBlendVal = 0;
                 GD.Print("🟩 Walking to exit...");
+                if (WorldService.I.GetEntrance() is null)
+                {
+                    QueueFree();
+                }
                 SetMovementTarget(WorldService.I.GetEntrance().GlobalPosition);
                 break;
 
@@ -324,7 +333,9 @@ public partial class Customer : NPC
     
     private void LeaveAndComplain(string message)
     {
+        Print("Urgh. I can't be bothered anymore.");
         NotificationService.I.Print("One of your customers just left without paying. Prehaps you should treat them better?\nTry building more checkouts.");
+        EconomyService.I.ModCrowdCap(-7);
         SwitchState(State.WalkingToExit);
     }
 }

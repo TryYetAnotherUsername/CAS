@@ -59,7 +59,7 @@ public partial class WorldService : Node
                     bool alreadyAdded = false;
                     foreach (ProductEntity p in products) // check if this product is already added into the list
                     {
-                        if (p == entry.Product)
+                        if (p.UID == entry.Product.UID)
                         {
                             alreadyAdded = true;
                         }

@@ -1,6 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 /// <summary>
 /// This class binds godot UIDs to their ProductEntity on startup.
@@ -20,13 +19,6 @@ public static class ProductConfig
         new ProductEntity { DispName = "Chemical soup", UID = "uid://dnp4qom8tlh68", Category = ProductEntity.EProductCategory.Food, PriceImport = 1.20f, PriceSell = 2.35f, Popularity = 1, Supplier = "Toxic chemical research Corp."}
     ];
 
-    /// <summary>
-    /// Get product entity from godot UID. Currently uses LINQ- cleanup to use index of the Catalog list in the future.
-    /// </summary>
-    public static ProductEntity FindByUID(string uid)
-    {
-        return Catalog.FirstOrDefault(e => e.UID == uid);
-    }
 
     /// <summary>
     /// Init checks that provided UIDs are valid. 
