@@ -1,7 +1,7 @@
 using Godot;
 using System;
-using System.Runtime.CompilerServices;
 
+// Stats and all
 public partial class EconomyService : Node
 {
     public static EconomyService I;

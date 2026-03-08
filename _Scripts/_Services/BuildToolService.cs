@@ -1,11 +1,13 @@
 using Godot;
 using System;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
 
+/// <summary>
+/// Manages placing, rotating and editing props at runtime.
+/// </summary>
 public partial class BuildToolService : Node
 {
-    // Buildmode revamp- old buildmode is called OldBuildMode. Gud luck timmy :)
+    // #4, #7 Buildmode revamp- old buildmode is called OldBuildMode. Gud luck timmy :)
+    // NTS- duped raycast code
 
     public static BuildToolService I;
 
@@ -100,17 +102,16 @@ public partial class BuildToolService : Node
         }
         if (@event.IsActionPressed("build_gizmo_rotate"))
         {
-            if (_currentState == EState.PlacingFromCatalog)
+            if (_currentState == EState.PlacingFromCatalog || _currentState == EState.Freeform)
             {
                 // rotate
                 var tween = CreateTween();
-                tween.TweenProperty(_currentProp, "rotation_degrees:y", _currentProp.RotationDegrees.Y + 90, 0.2);
+                tween.TweenProperty(_currentProp, "rotation_degrees:y", _currentProp.RotationDegrees.Y + 90, 0.1);
             }
         }
     }
 
     #endregion <godot funcs>
-
 
     #region <public methods>
     public void StartPlacingFromCatalog(CatalogEntity catEnt)

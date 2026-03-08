@@ -1,5 +1,9 @@
 using Godot;
 using System;
+
+/// <summary>
+/// Pushes notifications on the core UI.
+/// </summary>
 public partial class NotificationService : Node
 {
     public static NotificationService I;

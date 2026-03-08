@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Handles baking navmeshes from use placed geometry.
+/// </summary>
 public partial class PathfindingService : Node
 {
     // instance

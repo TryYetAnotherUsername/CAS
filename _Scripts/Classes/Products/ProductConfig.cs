@@ -4,7 +4,6 @@ using System.Collections.Generic;
 /// <summary>
 /// This class binds godot UIDs to their ProductEntity on startup.
 /// </summary>
-
 public static class ProductConfig
 {
     public static readonly List<ProductEntity> Catalog =

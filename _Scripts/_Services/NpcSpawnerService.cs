@@ -1,17 +1,39 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Spawning customers with delay calculated from stats.
+/// </summary>
 public partial class NpcSpawnerService : Node
 {
+    #region fields and stuff
+
+    public static NpcSpawnerService I;
+
+    // export
     [Export] private Node3D _npcRoot;
     [Export] private PackedScene _customerNpc;
-    public static NpcSpawnerService I;
+    // export- modifiers for algorithm
+    [Export] private float _facVariety = 0.05f;       // 100 variety = 5s bonus
+    [Export] private float _facAttractiveness = 0.03f; // 100 attract = 3s bonus
+    [Export] private float _facCustomerCount = 0.5f;   // each customer adds 0.5s
+    [Export] private float _minDelay = 2f;
+    [Export] private float _maxDelay = 30f;
+
+    // events
     public static event Action OnClearAll;
+
+    // public vars
     public int CustomerCount;
+    // private vars
+    private bool _isSpawning;
+    private float _finalWaitTime;
+    private bool _currentlySpawning;
+    private bool _allowedToSpawn;
 
-    private bool _spawning;
+    #endregion fields
 
-
+    #region Godot methods
     public override void _Ready()
     {
         I = this;
@@ -37,20 +59,10 @@ public partial class NpcSpawnerService : Node
 
         //StartSpawning();
     }
+    
+    #endregion Godot methods
 
-    public void SpawnCustomer()
-    {
-        if (!CheckSpawnStatus()) return;
-        GD.Print("NpcSpawnerService: Starting to spawn a new customer.");
-        var customerInst = _customerNpc.Instantiate();
-        _npcRoot.AddChild(customerInst);
-
-        if (customerInst is Customer customer)
-        {
-            customer.Init();
-        }
-    }
-
+    #region public methods
     public bool CheckSpawnStatus()
     {
         bool allowed = true;
@@ -76,18 +88,9 @@ public partial class NpcSpawnerService : Node
         return allowed;
     }
 
-    [Export] private float _facVariety = 0.05f;       // 100 variety = 5s bonus
-    [Export] private float _facAttractiveness = 0.03f; // 100 attract = 3s bonus
-    [Export] private float _facCustomerCount = 0.5f;   // each customer adds 0.5s
-    [Export] private float _minDelay = 2f;
-    [Export] private float _maxDelay = 30f;
-    private float _finalWaitTime;
-
-    private bool _currentlySpawning;      // loop is running
-    private bool _allowedToSpawn;
-
     public async void StartSpawning()
     {
+        PathfindingService.I.StartBakingRegion();
 
         if (_currentlySpawning) return;
         _allowedToSpawn = true;
@@ -124,10 +127,18 @@ public partial class NpcSpawnerService : Node
         _currentlySpawning = false;
     }
 
+    public void SpawnCustomer()
+    {
+        if (!CheckSpawnStatus()) return;
+        GD.Print("NpcSpawnerService: Starting to spawn a new customer.");
+        var customerInst = _customerNpc.Instantiate();
+        _npcRoot.AddChild(customerInst);
 
-
-
-
+        if (customerInst is Customer customer)
+        {
+            customer.Init();
+        }
+    }
 
     public void AddCount()
     {
@@ -138,5 +149,5 @@ public partial class NpcSpawnerService : Node
     {
         CustomerCount --;
     }
-
+    #endregion public methods
 }

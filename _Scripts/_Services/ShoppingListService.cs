@@ -1,7 +1,9 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Generates shopping lists with popularity weighting
+/// </summary>
 public partial class ShoppingListService : Node
 {
     public class ShoppingItem

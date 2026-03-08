@@ -1,9 +1,11 @@
-// NOTE TO SELF
-// The wandering state is not implemented yet, it just despawns.
-
 using Godot;
 using System.Collections.Generic;
 
+/// <summary>
+/// Customer behaviour state machine
+/// </summary>
+// NOTE TO SELF
+// The wandering state is not implemented yet
 public partial class Customer : NPC
 {
     // Enums
@@ -346,5 +348,20 @@ public partial class Customer : NPC
         Print(message);
         EconomyService.I.ModCrowdCap(-7);
         SwitchState(State.WalkingToExit);
+    }
+
+    // ========== Public methods ==========
+    public void Flatten()
+    {
+        _aniTree.Active = false;
+        GD.Print("Flatten");
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(this, "scale", new Vector3(1.5f, 0.01f, 1.5f), 0.2f);
+
+        SetProcess(false);
+        SetPhysicsProcess(false);
+        base.SetProcess(false);
+        base.SetPhysicsProcess(false);
+        GetTree().CreateTimer(2.0f).Timeout += QueueFree;
     }
 }

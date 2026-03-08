@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// It's a conversation
+/// </summary>
 public class Conversation
 {
     public string DispTitle;

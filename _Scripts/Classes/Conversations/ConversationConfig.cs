@@ -1,5 +1,10 @@
+using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// All the conversation content
+/// </summary>
+// lots and lots of typos. I think i'm deslexsic.
 public static class ConversationConfig
 {
     private static readonly Dictionary <string, Conversation> Conversations = new()
@@ -8,7 +13,7 @@ public static class ConversationConfig
             "c_matilda", new Conversation
             {
                 CurrentMessageId = "m_intro",
-                DispTitle = "Matilda (Crimson town)",
+                DispTitle = "Matilda",
                 Messages = new()
                 {
                     { "m_intro", new Conversation.InboundMessage()
@@ -136,7 +141,225 @@ public static class ConversationConfig
                 }
             }
         },
-
+        {
+            "c_tom", new Conversation
+            {
+                CurrentMessageId = "m_intro",
+                DispTitle = "tom@bradfordfamilydairies.co",
+                Messages = new()
+                {
+                    { "m_intro", new Conversation.InboundMessage()
+                        {
+                            Text = "Hey, can I ask you for a favour?",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "For you? Of course!",
+                                    NextMessageID = "m_honestly"
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Maybe... is it good or bad?",
+                                    NextMessageID = "m_fine"
+                                }
+                            }
+                        }
+                    },
+                    { "m_fine", new Conversation.InboundMessage()
+                        {
+                            Text = "It's... Fine. Everything will be just fine\nBut I really need your help.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Sure thing.",
+                                    NextMessageID = "m_honestly"
+                                }
+                            }
+                        }
+                    },
+                    { "m_honestly", new Conversation.InboundMessage()
+                        {
+                            Text = "Well...\nI honestly don't know who to say this to. Our family is going through some really tough times this week.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Hey, Hey, I'm here.\nYou can...\nTrust me.",
+                                    NextMessageID = "m_count"
+                                }
+                            }
+                        }
+                    },
+                    { "m_count", new Conversation.InboundMessage()
+                        {
+                            Text = "I knew I could count on you.\nWell.\nThere was a major virus outbreak on the farm last week.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Please don't tell me what I think you're gonna tell me...",
+                                    NextMessageID = "m_ik_its_bad"
+                                }
+                            }
+                        }
+                    },
+                    { "m_ik_its_bad", new Conversation.InboundMessage()
+                        {
+                            Text = "I know, buddy. It's... Bad.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "I'm so sorry for the trouble. Can I lend you a hand?",
+                                    NextMessageID = "m_cows"
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "I've got more important things to care about. So?",
+                                    NextMessageID = "m_quickly"
+                                }
+                            }
+                        }
+                    },
+                    { "m_quickly", new Conversation.InboundMessage()
+                        {
+                            Text = "Sorry, I will make this as quick as I can.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Oh, come on then.",
+                                    NextMessageID = "m_cows"
+                                }
+                            }
+                        }
+                    },
+                    { "m_cows", new Conversation.InboundMessage()
+                        {
+                            Text = "Half of our cows are in critical conditions, and we think most of them will be gone by the end of the week.\nIf you would be so kind to be able to lend us a little extra money, it could mean that our beloved farm wouldn't go under.\nA £2500 lend would be great.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "I'm more than happy to!",
+                                    Consequence = new Action (() => EconomyService.I.TryTakeCash(2500)),
+                                    NextMessageID = "m_accept"
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Urgh. Just this one time then.",
+                                    Consequence = new Action (() => EconomyService.I.TryTakeCash(2500)),
+                                    NextMessageID = "m_accept"
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "That's a big ask, and- you know it.\nI'm sorry, but I'm going to have to pass.",
+                                    NextMessageID = "m_pass"
+                                }
+                            }
+                        }
+                    },
+                    { "m_accept", new Conversation.InboundMessage()
+                        {
+                            Text = "I can't thank you enough. I will repay you some day.\nThat's a promise.",
+                            AvalibleReplies = null
+                        }
+                    },
+                    { "m_pass", new Conversation.InboundMessage()
+                        {
+                            Text = "I thought...\nI could...\nTrust you.",
+                            AvalibleReplies = null
+                        }
+                    },
+                }
+            }
+        },
+        {
+            "c_hmrc", new Conversation
+            {
+                CurrentMessageId = "m_intro",
+                DispTitle = "HMRC",
+                Messages = new()
+                {
+                    { "m_intro", new Conversation.InboundMessage()
+                        {
+                            Text = "HMRC: You have a £1500 tax payment, conveniently rounded to £2000, due to be paid by the end of this week. if you do not pay it, you will face unimaginable consequences.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Fair enough... heres £2000. Thanks for reminding me!",
+                                    NextMessageID = "m_goodlad",
+                                    Consequence = new Action(()=> EconomyService.I.TryTakeCash(2000))
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "I will consider it. Give me a day or two.",
+                                    NextMessageID = "m_verwell"
+                                }
+                            }
+                        }
+                    },
+                    { "m_goodlad", new Conversation.InboundMessage()
+                        {
+                            Text = "Good lad.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Hey- I never knew HMRC was so chill!?",
+                                    NextMessageID = "m_humour"
+                                }
+                            }
+                        }
+                    },
+                    { "m_verwell", new Conversation.InboundMessage()
+                        {
+                            Text = "Very well. We shall be back soon.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Hey- I never knew HMRC was so chill!?",
+                                    NextMessageID = "m_humour"
+                                }
+                            }
+                        }
+                    },
+                    { "m_humour", new Conversation.InboundMessage()
+                        {
+                            Text = "Haha. You humour me sometimes...\n... I'm not even the HMRC. The HMRC does not communicate to you by text.",
+                            AvalibleReplies = new()
+                            {
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "Thats it. Im telling mommy.",
+                                    NextMessageID = "m_assemblies"
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "ARGHHHHHHH\nDARETH NOT STEAL MINE WEALTH!!",
+                                    NextMessageID = "m_assemblies"
+                                },
+                                new Conversation.OutboundReply()
+                                {
+                                    Text = "I guess it wasn't that much anyway.",
+                                    NextMessageID = "m_assemblies"
+                                }
+                            }
+                        }
+                    },
+                    { "m_assemblies", new Conversation.InboundMessage()
+                        {
+                            Text = "Either way... u should have listened to those online safety assemblies.\n🙂",
+                            AvalibleReplies = null
+                        }
+                    },
+                }
+            }
+        },
     };
 
     public static Dictionary <string, Conversation> GetCopy()

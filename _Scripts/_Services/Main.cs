@@ -4,7 +4,6 @@ using System;
 /// <summary>
 /// "Main"ly for lazy testing. Attatched to root node so the entire scene tree is generated before this runs.
 /// </summary>
-
 public partial class Main : Node
 {
     public override void _Ready()

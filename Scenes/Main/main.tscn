@@ -15,8 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://csp2k3umbt08c" path="res://Assets/3D/Textures/Grass/normal.png" id="5_koken"]
 [ext_resource type="Texture2D" uid="uid://dypfw45wuc58g" path="res://Assets/3D/Textures/Grass/roughness.png" id="6_es6iu"]
 [ext_resource type="Script" uid="uid://drtnqob4u6a2a" path="res://_Scripts/_Services/NpcSpawnerService.cs" id="11_wbulw"]
-[ext_resource type="Script" uid="uid://bhutg27lkojfk" path="res://_Scripts/_Services/CustomerSpawnerService.cs" id="14_js8sm"]
-[ext_resource type="Script" uid="uid://bj4gvgek4cup8" path="res://Scenes/Main/EconomyService.cs" id="15_u244o"]
+[ext_resource type="Script" uid="uid://bef7k6j5t3hte" path="res://_Scripts/_Services/EconomyService.cs" id="13_aq0wg"]
 [ext_resource type="Script" uid="uid://kxjem6ojd6ir" path="res://_Scripts/_Services/MessageService.cs" id="16_0uxpu"]
 [ext_resource type="Shader" uid="uid://dudbydeb3ssrm" path="res://Assets/UI/Shaders/uiBlur.gdshader" id="17_fy12w"]
 [ext_resource type="Script" uid="uid://bcwo50eg8ydb2" path="res://_Scripts/_Services/NotificationService.cs" id="18_m6uf5"]
@@ -515,9 +514,6 @@ _floorsRoot = NodePath("../../3D/Props/PropsRoot")
 script = ExtResource("28_8oboy")
 _navRegion = NodePath("../../3D/Props/PropsRoot")
 
-[node name="CustomerSpawnerService" type="Node" parent="Services" unique_id=1236255876]
-script = ExtResource("14_js8sm")
-
 [node name="NpcFactoryService" type="Node" parent="Services" unique_id=1708621918 node_paths=PackedStringArray("_npcRoot")]
 script = ExtResource("11_wbulw")
 _npcRoot = NodePath("../../3D/Humanoids/NpcsRoot")
@@ -551,7 +547,7 @@ _BuildingRoot = NodePath("../../3D/Props/PropsRoot")
 script = ExtResource("3_qw60k")
 
 [node name="EconomyService" type="Node" parent="Services" unique_id=180782190]
-script = ExtResource("15_u244o")
+script = ExtResource("13_aq0wg")
 
 [node name="NotificationService" type="Node" parent="Services" unique_id=4814348 node_paths=PackedStringArray("_root")]
 script = ExtResource("18_m6uf5")

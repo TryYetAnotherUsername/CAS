@@ -1,5 +1,8 @@
 using Godot;
 
+/// <summary>
+/// For instancing props at runtime.
+/// </summary>
 public partial class FactoryService : Node
 {
 	public static FactoryService I;
@@ -10,6 +13,9 @@ public partial class FactoryService : Node
         I = this;   
     }
 
+    /// <returns>
+    /// Spawned Prop as Node3D in scene tree. 
+    /// </returns>
     public Node3D TrySpawningUidAndGetNode(string uid)
     {
         // Convert the string uid into non-human friendly uid, then into a path:

@@ -1,8 +1,10 @@
 using Godot;
 using System;
-using System.Net.Mime;
-using System.Security.Principal;
 
+/// <summary>
+/// Handles opening the shelf stocking UI.
+/// </summary>
+// Not a very useful class. Shouldn't even be a service. I dont have time to change it.
 public partial class LiveSelectService : Node
 {
     // Events:
@@ -13,10 +15,6 @@ public partial class LiveSelectService : Node
     private Node3D _currentHovered = null;
 
     // Godot native methods:
-    public override void _Process(double delta)
-    {
-    }
-
 	public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed("inspect_pressed"))

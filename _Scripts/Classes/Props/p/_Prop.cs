@@ -1,6 +1,9 @@
 using System;
 using Godot;
 
+/// <summary>
+/// Base class for all props (placeables)
+/// </summary>
 public partial class Prop : Node3D
 {
 	public CatalogEntity Identity;

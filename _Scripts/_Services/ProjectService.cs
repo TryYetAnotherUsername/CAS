@@ -1,7 +1,8 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
+/// <summary>
+/// Loads/ packages a deserialised casproj game state
+/// </summary>
 public partial class ProjectService : Node
 {
 	public static ProjectService I;
@@ -11,7 +12,6 @@ public partial class ProjectService : Node
     {
         I = this;
     }
-
 
 	public void In(CasProj project)
 	{

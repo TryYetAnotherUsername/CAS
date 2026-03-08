@@ -2,6 +2,9 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Makes new windows
+/// </summary>
 public partial class WindowService : Node
 {
 	public static WindowService I;

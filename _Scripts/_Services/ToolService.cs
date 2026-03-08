@@ -1,7 +1,9 @@
 using Godot;
-using Godot.Collections;
 using System;
 
+/// <summary>
+/// Actions for the core ui menu
+/// </summary>
 public partial class ToolService : Node
 {
     public static ToolService I { get; set; }

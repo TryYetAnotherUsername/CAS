@@ -1,8 +1,10 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
+/// <summary>
+/// For finding objects already in the scene tree, like a shelf.
+/// </summary>
+// some code here could make use of linq
 public partial class WorldService : Node
 {
     // instance

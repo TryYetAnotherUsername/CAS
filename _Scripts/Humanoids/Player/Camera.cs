@@ -1,6 +1,6 @@
 using Godot;
-using System;
 
+// The main player cam controller script.
 public partial class Camera : Node3D
 {
     #region Export Variables

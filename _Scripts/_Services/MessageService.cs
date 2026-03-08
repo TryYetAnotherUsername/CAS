@@ -1,8 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
+/// <summary>
+/// Backend for the messaging window.
+/// </summary>
 public partial class MessageService : Node
 {
     #region <fields>
@@ -104,7 +106,7 @@ public partial class MessageService : Node
         
         if (reply.NextMessageID == null) return;
         var nextMessage = convo.Messages[reply.NextMessageID];
-        var waitTime = nextMessage.Text.Length * 0.08;
+        var waitTime = nextMessage.Text.Length * 0.05;
         Mathf.Clamp(waitTime, 1,10);
 
         await ToSignal(GetTree().CreateTimer(waitTime), SceneTreeTimer.SignalName.Timeout);

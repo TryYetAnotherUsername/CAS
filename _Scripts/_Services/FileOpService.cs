@@ -1,7 +1,9 @@
 using Godot;
-using System;
 using System.Text.Json;
 
+/// <summary>
+/// Opens a file using the native file explorer + deserialisation into Casproj class
+/// </summary>
 public partial class FileOpService : Node
 {
     public static FileOpService I;
@@ -27,8 +29,6 @@ public partial class FileOpService : Node
 		};
     }
     
-
-
     public void Open()
     {
         if (_fDialog != null)

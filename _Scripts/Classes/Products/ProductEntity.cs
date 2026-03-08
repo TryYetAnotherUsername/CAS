@@ -1,5 +1,8 @@
 using Godot;
 
+/// <summary>
+/// Class for products, used everywhere in shelf logic/ checkout animations rendering
+/// </summary>
 public class ProductEntity
 {
 	public enum EProductCategory
