@@ -13,7 +13,7 @@ script = ExtResource("5_uuh75")
 [sub_resource type="Resource" id="Resource_jbofw"]
 script = ExtResource("5_uuh75")
 
-[node name="EconomyView" type="Control" unique_id=772191965 node_paths=PackedStringArray("_attractiveness", "_variety", "_queueTime", "_crowdCap", "_money", "_ratingString", "_numberOfPeople")]
+[node name="EconomyView" type="Control" unique_id=772191965]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,13 +21,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gqrjc")
-_attractiveness = NodePath("")
-_variety = NodePath("")
-_queueTime = NodePath("")
-_crowdCap = NodePath("")
-_money = NodePath("")
-_ratingString = NodePath("")
-_numberOfPeople = NodePath("")
 metadata/_edit_horizontal_guides_ = [-24.0]
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=508021656]
@@ -38,7 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_kg7eb")
-current_tab = 1
+current_tab = 5
 
 [node name="Welcome" type="ScrollContainer" parent="TabContainer" unique_id=1028839614]
 visible = false
@@ -72,6 +65,7 @@ selection_enabled = true
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Saves" type="ScrollContainer" parent="TabContainer" unique_id=1614441577]
+visible = false
 layout_mode = 2
 horizontal_scroll_mode = 0
 script = ExtResource("4_7pylx")
@@ -187,7 +181,6 @@ selection_enabled = true
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="Credits" type="ScrollContainer" parent="TabContainer" unique_id=1694132725]
-visible = false
 layout_mode = 2
 script = ExtResource("4_7pylx")
 speed = 500.0
@@ -233,7 +226,7 @@ bbcode_enabled = true
 text = "shaders adapted from godotshaders.com
 textures - polyhaven.com
 Icons from Tabler Icons
-"
+Music and SFXs - Pixaby"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -257,7 +250,7 @@ layout_mode = 2
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("5_7xa4d")
 theme_override_font_sizes/font_size = 17
-text = "Godot Engine & community"
+text = "Godot Engine"
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Credits/VBoxContainer" unique_id=1171641103]
@@ -271,8 +264,10 @@ theme_override_fonts/normal_font = ExtResource("5_7xa4d")
 theme_override_font_sizes/normal_font_size = 17
 bbcode_enabled = true
 text = "
+Thanks Mum, Dad, Mr. Dring,
+everyone else,
 And to you, for playing my game.
-Have a great day!"
+Have a great day : )"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
