@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// For finding objects already in the scene tree, like a shelf.
@@ -81,32 +82,40 @@ public partial class WorldService : Node
         return products; // return!
     }
 
-    // Get a shelf with specified product. Not nessasarily the closest one, though.
+    // Get a shelf with specified product that has stock.
     public Shelf GetShelf(ProductEntity targetProduct)
     {
-        List<Shelf> shelvesWithThisProduct = new();
-
+        List<Shelf> shelvesWithStock = new();
         foreach (Node3D node in _shelvesRoot.GetChildren())
         {
-            if (node is Shelf shelf) // found a new shelf
+            if (node is Shelf)
             {
+                Shelf shelf = (Shelf)node;
+                GD.Print($"Checking shelf: {shelf.Name}");
                 var stockList = shelf.StockedProductsList;
+                GD.Print($"Stock count: {stockList.Count}");
+                
                 foreach (Shelf.StockEntry entry in stockList)
                 {
-                    if (entry.Product == targetProduct) // Has product
+                    GD.Print($"Product: {entry.Product.DispName}, Qty: {entry.Quantity}");
+                    
+                    if (entry.Product.UID == targetProduct.UID && entry.Quantity > 0)
                     {
-                        shelvesWithThisProduct.Add(shelf);
+                        shelvesWithStock.Add(shelf);
                     }
                 }
             }
         }
 
-        if (shelvesWithThisProduct.Count == 0) return null;
-
-        var randomisedIndex = (int) GD.RandRange(0, shelvesWithThisProduct.Count - 1);
-        Shelf luckyShelf = shelvesWithThisProduct[randomisedIndex];
+        GD.Print($"Total shelves with product: {shelvesWithStock.Count}\n");
         
-        return luckyShelf;
+        if (shelvesWithStock.Count == 0) return null;
+
+        var randomisedIndex = (int)GD.RandRange(0, shelvesWithStock.Count - 1);
+        var selected = shelvesWithStock[randomisedIndex];
+        
+        GD.Print($"Selected: {selected.Name}");
+        return selected;
     }
 
     public Checkout GetFreeCheckout()

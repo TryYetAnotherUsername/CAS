@@ -84,6 +84,7 @@ public partial class Customer : NPC
         GD.Print($"==>> Customer {Name}: Init done.\n");
         SwitchState(State.CheckingShoppingList);
 
+
         if (_shoppingList is null)
         {
             GD.PrintErr("My shopping list is null.");
@@ -252,11 +253,10 @@ public partial class Customer : NPC
             if (_broughtitems.Count == 0 || _broughtitems == null)
             {
                 LeaveAndComplain("The shelves arn't even stocked!");
+                return;
             }
-            else
-            {
-                SwitchState(State.WalkingToQueue);
-            }
+
+            SwitchState(State.WalkingToQueue);
             
             return;
         }

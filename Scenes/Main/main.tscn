@@ -26,11 +26,20 @@
 [ext_resource type="PackedScene" uid="uid://cp8knfb1rmlmk" path="res://Scenes/3D/NPCs/Customer.tscn" id="22_v4agm"]
 [ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/smooth_scroll_container.gd" id="23_gw8t2"]
 [ext_resource type="Script" uid="uid://b7h0k2h2qwlqv" path="res://addons/SmoothScroll/scroll_damper/expo_scroll_damper.gd" id="24_nsdex"]
+[ext_resource type="Texture2D" uid="uid://4i2svf2jwxc4" path="res://Assets/UI/Icons/help-square.svg" id="24_wbulw"]
 [ext_resource type="Script" uid="uid://dpc4cxxk8mf6u" path="res://_Scripts/_Services/FactoryService.cs" id="25_8sujb"]
 [ext_resource type="Script" uid="uid://ct6bsg0nyo5pt" path="res://_Scripts/_Services/ToolService.cs" id="25_tyqxl"]
+[ext_resource type="Texture2D" uid="uid://b3nsvy7qkbnes" path="res://Assets/UI/Icons/hammer.svg" id="26_js8sm"]
 [ext_resource type="Script" uid="uid://d1luxgj4mjo40" path="res://_Scripts/_Services/LiveSelectService.cs" id="27_4ohmo"]
+[ext_resource type="Texture2D" uid="uid://crkrxtnae2ily" path="res://Assets/UI/Icons/message-circle.svg" id="27_u244o"]
+[ext_resource type="Texture2D" uid="uid://dwayqp3x8nk5n" path="res://Assets/UI/Icons/device-desktop.svg" id="28_1j4pb"]
 [ext_resource type="Script" uid="uid://pbm8xtsk7aox" path="res://_Scripts/_Services/PathfindingService.cs" id="28_8oboy"]
+[ext_resource type="Texture2D" uid="uid://c6hbhtrxxqxj4" path="res://Assets/UI/Icons/walk.svg" id="29_0uxpu"]
+[ext_resource type="Texture2D" uid="uid://bene2ad2amk6n" path="res://Assets/UI/Icons/file-import.svg" id="30_fy12w"]
 [ext_resource type="Script" uid="uid://ccodax680di2u" path="res://_Scripts/_Services/WorldService.cs" id="31_aq0wg"]
+[ext_resource type="Texture2D" uid="uid://ss517yqc4yk" path="res://Assets/UI/Icons/file-download.svg" id="31_hvw5u"]
+[ext_resource type="AudioStream" uid="uid://b8ij2yt053t17" path="res://Assets/Sound/Music/JazzBGM.mp3" id="39_go6uc"]
+[ext_resource type="AudioStream" uid="uid://da3vy06he1nb" path="res://Assets/Sound/SFX/CrowdNoise.mp3" id="40_m6uf5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvw5u"]
 shader = ExtResource("17_fy12w")
@@ -500,8 +509,9 @@ cell_height = 0.01
 agent_height = 1.0
 agent_radius = 0.2
 
-[node name="Main" type="Node" unique_id=458039144]
+[node name="Main" type="Node" unique_id=458039144 node_paths=PackedStringArray("_bgm")]
 script = ExtResource("1_imbg2")
+_bgm = NodePath("crowd")
 metadata/_edit_horizontal_guides_ = [-264.0]
 
 [node name="Services" type="Node" parent="." unique_id=1469627630]
@@ -530,7 +540,7 @@ _shelvesRoot = NodePath("../../3D/Props/PropsRoot")
 
 [node name="WindowService" type="Node" parent="Services" unique_id=1500006680 node_paths=PackedStringArray("_windowsRoot")]
 script = ExtResource("4_5yls4")
-_windowsRoot = NodePath("../../UI/WindowsRoot")
+_windowsRoot = NodePath("../../UI/Core/WindowsRoot")
 _windowBase = ExtResource("22_tyqxl")
 
 [node name="ToolService" type="Node" parent="Services" unique_id=452083335]
@@ -583,6 +593,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="TopArea" type="Control" parent="UI/Core" unique_id=256700952]
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -676,163 +687,476 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Build tool window" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=697393388]
+[node name="Welcome" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=834285875]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build tool window" unique_id=1864862690]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome" unique_id=155339995]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer" unique_id=1704006585]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer/HBoxContainer" unique_id=109234967]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer/HBoxContainer" unique_id=1880056989]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1225171434]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=833617633]
+modulate = Color(0.6362586, 0.37542692, 1, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("24_wbulw")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1501731485]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Welcome/HBoxContainer" unique_id=902237193]
+modulate = Color(0.63529414, 0.3764706, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Build tool window"
+text = "Welcome"
 flat = true
 alignment = 0
+expand_icon = true
+script = ExtResource("4_tyqxl")
+_tool = 9
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="Build" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1997113595]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build" unique_id=1799748400]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer" unique_id=582806000]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer/HBoxContainer" unique_id=894189571]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer/HBoxContainer" unique_id=1293076464]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1217007261]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1399092073]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("26_js8sm")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1508588581]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Build/HBoxContainer" unique_id=614401414]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("1_p6jpk")
+text = "Build"
+flat = true
+alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 7
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Messages" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=679314490]
+[node name="Messages2" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=490118878]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Messages" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages" unique_id=2074578238]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2" unique_id=1847565286]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer" unique_id=640699934]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer/HBoxContainer" unique_id=1235342150]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer/HBoxContainer" unique_id=1727411910]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1975113147]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1152493589]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("27_u244o")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1536060824]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Messages2/HBoxContainer" unique_id=1835079048]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Open messages"
+text = "Messages"
 flat = true
 alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 6
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Econ(StoreManager)" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=35848020]
+[node name="Econ" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1257467047]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="Econ" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ(StoreManager)" unique_id=1073691293]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ" unique_id=1672875595]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer" unique_id=1151502677]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer/HBoxContainer" unique_id=913225989]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer/HBoxContainer" unique_id=1104363790]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1448914540]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=2142494546]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("28_1j4pb")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1495958672]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Econ/HBoxContainer" unique_id=973343292]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
 text = "Store manager"
 flat = true
 alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 2
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="BakePathfinding" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1750453374]
+[node name="PathfindingBake" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1689302167]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/BakePathfinding" unique_id=894265331]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake" unique_id=82227894]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer" unique_id=1737180956]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer/HBoxContainer" unique_id=1978541052]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer/HBoxContainer" unique_id=981445947]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1568895880]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=320115276]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("29_0uxpu")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1998491258]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/PathfindingBake/HBoxContainer" unique_id=575733580]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
 text = "Refresh pathfinding"
 flat = true
 alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="SpawnCustomer" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=718372211]
+[node name="Spawn" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=166164637]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/SpawnCustomer" unique_id=942678748]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn" unique_id=68859939]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer" unique_id=333795075]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer/HBoxContainer" unique_id=2071398140]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer/HBoxContainer" unique_id=1611947872]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=308055765]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=705787180]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("29_0uxpu")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1002476817]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Spawn/HBoxContainer" unique_id=357079258]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Spawn customers"
+text = "Open store"
 flat = true
 alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 3
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="OpenFile" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=99611495]
+[node name="Open" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1097938651]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/OpenFile" unique_id=918659307]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open" unique_id=711217496]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer" unique_id=1062995019]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer/HBoxContainer" unique_id=790929028]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer/HBoxContainer" unique_id=437418986]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=89998942]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1522286007]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("30_fy12w")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1705672525]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Open/HBoxContainer" unique_id=1523452253]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Open an excisting file"
+text = "Open file"
 flat = true
 alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 5
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="SaveFile" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1360046575]
+[node name="Close" type="Panel" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer" unique_id=1550807063]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 metadata/_smooth_scroll_default_mouse_filter_set = true
 
-[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/SaveFile" unique_id=1668412186]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close" unique_id=139021689]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer" unique_id=1387971972]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer/HBoxContainer" unique_id=27224598]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer/HBoxContainer" unique_id=708591081]
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=510771789]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=601735886]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("31_hvw5u")
+expand_mode = 3
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1304145550]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+metadata/_smooth_scroll_default_mouse_filter_set = true
+
+[node name="ToolStartButton" type="Button" parent="UI/Core/TopArea/Menu/ScrollContainer/VBoxContainer/Close/HBoxContainer" unique_id=1578456676]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_p6jpk")
-text = "Save current session"
+text = "Save game"
 flat = true
 alignment = 0
+expand_icon = true
 script = ExtResource("4_tyqxl")
 _tool = 4
 metadata/_smooth_scroll_default_mouse_filter_set = true
@@ -942,6 +1266,15 @@ libraries/ = SubResource("AnimationLibrary_u244o")
 [node name="BackBufferCopy" type="BackBufferCopy" parent="UI/Core/TopArea/moneyCounter" unique_id=1865957402]
 copy_mode = 2
 
+[node name="WindowsRoot" type="Control" parent="UI/Core" unique_id=544186683]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="NotifRoot" type="VBoxContainer" parent="UI/Core" unique_id=590001818]
 layout_mode = 1
 anchors_preset = 1
@@ -952,15 +1285,6 @@ offset_top = 56.0
 offset_right = -8.0
 offset_bottom = 640.0
 grow_horizontal = 0
-
-[node name="WindowsRoot" type="Control" parent="UI" unique_id=544186683]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="3D" type="Node3D" parent="." unique_id=749366055]
 
@@ -1013,6 +1337,18 @@ navigation_mesh = SubResource("NavigationMesh_fy12w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2969537, 0)
 
 [node name="PlayerChar" parent="3D/Humanoids/Players" unique_id=248810176 instance=ExtResource("2_4e4y2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, 0.8630058, 1.2755573)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.115136, -0.13699412, 1.2755573)
 
 [node name="NpcsRoot" type="Node3D" parent="3D/Humanoids" unique_id=1296953903]
+
+[node name="jazz" type="AudioStreamPlayer" parent="." unique_id=1132330473]
+stream = ExtResource("39_go6uc")
+volume_db = -25.0
+autoplay = true
+bus = &"BGM"
+
+[node name="crowd" type="AudioStreamPlayer" parent="." unique_id=433144642]
+stream = ExtResource("40_m6uf5")
+volume_db = -80.0
+autoplay = true
+parameters/looping = true

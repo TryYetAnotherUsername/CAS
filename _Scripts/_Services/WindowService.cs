@@ -20,19 +20,26 @@ public partial class WindowService : Node
 		{ EWindowContent.Properties, ("Manage stock", "uid://dga1dp2fut3cf") },
 		{ EWindowContent.Messages, ("Messages", "uid://bh0t8bq1lj75o") },
 		{ EWindowContent.BuildWindow, ("Build tool", "uid://dfoesuavqgm4r")},
-		{ EWindowContent.Economy, ("Economy manager", "uid://cal7ydxuppgvp")}
+		{ EWindowContent.Economy, ("Economy manager", "uid://cal7ydxuppgvp")},
+		{ EWindowContent.Welcome, ("Welcome", "uid://boe2nigtdch22")}
     };
 
 
 	public enum EWindowContent
 	{
-		None, Properties, Messages, BuildWindow, Economy
+		None, Properties, Messages, BuildWindow, Economy, Welcome
 	};
 
     public override void _Ready()
     {
 		I = this;
-
+		ToolService.OnUpdate += (tool) =>
+		{
+			if (tool == ToolService.ETools.Welcome)
+			{
+				NewWindow(EWindowContent.Welcome);
+			} 
+		};
     }
 
 	/// <Summary>

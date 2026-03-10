@@ -45,7 +45,6 @@ public partial class MessageService : Node
     #region <Private methods>
     private void NewWindow()
     {
-        GD.Print("spawning new messages window");
         WindowService.I.NewWindow(WindowService.EWindowContent.Messages);
     }
 

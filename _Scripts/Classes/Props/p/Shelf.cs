@@ -226,7 +226,7 @@ public partial class Shelf : Prop
 			_Visuals.AniPlayer.Play("animate");	
 		}
 
-		GetTree().CreateTimer(10).Timeout += () =>
+		GetTree().CreateTimer(GD.RandRange(5,15)).Timeout += () =>
 		{
 			var entry = GetEntryFromStocked(targProduct);
 			if (entry is null)
@@ -308,7 +308,7 @@ public partial class Shelf : Prop
 	{
 		foreach (StockEntry entry in StockedProductsList)
 		{
-			if (entry.Product == targProduct)
+			if (entry.Product.UID == targProduct.UID)
 			{
 				return entry;
 			}

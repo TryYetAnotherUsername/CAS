@@ -8,6 +8,7 @@ public partial class Checkout : Prop
     [Export] private Node3D _productTarg;
     [Export] private Label _display;
     [Export] private MeshInstance3D _light;
+    [Export] private AudioStreamPlayer3D _beeper;
     [Export] private float _grandTotal = 0;
     [Export] public bool IsFree;
     [Export] public bool IsFinishedPaying;
@@ -67,6 +68,7 @@ public partial class Checkout : Prop
                 tweenIn.TweenProperty(node3D, "position", Vector3.Zero, 0.3f);
             }
 
+            _beeper.Play();
             _display.Text = $"{item.Product.DispName} x{item.Quantity}\n@ £{item.Product.PriceSell * item.Quantity}";
             _grandTotal += item.Product.PriceSell * item.Quantity;
 

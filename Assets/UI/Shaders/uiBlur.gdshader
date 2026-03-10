@@ -22,7 +22,7 @@ void fragment() {
 
     vec4 fin = mix(blurred, color_over, mix_amount);
 
-    // Grain stays static relative to the screen (macOS style)
+    // Grain stays static relative to the screen
     float n = (noise(SCREEN_UV) - 0.5) * grain_amount;
     fin.rgb += n;
 

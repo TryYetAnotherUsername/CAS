@@ -14,6 +14,7 @@ public partial class NPC : CharacterBody3D
     public override void _Ready()
     {
         _targPos = _talkBubble.Position;
+        MovementSpeed = MovementSpeed - (0.15f * GD.Randf());
     }
 
 

@@ -79,6 +79,22 @@ public partial class WindowBase : Panel
 		if(Input.IsActionJustReleased("window_drag"))
 		{
 			currentDir = Dir.none;
+			var screenSize = GetViewportRect().Size;
+
+			var clampedSize = new Vector2(
+				Mathf.Clamp(Size.X, 100, screenSize.X),
+				Mathf.Clamp(Size.Y, 100, screenSize.Y)
+			);
+
+			var clampedPos = new Vector2(
+				Mathf.Clamp(Position.X, 0, screenSize.X - clampedSize.X),
+				Mathf.Clamp(Position.Y, 0, screenSize.Y - clampedSize.Y)
+			);
+
+			var tween = CreateTween().SetParallel();
+			tween.TweenProperty(this, "size", clampedSize, 0.2f).SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+			tween.TweenProperty(this, "position", clampedPos, 0.25f).SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+			return;
 		}
 
 		if(Input.IsActionJustPressed("window_drag"))

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c0evkdqyjs8wy" path="res://Assets/3D/Models/Placeables/Services/self_checkout.glb" id="1_gwfbx"]
 [ext_resource type="Script" uid="uid://buiuy3euf4387" path="res://_Scripts/Classes/Props/p/Checkout.cs" id="2_6upq1"]
 [ext_resource type="FontFile" uid="uid://baq63qqcvy88f" path="res://Assets/UI/Fonts/Inter_18pt-Medium.ttf" id="3_2ixfa"]
+[ext_resource type="AudioStream" uid="uid://cfjvbikx45ksa" path="res://Assets/Sound/SFX/CheckoutBeep.mp3" id="4_it6ev"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6upq1"]
 albedo_color = Color(0.8477116, 0.85055155, 0.8081559, 1)
@@ -43,20 +44,17 @@ emission_energy_multiplier = 10.0
 [sub_resource type="ViewportTexture" id="ViewportTexture_lm80t"]
 viewport_path = NodePath("Screen/SubViewport")
 
-[node name="self_checkout" unique_id=2111515380 node_paths=PackedStringArray("NavTarg", "_productTarg", "_display", "_light", "PhyCol", "RayCol") instance=ExtResource("1_gwfbx")]
+[node name="self_checkout" unique_id=2111515380 node_paths=PackedStringArray("NavTarg", "_productTarg", "_display", "_light", "_beeper", "PhyCol", "RayCol") instance=ExtResource("1_gwfbx")]
 script = ExtResource("2_6upq1")
 NavTarg = NodePath("NavTarg")
 _productTarg = NodePath("ProductTarg")
 _display = NodePath("Screen/SubViewport/Control/Label")
 _light = NodePath("IndicatiorLight")
-_grandTotal = null
-IsFree = null
-IsFinishedPaying = null
-IsQueueTarg = null
+_beeper = NodePath("AudioStreamPlayer3D")
 PhyCol = NodePath("self_checkout_physics/StaticBody3D/CollisionShape3D")
 RayCol = NodePath("self_checkout_ray/StaticBody3D/CollisionShape3D")
 
-[node name="self_checkout_mesh" parent="." index="0" unique_id=1846018627]
+[node name="self_checkout_mesh" parent="." index="0" unique_id=344089583]
 surface_material_override/0 = SubResource("StandardMaterial3D_6upq1")
 surface_material_override/1 = SubResource("StandardMaterial3D_6upq1")
 surface_material_override/2 = SubResource("StandardMaterial3D_lp85w")
@@ -64,14 +62,14 @@ surface_material_override/3 = SubResource("StandardMaterial3D_n1j1e")
 surface_material_override/4 = SubResource("StandardMaterial3D_snja7")
 surface_material_override/5 = SubResource("StandardMaterial3D_g1lot")
 
-[node name="self_checkout_ray" parent="." index="1" unique_id=1230794934]
+[node name="self_checkout_ray" parent="." index="1" unique_id=2063215164]
 visible = false
 
-[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=2142795695]
+[node name="StaticBody3D" parent="self_checkout_ray" index="0" unique_id=168823304]
 collision_layer = 2
 collision_mask = 2
 
-[node name="self_checkout_physics" parent="." index="2" unique_id=232136143]
+[node name="self_checkout_physics" parent="." index="2" unique_id=1168268833]
 visible = false
 
 [node name="IndicatiorLight" type="MeshInstance3D" parent="." index="3" unique_id=2121159137]
@@ -124,3 +122,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4069031, 0, -0.0038947463)
 
 [node name="ProductTarg" type="Node3D" parent="." index="6" unique_id=2056219373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16360593, 0.53842425, 0.06139893)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="7" unique_id=865061715]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.12851593, 0.42428654, 0)
+stream = ExtResource("4_it6ev")
+volume_db = -5.0
+unit_size = 1.0
+max_distance = 7.0
+bus = &"Checkouts"
+emission_angle_enabled = true
+emission_angle_degrees = 19.0
+doppler_tracking = 1

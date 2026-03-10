@@ -15,7 +15,7 @@ public partial class ToolService : Node
 
     public enum ETools
     {
-        Settings, BakePathfinding, Economy, SpawnACustomer, SaveFile, OpenFile, Messages, BuildToolWindow, None
+        Settings, BakePathfinding, Economy, SpawnACustomer, SaveFile, OpenFile, Messages, BuildToolWindow, None, Welcome
     }
 
     public static event Action <ETools> OnUpdate;
@@ -23,6 +23,7 @@ public partial class ToolService : Node
 
     public void UseTool(ETools tool)
     {
+        GD.Print("Opening tool: " + tool.ToString());
         OnUpdate?.Invoke(tool);
     }
 
